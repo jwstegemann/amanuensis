@@ -1,0 +1,751 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"BSON",
+				"BSONObjectID"
+			],
+			[
+				"attr",
+				"attribute"
+			],
+			[
+				"sortabl",
+				"sortableColumnsCtrl"
+			],
+			[
+				"sortable",
+				"sortableColumns"
+			],
+			[
+				"sort",
+				"sortableColumnsCtrl"
+			],
+			[
+				"Dic",
+				"DictionaryRegistry"
+			],
+			[
+				"dictiona",
+				"dictionaries"
+			],
+			[
+				"curr",
+				"currentTimeMillis"
+			],
+			[
+				"BS",
+				"BSONLong"
+			],
+			[
+				"entit",
+				"entityConverter"
+			],
+			[
+				"Entit",
+				"entityActor"
+			],
+			[
+				"collec",
+				"collectionName"
+			],
+			[
+				"BSONW",
+				"BSONWriter"
+			],
+			[
+				"BSONO",
+				"BSONObjectID"
+			],
+			[
+				"schue",
+				"SchuelerActor"
+			],
+			[
+				"Exp",
+				"ExpireSessionsMsg"
+			],
+			[
+				"with",
+				"withAccessTime"
+			],
+			[
+				"sess",
+				"sessionTimeout"
+			],
+			[
+				"exp",
+				"expireInterval"
+			],
+			[
+				"mongo",
+				"mongodbDb"
+			],
+			[
+				"mon",
+				"mongodbDb"
+			],
+			[
+				"log",
+				"loginRequest"
+			],
+			[
+				"userCon",
+				"userContextServiceActor"
+			],
+			[
+				"createS",
+				"createSessionId"
+			],
+			[
+				"Session",
+				"SessionServiceActor"
+			],
+			[
+				"cre",
+				"createSessionMsg"
+			],
+			[
+				"isS",
+				"isSessionValidMsg"
+			],
+			[
+				"Logger",
+				"LoggerFactory"
+			],
+			[
+				"StaticS",
+				"staticService"
+			],
+			[
+				"UserPass",
+				"userPass"
+			],
+			[
+				"Mongo",
+				"MongoUserContext"
+			],
+			[
+				"us",
+				"userPass"
+			],
+			[
+				"distan",
+				"distanceToFind"
+			],
+			[
+				"user",
+				"userId"
+			],
+			[
+				"TokenFin",
+				"TokenFindResponse"
+			],
+			[
+				"TokenFindR",
+				"TokenFindResponse"
+			],
+			[
+				"Token",
+				"TokenFindRequest"
+			],
+			[
+				"tok",
+				"tokenHttpService"
+			],
+			[
+				"mess",
+				"messageHttpService"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "package amanuensis.story\n\nimport scala.concurrent.Future\n\nimport spray.routing._\n\nimport spray.json._\nimport spray.httpx.marshalling._\nimport spray.httpx.SprayJsonSupport\n\nimport spray.httpx.unmarshalling.Unmarshaller\nimport spray.httpx.marshalling.Marshaller\n\nimport akka.actor.ActorLogging\n\nimport amanuensis.story.Story._\nimport amanuensis.auth.UserContext\nimport amanuensis.system._\nimport amanuensis.services.MessageHandling\n\nimport amanuensis.system.MessageJsonProtocol._\n\nimport amanuensis.services.EntityHttpService\nimport amanuensis.entity._\n\n\n// this trait defines our service behavior independently from the service actor\ntrait StoryHttpService extends HttpService with SprayJsonSupport with MessageHandling with EntityHttpService { self : ActorLogging =>\n\n  // def storyRoute = route[Story](\"story\", actorRefFactory.actorSelection(\"/user/story\"), null)\n\n  def test(implicit m : Marshaller[Future[Story]]) = 17\n  def hallo = test\n\n  // (userContext: UserContext)\n\n}\n",
+			"file": "src/main/scala/amanuensis/story/StoryHttpService.scala",
+			"file_size": 1077,
+			"file_write_time": 1383734288000000,
+			"settings":
+			{
+				"buffer_size": 977,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/system/Message.scala",
+			"settings":
+			{
+				"buffer_size": 910,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/entity/Entity.scala",
+			"settings":
+			{
+				"buffer_size": 713,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "build.sbt",
+			"settings":
+			{
+				"buffer_size": 2345,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/services/UserHttpService.scala",
+			"settings":
+			{
+				"buffer_size": 2631,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/services/EntityHttpService.scala",
+			"settings":
+			{
+				"buffer_size": 2005,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/story/Story.scala",
+			"settings":
+			{
+				"buffer_size": 695,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/EntityHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/MessageHandling.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/Boot.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/EntityActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/Story.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/Entity.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Message.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/SessionServiceActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/AuthenticationDomain.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/MongoJsonProtocol.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StoryHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/UserHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/MongoUsingActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/LastErrorMapping.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/EntityMessages.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/UserService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/SessionAware.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/SessionCookieAuthenticator.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/EntityService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/GenericMongoActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/UserContextActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/validation/Validation.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/utils/ReflectionUtils.scala",
+		"/home/tiberius/scala/projects/amanuensis/build.sbt",
+		"/home/tiberius/scala/projects/amanuensis/README.md",
+		"/home/tiberius/scala/projects/amanuensis/project/plugins.sbt",
+		"/home/tiberius/scala/projects/amanuensis/project/build.properties",
+		"/home/tiberius/scala/projects/amanuensis/src/main/resources/application.conf",
+		"/home/tiberius/scala/projects/amanuensis/src/main/resources/logback.xml",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/package.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/dictionary/Dictionaries.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/validation/package.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/BSONConverter.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/BSONDocumentHelper.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/BSONProtocol.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/CollectionConverters.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/ProductConverters.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/StandardConverters.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/schueler/SchuelerActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/schueler/SchuelerDomain.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/schueler/SchuelerService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/schule/SchuleActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/schule/SchuleDomain.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/schule/SchuleService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/DictionaryService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Dictionary.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/DictionaryServiceActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Exceptions.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Failable.scala",
+		"/home/tiberius/amanuensis/demo/test1.html",
+		"/home/tiberius/scala/projects/klara/curl/schueler/create",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/app.js",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/controllers/schueler.js",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/partials/schuelerDetail.html",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/system/Message.scala",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/partials/schuelerList.html",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/directives.js",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/index.html",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/lib/jquery.blockUI.js",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/Boot.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/EntityActor.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/entity/Entity.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/entity/Validation.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/schueler/SchuelerDomain.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/schueler/SchuelerActor.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/DictionaryService.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/system/DictionaryServiceActor.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/system/Dictionary.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/bson/BSONConverter.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/bson/BSONProtocol.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/bson/StandardConverters.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/bson/ProductConverters.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/UserService.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/EntityService.scala",
+		"/home/tiberius/scala/projects/klara/curl/schueler/update",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/auth/SessionServiceActor.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/MongoJsonProtocol.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/auth/AuthenticationDomain.scala",
+		"/home/tiberius/scala/projects/klara/curl/schueler/create_with_id",
+		"/home/tiberius/scala/projects/klara/curl/schueler/delete",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/MongoUsingActor.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/LastErrorUpdate.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/utils/ReflectionUtils.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/schueler/ReflectionUtils.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/schueler/Macros.scala",
+		"/home/tiberius/scala/projects/klara/build.sbt",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/schueler/SchuelerService.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/auth/SessionCookieAuthenticator.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/SessionAware.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/Entity.scala",
+		"/home/tiberius/scala/projects/klara/curl/schueler/load",
+		"/home/tiberius/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/entity/EntityMessages.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/EntityMessages.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/messages/EntityMessages.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/MessageHandling.scala",
+		"/home/tiberius/scala/projects/klara/curl/tests.txt",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/utils/HandlingError.scala",
+		"/home/tiberius/scala/projects/klara/src/main/resources/logback.xml",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/auth/UserContextActor.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/auth/package.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/StaticService.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/UsingMongo.scala",
+		"/home/tiberius/scala/projects/klara/mongoDB/create_scripts",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/css/klara.css",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/controllers/user.js",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/filters.js",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/css/bootstrap.min.css",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/auth.js",
+		"/home/tiberius/scala/projects/klara/src/main/resources/application.conf",
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/controllers/login.js",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/auth/AuthenticationProtocoll.scala",
+		"/home/tiberius/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/auth/MongoAuthenticator.scala",
+		"/home/tiberius/scala/projects/klara/snippets/routes.snippets",
+		"/home/tiberius/scala/projects/klara/Boot.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/MongoAuthenticator.scala",
+		"/home/tiberius/scala/projects/klara/src/main/scala/spray/examples/DemoService.scala",
+		"/home/tiberius/scala/projects/klara/project/plugins.sbt",
+		"/home/tiberius/scala/projects/snaktest/build.sbt",
+		"/home/tiberius/scala/projects/snaktest/project/build.properties",
+		"/home/tiberius/scala/projects/AlienWebTNG/src/main/scala/com/scope42/magellanics/services/TokenService.scala",
+		"/home/tiberius/scala/projects/AlienWebTNG/src/main/scala/com/scope42/magellanics/domain/DomainModel.scala"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
+			"/home/tiberius/scala/projects/amanuensis/src/main/resources",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"MessageJsonProtocol",
+			"Inserted",
+			"klara",
+			"Result",
+			"klara",
+			"Klara",
+			"ExecutionContext",
+			"entity",
+			"version",
+			"_id.",
+			"ctx.re",
+			"Klara",
+			"klara",
+			"z-ind",
+			"startsWith",
+			"createSession",
+			"EntityJsonProtocol",
+			".id",
+			"ReflectionUtils",
+			"Load(",
+			"schueler",
+			"ec",
+			"=> ",
+			"AuthenticationConstants",
+			"AuthenticationConstants#",
+			"login",
+			"login-inner",
+			"login-holder",
+			"ExecutionContext",
+			"Todo",
+			"KlaraUserContext",
+			"logged in",
+			"showServerSt",
+			"showstat",
+			"Sphere",
+			"de.ste.mymoney.",
+			"/* =============================================================",
+			"Dies ist ein Test",
+			"ctrl+p"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"amanuensis",
+			"Amanuensis",
+			"amanuensis",
+			"UserContext",
+			"com.scope42.magellanics."
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/main/scala/amanuensis/story/StoryHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 977,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								977,
+								977
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/main/scala/amanuensis/system/Message.scala",
+					"settings":
+					{
+						"buffer_size": 910,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/main/scala/amanuensis/entity/Entity.scala",
+					"settings":
+					{
+						"buffer_size": 713,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								298,
+								298
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "build.sbt",
+					"settings":
+					{
+						"buffer_size": 2345,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								867,
+								867
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/main/scala/amanuensis/services/UserHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 2631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/main/scala/amanuensis/services/EntityHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 2005,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1276,
+								1276
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 238.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/main/scala/amanuensis/story/Story.scala",
+					"settings":
+					{
+						"buffer_size": 695,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"entit",
+				"src/main/scala/amanuensis/entity/Entity.scala"
+			],
+			[
+				"entityac",
+				"src/main/scala/klara/mongo/EntityActor.scala"
+			],
+			[
+				"schueler",
+				"src/main/scala/klara/schueler/SchuelerDomain.scala"
+			],
+			[
+				"userserv",
+				"src/main/scala/klara/services/UserService.scala"
+			],
+			[
+				"tokense",
+				"src/main/scala/com/scope42/magellanics/services/TokenService.scala"
+			],
+			[
+				"domain",
+				"src/main/scala/com/scope42/magellanics/domain/DomainModel.scala"
+			],
+			[
+				"jsonpro",
+				"src/main/scala/com/scope42/magellanics/protocol/MagellanicsJsonProtocol.scala"
+			],
+			[
+				"boo",
+				"src/main/scala/com/scope42/magellanics/Boot.scala"
+			],
+			[
+				"domai",
+				"src/main/scala/com/scope42/magellanics/domain/DomainModel.scala"
+			],
+			[
+				"",
+				"/home/tiberius/.gvfs/SFTP for ssh-822919-svbs on svbsev.de/kunden/184976_70794/rp-hosting/6321/7321/static/segeln.htm"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 364.0,
+	"status_bar_visible": true
+}

@@ -1,0 +1,2 @@
+#! /bin/bash
+curl -X GET --header "Content-Type: application/json" --cookie cookies.txt "http://localhost:8080/dict/$1"

@@ -1,0 +1,2 @@
+#! /bin/bash
+curl --header "Content-Type: application/json" --cookie cookies.txt --data '{"_id": "51220ac6c01229f100e9ce77", "name": "Carl", "vorname": "Coyote", "geschlecht": "m", "version": null}' "http://localhost:8080/schueler" --verbose

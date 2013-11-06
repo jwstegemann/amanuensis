@@ -1,0 +1,13 @@
+--cookie cookies.txt --cookie-jar
+
+curl --header "Content-Type: application/json" --data '{"username": "hallo", "password": "welt"}' --cookie-jar cookies.txt "http://localhost:8080/user/login" --verbose
+
+curl --header "Content-Type: application/json" --cookie cookies.txt "http://localhost:8080/schueler" --verbose
+
+//Windows
+curl --header "Content-Type: application/json" --cookie cookies.txt --data '{"id": "51220ac6c01229f100e9ce77", "name": "Carl", "vorname": "Coyote"}' "http://localhost:8080/schueler" --verbose
+
+//Linux
+curl --header "Content-Type: application/json" --cookie cookies.txt --data '{"id": "512158d847dc8a25001c1e15", "name": "Carl", "vorname": "Coyote"}' "http://localhost:8080/schueler" --verbose
+
+

@@ -1,0 +1,42 @@
+<table class="table table-condensed table-bordered table-hover table-striped entity-table">
+    <thead>
+        <tr>
+            <th colspan="{{colspan}}" class="toolbar">
+                <form class="form-search pull-left">
+                    <div class="input-append">
+                        <input type="text" class="search-query input-large" placeholder="Filter" ng-model="filterValue">
+                        <button class="btn"><i class="icon-search icon-large" /></button>
+                    </div>
+                </form>
+                <div class="pull-right">
+                    <button class="btn btn-success" ng-click="createEntity()" ng-if="!options.noCreate"><i class="icon-file icon-white icon-large" /> neu</button>
+                    <button class="btn btn-danger" ng-click="deleteSelected()" ng-if="!options.noDelete"><i class="icon-trash icon-white icon-large" /> löschen</button>
+                    <button class="btn btn-info" ng-click="reloadFunction()"><i class="icon-refresh icon-white icon-large" /> aktualisierens</button>
+                    <button class="btn btn-inverse"><i class="icon-cog icon-white icon-large" /> Einstellungens</button>
+                </div>
+            </th>
+        </tr>
+        <tr ng-mouseup="stopResize($event)" class="column-headers">
+            <th class="select" ng-hide="options.selection == undefined"><input type="checkbox" id="select_all" ng-model="selectAllValue" ng-change="selectAll()" ng-show="options.selection == 'many'" /></th>
+            <th ng-repeat="col in columns" ng-click="sort(col.attribute)" class="colhead">{{col.title}} <i ng-show="sortPredicate == col.attribute" ng-class="sortReverse?'icon-angle-up':'icon-angle-down'" />
+                <div class="sizehandler" ng-click="resizeClick($event)" ng-mousedown="startResize($event)">&nbsp;</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="entity in entities | filter: filterValue | orderBy:sortPredicate:sortReverse" ng-dblclick="editEntity(entity._id, $event)" ng-class="{selected: entity.selected}" class="entityTableRow">
+            <td ng-hide="options.selection == undefined" class="select">
+                <ng-switch on="options.selection">
+                    <input ng-switch-when="many" type="checkbox" ng-model="entity.selected" />
+                    <input ng-switch-when="single" type="radio" ng-model="selection.element" ng-value="entity" />
+                </ng-switch>
+            </td>
+            <td ng-repeat="col in columns">
+                <ng-switch on="col.dictionary">
+                    <span ng-switch-when="undefined">{{entity[col.attribute]}}</span>
+                    <span ng-switch-default=>{{col.dictionary[entity[col.attribute]]}}</span>
+                </ng-switch>
+            </td>
+        </tr>
+    </tbody>
+</table>

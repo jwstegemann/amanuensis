@@ -1,0 +1,90 @@
+
+<div class="row-fluid">
+	<ul class="breadcrumb">
+	  <li><a href="#">Klara</a> <span class="divider">/</span></li>
+	  <li><a href="#/schule">Schule</a> <span class="divider">/</span></li>
+	  <li class="active">{{schule._id}}</li>
+	</ul>
+</div>
+
+<div class="row-fluid">
+
+	<div class="span2 klara-sidebar">
+		<ul class="nav nav-list klara-sidenav">
+			<li ng-class="{active: activeSection == 'schulDaten'}"><a ng-click="activeSection='schulDaten'"><i class="icon-chevron-right"></i> Schule</a></li>
+		</ul>
+	</div>
+
+	<div class="span10" ng-init="init()">
+
+		<form class="form-horizontal">
+
+		<div class="page-header">
+	   	<h1>
+	   		<i class="icon-user icon-large" />&nbsp;
+        <ng-switch on="schule.name">
+          <span ng-switch-when="undefined">unbekannte Schule</span>
+          <span ng-switch-when="">unbekannte Schule</span>
+          <span ng-switch-default=>{{schule.name}}</span>
+        </ng-switch>
+	   		
+	   		<div class="pull-right" style="padding-right: 100px; padding-top: 10px">
+					<div class="btn-group">
+			    	<button class="btn btn-primary" ng-click="save(false)"><i class="icon-save icon-white" /> speichern</button>
+			    	<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			    		<span class="caret"></span>
+			    	</button>
+			    	<ul class="dropdown-menu">
+			    		<li><a ng-click="save(false)"><i class="icon-save" /> speichern</a></li>
+			    		<li><a href="#" ng-click="save(true)"><i class="icon-save" /> speichern und schließen</a></li>
+			    	</ul>
+			    </div>
+
+			    <button type="button" class="btn" ng-click="goToList()"><i class="icon-table" /> Übersicht</button>
+	   		</div>
+	   	</h1>
+	  </div>
+		
+		<!-- Validation Results -->
+		<div class="alert alert-error" ng-repeat="msg in validation.errors">
+			<strong>{{msg.text}}</strong>&nbsp;<span>{{msg.severity}}</span>
+		</div>
+
+		<ng-switch on="activeSection" ng-animate="{enter: 'enter-animation', leave: 'leave-animation'}">
+
+		<div id="schulDaten" class="form-section" ng-switch-when="schulDaten">
+
+			<div class="control-group">
+				<label class="control-label" for="inputId">id</label>
+				<div class="controls">
+					<input class="uneditable-input" type="text" id="inputId" ng-model="schule._id" />
+				</div>
+			</div>
+
+			<div id="name" class="control-group">
+				<label class="control-label" for="inputName">Name</label>
+				<div class="controls">
+					<input type="text" id="inputName" ng-model="schule.name" />
+					<span class="help-inline validationResult"></span>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="selectSchulform">Schulform</label>
+				<div class="controls">
+					<select id="selectSchulform" class="span2" bs-select ng-model="schule.schulform" ng-options="key as label for (key, label) in schulform"></select>
+				</div>
+			</div>
+
+		</div>
+
+	</ng-switch>
+	
+
+
+
+		</form>
+	</div>
+
+</div>
+

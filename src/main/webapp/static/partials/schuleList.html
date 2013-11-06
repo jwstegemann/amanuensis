@@ -1,0 +1,16 @@
+<div class="span12" ng-init="init()">
+
+    <ul class="breadcrumb">
+        <li><a href="#">Klara</a> <span class="divider">/</span></li>
+        <li><a href="#/schule">Schule</a> <span class="divider">/</span></li>
+    </ul>
+
+
+    <div class="page-header">
+        <h1><i class="icon-table icon-large" />&nbsp; Schulen-Liste</h1>
+    </div>
+
+    <entity-table id="schuleTable" entities="schuleList" columns="columns" options="optionen"
+    	create="/schule/create" edit-prefix="/schule/detail/" delete="deleteSchule(id)" reload="reload()" />
+
+</div>

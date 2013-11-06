@@ -1,0 +1,82 @@
+/*
+ * Benutzer anlegen
+ */
+
+db.user.insert({
+	username: "hallo",
+	password: "3aab87f4384d3e7aa25ca4f99f9c49c9406a343877d1d215e814cefa23b8ec2b",
+	info: "TestInfo",
+	firstName: "Jens",
+	lastName: "Stegemann",
+	permissions: ["Permission1","Permission2"]
+});
+
+/*
+ * Schueler anlegen
+ */
+
+ db.schueler.insert({
+ 	name: "Müller",
+ 	vorname: "Hans"
+ });
+
+ db.schueler.insert({
+ 	name: "Meier",
+ 	vorname: "Petra"
+ });
+
+// ***************************************** 
+
+/*
+ * Schueler updaten
+ */
+
+db.schueler.update({},{$set: {vertragspartner: {name: "Mueller", vorname: "Hannes", strasse: "A-Strasse", hausnummer: "21", plz: "12345", ort: "entenhausen"}}}, false, true);
+
+/*
+ * Tokens
+ */
+
+ db.token.insert({
+	name : "TestToken 1",
+	pos : [7.133814,52.29688],
+	alt : 420.0,
+	userId : "4f9d1080c297f11c878f3706",
+	targetName : "Eifelturm",
+	targetPos : [2.29446,48.85833],
+	targetAlt : 420.0,
+	tod : ISODate("2012-12-31T13:22:46.777Z")
+});
+
+db.token.insert({
+	name : "TestToken 2",
+	pos : [7.533814,52.29688],
+	alt : 420.0,
+	userId : "4f9d1080c297f11c878f3706",
+	targetName : "Eifelturm",
+	targetPos : [2.29446,48.85833],
+	targetAlt : 420.0,
+	tod : ISODate("2012-12-31T13:22:46.777Z")
+});
+
+db.token.insert({
+	name : "TestToken 3",
+	pos : [2.29446,48.85833],
+	alt : 420.0,
+	userId : "4f9d1080c297f11c878f3706",
+	targetName : "Eifelturm",
+	targetPos : [2.29446,48.85833],
+	targetAlt : 420.0,
+	tod : ISODate("2012-12-31T13:22:46.777Z")
+});
+
+
+db.token.ensureIndex({ pos : "2d" });
+
+/*
+ * User
+ */
+db.usr.insert({
+	username : "testuser",
+	pwd : "12345"
+});

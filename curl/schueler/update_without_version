@@ -1,0 +1,3 @@
+#! /bin/bash
+
+curl -X PUT --header "Content-Type: application/json" --cookie cookies.txt --data "{\"_id\": \"$1\", \"name\": \"$2\", \"vorname\": \"Coyote\", \"geschlecht\": \"$3\", \"version\": null}" "http://localhost:8080/schueler/$1"
