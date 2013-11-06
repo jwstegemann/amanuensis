@@ -2,6 +2,7 @@ package amanuensis.services
 
 import spray.http._
 import spray.routing._
+import spray.routing.PathMatchers.PathEnd
 import spray.util._
 import MediaTypes._
 import StatusCodes._
@@ -41,6 +42,8 @@ trait EntityHttpService extends HttpService with SprayJsonSupport with MessageHa
 
   protected implicit def executionContext = actorRefFactory.dispatcher
 
+  val logger = log
+
 
   def route[T <: Entity: ClassTag](prefix: String, entityActor: ActorSelection, userContext: UserContext)
   	(implicit marshaller: spray.httpx.marshalling.Marshaller[Future[T]],
@@ -49,9 +52,9 @@ trait EntityHttpService extends HttpService with SprayJsonSupport with MessageHa
   		delMarsh: Marshaller[Future[Deleted]],
   		updMarsh: Marshaller[Future[Updated]],
   		unmarshaller: Unmarshaller[T]) = {
-  		
+	
     pathPrefix(prefix) {
-			path("") {
+			path(PathEnd) {
 			  post {
 			    entity(as[T]) { item =>
 			      complete((entityActor ? Create(item)).mapTo[Inserted])
@@ -60,13 +63,14 @@ trait EntityHttpService extends HttpService with SprayJsonSupport with MessageHa
 			  get {
 			    //TODO: is this necessary or is it enough to be called just once per change
 			    dynamic {
+			    	logger.info("entityervice: {}, {}, {} ", prefix, entityActor, userContext )
 			      complete((entityActor ? FindAll()).mapTo[List[T]])
 			    }
 			  }
 			} ~ 
 			path(Rest) { id: String =>
 			  get {
-					dynamic {
+			    dynamic {
 				  complete((entityActor ? Load(id)).mapTo[T])
 				}
 				  } ~

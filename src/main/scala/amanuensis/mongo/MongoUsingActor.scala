@@ -30,7 +30,7 @@ trait MongoUsingActor extends Actor with ActorLogging with Failable {
   log.info("creating connection to {}@{}", mongodbDb, mongodbUrl)
 
   //TODO: is this correct and efficient?
-  val defaultWriteConcern = GetLastError(true,None,false)
+  val defaultWriteConcern = GetLastError(true)
 
   /*
    * fails future with a NotFound-exception when option is empty

@@ -1,0 +1,2 @@
+#! /bin/bash
+curl --header "Content-Type: application/json" --cookie cookies.txt --data '{"title": "Teststory", "content": "Testinhalt"}' "http://localhost:8080/story/"

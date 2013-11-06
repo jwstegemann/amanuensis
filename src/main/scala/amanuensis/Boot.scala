@@ -19,14 +19,14 @@ class RootServiceActor extends Actor with ActorLogging with StaticHttpService wi
   def actorRefFactory = context
 
   def receive = runRoute(
+    storyRoute(null) ~
     userRoute ~ 
     staticRoute
-//    storyRoute
-    //authenticate(SessionCookieAuth()(sessionServiceActor, context.dispatcher)) { userContext => //FIXME: make sessionServiceActor implicit again
-      //schuelerRoute(userContext) ~
-      //schuleRoute(userContext) ~
-      //dictionaryRoute
-    //}
+    
+
+//    authenticate(SessionCookieAuth()(sessionServiceActor, context.dispatcher)) { userContext => //FIXME: make sessionServiceActor implicit again
+//      storyRoute(userContext)
+//    }
   )
 }
 

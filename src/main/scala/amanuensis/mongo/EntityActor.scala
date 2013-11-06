@@ -39,7 +39,7 @@ abstract class EntityActor[T <: Entity: ClassTag](val collectionName: String)
    */ 
   def findAll() = {
     log.debug(s"finding all entites in $collectionName")
-    collection.find(BSONDocument()).cursor[T].toList pipeTo sender
+    collection.find(BSONDocument()).cursor[T].collect[List]() pipeTo sender
   }
 
   /*

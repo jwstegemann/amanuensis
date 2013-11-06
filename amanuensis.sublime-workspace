@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Acto",
+				"ActorLogging"
+			],
+			[
 				"BSON",
 				"BSONObjectID"
 			],
@@ -164,13 +168,10 @@
 	"buffers":
 	[
 		{
-			"contents": "package amanuensis.story\n\nimport scala.concurrent.Future\n\nimport spray.routing._\n\nimport spray.json._\nimport spray.httpx.marshalling._\nimport spray.httpx.SprayJsonSupport\n\nimport spray.httpx.unmarshalling.Unmarshaller\nimport spray.httpx.marshalling.Marshaller\n\nimport akka.actor.ActorLogging\n\nimport amanuensis.story.Story._\nimport amanuensis.auth.UserContext\nimport amanuensis.system._\nimport amanuensis.services.MessageHandling\n\nimport amanuensis.system.MessageJsonProtocol._\n\nimport amanuensis.services.EntityHttpService\nimport amanuensis.entity._\n\n\n// this trait defines our service behavior independently from the service actor\ntrait StoryHttpService extends HttpService with SprayJsonSupport with MessageHandling with EntityHttpService { self : ActorLogging =>\n\n  // def storyRoute = route[Story](\"story\", actorRefFactory.actorSelection(\"/user/story\"), null)\n\n  def test(implicit m : Marshaller[Future[Story]]) = 17\n  def hallo = test\n\n  // (userContext: UserContext)\n\n}\n",
 			"file": "src/main/scala/amanuensis/story/StoryHttpService.scala",
-			"file_size": 1077,
-			"file_write_time": 1383734288000000,
 			"settings":
 			{
-				"buffer_size": 977,
+				"buffer_size": 840,
 				"line_ending": "Unix"
 			}
 		},
@@ -186,7 +187,7 @@
 			"file": "src/main/scala/amanuensis/entity/Entity.scala",
 			"settings":
 			{
-				"buffer_size": 713,
+				"buffer_size": 516,
 				"line_ending": "Unix"
 			}
 		},
@@ -202,7 +203,7 @@
 			"file": "src/main/scala/amanuensis/services/UserHttpService.scala",
 			"settings":
 			{
-				"buffer_size": 2631,
+				"buffer_size": 2639,
 				"line_ending": "Unix"
 			}
 		},
@@ -210,7 +211,7 @@
 			"file": "src/main/scala/amanuensis/services/EntityHttpService.scala",
 			"settings":
 			{
-				"buffer_size": 2005,
+				"buffer_size": 2163,
 				"line_ending": "Unix"
 			}
 		},
@@ -219,6 +220,14 @@
 			"settings":
 			{
 				"buffer_size": 695,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/mongo/MongoJsonProtocol.scala",
+			"settings":
+			{
+				"buffer_size": 642,
 				"line_ending": "Unix"
 			}
 		}
@@ -382,7 +391,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
@@ -395,6 +404,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"BSONObjectIDFormat",
 			"MessageJsonProtocol",
 			"Inserted",
 			"klara",
@@ -464,15 +474,15 @@
 					"file": "src/main/scala/amanuensis/story/StoryHttpService.scala",
 					"settings":
 					{
-						"buffer_size": 977,
+						"buffer_size": 840,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								977,
-								977
+								388,
+								388
 							]
 						],
 						"settings":
@@ -480,7 +490,7 @@
 							"syntax": "Packages/Scala/Scala.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 166.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -516,15 +526,15 @@
 					"file": "src/main/scala/amanuensis/entity/Entity.scala",
 					"settings":
 					{
-						"buffer_size": 713,
+						"buffer_size": 516,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								298,
-								298
+								515,
+								515
 							]
 						],
 						"settings":
@@ -549,8 +559,8 @@
 						"selection":
 						[
 							[
-								867,
-								867
+								2250,
+								2250
 							]
 						],
 						"settings":
@@ -570,15 +580,15 @@
 					"file": "src/main/scala/amanuensis/services/UserHttpService.scala",
 					"settings":
 					{
-						"buffer_size": 2631,
+						"buffer_size": 2639,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								767,
+								767
 							]
 						],
 						"settings":
@@ -598,15 +608,15 @@
 					"file": "src/main/scala/amanuensis/services/EntityHttpService.scala",
 					"settings":
 					{
-						"buffer_size": 2005,
+						"buffer_size": 2163,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1276,
-								1276
+								1031,
+								1031
 							]
 						],
 						"settings":
@@ -631,8 +641,36 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								171,
+								171
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/main/scala/amanuensis/mongo/MongoJsonProtocol.scala",
+					"settings":
+					{
+						"buffer_size": 642,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26,
+								26
 							]
 						],
 						"settings":
