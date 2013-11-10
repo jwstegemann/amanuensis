@@ -13,15 +13,33 @@ import amanuensis.auth.UserContextActor
 
 import amanuensis.story.{StoryActor, StoryHttpService}
 
+//BasicAuth
+
+import scala.concurrent._
+import spray.routing.authentication._
+import amanuensis.auth._
+
+
+
 
 class RootServiceActor extends Actor with ActorLogging with StaticHttpService with UserHttpService with StoryHttpService with SessionAware {
+
+  def myUserPassAuthenticator(userPass: Option[UserPass]): Future[Option[UserContext]] = {
+    Future {
+      if (userPass.exists(up => up.user == "hallo" && up.pass == "welt")) Some(UserContext("TestUser", "","","",Nil))
+      else None
+    }
+  }
 
   def actorRefFactory = context
 
   def receive = runRoute(
-    storyRoute(null) ~
     userRoute ~ 
-    staticRoute
+    staticRoute ~
+
+    authenticate(BasicAuth(myUserPassAuthenticator _, realm = "Amanuensis")) { userName =>
+      storyRoute(null)
+    }
     
 
 //    authenticate(SessionCookieAuth()(sessionServiceActor, context.dispatcher)) { userContext => //FIXME: make sessionServiceActor implicit again

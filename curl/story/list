@@ -1,2 +1,6 @@
 #! /bin/bash
-curl -v -X GET --header "Content-Type: application/json" --cookie cookies.txt "http://localhost:8080/story/"
+curl -X GET \
+	--user hallo:welt \
+	--header "Content-Type: application/json" \
+	--cookie cookies.txt \
+	"http://localhost:8080/story/"

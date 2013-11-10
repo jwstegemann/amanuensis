@@ -167,70 +167,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/main/scala/amanuensis/story/StoryHttpService.scala",
-			"settings":
-			{
-				"buffer_size": 840,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/scala/amanuensis/system/Message.scala",
-			"settings":
-			{
-				"buffer_size": 910,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/scala/amanuensis/entity/Entity.scala",
-			"settings":
-			{
-				"buffer_size": 516,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "build.sbt",
-			"settings":
-			{
-				"buffer_size": 2345,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/scala/amanuensis/services/UserHttpService.scala",
-			"settings":
-			{
-				"buffer_size": 2639,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/scala/amanuensis/services/EntityHttpService.scala",
-			"settings":
-			{
-				"buffer_size": 2163,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/scala/amanuensis/story/Story.scala",
-			"settings":
-			{
-				"buffer_size": 695,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/scala/amanuensis/mongo/MongoJsonProtocol.scala",
-			"settings":
-			{
-				"buffer_size": 642,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -238,8 +174,36 @@
 		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"sbt",
+				"SBT: Start SBT"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"S",
+				"SBT: Stop SBT"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"SBT",
+				"SBT: Start SBT"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Control: list",
+				"Package Control: List Packages"
+			]
 		],
-		"width": 392.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -256,23 +220,27 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/AuthenticationDomain.scala",
+		"/home/tiberius/.config/sublime-text-2/Packages/User/sbt.sublime-build",
+		"/home/tiberius/scala/projects/amanuensis/curl/story/create",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/EntityHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/MessageHandling.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/Boot.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/EntityActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/Story.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/Entity.scala",
+		"/home/tiberius/scala/projects/amanuensis/curl/story/list",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/UserHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Message.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/Entity.scala",
+		"/home/tiberius/scala/projects/amanuensis/build.sbt",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/Story.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/MongoJsonProtocol.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/EntityActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/MongoUsingActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/MessageHandling.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/SessionServiceActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/AuthenticationDomain.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/MongoJsonProtocol.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/UserHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/MongoUsingActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/LastErrorMapping.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/EntityMessages.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/UserService.scala",
@@ -284,7 +252,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/validation/Validation.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/utils/ReflectionUtils.scala",
-		"/home/tiberius/scala/projects/amanuensis/build.sbt",
 		"/home/tiberius/scala/projects/amanuensis/README.md",
 		"/home/tiberius/scala/projects/amanuensis/project/plugins.sbt",
 		"/home/tiberius/scala/projects/amanuensis/project/build.properties",
@@ -380,10 +347,7 @@
 		"/home/tiberius/scala/projects/klara/src/main/scala/MongoAuthenticator.scala",
 		"/home/tiberius/scala/projects/klara/src/main/scala/spray/examples/DemoService.scala",
 		"/home/tiberius/scala/projects/klara/project/plugins.sbt",
-		"/home/tiberius/scala/projects/snaktest/build.sbt",
-		"/home/tiberius/scala/projects/snaktest/project/build.properties",
-		"/home/tiberius/scala/projects/AlienWebTNG/src/main/scala/com/scope42/magellanics/services/TokenService.scala",
-		"/home/tiberius/scala/projects/AlienWebTNG/src/main/scala/com/scope42/magellanics/domain/DomainModel.scala"
+		"/home/tiberius/scala/projects/snaktest/build.sbt"
 	],
 	"find":
 	{
@@ -391,7 +355,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
@@ -404,6 +368,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"log",
+			"log.info",
 			"BSONObjectIDFormat",
 			"MessageJsonProtocol",
 			"Inserted",
@@ -466,225 +432,8 @@
 	"groups":
 	[
 		{
-			"selected": 5,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/main/scala/amanuensis/story/StoryHttpService.scala",
-					"settings":
-					{
-						"buffer_size": 840,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								388,
-								388
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 166.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/main/scala/amanuensis/system/Message.scala",
-					"settings":
-					{
-						"buffer_size": 910,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/main/scala/amanuensis/entity/Entity.scala",
-					"settings":
-					{
-						"buffer_size": 516,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								515,
-								515
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "build.sbt",
-					"settings":
-					{
-						"buffer_size": 2345,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2250,
-								2250
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/main/scala/amanuensis/services/UserHttpService.scala",
-					"settings":
-					{
-						"buffer_size": 2639,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								767,
-								767
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/main/scala/amanuensis/services/EntityHttpService.scala",
-					"settings":
-					{
-						"buffer_size": 2163,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1031,
-								1031
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 238.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/main/scala/amanuensis/story/Story.scala",
-					"settings":
-					{
-						"buffer_size": 695,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								171,
-								171
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "src/main/scala/amanuensis/mongo/MongoJsonProtocol.scala",
-					"settings":
-					{
-						"buffer_size": 642,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								26,
-								26
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -719,6 +468,18 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 155.0
+	},
+	"output.sbt":
+	{
+		"height": 375.0
+	},
+	"output.sbt_error":
+	{
+		"height": 0.0
+	},
 	"replace":
 	{
 		"height": 64.0

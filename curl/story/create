@@ -1,2 +1,7 @@
 #! /bin/bash
-curl --header "Content-Type: application/json" --cookie cookies.txt --data '{"title": "Teststory", "content": "Testinhalt"}' "http://localhost:8080/story/"
+curl -X POST \
+	--user hallo:welt \
+	--header "Content-Type: application/json" \
+	--cookie cookies.txt \
+	--data '{"title": "Teststory", "content": "Testinhalt"}' \
+	"http://localhost:8080/story/"
