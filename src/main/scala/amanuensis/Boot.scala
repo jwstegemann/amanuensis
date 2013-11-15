@@ -1,44 +1,47 @@
 package amanuensis
 
-import akka.actor.{Props, Actor, ActorSystem, ActorLogging}
+import scala.concurrent.Future
+import scala.concurrent.duration.DurationInt
+import akka.actor.Actor
+import akka.actor.ActorLogging
+import akka.actor.ActorSystem
+import akka.actor.Props
+import akka.actor.actorRef2Scala
 import akka.io.IO
-import spray.can.Http
-
-import amanuensis.services._
-
-import amanuensis.auth.{SessionCookieAuth, UserContext}
-
-import amanuensis.auth.SessionServiceActor
+import akka.pattern.ask
+import akka.util.Timeout
+import amanuensis.auth.CheckUserMsg
+import amanuensis.auth.UserContext
 import amanuensis.auth.UserContextActor
-
-import amanuensis.story.{StoryActor, StoryHttpService}
-
-//BasicAuth
-
-import scala.concurrent._
-import spray.routing.authentication._
-import amanuensis.auth._
-
-
+import amanuensis.services.SessionAware
+import amanuensis.services.StaticHttpService
+import amanuensis.services.UserHttpService
+import amanuensis.story.StoryActor
+import amanuensis.story.StoryHttpService
+import spray.can.Http
+import spray.routing.authentication.UserPass
+import scala.language.postfixOps
+import spray.routing.authentication.BasicAuth
 
 
 class RootServiceActor extends Actor with ActorLogging with StaticHttpService with UserHttpService with StoryHttpService with SessionAware {
 
-  def myUserPassAuthenticator(userPass: Option[UserPass]): Future[Option[UserContext]] = {
-    Future {
-      if (userPass.exists(up => up.user == "hallo" && up.pass == "welt")) Some(UserContext("TestUser", "","","",Nil))
-      else None
-    }
+//  val userContextActor = actorRefFactory.actorSelection("user/userContext")
+
+  private implicit val timeout = new Timeout(2 seconds)
+
+  def myUserPassAuthenticator(userPassOption: Option[UserPass]): Future[Option[UserContext]] = {
+      (userContextActor ? new CheckUserMsg(userPassOption)).mapTo[Option[UserContext]]
   }
 
   def actorRefFactory = context
 
   def receive = runRoute(
-    userRoute ~ 
     staticRoute ~
 
-    authenticate(BasicAuth(myUserPassAuthenticator _, realm = "Amanuensis")) { userName =>
-      storyRoute(null)
+    authenticate(BasicAuth(myUserPassAuthenticator _, realm = "Amanuensis")) { userContext =>
+      storyRoute(userContext) ~
+      userRoute(userContext)
     }
     
 
@@ -52,8 +55,6 @@ object Boot extends App {
   // we need an ActorSystem to host our application in
   implicit val system = ActorSystem("amanuensis")
 
-  // create and start the session service
-  val sessionService = system.actorOf(Props[SessionServiceActor], "sessionService")	
   // create and start the userContext service
   val userContext = system.actorOf(Props[UserContextActor], "userContext")  
 

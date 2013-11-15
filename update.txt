@@ -1,7 +1,0 @@
-Loading /home/tiberius/scala/sbt/bin/sbt-launch-lib.bash
-[0m[[0minfo[0m] [0mLoading project definition from /home/tiberius/scala/projects/amanuensis/project[0m
-[0m[[0minfo[0m] [0mSet current project to amanuensis (in build file:/home/tiberius/scala/projects/amanuensis/)[0m
-> 
-> 
-> 
-> 

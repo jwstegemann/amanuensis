@@ -25,7 +25,7 @@ import language.postfixOps
 import akka.pattern.ask
 import akka.actor.{ActorLogging, ActorSelection}
 
-import amanuensis.auth.{SessionCookieAuth, UserContext}
+import amanuensis.auth.UserContext
 import amanuensis.system._
 
 import amanuensis.mongo.EntityActor

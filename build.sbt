@@ -7,6 +7,8 @@ scalaVersion := "2.10.3"
 // "-optimise"
 scalacOptions ++= Seq( "-deprecation", "-unchecked", "-feature" )
 
+javacOptions ++= Seq( "-XX:+TieredCompilation", "-XX:CICompilerCount=1" )
+
 // use src/main/webapp
 unmanagedResourceDirectories in Compile <+= (baseDirectory) { _ / "src" / "main" / "webapp" }
 

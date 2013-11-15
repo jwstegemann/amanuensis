@@ -167,6 +167,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/main/scala/amanuensis/auth/UserContextActor.scala",
+			"settings":
+			{
+				"buffer_size": 1388,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
+			"settings":
+			{
+				"buffer_size": 1847,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -175,20 +191,68 @@
 		"selected_items":
 		[
 			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"test",
+				"SBT: Test"
+			],
+			[
 				"sbt",
-				"SBT: Start SBT"
+				"SBT: Compile"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Grab CA Certs"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"add",
+				"Package Control: Add Repository"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
 			],
 			[
 				"pack",
 				"Package Control: Remove Package"
 			],
 			[
-				"S",
-				"SBT: Stop SBT"
+				"ensime",
+				"Ensime: Session"
 			],
 			[
-				"install",
-				"Package Control: Install Package"
+				"ens",
+				"Ensime: Go to Definition"
+			],
+			[
+				"ensim",
+				"Ensime: Startup"
+			],
+			[
+				"error",
+				"SBT: Show Error List"
+			],
+			[
+				"com",
+				"SBT: Compile"
+			],
+			[
+				"sbt:",
+				"SBT: Compile"
+			],
+			[
+				"S",
+				"SBT: Stop SBT"
 			],
 			[
 				"SBT",
@@ -220,17 +284,33 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/AuthenticationDomain.scala",
-		"/home/tiberius/.config/sublime-text-2/Packages/User/sbt.sublime-build",
-		"/home/tiberius/scala/projects/amanuensis/curl/story/create",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/EntityHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/Boot.scala",
-		"/home/tiberius/scala/projects/amanuensis/curl/story/list",
+		"/home/tiberius/scala/projects/amanuensis/update.txt",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/UserHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/Boot.scala",
+		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/README.md",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/EntityHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/project/plugins.sbt",
+		"/home/tiberius/scala/projects/amanuensis/.project",
+		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/SublimeSBT.sublime-settings",
+		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
+		"/home/tiberius/scala/projects/amanuensis/build.sbt",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/UserContextActor.scala",
+		"/home/tiberius/.config/sublime-text-2/Packages/Package Control/Package Control.sublime-settings",
+		"/home/tiberius/.config/sublime-text-2/Packages/Ensime/Default (Linux).sublime-keymap",
+		"/home/tiberius/.config/sublime-text-2/Packages/Ensime/Default.sublime-mousemap",
+		"/home/tiberius/scala/projects/amanuensis/.ensime_session",
+		"/home/tiberius/.config/sublime-text-2/Packages/Ensime/Ensime.sublime-settings",
+		"/home/tiberius/.config/sublime-text-2/Packages/User/Ensime.sublime-settings",
+		"/home/tiberius/.config/sublime-text-2/Packages/User/Default.sublime-mousemap",
+		"/home/tiberius/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/home/tiberius/scala/projects/amanuensis/.ensime",
+		"/home/tiberius/scala/projects/amanuensis/curl/story/list",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/AuthenticationDomain.scala",
+		"/home/tiberius/scala/projects/amanuensis/curl/story/create",
+		"/home/tiberius/.config/sublime-text-2/Packages/User/sbt.sublime-build",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Message.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/Entity.scala",
-		"/home/tiberius/scala/projects/amanuensis/build.sbt",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/MongoJsonProtocol.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/EntityActor.scala",
@@ -248,12 +328,10 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/SessionCookieAuthenticator.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/EntityService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/GenericMongoActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/UserContextActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/validation/Validation.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/utils/ReflectionUtils.scala",
 		"/home/tiberius/scala/projects/amanuensis/README.md",
-		"/home/tiberius/scala/projects/amanuensis/project/plugins.sbt",
 		"/home/tiberius/scala/projects/amanuensis/project/build.properties",
 		"/home/tiberius/scala/projects/amanuensis/src/main/resources/application.conf",
 		"/home/tiberius/scala/projects/amanuensis/src/main/resources/logback.xml",
@@ -333,21 +411,7 @@
 		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/UsingMongo.scala",
 		"/home/tiberius/scala/projects/klara/mongoDB/create_scripts",
 		"/home/tiberius/scala/projects/klara/src/main/webapp/static/css/klara.css",
-		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/controllers/user.js",
-		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/filters.js",
-		"/home/tiberius/scala/projects/klara/src/main/webapp/static/css/bootstrap.min.css",
-		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/auth.js",
-		"/home/tiberius/scala/projects/klara/src/main/resources/application.conf",
-		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/controllers/login.js",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/auth/AuthenticationProtocoll.scala",
-		"/home/tiberius/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/auth/MongoAuthenticator.scala",
-		"/home/tiberius/scala/projects/klara/snippets/routes.snippets",
-		"/home/tiberius/scala/projects/klara/Boot.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/MongoAuthenticator.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/spray/examples/DemoService.scala",
-		"/home/tiberius/scala/projects/klara/project/plugins.sbt",
-		"/home/tiberius/scala/projects/snaktest/build.sbt"
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/controllers/user.js"
 	],
 	"find":
 	{
@@ -368,6 +432,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"zip",
 			"log",
 			"log.info",
 			"BSONObjectIDFormat",
@@ -432,8 +497,64 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/main/scala/amanuensis/auth/UserContextActor.scala",
+					"settings":
+					{
+						"buffer_size": 1388,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1296,
+								1296
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 90.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
+					"settings":
+					{
+						"buffer_size": 1847,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								262,
+								262
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -474,11 +595,11 @@
 	},
 	"output.sbt":
 	{
-		"height": 375.0
+		"height": 281.0
 	},
 	"output.sbt_error":
 	{
-		"height": 0.0
+		"height": 147.0
 	},
 	"replace":
 	{
@@ -490,6 +611,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"usercon",
+				"src/main/scala/amanuensis/auth/UserContextActor.scala"
+			],
+			[
+				"auth",
+				"src/main/scala/amanuensis/auth/AuthenticationDomain.scala"
+			],
 			[
 				"entit",
 				"src/main/scala/amanuensis/entity/Entity.scala"
