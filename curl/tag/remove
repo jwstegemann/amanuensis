@@ -1,6 +1,13 @@
 #! /bin/bash
-curl -X GET \
+
+url="http://localhost:8080/tag/$1/$2"
+
+echo url: $url
+
+curl -X DELETE \
 	--user hallo:welt \
 	--header "Content-Type: application/json" \
 	--cookie cookies.txt \
-	"http://localhost:8080/story/"
+	$url
+
+echo 

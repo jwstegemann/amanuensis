@@ -11,5 +11,3 @@ case class InternalServerErrorException(val messages: List[Message]) extends Exc
 case class NotFoundException(val messages: List[Message]) extends Exception
 
 case class ValidationException(val messages: List[Message]) extends Exception
-
-case class BSONDeserializationError(msg: String) extends Exception

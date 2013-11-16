@@ -1,14 +1,13 @@
 #! /bin/bash
 
-url="http://localhost:8080/story/$1"
+url="http://localhost:8080/slot/$1/$2/$3"
 
 echo url: $url
 
-curl -X PUT \
+curl -X POST \
 	--user hallo:welt \
 	--header "Content-Type: application/json" \
 	--cookie cookies.txt \
-	--data "{\"_id\": $1, \"title\": \"$2\", \"content\": \"$3\"}" \
 	$url
 
 echo 

@@ -1,3 +1,0 @@
-#! /bin/bash
-
-curl --header "Content-Type: application/json" --data '{"username": "hallo", "password": "welt"}' --cookie-jar cookies.txt "http://localhost:8080/user/login"

@@ -10,43 +10,96 @@ import akka.actor.actorRef2Scala
 import akka.io.IO
 import akka.pattern.ask
 import akka.util.Timeout
-import amanuensis.auth.CheckUserMsg
-import amanuensis.auth.UserContext
-import amanuensis.auth.UserContextActor
-import amanuensis.services.SessionAware
 import amanuensis.services.StaticHttpService
-import amanuensis.services.UserHttpService
-import amanuensis.story.StoryActor
-import amanuensis.story.StoryHttpService
 import spray.can.Http
 import spray.routing.authentication.UserPass
 import scala.language.postfixOps
 import spray.routing.authentication.BasicAuth
 
 
-class RootServiceActor extends Actor with ActorLogging with StaticHttpService with UserHttpService with StoryHttpService with SessionAware {
+import amanuensis.story._
+import amanuensis.story.Story._
+import spray.httpx.SprayJsonSupport
 
-//  val userContextActor = actorRefFactory.actorSelection("user/userContext")
+import spray.httpx.unmarshalling.Unmarshaller
+import spray.httpx.marshalling.Marshaller
 
-  private implicit val timeout = new Timeout(2 seconds)
 
-  def myUserPassAuthenticator(userPassOption: Option[UserPass]): Future[Option[UserContext]] = {
-      (userContextActor ? new CheckUserMsg(userPassOption)).mapTo[Option[UserContext]]
-  }
+class RootServiceActor extends Actor with ActorLogging with SprayJsonSupport with StaticHttpService {
 
   def actorRefFactory = context
 
   def receive = runRoute(
     staticRoute ~
 
-    authenticate(BasicAuth(myUserPassAuthenticator _, realm = "Amanuensis")) { userContext =>
-      storyRoute(userContext) ~
-      userRoute(userContext)
-    }
-    
 
-//    authenticate(SessionCookieAuth()(sessionServiceActor, context.dispatcher)) { userContext => //FIXME: make sessionServiceActor implicit again
-//      storyRoute(userContext)
+    pathPrefix("story") {
+      path(LongNumber) { storyId : Long =>
+        get {
+          dynamic {
+            log.debug(s"request: get details for story $storyId")
+            complete(s"getting details for story $storyId")
+          }
+        } ~
+        put {
+          entity(as[Story]) { story =>
+            dynamic {
+              log.debug(s"request: update story $storyId with $story")
+              complete(s"updating story $storyId with: $story")
+            }
+          }
+        } ~
+        delete {
+          dynamic {
+            log.debug(s"request: remove story $storyId")
+            complete(s"removing story $storyId")
+          }
+        }
+      } ~
+      post {
+        entity(as[Story]) { story =>
+          dynamic {
+            log.debug(s"request: creating new story with $story")
+            complete(s"creating new story with $story")
+          }
+        }
+      }
+
+    }~
+
+    path("slot" / LongNumber / Segment / LongNumber) { (sourceStoryId : Long, slotName : String, targetStoryId : Long) =>
+      post {
+        dynamic {
+          log.debug(s"request: add slot for source: $sourceStoryId, slot: $slotName, target: $targetStoryId")
+          complete(s"adding slot for source: $sourceStoryId, slot: $slotName, target: $targetStoryId")
+        }
+      } ~
+      delete {
+        dynamic {
+          log.debug(s"request: remove slot for source: $sourceStoryId, slot: $slotName, target: $targetStoryId")
+          complete(s"removing slot for source: $sourceStoryId, slot: $slotName, target: $targetStoryId")
+        }
+      }
+    } ~
+
+    path("tag" / LongNumber / Rest ) { (storyId : Long, tagName : String) =>
+      post {
+        dynamic {
+          log.debug(s"request: add tag: $tagName to story: $storyId")
+          complete(s"adding tag: $tagName to story: $storyId")
+        }
+      } ~
+      delete {
+        dynamic {
+          log.debug(s"request: remove tag: $tagName from story: $storyId")
+          complete(s"removing tag: $tagName from story: $storyId")
+        }
+      }
+    }    
+
+//    authenticate(BasicAuth(myUserPassAuthenticator _, realm = "Amanuensis")) { userContext =>
+//      storyRoute(userContext) // ~
+//      userRoute(userContext)
 //    }
   )
 }
@@ -55,13 +108,10 @@ object Boot extends App {
   // we need an ActorSystem to host our application in
   implicit val system = ActorSystem("amanuensis")
 
-  // create and start the userContext service
-  val userContext = system.actorOf(Props[UserContextActor], "userContext")  
-
   /*
    * Domain Actors 
    */  
-  val storyActor = system.actorOf(Props[StoryActor], "story")  
+  //val storyActor = system.actorOf(Props[StoryActor], "story")  
 
   /*
    * Web Actors

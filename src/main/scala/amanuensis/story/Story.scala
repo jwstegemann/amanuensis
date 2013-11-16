@@ -1,27 +1,13 @@
 package amanuensis.story
 
-import amanuensis.mongo.MongoJsonProtocol
-import amanuensis.entity._
-
-import reactivemongo.bson._
+import spray.json.DefaultJsonProtocol
 
 
-case class Story(_id : Option[BSONObjectID], title : String, content : String) extends Entity
+case class Story(_id : Option[Long], title : String, content : String)
 
 
-object Story extends MongoJsonProtocol {
+object Story extends DefaultJsonProtocol {
   // JSON-Serialization
   implicit val storyJsonFormat = jsonFormat3(Story.apply)
 
-  // BSON-Serialization
-  implicit val storyBsonHandler = Macros.handler[Story]
-
-  /* Validation
-  override def checks() = checkName _ :: Nil
-
-  def checkName(schueler: Schueler): Result[Schueler] = {
-    if (schueler.name.startsWith("Ca")) Right(schueler)
-    else Left(Message("Namde muss mit Ca beginnen!",`ERROR`, field=Some("name")))
-  }
-  */
 }

@@ -168,18 +168,39 @@
 	"buffers":
 	[
 		{
+			"contents": "package amanuensis.auth\n\nimport akka.actor._\nimport akka.pattern._\nimport reactivemongo.api._\nimport reactivemongo.bson._\nimport language.postfixOps\nimport amanuensis.mongo.MongoUsingActor\nimport spray.routing.authentication.UserPass\nimport spray.caching._\n\ncom\ncase class CheckUserMsg(userPassOption: Option[UserPass])\n\n\nclass UserContextActor extends MongoUsingActor {\n\n  val userCache : Cache[Option[UserContext]]  = LruCache() //TODO: set parameters\n\n  override def preStart =  {\n    log.info(\"UserContextActor started at: {}\", self.path)  \n  }\n\n  val collection = db(\"user\")\n\n  def receive = {\n    case CheckUserMsg(userPassOption) => checkUser(userPassOption)\n  }\n\n  private val digest = java.security.MessageDigest.getInstance(\"SHA-256\")\n\n  private def sha(s: String): String = {\n    val m = digest.digest(s.getBytes(\"UTF-8\"));\n    m map { c => (c & 0xff) toHexString } mkString\n  }\n\n  def checkUser(userPassOption: Option[UserPass]) = {\n    userPassOption match {\n      case Some(userPass) => {\n        log.info(\"checking user {} with {}...\", userPass.user, userPass.pass)\n\n        userCache(userPass) {\n          log.info(\"had to check db for userContext\")\n          val query = BSONDocument(\"username\" -> userPass.user, \"password\" -> sha(userPass.pass))\n          collection.find(query).one[UserContext]\n        } pipeTo sender\n      }\n      case None => sender ! None\n    }\n  }\n\n}",
 			"file": "src/main/scala/amanuensis/auth/UserContextActor.scala",
+			"file_size": 1388,
+			"file_write_time": 1384541275000000,
 			"settings":
 			{
-				"buffer_size": 1388,
+				"buffer_size": 1391,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
+			"contents": "Searching 20 files for \"requested\"\n\n/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/UserHttpService.scala:\n   39        get {\n   40          path(\"info\") {\n   41:           log.info(\"Userinfo for \" + userContext.username + \" requested\")\n   42            complete(userContext);\n   43          }\n\n1 match in 1 file\n",
 			"settings":
 			{
-				"buffer_size": 1847,
+				"buffer_size": 341,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/Boot.scala",
+			"settings":
+			{
+				"buffer_size": 2337,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/services/UserHttpService.scala",
+			"settings":
+			{
+				"buffer_size": 1725,
 				"line_ending": "Unix"
 			}
 		}
@@ -191,16 +212,24 @@
 		"selected_items":
 		[
 			[
+				"sbt",
+				"SBT: Start SBT"
+			],
+			[
+				"git pu",
+				"Git: Push"
+			],
+			[
+				"git",
+				"Git: Commit history"
+			],
+			[
 				"install",
 				"Package Control: Install Package"
 			],
 			[
 				"test",
 				"SBT: Test"
-			],
-			[
-				"sbt",
-				"SBT: Compile"
 			],
 			[
 				"Package Control: ",
@@ -284,6 +313,8 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/.config/sublime-text-2/Packages/Git/Git.sublime-settings",
+		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
 		"/home/tiberius/scala/projects/amanuensis/update.txt",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/UserHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/Boot.scala",
@@ -292,7 +323,6 @@
 		"/home/tiberius/scala/projects/amanuensis/project/plugins.sbt",
 		"/home/tiberius/scala/projects/amanuensis/.project",
 		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/SublimeSBT.sublime-settings",
-		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
 		"/home/tiberius/scala/projects/amanuensis/build.sbt",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/UserContextActor.scala",
 		"/home/tiberius/.config/sublime-text-2/Packages/Package Control/Package Control.sublime-settings",
@@ -410,8 +440,7 @@
 		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/StaticService.scala",
 		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/UsingMongo.scala",
 		"/home/tiberius/scala/projects/klara/mongoDB/create_scripts",
-		"/home/tiberius/scala/projects/klara/src/main/webapp/static/css/klara.css",
-		"/home/tiberius/scala/projects/klara/src/main/webapp/static/js/controllers/user.js"
+		"/home/tiberius/scala/projects/klara/src/main/webapp/static/css/klara.css"
 	],
 	"find":
 	{
@@ -419,7 +448,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
@@ -429,9 +458,12 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"requested",
+			"UserInfo for",
+			"UserInfo for requested",
 			"zip",
 			"log",
 			"log.info",
@@ -497,7 +529,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -505,15 +537,15 @@
 					"file": "src/main/scala/amanuensis/auth/UserContextActor.scala",
 					"settings":
 					{
-						"buffer_size": 1388,
+						"buffer_size": 1391,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1296,
-								1296
+								468,
+								468
 							]
 						],
 						"settings":
@@ -530,27 +562,99 @@
 				},
 				{
 					"buffer": 1,
-					"file": "/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
 					"settings":
 					{
-						"buffer_size": 1847,
+						"buffer_size": 341,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										253,
+										262
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								341,
+								341
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/main/scala/amanuensis/Boot.scala",
+					"settings":
+					{
+						"buffer_size": 2337,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								262,
-								262
+								1336,
+								1336
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 135.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/main/scala/amanuensis/services/UserHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 1725,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1424,
+								1424
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 225.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -593,9 +697,13 @@
 	{
 		"height": 155.0
 	},
+	"output.git":
+	{
+		"height": 121.0
+	},
 	"output.sbt":
 	{
-		"height": 281.0
+		"height": 202.0
 	},
 	"output.sbt_error":
 	{

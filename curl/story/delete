@@ -1,3 +1,0 @@
-#! /bin/bash
-
-curl -X DELETE --header "Content-Type: application/json" --cookie cookies.txt "http://localhost:8080/schueler/$1"
