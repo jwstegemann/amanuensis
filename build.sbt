@@ -37,16 +37,17 @@ libraryDependencies ++= Seq(
     "com.typesafe.akka"                       %%  "akka-actor"                  % "2.2.3",
     "com.typesafe.akka"                       %%  "akka-slf4j"                  % "2.2.3",
     "com.typesafe.akka"                       %%  "akka-testkit"                % "2.2.3",
-    "org.parboiled"                           %%  "parboiled-scala"             % "1.1.4",
-    "com.chuusai"                             %%  "shapeless"                   % "1.2.4",
-    "org.scalatest"                           %%  "scalatest"                   % "1.9.2",
-    "org.specs2"                              %%  "specs2"                      % "2.2.2",
-    "com.googlecode.concurrentlinkedhashmap"  %   "concurrentlinkedhashmap-lru" % "1.4",
     "ch.qos.logback"                          %   "logback-classic"             % "1.0.13",
-    "org.jvnet.mimepull"                      %   "mimepull"                    % "1.9.1",
-    "org.pegdown"                             %   "pegdown"                     % "1.4.1",
-    "org.reactivemongo"                       %%  "reactivemongo"                % "0.10.0-SNAPSHOT",
-    "joda-time"                               % "joda-time"                     % "2.1"
+    "org.neo4j"                               %   "neo4j"                       % "2.0.0-M06"
+//    "org.parboiled"                           %%  "parboiled-scala"             % "1.1.4",
+//    "com.chuusai"                             %%  "shapeless"                   % "1.2.4",
+//    "org.scalatest"                           %%  "scalatest"                   % "1.9.2",
+//    "org.specs2"                              %%  "specs2"                      % "2.2.2",
+//    "com.googlecode.concurrentlinkedhashmap"  %   "concurrentlinkedhashmap-lru" % "1.4",
+//    "org.jvnet.mimepull"                      %   "mimepull"                    % "1.9.1",
+//    "org.pegdown"                             %   "pegdown"                     % "1.4.1",
+//    "org.reactivemongo"                       %%  "reactivemongo"                % "0.10.0-SNAPSHOT",
+//    "joda-time"                               % "joda-time"                     % "2.1"
 )
 
 
