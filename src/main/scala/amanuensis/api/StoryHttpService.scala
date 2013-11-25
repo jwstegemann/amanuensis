@@ -33,7 +33,8 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
         get {
           dynamic {
             log.debug(s"request: get details for story $storyId")
-            complete((storyActor ? Get(storyId)).mapTo[Story])
+            complete((storyActor ? Retrieve(storyId)).mapTo[Story])
+//              complete(future { Story(Some(17),"A","B") } )
           }
         } ~
         put {
@@ -55,7 +56,8 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
         entity(as[Story]) { story =>
           dynamic {
             log.debug(s"request: creating new story with $story")
-            complete(s"creating new story with $story")
+            complete((storyActor ? Create(story)).mapTo[Story])
+//            complete(s"creating new story with $story")
           }
         }
       }
