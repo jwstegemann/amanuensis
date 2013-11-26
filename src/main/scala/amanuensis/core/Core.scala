@@ -42,4 +42,6 @@ trait CoreActors {
    */
   val storyActor = system.actorOf(Props[StoryActor], "story")
 
+  val cypherActor = system.actorOf(Props[CypherActor], "cypher")
+
 }

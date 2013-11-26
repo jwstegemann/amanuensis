@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"expectMs",
+				"expectMsgPF"
+			],
+			[
 				"Actor",
 				"ActorLogging"
 			],
@@ -187,6 +191,39 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/test/scala/amanuensis/core/CypherActorSpec.scala",
+			"settings":
+			{
+				"buffer_size": 962,
+				"line_ending": "Unix",
+				"name": "package amanuensis.core"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/core/CypherActor.scala",
+			"settings":
+			{
+				"buffer_size": 1154,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/RootServiceActor.scala",
+			"settings":
+			{
+				"buffer_size": 1443,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/domain/Story.scala",
+			"settings":
+			{
+				"buffer_size": 267,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -196,7 +233,7 @@
 		[
 			[
 				"sbt",
-				"SBT: Compile"
+				"SBT: Stop SBT"
 			],
 			[
 				"git pu",
@@ -296,15 +333,15 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/Core.scala",
 		"/home/tiberius/scala/projects/amanuensis/build.sbt",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/Api.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
 		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Failable.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/Core.scala",
 		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/SublimeSBT.sublime-settings",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootHttpService.scala",
@@ -514,8 +551,120 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/test/scala/amanuensis/core/CypherActorSpec.scala",
+					"settings":
+					{
+						"buffer_size": 962,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								772,
+								772
+							]
+						],
+						"settings":
+						{
+							"auto_name": "package amanuensis.core",
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/main/scala/amanuensis/core/CypherActor.scala",
+					"settings":
+					{
+						"buffer_size": 1154,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1138,
+								1138
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 180.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/main/scala/amanuensis/api/RootServiceActor.scala",
+					"settings":
+					{
+						"buffer_size": 1443,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								408,
+								408
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/main/scala/amanuensis/domain/Story.scala",
+					"settings":
+					{
+						"buffer_size": 267,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								267,
+								267
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -560,7 +709,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 247.0
+		"height": 303.0
 	},
 	"output.sbt_error":
 	{
@@ -576,6 +725,18 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"story",
+				"src/main/scala/amanuensis/domain/Story.scala"
+			],
+			[
+				"core",
+				"src/main/scala/amanuensis/core/Core.scala"
+			],
+			[
+				"storya",
+				"src/main/scala/amanuensis/core/StoryActor.scala"
+			],
 			[
 				"usercon",
 				"src/main/scala/amanuensis/auth/UserContextActor.scala"
