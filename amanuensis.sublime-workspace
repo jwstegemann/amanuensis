@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Actor",
+				"ActorLogging"
+			],
+			[
 				"story",
 				"storyId"
 			],
@@ -183,14 +187,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/main/scala/amanuensis/story/StoryActor.scala",
-			"settings":
-			{
-				"buffer_size": 1195,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -200,7 +196,7 @@
 		[
 			[
 				"sbt",
-				"SBT: Start SBT"
+				"SBT: Compile"
 			],
 			[
 				"git pu",
@@ -300,8 +296,28 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/tiberius/scala/projects/amanuensis/build.sbt",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/Api.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
+		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Failable.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/Core.scala",
+		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/SublimeSBT.sublime-settings",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/web/Web.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/MessageHandling.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/Boot.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Message.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Message.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Exceptions.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/exceptions/Exceptions.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryActor.scala",
+		"/home/tiberius/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
 		"/home/tiberius/scala/projects/amanuensis/curl/slot/add",
 		"/home/tiberius/scala/projects/amanuensis/curl/slot/remove",
 		"/home/tiberius/scala/projects/amanuensis/curl/tag/add",
@@ -311,22 +327,16 @@
 		"/home/tiberius/scala/projects/amanuensis/curl/story/remove",
 		"/home/tiberius/scala/projects/amanuensis/curl/story/get",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/Story.scala",
-		"/home/tiberius/scala/projects/amanuensis/build.sbt",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/UserContextActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/UserHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/EntityHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Exceptions.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Failable.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Message.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryHttpService.scala",
 		"/home/tiberius/.config/sublime-text-2/Packages/Git/Git.sublime-settings",
-		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
 		"/home/tiberius/scala/projects/amanuensis/update.txt",
 		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/README.md",
 		"/home/tiberius/scala/projects/amanuensis/project/plugins.sbt",
 		"/home/tiberius/scala/projects/amanuensis/.project",
-		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/SublimeSBT.sublime-settings",
 		"/home/tiberius/.config/sublime-text-2/Packages/Package Control/Package Control.sublime-settings",
 		"/home/tiberius/.config/sublime-text-2/Packages/Ensime/Default (Linux).sublime-keymap",
 		"/home/tiberius/.config/sublime-text-2/Packages/Ensime/Default.sublime-mousemap",
@@ -343,11 +353,8 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/MongoJsonProtocol.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/EntityActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/MongoUsingActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/MessageHandling.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/SessionServiceActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StoryHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/LastErrorMapping.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/EntityMessages.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/UserService.scala",
@@ -416,18 +423,7 @@
 		"/home/tiberius/scala/projects/klara/src/main/scala/klara/utils/ReflectionUtils.scala",
 		"/home/tiberius/scala/projects/klara/src/main/scala/klara/schueler/ReflectionUtils.scala",
 		"/home/tiberius/scala/projects/klara/src/main/scala/klara/schueler/Macros.scala",
-		"/home/tiberius/scala/projects/klara/build.sbt",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/schueler/SchuelerService.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/auth/SessionCookieAuthenticator.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/SessionAware.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/Entity.scala",
-		"/home/tiberius/scala/projects/klara/curl/schueler/load",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/entity/EntityMessages.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/EntityMessages.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/messages/EntityMessages.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/MessageHandling.scala",
-		"/home/tiberius/scala/projects/klara/curl/tests.txt",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/utils/HandlingError.scala"
+		"/home/tiberius/scala/projects/klara/build.sbt"
 	],
 	"find":
 	{
@@ -518,37 +514,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/main/scala/amanuensis/story/StoryActor.scala",
-					"settings":
-					{
-						"buffer_size": 1195,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								948,
-								948
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 135.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -593,7 +560,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 255.0
+		"height": 247.0
 	},
 	"output.sbt_error":
 	{

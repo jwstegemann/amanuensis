@@ -38,7 +38,8 @@ libraryDependencies ++= Seq(
     "com.typesafe.akka"                       %%  "akka-slf4j"                  % "2.2.3",
     "com.typesafe.akka"                       %%  "akka-testkit"                % "2.2.3",
     "ch.qos.logback"                          %   "logback-classic"             % "1.0.13",
-    "org.neo4j"                               %   "neo4j"                       % "2.0.0-M06"
+    "org.neo4j"                               %   "neo4j"                       % "2.0.0-M06",
+    "org.specs2"                              %%  "specs2"                      % "1.14"         % "test"
 //    "org.parboiled"                           %%  "parboiled-scala"             % "1.1.4",
 //    "com.chuusai"                             %%  "shapeless"                   % "1.2.4",
 //    "org.scalatest"                           %%  "scalatest"                   % "1.9.2",
