@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"Resu",
+				"ResultX"
+			],
+			[
+				"jsno",
+				"jsonFormat2"
+			],
+			[
+				"imp",
+				"implicit"
+			],
+			[
+				"Co",
+				"ColorJsonFormat"
+			],
+			[
+				"json",
+				"jsonFormat2"
+			],
+			[
 				"expectMs",
 				"expectMsgPF"
 			],
@@ -204,7 +224,7 @@
 			"file": "src/main/scala/amanuensis/core/CypherActor.scala",
 			"settings":
 			{
-				"buffer_size": 1154,
+				"buffer_size": 2480,
 				"line_ending": "Unix"
 			}
 		},
@@ -231,6 +251,10 @@
 		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"start",
+				"SBT: Start SBT"
+			],
 			[
 				"sbt",
 				"SBT: Stop SBT"
@@ -551,7 +575,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -566,8 +590,8 @@
 						"selection":
 						[
 							[
-								772,
-								772
+								400,
+								400
 							]
 						],
 						"settings":
@@ -578,7 +602,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 90.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -588,15 +612,15 @@
 					"file": "src/main/scala/amanuensis/core/CypherActor.scala",
 					"settings":
 					{
-						"buffer_size": 1154,
+						"buffer_size": 2480,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1138,
-								1138
+								2256,
+								2256
 							]
 						],
 						"settings":
@@ -606,7 +630,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 180.0,
+						"translation.y": 765.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -709,7 +733,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 303.0
+		"height": 212.0
 	},
 	"output.sbt_error":
 	{

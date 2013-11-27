@@ -27,8 +27,8 @@ class CypherActorSpec extends TestKit(ActorSystem()) with SpecificationLike with
 */
 
       expectMsgPF() {
-        //case msg: String => msg mustEqual ""
-        case msg: Result => msg.data(0)(2) mustEqual JsNumber(25)
+        case msg: String => msg mustEqual ""
+        //case msg: Result => msg.data(0)(2) mustEqual JsNumber(25)
       }
 
     }
