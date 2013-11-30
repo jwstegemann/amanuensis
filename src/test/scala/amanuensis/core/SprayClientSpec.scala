@@ -46,9 +46,7 @@ class SprayClientSpec extends TestKit(ActorSystem()) with NoTimeConversions with
       case class TestRow(a: String, c: Int)
       implicit val testRowJsonFormat = jsonCaseClassArrayFormat(TestRow)
 
-      implicit val server = Neo4JServer(serverUrl)
-
-      val q = new Query()
+      val q = CyperServer(serverUrl)
 
       val res = q.list[TestRow](queryString)
 
@@ -66,9 +64,7 @@ class SprayClientSpec extends TestKit(ActorSystem()) with NoTimeConversions with
 
     "create a new node correctly" in {
 
-      implicit val server = Neo4JServer(serverUrl)
-
-      val q = new Query()
+      val q = CyperServer(serverUrl)
 
       val res = q.execute(createString, ("title" -> "Story21"), ("content" -> "Test-Content 2"))
 

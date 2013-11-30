@@ -15,12 +15,14 @@ import spray.httpx.SprayJsonSupport
 import scala.concurrent.future
 
 import amanuensis.core.StoryActor._
+import amanuensis.core.{Created}
 import amanuensis.domain.Story
 
 
 trait StoryHttpService extends Directives { self : Actor with HttpService with ActorLogging with SprayJsonSupport =>
 
   import Story._
+  import CoreJsonProtocol._
 
   val storyActor = actorRefFactory.actorSelection("/user/story")
 
@@ -29,7 +31,7 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
 
   val storyRoute =
     pathPrefix("story") {
-      path(LongNumber) { storyId : Long =>
+      path(Segment) { storyId : String =>
         get {
           dynamic {
             log.debug(s"request: get details for story $storyId")
@@ -56,7 +58,7 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
         entity(as[Story]) { story =>
           dynamic {
             log.debug(s"request: creating new story with $story")
-            complete((storyActor ? Create(story)).mapTo[Story])
+            complete((storyActor ? Create(story)).mapTo[Created])
 //            complete(s"creating new story with $story")
           }
         }

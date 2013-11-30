@@ -1,5 +1,4 @@
-package amanuensis.core
-
+package amanuensis.core.neo4j
 
 import scala.concurrent.Future
 
@@ -16,13 +15,8 @@ import spray.util._
 
 import akka.actor.ActorSystem
 
-import amanuensis.core.neo4j.Neo4JRestFormats
 
-
-case class Neo4JServer(url: String)
-  
-
-case class Query(implicit val actorSystem: ActorSystem, val server: Neo4JServer) extends DefaultJsonProtocol with SprayJsonSupport {
+case class CypherServer(url: String)(implicit val actorSystem: ActorSystem) extends DefaultJsonProtocol with SprayJsonSupport {
 
   type Param = (String, JsValue)
 
@@ -41,9 +35,10 @@ case class Query(implicit val actorSystem: ActorSystem, val server: Neo4JServer)
   def buildQueryObject(query: String, params: Param*): JsObject = JsObject(("query", JsString(query)), ("params", JsObject(params: _*)))
 
   def list[R](query: String, params: Param*)(implicit rowJsonFormat: JsonFormat[R]): Future[Seq[R]] = {
-    pipeline(Post(server.url, buildQueryObject(query, params: _*))) map {
+    pipeline(Post(url, buildQueryObject(query, params: _*))) map {
       case result: JsObject => result.fields("data").convertTo[Seq[R]]
     }
+    //FIXME: map xception to Neo4JException and handle it!
   }
 
   def one[R](query: String, params: Param*)(implicit rowJsonFormat: JsonFormat[R]): Future[R] = {
@@ -52,7 +47,9 @@ case class Query(implicit val actorSystem: ActorSystem, val server: Neo4JServer)
   }
 
   def execute(query: String, params: Param*): Future[HttpResponse] = {
-    pipelineRaw(Post(server.url, buildQueryObject(query, params: _*)))
+    //FIXME: handle error! (NoException)
+    println(query + ", " + params)
+    pipelineRaw(Post(url, buildQueryObject(query, params: _*))) // map (httpResponse => httpResponse.status.isSuccess)
   }
 
 }

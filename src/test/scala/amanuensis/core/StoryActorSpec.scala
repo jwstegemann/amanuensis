@@ -19,10 +19,10 @@ class StoryActorSpec extends TestKit(ActorSystem()) with SpecificationLike with 
   "StoryActor should" >> {
 
     "return story with given id" in {
-      storyActor ! Retrieve(29)
+      storyActor ! Retrieve("29")
     
       expectMsgPF() {
-        case Story(Some(id: Long), _, _) => id mustEqual 29 //if id == 24 => success
+        case Story(Some(id: String), _, _) => id mustEqual "29" //if id == 24 => success
       }
 
     }
