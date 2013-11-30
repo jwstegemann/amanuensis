@@ -29,10 +29,10 @@ resolvers ++= Seq(
 
 // Libraries
 libraryDependencies ++= Seq(
-	"io.spray"								  %   "spray-routing"				% "1.2-RC2",
-	"io.spray"								  %   "spray-can"					% "1.2-RC2",
-	"io.spray"								  %   "spray-caching"				% "1.2-RC2",
-    "io.spray"                                %   "spray-client"                % "1.2-RC2",
+	"io.spray"								  %   "spray-routing"				% "1.2-RC4",
+	"io.spray"								  %   "spray-can"					% "1.2-RC4",
+	"io.spray"								  %   "spray-caching"				% "1.2-RC4",
+    "io.spray"                                %   "spray-client"                % "1.2-RC4",
     "io.spray"                                %%  "spray-json"                  % "1.2.5",
 	"org.scala-lang"                          %   "scala-reflect"               % "2.10.3",
     "com.typesafe.akka"                       %%  "akka-actor"                  % "2.2.3",

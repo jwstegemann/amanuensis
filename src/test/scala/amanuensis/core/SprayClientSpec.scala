@@ -2,7 +2,9 @@ package amanuensis.core
 
 import akka.testkit.{ImplicitSender, TestKit}
 import akka.actor.ActorSystem
+
 import org.specs2.mutable.SpecificationLike
+import org.specs2.time.NoTimeConversions
 
 import scala.concurrent.Future
 
@@ -14,8 +16,12 @@ import spray.client.pipelining._
 
 import spray.can.Http
 import spray.httpx.SprayJsonSupport
+import spray.http.StatusCodes.Success
 import spray.client.pipelining._
 import spray.util._
+
+import scala.concurrent._
+import scala.concurrent.duration._
 
 import amanuensis.core.neo4j._
 
@@ -23,45 +29,53 @@ import amanuensis.core.neo4j._
 //import scala.concurrent.duration._
 
 
-class SprayClientSpec extends TestKit(ActorSystem()) with SpecificationLike with CoreActors with Core 
-  with ImplicitSender with SprayJsonSupport with DefaultJsonProtocol with Neo4JRestFormats {
+class SprayClientSpec extends TestKit(ActorSystem()) with NoTimeConversions with SpecificationLike with CoreActors with Core 
+  with ImplicitSender with SprayJsonSupport with Neo4JJsonProtocol  {
 
   import system.dispatcher
 
+  final val serverUrl = "http://localhost:7474/db/data/cypher"
+  final val queryString = "start n=node(*) return n.title,id(n)"
+  final val createString = "CREATE (n:Story { title: {title}, content: {content} }) RETURN n.title"
+
   sequential
 
-  "spray-client should" >> {
+  "neo4j spray-client should" >> {
 
-    "bla bla return story with given id" in {
-     
-        case class TestParams(p1: String, p2: Int)
-        implicit val testParamsJsonFormat = jsonFormat2(TestParams)
+    "return list of case class for semi-typed query" in {
+      case class TestRow(a: String, c: Int)
+      implicit val testRowJsonFormat = jsonCaseClassArrayFormat(TestRow)
 
-        case class TestRow(a: String, c: Int)
-        implicit val testRowJsonFormat = jsonArrayFormat2(TestRow)
+      implicit val server = Neo4JServer(serverUrl)
 
-        implicit val server = Neo4JServer("http://localhost:7474/db/data/cypher")
+      val q = new Query()
 
-        val q = new Query[TestParams, TestRow]("start n=node(*) return n.title,id(n)",TestParams("A",1))
+      val res = q.list[TestRow](queryString)
 
-        q.execute onSuccess { 
-          case r => println(r)
-        }
+      res onSuccess { 
+        case r => println("C +++++ " + r)
+      }
 
-        success
-        
+      res onFailure {
+        case e => println("C ----- " + e)
+      }
+
+      Await.result(res, 2 seconds) must not be empty
     }
+    
 
+    "create a new node correctly" in {
 
+      implicit val server = Neo4JServer(serverUrl)
 
+      val q = new Query()
 
+      val res = q.execute(createString, ("title" -> "Story21"), ("content" -> "Test-Content 2"))
 
-/*    "accept valid user to be registered" in {
-      registration ! Register(mkUser("jan@eigengo.com"))
-      expectMsg(Right(Registered))
-      success
+      Await.result(res, 2 seconds).status must beAnInstanceOf[Success]
     }
-*/    
   }
+
+
 
 }
