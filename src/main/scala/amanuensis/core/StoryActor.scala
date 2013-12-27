@@ -34,7 +34,7 @@ object StoryActor {
   val retrieveOutSlotQueryString = """MATCH (s:Story)-[r]->(m:Story) WHERE s.id={id} return type(r) as name"""
   val retrieveInSlotQueryString = """MATCH (s:Story)<-[r]-(m:Story) WHERE s.id={id} return type(r) as name"""
 
-  val removeStoryQueryString = """ """
+  val removeStoryQueryString = """MATCH (s:Story) WHERE s.id='' DELETE"""
 }
 
 
@@ -69,8 +69,6 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   }
 
   def create(story: Story) = {
-    println("creating " + story)
-
     // Todo: check for id not be present
     val id = Neo4JId.generateId
 
@@ -106,6 +104,10 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   }
 
   def delete(storyId: String) = {
-  	
+    server.execute(removeStoryQueryString, 
+      ("id" -> storyId)
+    )	map { response => response.status.intValue }
   }
+
+
 }

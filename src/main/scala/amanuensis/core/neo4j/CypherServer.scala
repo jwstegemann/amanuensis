@@ -20,6 +20,7 @@ trait UsingParams {
   type Param = (String, JsValue)
 }
 
+//FIXME: Make this one log right!
 case class CypherServer(url: String)(implicit val actorSystem: ActorSystem) extends DefaultJsonProtocol with SprayJsonSupport with UsingParams {
 
   import actorSystem.dispatcher
