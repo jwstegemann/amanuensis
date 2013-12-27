@@ -13,9 +13,11 @@ import amanuensis.core.util.Failable
 
 import amanuensis.core.neo4j._
 
-import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol}
+import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol, Slot, SlotProtocol}
 
 import spray.httpx.SprayJsonSupport
+
+import scala.concurrent.Future
 
 
 
@@ -29,17 +31,19 @@ object StoryActor extends Neo4JJsonProtocol {
   val createQueryString = """CREATE (s:Story { id: {id},title: {title},content: {content} }) RETURN s.id"""
   val retrieveStoryQueryString = """MATCH (s:Story) WHERE s.id={id} return s.id as id, s.title as title, s.content as content"""
 
-  implicit val storyNeo4JFormat = jsonCaseClassArrayFormat(Story)
+  val retrieveOutSlotQueryString = """MATCH (s:Story)-[r]->(m:Story) WHERE s.id={id} return type(r) as name"""
+  val retrieveInSlotQueryString = """MATCH (s:Story)<-[r]-(m:Story) WHERE s.id={id} return type(r) as name"""
 
+  implicit val storyNeo4JFormat = jsonCaseClassArrayFormat(Story)
+  implicit val slotNeo4JFormat = jsonCaseClassArrayFormat(Slot)
 }
 
 /**
  * Registers the users. Replies with
  */
-class StoryActor extends Actor with ActorLogging with Failable {
+class StoryActor extends Actor with ActorLogging with Failable with UsingParams with Neo4JJsonProtocol {
 
   import StoryActor._
-  import StoryProtocol._
 
   implicit def executionContext = context.dispatcher
   implicit val system = context.system
@@ -74,12 +78,19 @@ class StoryActor extends Actor with ActorLogging with Failable {
   }
 
   def retrieve(storyId: String) = {
-    val story = server.one[Story](retrieveStoryQueryString, ("id" -> storyId))
 
-  	story.map {
-      case Some(s) => Some(StoryContext(s, Nil, Nil))
-      case None => None
-    }
+    val paramList: Param = ("id" -> storyId)
+
+    for {
+      story <- server.one[Story](retrieveStoryQueryString, paramList) map {
+        case Some(s) => s
+        case None => throw NotFoundException(Message(s"story with id '$storyId' could not be found",`ERROR`) :: Nil)
+      }
+      //FIXME: allow simple strings here as a result!
+      inSlots <- server.list[Slot](retrieveInSlotQueryString, paramList) 
+      outSlots <- server.list[Slot](retrieveOutSlotQueryString, paramList) 
+    } yield StoryContext(story,inSlots,outSlots)
+
   }
 
   def update(storyId: String, story: Story) = {

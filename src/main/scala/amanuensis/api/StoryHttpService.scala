@@ -34,7 +34,7 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
           dynamic {
             log.debug(s"request: get details for story $storyId")
             //FIXME: fail if Option is None
-            complete((storyActor ? Retrieve(storyId)).mapTo[Option[StoryContext]])
+            complete((storyActor ? Retrieve(storyId)).mapTo[StoryContext])
 //              complete(future { Story(Some(17),"A","B") } )
           }
         } ~
