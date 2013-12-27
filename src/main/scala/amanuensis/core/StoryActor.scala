@@ -21,7 +21,7 @@ import scala.concurrent.Future
 
 
 
-object StoryActor extends Neo4JJsonProtocol {
+object StoryActor {
 
   case class Create(story: Story)  
   case class Retrieve(storyId: String)
@@ -34,6 +34,11 @@ object StoryActor extends Neo4JJsonProtocol {
   val retrieveOutSlotQueryString = """MATCH (s:Story)-[r]->(m:Story) WHERE s.id={id} return type(r) as name"""
   val retrieveInSlotQueryString = """MATCH (s:Story)<-[r]-(m:Story) WHERE s.id={id} return type(r) as name"""
 
+  val removeStoryQueryString = """ """
+}
+
+
+object StoryNeoProtocol extends Neo4JJsonProtocol {
   implicit val storyNeo4JFormat = jsonCaseClassArrayFormat(Story)
   implicit val slotNeo4JFormat = jsonCaseClassArrayFormat(Slot)
 }
@@ -44,6 +49,7 @@ object StoryActor extends Neo4JJsonProtocol {
 class StoryActor extends Actor with ActorLogging with Failable with UsingParams with Neo4JJsonProtocol {
 
   import StoryActor._
+  import StoryNeoProtocol._
 
   implicit def executionContext = context.dispatcher
   implicit val system = context.system
@@ -63,6 +69,8 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   }
 
   def create(story: Story) = {
+    println("creating " + story)
+
     // Todo: check for id not be present
     val id = Neo4JId.generateId
 
@@ -98,6 +106,6 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   }
 
   def delete(storyId: String) = {
-  	Story(Some(storyId),"Testtitel","Testcontent")
+  	
   }
 }
