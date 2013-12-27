@@ -5,7 +5,7 @@ version := "1.0"
 scalaVersion := "2.10.3"
 
 // "-optimise"
-scalacOptions ++= Seq( "-deprecation", "-unchecked", "-feature" )
+scalacOptions ++= Seq( "-deprecation", "-unchecked", "-feature", "-language:implicitConversions" )
 
 javacOptions ++= Seq( "-XX:+TieredCompilation", "-XX:CICompilerCount=1" )
 

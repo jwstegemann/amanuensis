@@ -35,15 +35,20 @@ case class CypherServer(url: String)(implicit val actorSystem: ActorSystem) exte
   def buildQueryObject(query: String, params: Param*): JsObject = JsObject(("query", JsString(query)), ("params", JsObject(params: _*)))
 
   def list[R](query: String, params: Param*)(implicit rowJsonFormat: JsonFormat[R]): Future[Seq[R]] = {
+    println(buildQueryObject(query, params: _*))
     pipeline(Post(url, buildQueryObject(query, params: _*))) map {
-      case result: JsObject => result.fields("data").convertTo[Seq[R]]
+      //TODO: is there a way to hande objects in return s for example
+      case result: JsObject => {
+        println(result)
+        result.fields("data").convertTo[Seq[R]]
+      }
     }
     //FIXME: map xception to Neo4JException and handle it!
   }
 
-  def one[R](query: String, params: Param*)(implicit rowJsonFormat: JsonFormat[R]): Future[R] = {
+  def one[R](query: String, params: Param*)(implicit rowJsonFormat: JsonFormat[R]): Future[Option[R]] = {
     //FIXME: do not convert all entries to case class
-    list[R](query, params: _*) map ( list => list.head )
+    list[R](query, params : _*) map ( list => list.headOption )
   }
 
   def execute(query: String, params: Param*): Future[HttpResponse] = {

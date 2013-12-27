@@ -13,23 +13,33 @@ import amanuensis.core.util.Failable
 
 import amanuensis.core.neo4j._
 
+import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol}
 
-object StoryActor {
+import spray.httpx.SprayJsonSupport
 
-  case class Create(story: Story)
+
+
+object StoryActor extends Neo4JJsonProtocol {
+
+  case class Create(story: Story)  
   case class Retrieve(storyId: String)
   case class Update(storyId: String, story: Story)
   case class Delete(storyId: String)
 
-  val createQueryString = """CREATE (s:Story { id: {id}, title: {title}, content: {content} }) RETURN s.id"""
+  val createQueryString = """CREATE (s:Story { id: {id},title: {title},content: {content} }) RETURN s.id"""
+  val retrieveStoryQueryString = """MATCH (s:Story) WHERE s.id={id} return s.id as id, s.title as title, s.content as content"""
+
+  implicit val storyNeo4JFormat = jsonCaseClassArrayFormat(Story)
+
 }
 
 /**
  * Registers the users. Replies with
  */
-class StoryActor extends Actor with ActorLogging with Failable with Neo4JJsonProtocol {
+class StoryActor extends Actor with ActorLogging with Failable {
 
   import StoryActor._
+  import StoryProtocol._
 
   implicit def executionContext = context.dispatcher
   implicit val system = context.system
@@ -42,7 +52,8 @@ class StoryActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
 
   def receive = {
     case Create(story) => create(story) pipeTo sender
-    case Retrieve(storyId) => sender ! retrieve(storyId)
+    case Retrieve(storyId) => retrieve(storyId) pipeTo sender
+
     case Update(storyId, story) => sender ! update(storyId, story)
     case Delete(storyId) => sender ! delete(storyId)
   }
@@ -55,15 +66,20 @@ class StoryActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
       ("id" -> id), 
       ("title" -> story.title), 
       ("content" -> story.content)
-    ) map {
-      response => println(response)
-        Created(id)
+    ) map { response => 
+      println(response) //FIXME: logging
+      StoryInfo(id, story.title)
     }
 //  	failWith(NotFoundException(Message("Testmessage",`ERROR`) :: Nil))
   }
 
   def retrieve(storyId: String) = {
-  	Story(Some(storyId),"Testtitel","Testcontent")
+    val story = server.one[Story](retrieveStoryQueryString, ("id" -> storyId))
+
+  	story.map {
+      case Some(s) => Some(StoryContext(s, Nil, Nil))
+      case None => None
+    }
   }
 
   def update(storyId: String, story: Story) = {

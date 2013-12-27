@@ -15,14 +15,12 @@ import spray.httpx.SprayJsonSupport
 import scala.concurrent.future
 
 import amanuensis.core.StoryActor._
-import amanuensis.core.{Created}
-import amanuensis.domain.Story
+import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol}
 
 
 trait StoryHttpService extends Directives { self : Actor with HttpService with ActorLogging with SprayJsonSupport =>
 
-  import Story._
-  import CoreJsonProtocol._
+  import StoryProtocol._
 
   val storyActor = actorRefFactory.actorSelection("/user/story")
 
@@ -35,7 +33,8 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
         get {
           dynamic {
             log.debug(s"request: get details for story $storyId")
-            complete((storyActor ? Retrieve(storyId)).mapTo[Story])
+            //FIXME: fail if Option is None
+            complete((storyActor ? Retrieve(storyId)).mapTo[Option[StoryContext]])
 //              complete(future { Story(Some(17),"A","B") } )
           }
         } ~
@@ -58,7 +57,7 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
         entity(as[Story]) { story =>
           dynamic {
             log.debug(s"request: creating new story with $story")
-            complete((storyActor ? Create(story)).mapTo[Created])
+            complete((storyActor ? Create(story)).mapTo[StoryInfo])
 //            complete(s"creating new story with $story")
           }
         }
