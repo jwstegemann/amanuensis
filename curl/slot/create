@@ -1,0 +1,14 @@
+#! /bin/bash
+
+url="http://localhost:8080/story/$1/$2"
+
+echo url: $url
+
+curl -X POST \
+	--user hallo:welt \
+	--header "Content-Type: application/json" \
+	--cookie cookies.txt \
+	--data "{\"title\": \"$3\", \"content\": \"$4\"}" \
+	$url
+
+echo 

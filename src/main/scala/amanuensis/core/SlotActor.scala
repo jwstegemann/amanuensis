@@ -20,9 +20,9 @@ object SlotActor {
 
   case class Retrieve(storyId: String, slotName: String)
   case class Add(storyId: String, slotName: String, toStory: String)
-  case class Removed(storyId: String, slotName: String, fromStory: String)
+  case class Remove(storyId: String, slotName: String, fromStory: String)
 
-  val createQueryString = """CREATE (s:Story { id: {id}, title: {title}, content: {content} }) RETURN s.id"""
+  val retrieveQueryString = """MATCH (s:Story)-[{slot}]-(m:Story) WHERE s.id={id} RETURN m.id as id, m.title as title"""
 }
 
 /**
@@ -31,6 +31,7 @@ object SlotActor {
 class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProtocol {
 
   import SlotActor._
+  import StoryNeoProtocol._
 
   implicit def executionContext = context.dispatcher
   implicit val system = context.system
@@ -47,7 +48,10 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
 
 
   def retrieve(storyId: String, slotName: String) = {
-  	StoryInfo("abc","Testtitel") :: Nil
+  	server.list[StoryInfo](retrieveQueryString,
+      ("id" -> storyId),
+      ("slot" -> slotName)
+    )
   }
 
 }

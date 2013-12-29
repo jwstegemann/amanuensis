@@ -50,6 +50,7 @@ object StoryActor {
 object StoryNeoProtocol extends Neo4JJsonProtocol {
   implicit val storyNeo4JFormat = jsonCaseClassArrayFormat(Story)
   implicit val slotNeo4JFormat = jsonCaseClassArrayFormat(Slot)
+  implicit val storyInfoNeo4JFormat = jsonCaseClassArrayFormat(StoryInfo)
 }
 
 /**

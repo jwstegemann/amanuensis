@@ -32,28 +32,66 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
 
   val storyRoute =
     pathPrefix("story") {
-      path(Segment) { storyId : String =>
-        // FIXME: rehect if not a valid id!
-        get {
-          dynamic {
-            log.debug(s"request: get details for story $storyId")
-            //FIXME: fail if Option is None
-            complete((storyActor ? Retrieve(storyId)).mapTo[StoryContext])
-//              complete(future { Story(Some(17),"A","B") } )
-          }
-        } ~
-        put {
-          entity(as[Story]) { story =>
+      pathPrefix(Segment) { storyId: String =>
+        pathEnd {
+          // FIXME: rehect if not a valid id!
+          get {
             dynamic {
-              log.debug(s"request: update story $storyId with $story")
-              complete((storyActor ? Update(storyId, story)) map { value => StatusCodes.OK })
+              log.debug(s"request: get details for story $storyId")
+              //FIXME: fail if Option is None
+              complete((storyActor ? Retrieve(storyId)).mapTo[StoryContext])
+  //              complete(future { Story(Some(17),"A","B") } )
+            }
+          } ~
+          put {
+            entity(as[Story]) { story =>
+              dynamic {
+                log.debug(s"request: update story $storyId with $story")
+                complete((storyActor ? Update(storyId, story)) map { value => StatusCodes.OK })
+              }
+            }
+          } ~
+          delete {
+            dynamic {
+              log.debug(s"request: remove story $storyId")
+              complete((storyActor ? Delete(storyId)) map { value => StatusCodes.OK })
             }
           }
         } ~
-        delete {
-          dynamic {
-            log.debug(s"request: remove story $storyId")
-            complete((storyActor ? Delete(storyId)) map { value => StatusCodes.OK })
+        pathPrefix(Segment) { slotName: String =>
+          pathEnd {
+            get {
+              dynamic {
+                log.debug(s"request: get stories in slot $slotName for story $storyId")
+                //ToDo: to be implemented
+                complete(StoryInfo("a","b") :: Nil)  
+              }
+            } ~
+            post {
+              entity(as[Story]) { story =>
+                dynamic {
+                  log.debug(s"request: creating new story $story in slot $slotName at story $storyId")
+                  //ToDo: to be implemented                  
+                  complete(StoryInfo("x","y"))
+                }
+              }              
+            }
+          } ~
+          path(Segment) { targetStoryId: String =>
+            put {
+              dynamic {
+                log.debug(s"request: add story $targetStoryId to slot $slotName at story $storyId")
+                //ToDo: to be implemented
+                complete(StatusCodes.OK)
+              }
+            } ~
+            delete {
+              dynamic {
+                log.debug(s"request: remove story $targetStoryId from slot $slotName at story $storyId")
+                //ToDo: to be implemented
+                complete(StatusCodes.OK)
+              }
+            }
           }
         }
       } ~
