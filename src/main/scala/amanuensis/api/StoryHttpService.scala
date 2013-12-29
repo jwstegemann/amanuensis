@@ -17,6 +17,8 @@ import scala.concurrent.future
 import amanuensis.core.StoryActor._
 import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol}
 
+import StatusCode._
+
 
 trait StoryHttpService extends Directives { self : Actor with HttpService with ActorLogging with SprayJsonSupport =>
 
@@ -49,7 +51,7 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
         delete {
           dynamic {
             log.debug(s"request: remove story $storyId")
-            complete(s"removing story $storyId")
+            complete((storyActor ? Delete(storyId)) map { value => StatusCodes.OK })
           }
         }
       } ~

@@ -18,6 +18,7 @@ import amanuensis.api.exceptions._
 import amanuensis.domain.Message
 import amanuensis.domain.Severities._
 import amanuensis.domain.MessageJsonProtocol._
+import amanuensis.core.neo4j.Neo4JException
 
 
 class RootServiceActor extends Actor with ActorLogging with HttpService with SprayJsonSupport with StoryHttpService {
@@ -32,8 +33,12 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
     case InternalServerErrorException(messages) => complete(InternalServerError, messages)
     case NotFoundException(message) => complete(NotFound, message)
     case ValidationException(messages) => complete(PreconditionFailed, messages)
+    case Neo4JException(message) => {
+      log.error(s"Neo4J-error: $message")
+      complete(InternalServerError, Message("An unexpected Error occured. Please inform your system administrator.", `ERROR`))     
+    }
     case t: Throwable => {
-      log.error(t, s"Unexpected error:")
+      log.error(t, "Unexpected error:")
       complete(InternalServerError, Message("An unexpected Error occured. Please inform your system administrator.", `ERROR`))
     }
   }

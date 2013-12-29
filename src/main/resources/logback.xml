@@ -5,7 +5,7 @@
         <target>System.out</target>
         <encoder>
             <!-- <pattern>%date{yyyy-MM-dd HH:mm:ss} %-5level[%thread] %logger{1} %X{akkaSource}@%X{sourceThread} - %msg%n</pattern> -->
-            <pattern>%date{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</pattern>
+            <pattern>%date{ISO8601} %-5level %logger{36} %X{akkaSource} - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -17,9 +17,10 @@
         </encoder>
     </appender> -->
 
-    <logger name="akka" level="INFO" />
-    <logger name="spray.io.IOBridge" level="INFO" />
+    <logger name="akka" level="WARN" />
+    <logger name="spray.io.IOBridge" level="WARN" />
     <logger name="amanuensis" level="DEBUG" />
+    <logger name="CypherServer" level="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>

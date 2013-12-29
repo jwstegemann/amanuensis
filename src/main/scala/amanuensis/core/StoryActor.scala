@@ -34,7 +34,7 @@ object StoryActor {
   val retrieveOutSlotQueryString = """MATCH (s:Story)-[r]->(m:Story) WHERE s.id={id} return type(r) as name"""
   val retrieveInSlotQueryString = """MATCH (s:Story)<-[r]-(m:Story) WHERE s.id={id} return type(r) as name"""
 
-  val removeStoryQueryString = """MATCH (s:Story) WHERE s.id='' DELETE"""
+  val removeStoryQueryString = """MATCH (s:Story) WHERE s.id={id} DELETE s"""
 }
 
 
@@ -63,9 +63,8 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   def receive = {
     case Create(story) => create(story) pipeTo sender
     case Retrieve(storyId) => retrieve(storyId) pipeTo sender
-
     case Update(storyId, story) => sender ! update(storyId, story)
-    case Delete(storyId) => sender ! delete(storyId)
+    case Delete(storyId) => delete(storyId) pipeTo sender
   }
 
   def create(story: Story) = {
@@ -106,8 +105,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   def delete(storyId: String) = {
     server.execute(removeStoryQueryString, 
       ("id" -> storyId)
-    )	map { response => response.status.intValue }
+    )
   }
-
 
 }

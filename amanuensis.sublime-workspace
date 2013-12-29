@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"re",
+				"retrieveInSlotQueryString"
+			],
+			[
 				"HttpRe",
 				"HttpResponse"
 			],
@@ -220,24 +224,82 @@
 	"buffers":
 	[
 		{
-			"contents": "MATCH (s:Story)-[r]-m\nWHERE s.id=\"529a79ff47dc8a0d00bb92e4\"\nRETURN type(r) as slot, m.id as id, m.title as title, \nCASE \n WHEN type(r) = 'self' THEN s.content\n ELSE ''\nEND as content\n\n\nMATCH (n:Story), (m:Story) \nWHERE n.id=\"529a79ff47dc8a0d00bb92e4\" and m.id=\"529b7a4f47dc8a0d008bffde\" \nCREATE (n)-[r:Testslot2]->(m)\n\n\nMATCH (n:Story)\nWHERE n.id=\"529a79ff47dc8a0d00bb92e4\"\nCREATE (n)-[r:self]->(n)\n\n\nMATCH (s:Story)-[r]-m\nWHERE s.id=\"529a79ff47dc8a0d00bb92e4\"\nRETURN type(r) as slot, m.id as id, m.title as title, \nCASE \n WHEN type(r) = 'self' THEN s.content\n ELSE ''\nEND as content",
-			"file": "neo4j/queries.cypher",
-			"file_size": 398,
-			"file_write_time": 1385933757000000,
+			"file": "src/main/scala/amanuensis/core/StoryActor.scala",
 			"settings":
 			{
-				"buffer_size": 583,
+				"buffer_size": 3375,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "package amanuensis.core\n\nimport akka.actor.{Actor, ActorLogging}\nimport akka.pattern._\n\nimport amanuensis.api.exceptions._\n\nimport amanuensis.domain.Message\nimport amanuensis.domain.Severities._\n\nimport amanuensis.domain.Story\nimport amanuensis.core.util.Failable\n\nimport amanuensis.core.neo4j._\n\n\nobject StoryActor {\n\n  case class Create(story: Story)\n  case class Retrieve(storyId: String)\n  case class Update(storyId: String, story: Story)\n  case class Delete(storyId: String)\n\n  val createQueryString = \"\"\"CREATE (s:Story { id: {id}, title: {title}, content: {content} }) RETURN s.id\"\"\"\n  val retrieveSlotsString = \"\"\"START \"\"\"\n}\n\n/**\n * Registers the users. Replies with\n */\nclass StoryActor extends Actor with ActorLogging with Failable with Neo4JJsonProtocol {\n\n  import StoryActor._\n\n  implicit def executionContext = context.dispatcher\n  implicit val system = context.system\n\n  final val server = CypherServer(\"http://localhost:7474/db/data/cypher\")\n\n	override def preStart =  {\n    log.info(s\"StoryActor started at: {}\", self.path)\n  }\n\n  def receive = {\n    case Create(story) => create(story) pipeTo sender\n    case Retrieve(storyId) => sender ! retrieve(storyId)\n    case Update(storyId, story) => sender ! update(storyId, story)\n    case Delete(storyId) => sender ! delete(storyId)\n  }\n\n  def create(story: Story) = {\n    // Todo: check for id not be present\n    val id = Neo4JId.generateId\n\n    server.execute(createQueryString, \n      (\"id\" -> id), \n      (\"title\" -> story.title), \n      (\"content\" -> story.content)\n    ) map {\n      response => println(response)\n        Created(id)\n    }\n//  	failWith(NotFoundException(Message(\"Testmessage\",`ERROR`) :: Nil))\n  }\n\n  def retrieve(storyId: String) = {\n  	Story(Some(storyId),\"Testtitel\",\"Testcontent\")\n  }\n\n  def update(storyId: String, story: Story) = {\n  	Story(Some(storyId),\"Testtitel\",\"Testcontent\")\n  }\n\n  def delete(storyId: String) = {\n  	Story(Some(storyId),\"Testtitel\",\"Testcontent\")\n  }\n}",
-			"file": "src/main/scala/amanuensis/core/StoryActor.scala",
-			"file_size": 1968,
-			"file_write_time": 1385899737000000,
+			"file": "src/main/scala/amanuensis/core/neo4j/CypherServer.scala",
 			"settings":
 			{
-				"buffer_size": 1968,
+				"buffer_size": 2216,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/domain/Story.scala",
+			"settings":
+			{
+				"buffer_size": 568,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/domain/Slot.scala",
+			"settings":
+			{
+				"buffer_size": 231,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/test/scala/amanuensis/core/SprayClientSpec.scala",
+			"settings":
+			{
+				"buffer_size": 1852,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/StoryHttpService.scala",
+			"settings":
+			{
+				"buffer_size": 2042,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/core/neo4j/Neo4JRestFormats.scala",
+			"settings":
+			{
+				"buffer_size": 1866,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/core/util/Failable.scala",
+			"settings":
+			{
+				"buffer_size": 331,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/RootServiceActor.scala",
+			"settings":
+			{
+				"buffer_size": 1443,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/exceptions/Exceptions.scala",
+			"settings":
+			{
+				"buffer_size": 439,
 				"line_ending": "Unix"
 			}
 		}
@@ -245,16 +307,20 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 72.0,
+		"height": 292.0,
 		"selected_items":
 		[
 			[
-				"upd",
-				"Package Control: Upgrade Package"
+				"Package Control: ",
+				"Package Control: Remove Package"
 			],
 			[
 				"sbt",
-				"SBT: Stop SBT"
+				"SBT: Start SBT"
+			],
+			[
+				"upd",
+				"Package Control: Upgrade Package"
 			],
 			[
 				"start",
@@ -275,10 +341,6 @@
 			[
 				"test",
 				"SBT: Test"
-			],
-			[
-				"Package Control: ",
-				"Package Control: Grab CA Certs"
 			],
 			[
 				"remo",
@@ -358,11 +420,19 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JRestFormats.scala",
+		"/home/tiberius/scala/projects/amanuensis/build.sbt",
 		"/home/tiberius/scala/projects/amanuensis/neo4j/queries.cypher",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/Api.scala",
+		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Message.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/Messages.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Slot.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/Core.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/Messages.scala",
 		"/home/tiberius/scala/projects/amanuensis/neo4j/init.cypher",
 		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/core/SprayClientSpec.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Query.scala",
@@ -370,16 +440,11 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JServer.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Converters.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/web/Web.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/core/StoryActorSpec.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/Api.scala",
 		"/home/tiberius/scala/projects/amanuensis/curl/story/create",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JRestFormats.scala",
-		"/home/tiberius/scala/projects/amanuensis/build.sbt",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/CypherActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/core/CypherActorSpec.scala",
-		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/Default (Linux).sublime-keymap",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Failable.scala",
 		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/SublimeSBT.sublime-settings",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticHttpService.scala",
@@ -388,7 +453,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/MessageHandling.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/Boot.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Message.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Message.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/system/Exceptions.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/exceptions/Exceptions.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/story/StoryActor.scala",
@@ -483,9 +547,7 @@
 		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/bson/BSONConverter.scala",
 		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/bson/BSONProtocol.scala",
 		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/bson/StandardConverters.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/bson/ProductConverters.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/UserService.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/services/EntityService.scala"
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/bson/ProductConverters.scala"
 	],
 	"find":
 	{
@@ -506,6 +568,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"one",
+			"}\"\"\"\n",
 			"Long",
 			"jsonArrayFormat2",
 			"execute2",
@@ -587,23 +651,79 @@
 			[
 				{
 					"buffer": 0,
-					"file": "neo4j/queries.cypher",
+					"file": "src/main/scala/amanuensis/core/StoryActor.scala",
 					"settings":
 					{
-						"buffer_size": 583,
+						"buffer_size": 3375,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								185,
-								318
+								2465,
+								2465
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 936.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/main/scala/amanuensis/core/neo4j/CypherServer.scala",
+					"settings":
+					{
+						"buffer_size": 2216,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								407,
+								407
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 8.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/main/scala/amanuensis/domain/Story.scala",
+					"settings":
+					{
+						"buffer_size": 568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								523,
+								523
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -612,19 +732,45 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "src/main/scala/amanuensis/core/StoryActor.scala",
+					"buffer": 3,
+					"file": "src/main/scala/amanuensis/domain/Slot.scala",
 					"settings":
 					{
-						"buffer_size": 1968,
+						"buffer_size": 231,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								610,
-								610
+								99,
+								99
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/test/scala/amanuensis/core/SprayClientSpec.scala",
+					"settings":
+					{
+						"buffer_size": 1852,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								497,
+								497
 							]
 						],
 						"settings":
@@ -632,6 +778,142 @@
 							"syntax": "Packages/Scala/Scala.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/main/scala/amanuensis/api/StoryHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 2042,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1709,
+								1709
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/main/scala/amanuensis/core/neo4j/Neo4JRestFormats.scala",
+					"settings":
+					{
+						"buffer_size": 1866,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								922,
+								922
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 90.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/main/scala/amanuensis/core/util/Failable.scala",
+					"settings":
+					{
+						"buffer_size": 331,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/main/scala/amanuensis/api/RootServiceActor.scala",
+					"settings":
+					{
+						"buffer_size": 1443,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1443,
+								1443
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/main/scala/amanuensis/api/exceptions/Exceptions.scala",
+					"settings":
+					{
+						"buffer_size": 439,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								234,
+								234
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -683,7 +965,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 323.0
+		"height": 255.0
 	},
 	"output.sbt_error":
 	{
