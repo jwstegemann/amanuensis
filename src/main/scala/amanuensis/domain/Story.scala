@@ -2,8 +2,14 @@ package amanuensis.domain
 
 import spray.json.DefaultJsonProtocol
 
+import amanuensis.api.exceptions.ValidationException
 
-case class Story(id : Option[String], title : String, content : String)
+
+case class Story(id : Option[String], title : String, content : String)  {
+	def check() = {
+		//FIXME: Implement checks here
+	}
+}
 
 case class StoryInfo(id : String, title : String)
 

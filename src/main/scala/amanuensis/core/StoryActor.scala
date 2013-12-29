@@ -23,18 +23,27 @@ import scala.concurrent.Future
 
 object StoryActor {
 
+  /*
+   * messages to be used with this actor
+   */
   case class Create(story: Story)  
   case class Retrieve(storyId: String)
   case class Update(storyId: String, story: Story)
   case class Delete(storyId: String)
 
+  /*
+   * query-string for neo4j
+   */
   val createQueryString = """CREATE (s:Story { id: {id},title: {title},content: {content} }) RETURN s.id"""
+  
   val retrieveStoryQueryString = """MATCH (s:Story) WHERE s.id={id} return s.id as id, s.title as title, s.content as content"""
 
   val retrieveOutSlotQueryString = """MATCH (s:Story)-[r]->(m:Story) WHERE s.id={id} return type(r) as name"""
   val retrieveInSlotQueryString = """MATCH (s:Story)<-[r]-(m:Story) WHERE s.id={id} return type(r) as name"""
 
   val removeStoryQueryString = """MATCH (s:Story) WHERE s.id={id} DELETE s"""
+
+  val updateStoryQueryString = """MATCH (s:Story) WHERE s.id={id} SET s.title={title}, s.content={content}"""
 }
 
 
@@ -68,18 +77,17 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   }
 
   def create(story: Story) = {
-    // Todo: check for id not be present
+
+    if (story.id.nonEmpty) throw ValidationException(Message("A new story must not have an id.",`ERROR`) :: Nil)
+    story.check
+
     val id = Neo4JId.generateId
 
     server.execute(createQueryString, 
       ("id" -> id), 
       ("title" -> story.title), 
       ("content" -> story.content)
-    ) map { response => 
-      println(response) //FIXME: logging
-      StoryInfo(id, story.title)
-    }
-//  	failWith(NotFoundException(Message("Testmessage",`ERROR`) :: Nil))
+    ) map { nothing => StoryInfo(id, story.title) }
   }
 
   def retrieve(storyId: String) = {
@@ -99,7 +107,16 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   }
 
   def update(storyId: String, story: Story) = {
-  	Story(Some(storyId),"Testtitel","Testcontent")
+
+    if (storyId != story.id.getOrElse("")) throw ValidationException(Message("You cannot save story with id $story.id at id $storyId.",`ERROR`) :: Nil)
+
+    story.check()
+
+  	server.execute(updateStoryQueryString, 
+      ("id" -> storyId),
+      ("title" -> story.title), 
+      ("content" -> story.content)
+    )
   }
 
   def delete(storyId: String) = {

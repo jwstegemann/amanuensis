@@ -29,9 +29,11 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
   private implicit val timeout = new Timeout(2.seconds)
   implicit def executionContext = actorRefFactory.dispatcher
 
+
   val storyRoute =
     pathPrefix("story") {
       path(Segment) { storyId : String =>
+        // FIXME: rehect if not a valid id!
         get {
           dynamic {
             log.debug(s"request: get details for story $storyId")
@@ -44,7 +46,7 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
           entity(as[Story]) { story =>
             dynamic {
               log.debug(s"request: update story $storyId with $story")
-              complete(s"updating story $storyId with: $story")
+              complete((storyActor ? Update(storyId, story)) map { value => StatusCodes.OK })
             }
           }
         } ~
