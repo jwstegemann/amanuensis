@@ -15,6 +15,7 @@ import spray.httpx.SprayJsonSupport
 import scala.concurrent.future
 
 import amanuensis.core.StoryActor._
+import amanuensis.core.SlotActor._
 import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol}
 
 import StatusCode._
@@ -25,6 +26,7 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
   import StoryProtocol._
 
   val storyActor = actorRefFactory.actorSelection("/user/story")
+  val slotActor = actorRefFactory.actorSelection("/user/slot")
 
   private implicit val timeout = new Timeout(2.seconds)
   implicit def executionContext = actorRefFactory.dispatcher
@@ -38,9 +40,7 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
           get {
             dynamic {
               log.debug(s"request: get details for story $storyId")
-              //FIXME: fail if Option is None
               complete((storyActor ? Retrieve(storyId)).mapTo[StoryContext])
-  //              complete(future { Story(Some(17),"A","B") } )
             }
           } ~
           put {
@@ -63,8 +63,7 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
             get {
               dynamic {
                 log.debug(s"request: get stories in slot $slotName for story $storyId")
-                //ToDo: to be implemented
-                complete(StoryInfo("a","b") :: Nil)  
+                complete((slotActor ? List(storyId, slotName)).mapTo[Seq[StoryInfo]])
               }
             } ~
             post {
@@ -81,15 +80,13 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
             put {
               dynamic {
                 log.debug(s"request: add story $targetStoryId to slot $slotName at story $storyId")
-                //ToDo: to be implemented
-                complete(StatusCodes.OK)
+                complete((slotActor ? Add(storyId, slotName, targetStoryId)) map { value => StatusCodes.OK })
               }
             } ~
             delete {
               dynamic {
                 log.debug(s"request: remove story $targetStoryId from slot $slotName at story $storyId")
-                //ToDo: to be implemented
-                complete(StatusCodes.OK)
+                complete((slotActor ? Remove(storyId, slotName, targetStoryId)) map { value => StatusCodes.OK })
               }
             }
           }

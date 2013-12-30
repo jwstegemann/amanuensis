@@ -18,11 +18,13 @@ import amanuensis.domain.{StoryInfo}
 
 object SlotActor {
 
-  case class Retrieve(storyId: String, slotName: String)
-  case class Add(storyId: String, slotName: String, toStory: String)
-  case class Remove(storyId: String, slotName: String, fromStory: String)
+  case class List(storyId: String, slotName: String)
+  case class Add(toStory: String, storyId: String, slotName: String)
+  case class Remove(fromStory: String, storyId: String, slotName: String)
 
-  val retrieveQueryString = """MATCH (s:Story)-[{slot}]-(m:Story) WHERE s.id={id} RETURN m.id as id, m.title as title"""
+  val retrieveQueryString = """MATCH (s:Story)-[r:Slot]-(m:Story) WHERE s.id={id} and r.name={slot} RETURN m.id as id, m.title as title"""
+  val addQueryString = """MATCH (n:Story),(m:Story) WHERE n.id={toStory} and m.id={story} CREATE (n)-[r:Slot]->(m) set r.name={slot}"""
+  val removeQueryString = """MATCH (n:Story)-[r:Slot]->(m:Story) WHERE n.id={fromStory} and m.id={story} and r.name={slot} DELETE r"""
 }
 
 /**
@@ -43,14 +45,31 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
   }
 
   def receive = {
-    case Retrieve(storyId, slotName) => sender ! retrieve(storyId, slotName)
+    case List(storyId, slotName) => list(storyId, slotName) pipeTo sender
+    case Add(toStory, storyId, slotName) => add(toStory, storyId, slotName) pipeTo sender
+    case Remove(toStory, storyId, slotName) => remove(toStory, storyId, slotName) pipeTo sender
   }
 
-
-  def retrieve(storyId: String, slotName: String) = {
+  def list(storyId: String, slotName: String) = {
   	server.list[StoryInfo](retrieveQueryString,
       ("id" -> storyId),
       ("slot" -> slotName)
+    )
+  }
+
+  def add(toStory: String, slotName: String, storyId: String) = {
+    server.execute(addQueryString, 
+      ("toStory" -> toStory),
+      ("slot" -> slotName), 
+      ("story" -> storyId)
+    )
+  }
+
+  def remove(fromStory: String, slotName: String, storyId: String) = {
+    server.execute(removeQueryString, 
+      ("fromStory" -> fromStory),
+      ("slot" -> slotName), 
+      ("story" -> storyId)
     )
   }
 

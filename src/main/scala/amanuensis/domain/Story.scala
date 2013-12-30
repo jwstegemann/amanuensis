@@ -15,6 +15,7 @@ case class StoryInfo(id : String, title : String)
 
 case class StoryContext(story: Story, inSlots: Seq[Slot], outSlots: Seq[Slot])
 
+
 object StoryProtocol extends DefaultJsonProtocol {
 	import SlotProtocol._
 

@@ -34,6 +34,8 @@ object StoryActor {
   /*
    * query-string for neo4j
    */
+  //TODO: use one param of story-object
+  //TODO: use merge when creating stories
   val createQueryString = """CREATE (s:Story { id: {id},title: {title},content: {content} }) RETURN s.id"""
   
   val retrieveStoryQueryString = """MATCH (s:Story) WHERE s.id={id} return s.id as id, s.title as title, s.content as content"""
