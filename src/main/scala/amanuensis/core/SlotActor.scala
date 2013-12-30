@@ -18,13 +18,16 @@ import amanuensis.domain.{StoryInfo}
 
 object SlotActor {
 
+  //FIXME: reverse attributes fitting to url
   case class List(storyId: String, slotName: String)
-  case class Add(toStory: String, storyId: String, slotName: String)
-  case class Remove(fromStory: String, storyId: String, slotName: String)
+  case class Add(toStory: String, slotName: String, storyId: String)
+  case class Remove(fromStory: String, slotName: String, storyId: String)
+  case class CreateAndAdd(toStory: String, slotName: String, story: Story)
 
   val retrieveQueryString = """MATCH (s:Story)-[r:Slot]-(m:Story) WHERE s.id={id} and r.name={slot} RETURN m.id as id, m.title as title"""
   val addQueryString = """MATCH (n:Story),(m:Story) WHERE n.id={toStory} and m.id={story} CREATE (n)-[r:Slot]->(m) set r.name={slot}"""
   val removeQueryString = """MATCH (n:Story)-[r:Slot]->(m:Story) WHERE n.id={fromStory} and m.id={story} and r.name={slot} DELETE r"""
+  val createAndAddQueryString = """MATCH (n:Story) WHERE n.id={toStory} CREATE (n)-[r:Slot]->(m:Story) set r.name={slot}, m.id={id}, m.title={title}, m.content={content}"""
 }
 
 /**
@@ -46,8 +49,9 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
 
   def receive = {
     case List(storyId, slotName) => list(storyId, slotName) pipeTo sender
-    case Add(toStory, storyId, slotName) => add(toStory, storyId, slotName) pipeTo sender
-    case Remove(toStory, storyId, slotName) => remove(toStory, storyId, slotName) pipeTo sender
+    case Add(toStory, slotName, storyId) => add(toStory, slotName, storyId) pipeTo sender
+    case Remove(fromStory, slotName, storyId) => remove(fromStory, slotName, storyId) pipeTo sender
+    case CreateAndAdd(toStory, slotName, story) => createAndAdd(toStory, slotName, story) pipeTo sender
   }
 
   def list(storyId: String, slotName: String) = {
@@ -71,6 +75,22 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
       ("slot" -> slotName), 
       ("story" -> storyId)
     )
+  }
+
+  def createAndAdd(toStory: String, slotName: String, story: Story) = {
+
+    if (story.id.nonEmpty) throw ValidationException(Message("A new story must not have an id.",`ERROR`) :: Nil)
+    story.check
+
+    val id = Neo4JId.generateId
+
+    server.execute(createAndAddQueryString, 
+      ("toStory" -> toStory),
+      ("slot" -> slotName), 
+      ("id" -> id),
+      ("title" -> story.title),
+      ("content" -> story.content)
+    ) map { nothing => StoryInfo(id, story.title) }
   }
 
 }

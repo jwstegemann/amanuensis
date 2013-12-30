@@ -70,8 +70,7 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
               entity(as[Story]) { story =>
                 dynamic {
                   log.debug(s"request: creating new story $story in slot $slotName at story $storyId")
-                  //ToDo: to be implemented                  
-                  complete(StoryInfo("x","y"))
+                  complete((slotActor ? CreateAndAdd(storyId, slotName, story)).mapTo[StoryInfo])
                 }
               }              
             }
