@@ -21,7 +21,7 @@ import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol}
 import StatusCode._
 
 
-trait StoryHttpService extends Directives { self : Actor with HttpService with ActorLogging with SprayJsonSupport =>
+trait StoryHttpService extends HttpService with SprayJsonSupport { 
 
   import StoryProtocol._
 
@@ -39,21 +39,21 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
           // FIXME: rehect if not a valid id!
           get {
             dynamic {
-              log.debug(s"request: get details for story $storyId")
+//              log.debug(s"request: get details for story $storyId")
               complete((storyActor ? Retrieve(storyId)).mapTo[StoryContext])
             }
           } ~
           put {
             entity(as[Story]) { story =>
               dynamic {
-                log.debug(s"request: update story $storyId with $story")
+ //               log.debug(s"request: update story $storyId with $story")
                 complete((storyActor ? Update(storyId, story)) map { value => StatusCodes.OK })
               }
             }
           } ~
           delete {
             dynamic {
-              log.debug(s"request: remove story $storyId")
+  //            log.debug(s"request: remove story $storyId")
               complete((storyActor ? Delete(storyId)) map { value => StatusCodes.OK })
             }
           }
@@ -62,14 +62,14 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
           pathEnd {
             get {
               dynamic {
-                log.debug(s"request: get stories in slot $slotName for story $storyId")
+    //            log.debug(s"request: get stories in slot $slotName for story $storyId")
                 complete((slotActor ? List(storyId, slotName)).mapTo[Seq[StoryInfo]])
               }
             } ~
             post {
               entity(as[Story]) { story =>
                 dynamic {
-                  log.debug(s"request: creating new story $story in slot $slotName at story $storyId")
+  //                log.debug(s"request: creating new story $story in slot $slotName at story $storyId")
                   complete((slotActor ? CreateAndAdd(storyId, slotName, story)).mapTo[StoryInfo])
                 }
               }              
@@ -78,13 +78,13 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
           path(Segment) { targetStoryId: String =>
             put {
               dynamic {
-                log.debug(s"request: add story $targetStoryId to slot $slotName at story $storyId")
+    //            log.debug(s"request: add story $targetStoryId to slot $slotName at story $storyId")
                 complete((slotActor ? Add(storyId, slotName, targetStoryId)) map { value => StatusCodes.OK })
               }
             } ~
             delete {
               dynamic {
-                log.debug(s"request: remove story $targetStoryId from slot $slotName at story $storyId")
+      //          log.debug(s"request: remove story $targetStoryId from slot $slotName at story $storyId")
                 complete((slotActor ? Remove(storyId, slotName, targetStoryId)) map { value => StatusCodes.OK })
               }
             }
@@ -92,11 +92,13 @@ trait StoryHttpService extends Directives { self : Actor with HttpService with A
         }
       } ~
       post {
-        entity(as[Story]) { story =>
-          dynamic {
-            log.debug(s"request: creating new story with $story")
-            complete((storyActor ? Create(story)).mapTo[StoryInfo])
-//            complete(s"creating new story with $story")
+        pathEnd {
+          entity(as[Story]) { story =>
+            dynamic {
+   //           log.debug(s"request: creating new story with $story")
+              complete((storyActor ? Create(story)).mapTo[StoryInfo])
+  //            complete(s"creating new story with $story")
+            }
           }
         }
       }

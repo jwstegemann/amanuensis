@@ -40,7 +40,7 @@ trait CoreActors {
   /*
    * start all the core actors here
    */
-  val storyActor = system.actorOf(Props[StoryActor], "story")
-  val slotActor = system.actorOf(Props[SlotActor], "slot")
+  val storyActorInstance = system.actorOf(Props[StoryActor], "story")
+  val slotActorInstance = system.actorOf(Props[SlotActor], "slot")
 }
 
