@@ -27,7 +27,7 @@ angular.module('amanuensisApp')
     	}
     	else {
     		storyService.create($scope.context.story, function(data) {
-    			$context.story.id = data.id
+    			$scope.context.story.id = data.id;
     		});
     		console.log("story gespeichert!");    		
     	}

@@ -22,6 +22,7 @@ module.exports = function (grunt) {
 
   // Load Proxy-Task
   grunt.loadNpmTasks('grunt-connect-proxy');
+  grunt.loadNpmTasks('grunt-karma');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
