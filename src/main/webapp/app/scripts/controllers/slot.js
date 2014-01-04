@@ -13,13 +13,15 @@ angular.module('amanuensisApp')
     	console.log("not yet implemented!");
     }
 
-    $scope.remove = function(storyId) {
+    $scope.remove = function(storyId, index) {
     	slotService.remove({
     		fromStoryId: $routeParams.storyId,
     		slotName: $routeParams.slotName,
     		storyId: storyId
+    	}, function (successData) {
+    		$scope.stories.splice(index,1);
+	    	console.log("story aus slot entfernt!");    	
     	});
-    	console.log("story aus slot entfernt!");    	
     }
 
   });
