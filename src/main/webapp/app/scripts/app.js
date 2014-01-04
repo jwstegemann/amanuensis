@@ -16,6 +16,10 @@ angular.module('amanuensisApp', [
         templateUrl: 'views/story.html',
         controller: 'StoryCtrl'
       })
+      .when('/slot/:storyId/:slotName', {
+        templateUrl: 'views/slot.html',
+        controller: 'SlotCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -13,7 +13,7 @@
 <h2>InSlots:</h2>
 <ul>
   <li ng-repeat="slot in context.inSlots">
-    {{slot.name}}
+    <a href="../#/slot/{{context.story.id}}/{{slot.name}}">{{slot.name}}</a>
   </li>
 </ul>
 
@@ -21,6 +21,6 @@
 <h2>OutSlots:</h2>
 <ul>
   <li ng-repeat="slot in context.outSlots">
-    {{slot.name}}
+    <a href="../#/slot/{{context.story.id}}/{{slot.name}}">{{slot.name}}</a>
   </li>
 </ul>

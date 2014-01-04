@@ -287,7 +287,7 @@
 			"file": "src/main/webapp/app/views/story.html",
 			"settings":
 			{
-				"buffer_size": 385,
+				"buffer_size": 611,
 				"line_ending": "Unix"
 			}
 		},
@@ -295,7 +295,7 @@
 			"file": "src/main/webapp/app/scripts/controllers/story.js",
 			"settings":
 			{
-				"buffer_size": 994,
+				"buffer_size": 1001,
 				"line_ending": "Unix"
 			}
 		},
@@ -303,7 +303,7 @@
 			"file": "src/main/webapp/Gruntfile.js",
 			"settings":
 			{
-				"buffer_size": 9275,
+				"buffer_size": 9314,
 				"line_ending": "Unix"
 			}
 		},
@@ -312,6 +312,39 @@
 			"settings":
 			{
 				"buffer_size": 442,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/karma.conf.js",
+			"settings":
+			{
+				"buffer_size": 1564,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/StaticHttpService.scala",
+			"settings":
+			{
+				"buffer_size": 745,
+				"line_ending": "Unix",
+				"name": "package amanuensis.services"
+			}
+		},
+		{
+			"file": "build.sbt",
+			"settings":
+			{
+				"buffer_size": 2206,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/RootServiceActor.scala",
+			"settings":
+			{
+				"buffer_size": 1748,
 				"line_ending": "Unix"
 			}
 		}
@@ -419,7 +452,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 467.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -436,6 +469,7 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/dist/app/views/story.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/main.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/main.js",
@@ -562,8 +596,7 @@
 		"/home/tiberius/scala/projects/klara/src/main/webapp/static/index.html",
 		"/home/tiberius/scala/projects/klara/src/main/webapp/static/lib/jquery.blockUI.js",
 		"/home/tiberius/scala/projects/klara/src/main/scala/klara/Boot.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/EntityActor.scala",
-		"/home/tiberius/scala/projects/klara/src/main/scala/klara/entity/Entity.scala"
+		"/home/tiberius/scala/projects/klara/src/main/scala/klara/mongo/EntityActor.scala"
 	],
 	"find":
 	{
@@ -667,7 +700,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -729,15 +762,15 @@
 					"file": "src/main/webapp/app/views/story.html",
 					"settings":
 					{
-						"buffer_size": 385,
+						"buffer_size": 611,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								119,
-								119
+								275,
+								275
 							]
 						],
 						"settings":
@@ -755,20 +788,22 @@
 					"file": "src/main/webapp/app/scripts/controllers/story.js",
 					"settings":
 					{
-						"buffer_size": 994,
+						"buffer_size": 1001,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								724,
-								724
+								282,
+								282
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 90.0,
@@ -781,15 +816,15 @@
 					"file": "src/main/webapp/Gruntfile.js",
 					"settings":
 					{
-						"buffer_size": 9275,
+						"buffer_size": 9314,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2509,
-								2509
+								962,
+								962
 							]
 						],
 						"settings":
@@ -799,7 +834,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 973.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -828,6 +863,117 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/main/webapp/karma.conf.js",
+					"settings":
+					{
+						"buffer_size": 1564,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								968,
+								968
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/main/scala/amanuensis/api/StaticHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 745,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								22,
+								22
+							]
+						],
+						"settings":
+						{
+							"auto_name": "package amanuensis.services",
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "build.sbt",
+					"settings":
+					{
+						"buffer_size": 2206,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								386,
+								386
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/main/scala/amanuensis/api/RootServiceActor.scala",
+					"settings":
+					{
+						"buffer_size": 1748,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								641,
+								641
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 207.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -876,7 +1022,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 393.0
+		"height": 203.0
 	},
 	"output.sbt_error":
 	{
