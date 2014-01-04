@@ -22,7 +22,9 @@ import amanuensis.core.neo4j.Neo4JException
 
 
 class RootServiceActor extends Actor with ActorLogging with HttpService with SprayJsonSupport 
-  with StoryHttpService with StaticHttpService {
+  with StoryHttpService 
+  with QueryHttpService 
+  with StaticHttpService {
 
 //  val userContextActor = actorRefFactory.actorSelection("user/userContext")
 
@@ -46,6 +48,7 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
 
   def receive = runRoute(
     storyRoute ~
+    queryRoute ~
     staticRoute
   )
 }

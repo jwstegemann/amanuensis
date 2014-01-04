@@ -27,8 +27,12 @@ angular.module('amanuensisApp', [
         templateUrl: 'views/slot.html',
         controller: 'SlotCtrl'
       })
+      .when('/query', {
+        templateUrl: 'views/query.html',
+        controller: 'QueryCtrl'
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/query'
       });
 
   }).run(function ($rootScope) {

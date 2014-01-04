@@ -81,6 +81,14 @@ module.exports = function (grunt) {
         https: false,
         changeOrigin: true,
         xforward: true
+      },
+      {
+        context: '/query',
+        host: 'localhost',
+        port: 8080,
+        https: false,
+        changeOrigin: true,
+        xforward: true
       }],
       livereload: {
         options: {

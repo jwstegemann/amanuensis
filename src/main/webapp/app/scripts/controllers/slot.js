@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('SlotCtrl', function ($scope,$routeParams,slotService,$rootScope) {
+  .controller('SlotCtrl', function ($scope,$routeParams,slotService,$rootScope,$location) {
 
     // init StoryContext
    	$scope.stories = slotService.query({
@@ -15,6 +15,7 @@ angular.module('amanuensisApp')
     		storyId: $routeParams.storyId,
     		slotName: $routeParams.slotName
     	};
+    	$location.url('/query');
     }
 
     $scope.remove = function(storyId, index) {

@@ -1,0 +1,8 @@
+<h2>This is the query view.</h2>
+<ul>
+  <li ng-repeat="storyInfo in stories">
+    <a href="../#/story/{{storyInfo.id}}">{{storyInfo.title}}</a>
+    <!-- &nbsp;<button ng-click="remove(storyInfo.id,$index)">[delete]</button> -->
+  </li>
+</ul>
+<a href="../#/story">[create new Story]</a>

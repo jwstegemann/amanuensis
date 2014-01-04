@@ -42,5 +42,6 @@ trait CoreActors {
    */
   val storyActorInstance = system.actorOf(Props[StoryActor], "story")
   val slotActorInstance = system.actorOf(Props[SlotActor], "slot")
+  val queryActorInstance = system.actorOf(Props[QueryActor], "query")
 }
 

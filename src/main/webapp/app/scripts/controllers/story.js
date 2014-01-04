@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope) {
+  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location) {
 
     // init StoryContext
     if (angular.isDefined($routeParams.storyId)) {
@@ -56,6 +56,7 @@ angular.module('amanuensisApp')
         $rootScope.stack = {
             storyId: $routeParams.storyId,
         };
+        $location.url('/query');
     }
 
   });
