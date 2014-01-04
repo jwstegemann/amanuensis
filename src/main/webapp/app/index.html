@@ -25,9 +25,16 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+    <!-- statusBar -->
+    <div ng-controller="CabCtrl">Mode: {{mode}}, Stack: {{stack}} 
+      <button ng-show="mode" ng-disabled="isNotSelectable()" ng-click="select()">select</button>
+      <input ng-show="mode == 2" type="text" ng-model="slotName"></input>
+      <button ng-show="mode" ng-click="cancel()">cancel</>
+    </div>
+
     <div class="container" ng-view=""></div>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -36,7 +43,7 @@
 
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
-    </script>
+    </script> -->
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -62,6 +69,7 @@
         <script src="scripts/controllers/story.js"></script>
         <script src="scripts/services/slotService.js"></script>
         <script src="scripts/controllers/slot.js"></script>
+        <script src="scripts/controllers/cab.js"></script>
         <!-- endbuild -->
 </body>
 </html>

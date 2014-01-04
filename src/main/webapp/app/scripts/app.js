@@ -1,5 +1,12 @@
 'use strict';
 
+/* global constants */
+
+var MODE_BROWSE = 0;
+var MODE_ADD_TO_SLOT = 1;
+var MODE_ADD_TO_NEW_SLOT = 2;
+
+
 angular.module('amanuensisApp', [
   'ngCookies',
   'ngResource',
@@ -23,4 +30,9 @@ angular.module('amanuensisApp', [
       .otherwise({
         redirectTo: '/'
       });
+
+  }).run(function ($rootScope) {
+    //init mode and stack
+    $rootScope.mode = MODE_BROWSE;
+    $rootScope.stack = undefined;
   });

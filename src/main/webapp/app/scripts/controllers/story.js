@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('StoryCtrl', function ($scope,$routeParams,storyService) {
+  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope) {
 
     // init StoryContext
     if (angular.isDefined($routeParams.storyId)) {
@@ -36,6 +36,26 @@ angular.module('amanuensisApp')
     $scope.delete = function() {
     	storyService.delete({storyId: $routeParams.storyId});
     	console.log("story gelöscht!");    	
+    }
+
+    $scope.addMeToSlot = function(toStoryId, slotName) {
+        if (angular.isUndefined($scope.context.story.id)) {
+            alert("cannot add unsaved story to slot");
+        }
+        else {
+            slotService.add({
+                toStoryId: toStoryId,
+                slotName: slotName,
+                storyId: $scope.context.story.id
+            }, null);
+        }
+    }
+
+    $scope.addStoryToSlot = function() {
+        $rootScope.mode = MODE_ADD_TO_NEW_SLOT;
+        $rootScope.stack = {
+            storyId: $routeParams.storyId,
+        };
     }
 
   });

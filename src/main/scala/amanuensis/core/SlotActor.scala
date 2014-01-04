@@ -25,7 +25,8 @@ object SlotActor {
   case class CreateAndAdd(toStory: String, slotName: String, story: Story)
 
   val retrieveQueryString = """MATCH (s:Story)-[r:Slot]-(m:Story) WHERE s.id={id} and r.name={slot} RETURN m.id as id, m.title as title"""
-  val addQueryString = """MATCH (n:Story),(m:Story) WHERE n.id={toStory} and m.id={story} CREATE (n)-[r:Slot]->(m) set r.name={slot}"""
+  val addQueryString = """MATCH (n:Story {id: {toStory}}),(m:Story {id: {story}}) MERGE (n)-[r:Slot]->(m) SET r.name={slot}"""
+  //val addQueryString = """MATCH (n:Story),(m:Story) WHERE n.id={toStory} and m.id={story} MERGE (n)-[r:Slot]->(m) set r.name={slot}"""
   val removeQueryString = """MATCH (n:Story)-[r:Slot]->(m:Story) WHERE n.id={fromStory} and m.id={story} and r.name={slot} DELETE r"""
   val createAndAddQueryString = """MATCH (n:Story) WHERE n.id={toStory} CREATE (n)-[r:Slot]->(m:Story) set r.name={slot}, m.id={id}, m.title={title}, m.content={content}"""
 }
