@@ -1,8 +1,10 @@
 <h2>This is the slot view.</h2>
 <ul>
   <li ng-repeat="storyInfo in stories">
-    <a href="../#/story/{{storyInfo.id}}">{{storyInfo.title}}</a>&nbsp;<button ng-click="remove(storyInfo.id,$index)">[delete]</button>
+    <a href="../#/story/{{storyInfo.id}}">{{storyInfo.title}}</a>&nbsp;<button ng-click="remove(storyInfo.id,$index)">delete</button>
   </li>
 </ul>
 <button ng-click="add()">add Story</button>
+<button ng-click="goBack()">go back</button>
+
 

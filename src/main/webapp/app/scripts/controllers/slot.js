@@ -1,13 +1,15 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('SlotCtrl', function ($scope,$routeParams,slotService,$rootScope,$location) {
+  .controller('SlotCtrl', function ($scope,$routeParams,slotService,$rootScope,$location,$window) {
 
     // init StoryContext
-   	$scope.stories = slotService.query({
-    	storyId: $routeParams.storyId,
-    	slotName: $routeParams.slotName
-    });
+    $scope.reload = function() {
+       	$scope.stories = slotService.query({
+        	storyId: $routeParams.storyId,
+        	slotName: $routeParams.slotName
+        });
+    }
 
     $scope.add = function() {
     	$rootScope.mode = MODE_ADD_TO_SLOT;
@@ -29,4 +31,10 @@ angular.module('amanuensisApp')
     	});
     }
 
+    $scope.goBack = function() {
+        $window.history.back();
+    }
+
+    // init controller
+    $scope.reload();
   });

@@ -26,7 +26,7 @@
 
     <!-- Add your site or application content here -->
     <!-- statusBar -->
-    <div ng-controller="CabCtrl">Mode: {{mode}}, Stack: {{stack}} 
+    <div ng-controller="CabCtrl"><a href="/#/query">[go to query]</a> Mode: {{mode}}, Stack: {{stack}} 
       <button ng-show="mode" ng-disabled="isNotSelectable()" ng-click="select()">select</button>
       <input ng-show="mode == 2" type="text" ng-model="slotName"></input>
       <button ng-show="mode" ng-click="cancel()">cancel</>

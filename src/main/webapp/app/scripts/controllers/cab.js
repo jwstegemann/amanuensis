@@ -8,7 +8,7 @@ angular.module('amanuensisApp')
     }
 
     $scope.select = function() {
-    	if ($rootScope.mode == MODE_ADD_TO_SLOT) {
+    	if ($rootScope.mode === MODE_ADD_TO_SLOT) {
 				$route.current.scope.addMeToSlot($rootScope.stack.storyId, $rootScope.stack.slotName);
 			}
 			// MODE_ADD_TO_NEW_SLOT

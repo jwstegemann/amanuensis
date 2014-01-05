@@ -1,23 +1,25 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location) {
+  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window) {
 
     // init StoryContext
-    if (angular.isDefined($routeParams.storyId)) {
-    	$scope.context = storyService.get({storyId: $routeParams.storyId});
-    } 
-    else {
-    	// init empty StoryContext
-    	$scope.context = { 
-    		story: {
-    			id: undefined,
-    			title: '',
-    			content: ''
-    		},
-    		inSlots: [],
-    		outSlots: []
-    	};
+    $scope.reload = function() {
+        if (angular.isDefined($routeParams.storyId)) {
+        	$scope.context = storyService.get({storyId: $routeParams.storyId});
+        } 
+        else {
+        	// init empty StoryContext
+        	$scope.context = { 
+        		story: {
+        			id: undefined,
+        			title: '',
+        			content: ''
+        		},
+        		inSlots: [],
+        		outSlots: []
+        	};
+        }
     }
 
     $scope.save = function() {
@@ -34,8 +36,10 @@ angular.module('amanuensisApp')
     }
 
     $scope.delete = function() {
-    	storyService.delete({storyId: $routeParams.storyId});
-    	console.log("story gelöscht!");    	
+    	storyService.delete({storyId: $routeParams.storyId}, function(successData) {
+            console.log("story gelöscht!");     
+            $window.history.back();
+        });
     }
 
     $scope.addMeToSlot = function(toStoryId, slotName) {
@@ -47,7 +51,9 @@ angular.module('amanuensisApp')
                 toStoryId: toStoryId,
                 slotName: slotName,
                 storyId: $scope.context.story.id
-            }, null);
+            }, null, function () {
+                $scope.reload();
+            });
         }
     }
 
@@ -59,4 +65,6 @@ angular.module('amanuensisApp')
         $location.url('/query');
     }
 
+    // init controller
+    $scope.reload();
   });

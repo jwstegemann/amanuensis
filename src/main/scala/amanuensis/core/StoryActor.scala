@@ -43,7 +43,7 @@ object StoryActor {
   val retrieveOutSlotQueryString = """MATCH (s:Story)-[r:Slot]->() WHERE s.id={id} RETURN DISTINCT r.name as name"""
   val retrieveInSlotQueryString = """MATCH (s:Story)<-[r:Slot]-() WHERE s.id={id} RETURN DISTINCT r.name as name"""
 
-  val removeStoryQueryString = """OPTIONAL MATCH (s:Story)-[r]-() WHERE s.id={id} DELETE r,s"""
+  val removeStoryQueryString = """MATCH (s:Story) WHERE s.id={id} WITH s OPTIONAL MATCH s-[r]-() DELETE r,s"""
 
   val updateStoryQueryString = """MATCH (s:Story) WHERE s.id={id} SET s.title={title}, s.content={content}"""
 }
