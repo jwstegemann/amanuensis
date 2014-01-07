@@ -12,7 +12,6 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -25,14 +24,40 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <!-- statusBar -->
-    <div ng-controller="CabCtrl"><a href="/#/query">[go to query]</a> Mode: {{mode}}, Stack: {{stack}} 
-      <button ng-show="mode" ng-disabled="isNotSelectable()" ng-click="select()">select</button>
-      <input ng-show="mode == 2" type="text" ng-model="slotName"></input>
-      <button ng-show="mode" ng-click="cancel()">cancel</>
+
+    <div class="container">
+
+      <!-- #                         -->
+      <!-- # StatusBar               --> 
+      <!-- #                         -->
+      <ul id="cab" class="cab-main">
+        <li class="trigger-left">
+          <a class="icon icon-menu"><span>inSlots</span></a>
+        </li>
+        <li><a><span>Jens Stegemann</span></a></li>
+        <li class="trigger-right">
+          <a class="icon icon-menu"><span>outSlots</span></a>
+        </li>        
+      </ul>
+
+<!--
+      <div ng-controller="CabCtrl"><a href="/#/query">[go to query]</a> Mode: {{mode}}, Stack: {{stack}} 
+        <button ng-show="mode" ng-disabled="isNotSelectable()" ng-click="select()">select</button>
+        <input ng-show="mode == 2" type="text" ng-model="slotName"></input>
+        <button ng-show="mode" ng-click="cancel()">cancel</button>
+      </div>
+-->
+
+      <!-- #                         -->
+      <!-- # View                    --> 
+      <!-- #                         -->
+      <div ng-view=""></div>
+
     </div>
 
-    <div class="container" ng-view=""></div>
+    <!-- #                         -->
+    <!-- # JavaScript              --> 
+    <!-- #                         -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID
      <script>
@@ -54,9 +79,7 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->

@@ -1,79 +1,205 @@
-/* Space out content a bit */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  background: #34495e;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+/*
+ * Story-Title
+ */
+
+header {
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 1.8em 1em;
+  padding-left: 370px;
+  background: rgba(0,0,0,0.05);
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
+header a {
+  color: #566473;
+  text-decoration: none;
+  outline: none;
 }
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+header a:hover {
+  color: #4f7bab;
 }
 
-/* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-}
-.container-narrow > hr {
-  margin: 30px 0;
+header h1 {
+  font-size: 3.2em;
+  line-height: 1.3;
+  margin: 0;
+  font-weight: 300;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+header span {
+  display: block;
+  font-size: 0.4em;
+  color: #74818e;
+  padding: 0 0 0.6em 0.1em;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
+input.story-title {
+  font-family: 'Lato', Arial, sans-serif;
+  color: #fff;
+  font-size: 3.2em;
+  line-height: 1.3;
+  margin: 0;
+  font-weight: 300;
+  background: transparent;
+  border: none;
 }
-.marketing p + h4 {
-  margin-top: 28px;
+  
+
+/*
+ * Story-Content
+ */
+
+div.content {
+  display: block;
+  color: #fff;
+  font-family: 'Lato', Arial, sans-serif;
+  font-weight: 300;
+  color: #fff;
+  font-size: 1.2em;
+  padding: 1.8em 1em;
+  padding-left: 370px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+textarea.story-content {
+  font-family: 'Lato', Arial, sans-serif;
+  color: #fff;
+  line-height: 1.3;
+  margin: 0;
+  font-weight: 300;
+  background: transparent;
+  border: none;
+  width: 600px;
+  font-size: 1.2em;
+  padding: 10px;
+}
+
+
+/*
+ * CAB
+ */
+
+ .cab-main,
+.cab-main ul {
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: #5f6f81;
+    list-style: none;
+    text-transform: none;
+    font-weight: 300;
+    font-family: 'Lato', Arial, sans-serif;
+    line-height: 40px;
+}
+
+.cab-main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+}
+
+.cab-main a {
+    display: block;
+    height: 100%;
+    color: #5f6f81;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cab-main > li {
+    display: block;
+    float: left;
+    height: 100%;
+    border-right: 1px solid #c6d0da;
+    text-align: center;
+}
+
+/* icon-only trigger (menu item) */
+
+.cab-main > li > a {
+    padding: 0 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.cab-main:after {
+    display: table;
+    clear: both;
+    content: "";
+}
+.cab-main li.trigger-left {
+    position: relative;
+    width: 60px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.cab-main li.trigger-right {
+    position: relative;
+    width: 60px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    float: right;
+    border-right: none;
+    border-left: 1px solid #c6d0da;
+}
+
+
+/* 
+ * Icons 
+ */
+ .icon::before {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    text-transform: none;
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-family: 'ecoicons';
+    line-height: 1;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.icon span {
+    width: 0;
+    height: 0;
+    display: block;
+    overflow: hidden;
+}
+
+.icon-menu::before {
+    margin-left: -15px;
+    vertical-align: -2px;
+    width: 30px;
+    height: 3px;
+    background: #5f6f81;
+    box-shadow: 0 3px white, 0 -6px #5f6f81, 0 -9px white, 0 -12px #5f6f81;
+    content: '';
+}
+
+// ToDo: example for icon, delete!
+.icon-search::before {
+    content: "\e005"
 }

@@ -8,7 +8,6 @@ var MODE_ADD_TO_NEW_SLOT = 2;
 
 
 angular.module('amanuensisApp', [
-  'ngCookies',
   'ngResource',
   'ngSanitize',
   'ngRoute'
