@@ -1,0 +1,77 @@
+/*
+ * CAB
+ */
+
+ .cab-main,
+.cab-main ul {
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: #5f6f81;
+    list-style: none;
+    text-transform: none;
+    font-weight: 300;
+    font-family: 'Lato', Arial, sans-serif;
+    line-height: 40px;
+}
+
+.cab-main {
+    z-index: 9000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+}
+
+.cab-main a {
+    display: block;
+    height: 100%;
+    color: #5f6f81;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cab-main > li {
+    display: block;
+    float: left;
+    height: 100%;
+    border-right: 1px solid #c6d0da;
+    text-align: center;
+}
+
+/* icon-only trigger (menu item) */
+
+.cab-main > li > a {
+    padding: 0 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.cab-main:after {
+    display: table;
+    clear: both;
+    content: "";
+}
+.cab-main li.trigger-left {
+    position: relative;
+    width: 60px;
+    vertical-align: middle; 
+
+}
+
+.cab-main li.trigger-right {
+    position: relative;
+    width: 60px;
+    vertical-align: middle;
+
+    float: right;
+    border-right: none;
+    border-left: 1px solid #c6d0da;
+}
+
+i.on-cab {
+    margin-top: 8px;
+}
