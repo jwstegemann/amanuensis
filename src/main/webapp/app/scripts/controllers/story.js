@@ -3,6 +3,8 @@
 angular.module('amanuensisApp')
   .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window) {
 
+    $scope.inSlots = false;
+
     // init StoryContext
     $scope.reload = function() {
         if (angular.isDefined($routeParams.storyId)) {
@@ -13,8 +15,8 @@ angular.module('amanuensisApp')
         	$scope.context = { 
         		story: {
         			id: undefined,
-        			title: '',
-        			content: ''
+        			title: 'A Story...',
+        			content: '... that still has to be written.'
         		},
         		inSlots: [],
         		outSlots: []

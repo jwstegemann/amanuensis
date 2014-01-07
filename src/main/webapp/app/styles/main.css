@@ -100,6 +100,7 @@ textarea.story-content {
   background: transparent;
   border: none;
   width: 600px;
+  height: 300px;
   font-size: 1.2em;
   padding: 10px;
 }
@@ -123,6 +124,7 @@ textarea.story-content {
 }
 
 .cab-main {
+    z-index: 9000;
     position: fixed;
     top: 0;
     left: 0;
@@ -257,6 +259,8 @@ textarea.story-content {
   text-decoration:none;
   text-align:center;
   vertical-align: middle;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .button:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a5cc52), color-stop(1, #b8e356) );
@@ -272,4 +276,71 @@ textarea.story-content {
 
 .on-button {
   margin-left: 10px;
+}
+
+
+/*
+ * inSlots
+ */
+
+div#in-slot-container {
+  position: absolute; /* we can't use fixed here :( */
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 300px;
+  height: 100%;
+  background-color: #5E4E18;
+  -webkit-box-shadow: 5px 0 5px 0 rgba(0,0,0,0.4);
+     -moz-box-shadow: 5px 0 5px 0 rgba(0,0,0,0.4);
+          box-shadow: 5px 0 5px 0 rgba(0,0,0,0.4);
+  overflow: hidden;
+
+  -webkit-transition:all linear  0.4s;
+    transition:all linear 0.4s;
+
+  -webkit-transform: translate3d(-100%, 0, 0);
+    -moz-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+#in-slot-container.shown {
+  -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); 
+}
+
+div.slot-list-title {
+  width: 100%;
+  padding: 25px;
+  font-family: 'Lato', Arial, sans-serif;
+  color: #E3D091;
+  font-size: 24px;
+  margin-top: 40px;
+  font-weight: 300; 
+  background: rgba(0,0,0,0.05)
+}
+
+ul.slot-list {
+    width: 100%;
+    list-style: none;
+    padding: 0px;
+    margin: 0;
+}
+
+li.slot-name {
+  width: 100%;
+  display: block;
+  float: left;
+  border-top: 1px solid #866F22; //#9A8027;
+  padding: 15px;
+  font-family: 'Lato', Arial, sans-serif;
+  color: #E3D091;
+  font-size: 20px;
+  margin: 0;
+  font-weight: 300;
+}
+
+i.on-slot {
+  margin-right: 10px;
 }

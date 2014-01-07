@@ -10,7 +10,8 @@ var MODE_ADD_TO_NEW_SLOT = 2;
 angular.module('amanuensisApp', [
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ngAnimate'
 ])
   .config(function ($routeProvider) {
     $routeProvider
