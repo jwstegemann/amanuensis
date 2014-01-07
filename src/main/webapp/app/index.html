@@ -15,6 +15,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
@@ -34,7 +35,7 @@
         <li class="trigger-left">
           <a class="icon icon-menu"><span>inSlots</span></a>
         </li>
-        <li><a><span>Jens Stegemann</span></a></li>
+        <li><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;Jens Stegemann</a></li>
         <li class="trigger-right">
           <a class="icon icon-menu"><span>outSlots</span></a>
         </li>        
@@ -87,7 +88,6 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
         <script src="scripts/services/storyService.js"></script>
         <script src="scripts/controllers/story.js"></script>
         <script src="scripts/services/slotService.js"></script>

@@ -2,6 +2,14 @@
 
 body {
   background: #34495e;
+  font-family: 'Lato', Arial, sans-serif;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 300;
+}
+
+a, a:link, a:visited, a:active, a:hover {
+  color: inherit;
 }
 
 /*
@@ -51,6 +59,20 @@ input.story-title {
   font-weight: 300;
   background: transparent;
   border: none;
+}
+
+div.story-icon {
+  width: 64px;
+  height: 108px;
+  margin: 0px ;
+  float: left;
+  text-align: center;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+div.story-header {
+  height: 108px;
 }
   
 
@@ -202,4 +224,52 @@ textarea.story-content {
 // ToDo: example for icon, delete!
 .icon-search::before {
     content: "\e005"
+}
+
+/*
+ * Buttons
+ */
+
+.button-bar {
+  margin-top: 20px;
+  padding: 20px;
+  padding-left: 370px;
+  background: rgba(0,0,0,0.05);
+}
+
+.button {
+  margin-left: 10px;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b8e356), color-stop(1, #a5cc52) );
+  background:-moz-linear-gradient( center top, #b8e356 5%, #a5cc52 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b8e356', endColorstr='#a5cc52');
+  background-color:#b8e356;
+  -webkit-border-top-left-radius:0px;
+  -moz-border-radius-topleft:0px;
+  text-indent:0;
+  border:1px solid #83c41a;
+  display:inline-block;
+  color:#ffffff;
+  font-weight: 400;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size:1.0em;
+  font-style:normal;
+  line-height:40px;
+  text-decoration:none;
+  text-align:center;
+  vertical-align: middle;
+}
+.button:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a5cc52), color-stop(1, #b8e356) );
+  background:-moz-linear-gradient( center top, #a5cc52 5%, #b8e356 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a5cc52', endColorstr='#b8e356');
+  background-color:#a5cc52;
+}
+.button:active {
+  position:relative;
+  top:1px;
+}
+/* This button was generated using CSSButtonGenerator.com */
+
+.on-button {
+  margin-left: 10px;
 }
