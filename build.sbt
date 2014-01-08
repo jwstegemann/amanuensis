@@ -1,3 +1,7 @@
+import com.typesafe.sbt.SbtStartScript
+
+seq(SbtStartScript.startScriptForClassesSettings: _*)
+
 name := "amanuensis"
 
 version := "1.0"
@@ -27,7 +31,8 @@ resolvers ++= Seq(
     "Sonatype Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
 //    "sgodbillon" at "https://bitbucket.org/sgodbillon/repository/raw/master/snapshots/",
     "Typesafe Snapshots" at "http://repo.typesafe.com/typesafe/maven-snapshots",
-    "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases"
+    "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases",
+    "Typesafe repository" at "http://repo.typesafe.com/typesafe/repo1/"
 )
 
 // Libraries
@@ -43,10 +48,7 @@ libraryDependencies ++= Seq(
     "com.typesafe.akka"                       %%  "akka-slf4j"                  % "2.2.3",
     "com.typesafe.akka"                       %%  "akka-testkit"                % "2.2.3"        % "test",
     "ch.qos.logback"                          %   "logback-classic"             % "1.0.13",
-    "org.neo4j"                               %   "neo4j"                       % "2.0.0-M06",
     "org.specs2"                              %%  "specs2"                      % "1.14"         % "test"
 )
-
-
 
 
