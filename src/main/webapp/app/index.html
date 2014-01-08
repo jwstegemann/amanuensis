@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="styles/buttons.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="amanuensisApp">
+  <body ng-app="amanuensisApp" ng-controller="CabCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -36,12 +36,12 @@
       <!-- #                         -->
        <ul id="cab" class="cab-main">
         <li class="trigger-left">
-          <i class="fa fa-th fa-2x on-cab"></i>
+          <i class="fa fa-th fa-2x on-cab" ng-click="toggleLeft()"></i>
         </li>
         <li><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;Jens Stegemann</a></li>
         <li class="trigger-right">
-          <i class="fa fa-th fa-2x on-cab"></i>
-        </li>        
+          <i class="fa fa-th fa-2x on-cab" ng-click="toggleRight()"></i>
+        </li>      
       </ul>
 
 <!--

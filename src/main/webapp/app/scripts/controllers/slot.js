@@ -1,29 +1,32 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('SlotCtrl', function ($scope,$routeParams,slotService,$rootScope,$location,$window) {
+  .controller('SlotCtrl', function ($scope,slotService,$rootScope,$location,$window) {
 
     // init StoryContext
-    $scope.reload = function() {
+    $scope.reload = function(storyId, slotName) {
+        $scope.storyId = storyId;
+        $scope.slotName = slotName;
+
        	$scope.stories = slotService.query({
-        	storyId: $routeParams.storyId,
-        	slotName: $routeParams.slotName
+        	storyId: $scope.storyId,
+        	slotName: $scope.slotName
         });
     }
 
     $scope.add = function() {
     	$rootScope.mode = MODE_ADD_TO_SLOT;
     	$rootScope.stack = {
-    		storyId: $routeParams.storyId,
-    		slotName: $routeParams.slotName
+    		storyId: $scope.storyId,
+    		slotName: $scope.slotName
     	};
     	$location.url('/query');
     }
 
     $scope.remove = function(storyId, index) {
     	slotService.remove({
-    		fromStoryId: $routeParams.storyId,
-    		slotName: $routeParams.slotName,
+    		fromStoryId: $scope.storyId,
+    		slotName: $scope.slotName,
     		storyId: storyId
     	}, function (successData) {
     		$scope.stories.splice(index,1);
@@ -35,6 +38,8 @@ angular.module('amanuensisApp')
         $window.history.back();
     }
 
-    // init controller
-    $scope.reload();
+    $scope.$on("selectSlot", function(event, params) {
+        $scope.reload(params.storyId, params.slotName);
+    });
+
   });

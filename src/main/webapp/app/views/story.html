@@ -4,23 +4,21 @@
 
 <div id="left-container" class="container left-container" ng-class="{'show-slots': inSlots, 'show-stories': inStories}">
 	<!-- inbound Story-List	-->
-  <div id="stories-left" class="container stories stories-left">
-		<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Testslot No. 1</div>
+  <div id="stories-left" class="container stories stories-left shadow-right" ng-controller="SlotCtrl">
+		<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>{{slotName}}</div>
 		<ul class="story-list">
-			<li class="story-info"><i class="fa fa-book on-slot"></i>Story No. 1</li>
-			<li class="story-info"><i class="fa fa-user on-slot"></i>Story No. 2</li>
-			<li class="story-info"><i class="fa fa-heart on-slot"></i>Story No. 3</li>
-			<li class="story-info"><i class="fa fa-folder-open on-slot"></i>Story No. 4</li>
+			<li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id)">
+				<i class="fa fa-book on-slot"></i>{{storyInfo.title}}
+			</li>
 		</ul>  	
   </div>
 	<!-- inbound Slot-List	-->
-  <div id="slots-left" class="container slots slots-left">
+  <div id="slots-left" class="container slots slots-left shadow-right">
     <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Inbound Slots</div>
     <ul class="slot-list">
-            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 1</li>
-            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 2</li>
-            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 3</li>
-            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 4</li>
+            <li class="slot-name" ng-repeat="slot in context.inSlots" ng-click="selectSlot(slot.name, true)">
+            	<i class="fa fa-mail-reply on-slot"></i>{{slot.name}}
+            </li>
     </ul>  	
   </div>
 </div>
@@ -31,7 +29,7 @@
 <!-- #                            -->
 
 <div id="story-container" class="container story" ng-class="{'shifted-right': inStories, 'shifted-left': outStories}"> 
-  <div class="story-padding">
+
     <div class="inner">
 			<ng-form>
 				<header>
@@ -55,7 +53,6 @@
 				</div>
 			</ng-form>       
     </div>
-  </div>
 </div>
 
 
@@ -65,23 +62,21 @@
 
 <div id="right-container" class="container right-container" ng-class="{'show-slots': outSlots, 'show-stories': outStories}">
 	<!-- inbound Story-List	-->
-  <div id="stories-right" class="container stories stories-right">
-		<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Testslot No. 1</div>
+  <div id="stories-right" class="container stories stories-right shadow-left" ng-controller="SlotCtrl">
+		<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>{{slotName}}</div>
 		<ul class="story-list">
-			<li class="story-info"><i class="fa fa-book on-slot"></i>Story No. 1</li>
-			<li class="story-info"><i class="fa fa-user on-slot"></i>Story No. 2</li>
-			<li class="story-info"><i class="fa fa-heart on-slot"></i>Story No. 3</li>
-			<li class="story-info"><i class="fa fa-folder-open on-slot"></i>Story No. 4</li>
+			<li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id)">
+				<i class="fa fa-book on-slot"></i>{{storyInfo.title}}
+			</li>
 		</ul>  	
   </div>
 	<!-- inbound Slot-List	-->
-  <div id="slots-right" class="container slots slots-right">
-    <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Inbound Slots</div>
+  <div id="slots-right" class="container slots slots-right shadow-left">
+    <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Outbound Slots</div>
     <ul class="slot-list">
-            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 1</li>
-            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 2</li>
-            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 3</li>
-            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 4</li>
+      <li class="slot-name" ng-repeat="slot in context.outSlots" ng-click="selectSlot(slot.name, false)">
+      	<i class="fa fa-mail-reply on-slot"></i>{{slot.name}}
+      </li>
     </ul>  	
   </div>
 </div>

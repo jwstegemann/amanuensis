@@ -26,4 +26,12 @@ angular.module('amanuensisApp')
 			$rootScope.stack = undefined;
     }
 
-  });
+    $scope.toggleLeft = function() {
+    	$scope.$broadcast('toggleLeft');
+    }
+
+    $scope.toggleRight = function() {
+    	$scope.$broadcast('toggleRight');
+    }
+
+	});

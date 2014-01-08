@@ -7,8 +7,9 @@ header {
   font-family: 'Lato', Arial, sans-serif;
   margin: 0 auto;
   margin-top: 40px;
-  padding: 1.8em 1em;
+  padding:  1em;
   background: rgba(0,0,0,0.05);
+  padding: 1.8em 15%;
 }
 
 header a {
@@ -72,7 +73,7 @@ div.content {
   font-weight: 300;
   color: #fff;
   font-size: 1.2em;
-  padding: 1.8em 1em;
+  padding: 1.8em 15%;
 }
 
 textarea.story-content {
@@ -85,10 +86,24 @@ textarea.story-content {
   border: none;
   width: 600px;
   height: 300px;
-  font-size: 1.2em;
+  font-size: 1.0em;
   padding: 10px;
 }
 
+/*
+ * shadows
+ */
+
+div.shadow-right {
+  -webkit-box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
+     -moz-box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
+          box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
+}
+
+div.shadow-left {
+  -webkit-box-shadow: -3px 0 4px 0 rgba(0,0,0,0.4);
+     -moz-box-shadow: -3px 0 4px 0 rgba(0,0,0,0.4);
+          box-shadow: -3px 0 4px 0 rgba(0,0,0,0.4);}
 
 /*
  * Slot-List
@@ -96,9 +111,6 @@ textarea.story-content {
 
 div.slots {
   background-color: #5E4E18;
-  -webkit-box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
-     -moz-box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
-          box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
   overflow: hidden;   
 }
 
@@ -131,6 +143,7 @@ li.slot-name {
   font-size: 20px;
   margin: 0;
   font-weight: 300;
+  cursor: pointer;
 }
 
 i.on-slot {
@@ -144,9 +157,6 @@ i.on-slot {
 
 div.stories {
   background-color: #5E2F18;
-  -webkit-box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
-     -moz-box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
-          box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
   overflow: hidden;
 }
 
@@ -179,5 +189,6 @@ li.story-info {
   font-size: 20px;
   margin: 0;
   font-weight: 300;
+  cursor: pointer;
 }
 
