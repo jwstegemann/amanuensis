@@ -59,7 +59,7 @@
     position: relative;
     width: 60px;
     vertical-align: middle; 
-
+    cursor: pointer;
 }
 
 .cab-main li.trigger-right {
@@ -70,6 +70,7 @@
     float: right;
     border-right: none;
     border-left: 1px solid #c6d0da;
+    cursor: pointer;
 }
 
 i.on-cab {

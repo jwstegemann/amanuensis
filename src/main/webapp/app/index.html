@@ -35,12 +35,17 @@
       <!-- # StatusBar               --> 
       <!-- #                         -->
        <ul id="cab" class="cab-main">
-        <li class="trigger-left">
-          <i class="fa fa-th fa-2x on-cab" ng-click="toggleLeft()"></i>
+        <li class="trigger-left" ng-click="toggleLeft()">
+          <i class="fa fa-th fa-2x on-cab"></i>
         </li>
+        <li ng-show="mode"><a ng-click="select()"><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
+        <li ng-show="mode"><a>Hier stehen dann Story und Slot</a></li>        
+        <li ng-show="mode"><a ng-click="cancel()"><i class="fa fa-times fa-fw fa-2x on-cab"></i></a></li>
+
+        <li><a href="/#/query"><i class="fa fa-search fa-fw fa-lg"></i>&nbsp;Search...</a></li>
         <li><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;Jens Stegemann</a></li>
-        <li class="trigger-right">
-          <i class="fa fa-th fa-2x on-cab" ng-click="toggleRight()"></i>
+        <li class="trigger-right" ng-click="toggleRight()">
+          <i class="fa fa-th fa-2x on-cab"></i>
         </li>      
       </ul>
 
