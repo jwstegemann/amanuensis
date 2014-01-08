@@ -17,6 +17,7 @@
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/story.css">
     <link rel="stylesheet" href="styles/cab.css">
     <link rel="stylesheet" href="styles/buttons.css">
@@ -29,12 +30,11 @@
 
     <!-- Add your site or application content here -->
 
-    <div class="container">
 
       <!-- #                         -->
       <!-- # StatusBar               --> 
       <!-- #                         -->
-      <ul id="cab" class="cab-main">
+       <ul id="cab" class="cab-main">
         <li class="trigger-left">
           <i class="fa fa-th fa-2x on-cab"></i>
         </li>
@@ -55,9 +55,9 @@
       <!-- #                         -->
       <!-- # View                    --> 
       <!-- #                         -->
-      <div ng-view=""></div>
+      <div class="view-container" ng-view=""></div>
 
-    </div>
+ <!--    </div> -->
 
     <!-- #                         -->
     <!-- # JavaScript              --> 

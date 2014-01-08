@@ -1,60 +1,90 @@
-<!-- #                         -->
-<!-- # The Story itself        --> 
-<!-- #                         -->
+<!--                              -->
+<!-- # The inSlots  and -Stories  --> 
+<!-- #                            -->
 
-<div class="story-container" ng-class="{'with-stories': inStories}">
-	<ng-form>
-		<header>
-			<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
-			<div class="story-header">
-				<input class="story-title" type="text" ng-model="context.story.title"></input>
-		  	<h1><span>edited on January, 1st 2014 by Jens Stegemann</span></h1> <!-- ToDo: get right values here -->
-		  </div>
-		</header>
-		<div class="content">
-		  <textarea class="story-content" ng-model="context.story.content"></textarea></textarea>
-		</div>
-		<p>&nbsp;</p>
-		<div class="button-bar">
-			<button class="button" ng-click="save()">save Story<i class="fa fa-save fa-lg on-button"></i></button>
-			<button class="button" ng-click="delete()">delete Story<i class="fa fa-trash-o fa-lg on-button"></i></button>
-			&nbsp;Slots:<input type="checkbox" ng-model="inSlots">
-			&nbsp;Stories:<input type="checkbox" ng-model="inStories">
-		</div>
-	</ng-form>
+<div id="left-container" class="container left-container" ng-class="{'show-slots': inSlots, 'show-stories': inStories}">
+	<!-- inbound Story-List	-->
+  <div id="stories-left" class="container stories stories-left">
+		<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Testslot No. 1</div>
+		<ul class="story-list">
+			<li class="story-info"><i class="fa fa-book on-slot"></i>Story No. 1</li>
+			<li class="story-info"><i class="fa fa-user on-slot"></i>Story No. 2</li>
+			<li class="story-info"><i class="fa fa-heart on-slot"></i>Story No. 3</li>
+			<li class="story-info"><i class="fa fa-folder-open on-slot"></i>Story No. 4</li>
+		</ul>  	
+  </div>
+	<!-- inbound Slot-List	-->
+  <div id="slots-left" class="container slots slots-left">
+    <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Inbound Slots</div>
+    <ul class="slot-list">
+            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 1</li>
+            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 2</li>
+            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 3</li>
+            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 4</li>
+    </ul>  	
+  </div>
+</div>
+     
+
+<!-- #                            -->
+<!-- # The Story itself           --> 
+<!-- #                            -->
+
+<div id="story-container" class="container story" ng-class="{'shifted-right': inStories, 'shifted-left': outStories}"> 
+  <div class="story-padding">
+    <div class="inner">
+			<ng-form>
+				<header>
+					<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
+					<div class="story-header">
+						<input class="story-title" type="text" ng-model="context.story.title"></input>
+				  	<h1><span>edited on January, 1st 2014 by Jens Stegemann</span></h1> 
+				  </div>
+				</header>
+				<div class="content">
+				  <textarea class="story-content" ng-model="context.story.content"></textarea></textarea>
+				</div>
+				<p>&nbsp;</p>
+				<div class="button-bar">
+					<button class="button" ng-click="save()">save Story<i class="fa fa-save fa-lg on-button"></i></button>
+					<button class="button" ng-click="delete()">delete Story<i class="fa fa-trash-o fa-lg on-button"></i></button>
+					&nbsp;In-Slots:<input type="checkbox" ng-model="inSlots">
+					&nbsp;In-Stories:<input type="checkbox" ng-model="inStories">
+					&nbsp;Out-Slots:<input type="checkbox" ng-model="outSlots">
+					&nbsp;Out-Stories:<input type="checkbox" ng-model="outStories">
+				</div>
+			</ng-form>       
+    </div>
+  </div>
 </div>
 
 
+<!-- #                            -->
+<!-- # The outSlots  and -Stories --> 
+<!-- #                            -->
 
-<!-- #                         -->
-<!-- # The inSlots             --> 
-<!-- #                         -->
-
-<div id="in-slot-container" ng-class="{'shown': inSlots, 'with-stories': inStories}">
-	<div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Inbound Slots</div>
-	<ul class="slot-list">
-		<li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 1</li>
-		<li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 2</li>
-		<li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 3</li>
-		<li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 4</li>
-	</ul>
+<div id="right-container" class="container right-container" ng-class="{'show-slots': outSlots, 'show-stories': outStories}">
+	<!-- inbound Story-List	-->
+  <div id="stories-right" class="container stories stories-right">
+		<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Testslot No. 1</div>
+		<ul class="story-list">
+			<li class="story-info"><i class="fa fa-book on-slot"></i>Story No. 1</li>
+			<li class="story-info"><i class="fa fa-user on-slot"></i>Story No. 2</li>
+			<li class="story-info"><i class="fa fa-heart on-slot"></i>Story No. 3</li>
+			<li class="story-info"><i class="fa fa-folder-open on-slot"></i>Story No. 4</li>
+		</ul>  	
+  </div>
+	<!-- inbound Slot-List	-->
+  <div id="slots-right" class="container slots slots-right">
+    <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Inbound Slots</div>
+    <ul class="slot-list">
+            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 1</li>
+            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 2</li>
+            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 3</li>
+            <li class="slot-name"><i class="fa fa-mail-reply on-slot"></i>Slot No. 4</li>
+    </ul>  	
+  </div>
 </div>
-
-
-<!-- #                         -->
-<!-- # The in-Slots Story-List --> 
-<!-- #                         -->
-
-<div id="in-slot-story-list" ng-class="{'shown': inStories}">
-	<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Testslot No. 1</div>
-	<ul class="story-list">
-		<li class="story-info"><i class="fa fa-book on-slot"></i>Story No. 1</li>
-		<li class="story-info"><i class="fa fa-user on-slot"></i>Story No. 2</li>
-		<li class="story-info"><i class="fa fa-heart on-slot"></i>Story No. 3</li>
-		<li class="story-info"><i class="fa fa-folder-open on-slot"></i>Story No. 4</li>
-	</ul>
-</div>
-
 
 
 <!--
@@ -87,4 +117,3 @@
 </ul>
 
 <button ng-click="addStoryToSlot()">add Story to Slot</button>
--->

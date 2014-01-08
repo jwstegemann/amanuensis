@@ -1,0 +1,111 @@
+div.container {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* 
+ * Left-Side
+ */
+
+div.container.left-container {
+  width: 45%;
+  z-index: 2;
+  left: -45%;
+
+  -webkit-transition:all linear  0.4s;
+    transition:all linear 0.4s;
+}
+
+div.container.left-container.show-slots {
+  left: -30%;
+}
+
+div.container.left-container.show-stories {
+  left: 0;
+}
+
+
+div.container.stories-left {
+  left: 0;
+  width: 67%;
+  z-index: 4;  
+}
+
+div.container.slots-left {
+  left: 67%;
+  width: 33%;
+  z-index: 3; 
+}
+
+/* 
+ * Right-Side
+ */
+ 
+div.container.right-container {
+  background-color: yellow;
+  width: 45%;
+  z-index: 2;
+  left: 100%;   
+
+  -webkit-transition:all linear  0.4s;
+    transition:all linear 0.4s;         
+}
+
+div.container.right-container.show-slots {
+  left: 85%;
+}
+
+div.container.right-container.show-stories {
+  left: 55%;
+}
+
+div.container.slots-right {
+  left: 0;
+  width: 33%;
+  z-index: 3;
+}
+
+div.container.stories-right {
+  left: 33%;
+  width: 67%;
+  z-index: 4;
+}
+
+
+
+
+/*
+ * Story
+ */ 
+div.container.story {
+  width: 100%;
+  left: 0;
+  z-index: 0;
+
+  -webkit-transition:all linear  0.4s;
+    transition:all linear 0.4s;        
+}
+
+div.container.story.shifted-right {
+  left: 30%;
+}
+
+div.container.story.shifted-left {
+  left: -15%;
+}
+
+div.story-padding {
+  padding-left: 15%;
+  padding-right: 15%;
+  height: 100%;
+}     
+
+div.container.story div.inner {
+  position: relative;
+  height: 100%; 
+  padding-left: 20px;
+  padding-right: 20px;
+}

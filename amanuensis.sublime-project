@@ -3,6 +3,9 @@
 	[
 		{
 			"path": "/home/tiberius/scala/projects/amanuensis"
+		},
+		{
+			"path": "/home/tiberius/amanuensis/layout"
 		}
 	]
 }

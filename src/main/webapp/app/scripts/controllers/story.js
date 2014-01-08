@@ -3,10 +3,13 @@
 angular.module('amanuensisApp')
   .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window) {
 
-    $scope.inSlots = false;
-
     // init StoryContext
     $scope.reload = function() {
+        $scope.inSlots = false;
+        $scope.inStories = false;
+        $scope.outSlots = false;
+        $scope.outStories = false;
+
         if (angular.isDefined($routeParams.storyId)) {
         	$scope.context = storyService.get({storyId: $routeParams.storyId});
         } 
