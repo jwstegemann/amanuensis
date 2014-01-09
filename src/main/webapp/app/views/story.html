@@ -9,6 +9,7 @@
 		<ul class="story-list">
 			<li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id)">
 				<i class="fa fa-book on-slot"></i>{{storyInfo.title}}
+        <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
 			</li>
 		</ul>  	
   </div>
@@ -52,16 +53,17 @@
 <!-- #                            -->
 
 <div id="right-container" class="container right-container" ng-class="{'show-slots': outSlots, 'show-stories': outStories}">
-	<!-- inbound Story-List	-->
+	<!-- outbound Story-List	-->
   <div id="stories-right" class="container stories stories-right shadow-left" ng-controller="SlotCtrl">
 		<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>{{slotName}}</div>
 		<ul class="story-list">
 			<li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id)">
 				<i class="fa fa-book on-slot"></i>{{storyInfo.title}}
+        <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
 			</li>
 		</ul>  	
   </div>
-	<!-- inbound Slot-List	-->
+	<!-- outbound Slot-List	-->
   <div id="slots-right" class="container slots slots-right shadow-left">
     <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Outbound Slots</div>
     <ul class="slot-list">
@@ -81,8 +83,8 @@
   <div class="md-content">
     <h3>Please give the new slot a name <i style="float: right" class="fa fa-times action" ng-click="cancelNewSlot()"></i></h3>
     <div>
-    	<input class="start-focus" type="text" ng-model="newSlotName" on-enter="addStoryToSlot()" on-escape="cancelNewSlot()"></input>
-      <i class="fa fa-check fa-2x on-button action" ng-click="addStoryToSlot()"></i>
+    	<input class="start-focus" type="text" ng-model="newSlotName" on-enter="selectStory()" on-escape="cancelNewSlot()"></input>
+      <i class="fa fa-check fa-2x on-button action" ng-click="selectStory()"></i>
     </div>
   </div>
 </div>

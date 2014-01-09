@@ -52,7 +52,24 @@ angular.module('amanuensisApp')
         });
     });
 
-    $scope.addStoryToSlot = function() {
+    $scope.$on('addStoryToSlot', function() {
+        if (angular.isUndefined($scope.context.story.id)) {
+            alert("cannot add unsaved story to slot");
+        }
+        else {
+            slotService.add({
+                toStoryId: $rootScope.stack.storyId,
+                slotName: $rootScope.stack.slotName,
+                storyId: $scope.context.story.id
+            }, null, function () {
+                $scope.reload();
+                $rootScope.selectMode = false;
+                $rootScope.stack = undefined;
+            });
+        }
+    });    
+
+    $scope.selectStory = function() {
         if ($scope.newSlotName.length > 2) {
             //ToDo: better check and show error-message
             $rootScope.selectMode = true;

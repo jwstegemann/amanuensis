@@ -150,6 +150,10 @@ li.slot-name {
   cursor: pointer;
 }
 
+li.slot-name:hover {
+  background-color: rgba(75,75,75,0.25);
+}
+
 i.on-slot {
   margin-right: 10px;
 }
@@ -196,3 +200,16 @@ li.story-info {
   cursor: pointer;
 }
 
+li.story-info:hover {
+  background-color: rgba(75,75,75,0.25);
+}
+
+li.story-info > .delete-action {
+  float: right;
+  visibility: hidden;
+  margin-right: 30px;
+}
+
+li.story-info:hover > .delete-action {
+  visibility: visible; 
+}

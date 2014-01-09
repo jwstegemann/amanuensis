@@ -23,8 +23,11 @@ angular.module('amanuensisApp')
     	$location.url('/query');
     }
 
-    $scope.remove = function(storyId, index) {
-    	slotService.remove({
+    $scope.remove = function(storyId, index, $event) {
+        //stop the click-event to go further down...
+        if(typeof($event) !== 'undefined') $event.stopPropagation();
+    	
+        slotService.remove({
     		fromStoryId: $scope.storyId,
     		slotName: $scope.slotName,
     		storyId: storyId
