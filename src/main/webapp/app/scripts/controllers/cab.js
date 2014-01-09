@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('CabCtrl', function ($scope,$route,$rootScope,$location) {
+  .controller('CabCtrl', function ($scope,$route,$rootScope,$location,$window) {
 
     $scope.select = function() {
     	$scope.$broadcast('addStoryToSlot');
     }
 
     $scope.cancel = function() {
-			//reset stack etc.
-			$rootScope.selectMode = false;
-			$rootScope.stack = undefined;
+    		//reset stack etc.
+    		$rootScope.selectMode = false;
+    		$rootScope.stack = undefined;
     }
 
     $scope.toggleLeft = function() {
@@ -29,4 +29,4 @@ angular.module('amanuensisApp')
         $location.url('/story/' + $rootScope.stack.storyId);
     }
 
-	});
+});

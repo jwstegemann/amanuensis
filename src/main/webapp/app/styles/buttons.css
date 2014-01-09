@@ -27,6 +27,7 @@
   -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.4);
     -moz-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.4);
     box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.4);
+  border-radius: 3px;
 }
 
 .button:hover {
@@ -41,4 +42,8 @@
 
 .on-button {
   margin-left: 10px;
+}
+
+i.action {
+  cursor: pointer;
 }

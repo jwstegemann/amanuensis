@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window) {
+  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window,utilService) {
 
     // init StoryContext
     $scope.reload = function() {
@@ -68,13 +68,29 @@ angular.module('amanuensisApp')
     });
 
     $scope.addStoryToSlot = function() {
-        $rootScope.selectMode = true;
-        $rootScope.stack = {
-            storyId: $scope.context.story.id,
-            storyTitle: $scope.context.story.title.substr(0,25),
-            slotName: 'testSlot17'
-        };
-        $location.url('/query');
+        if ($scope.newSlotName.length > 2) {
+            //ToDo: better check and show error-message
+            $rootScope.selectMode = true;
+            $rootScope.stack = {
+                storyId: $scope.context.story.id,
+                storyTitle: $scope.context.story.title.substr(0,25),
+                slotName: $scope.newSlotName
+            };
+            $location.url('/query');
+
+            utilService.hideModal('#slot-name-modal');
+        }  
+    }
+
+    $scope.askForNewSlotName = function() {
+        if (angular.isDefined($scope.context.story.id)) {
+            utilService.showModal('#slot-name-modal');
+        }
+        //ToDo: show error-message
+    }
+
+    $scope.cancelNewSlot = function() {
+        utilService.hideModal('#slot-name-modal');    
     }
 
     //FixMe: Handle it just in the right controller!
