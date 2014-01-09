@@ -1,28 +1,15 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('CabCtrl', function ($scope,$route,$rootScope) {
-    $scope.isNotSelectable = function() {
-    	return false;
-			//return angular.isUndefined($route.current.scope.addMeToSlot);
-    }
+  .controller('CabCtrl', function ($scope,$route,$rootScope,$location) {
 
     $scope.select = function() {
-    	if ($rootScope.mode === MODE_ADD_TO_SLOT) {
-				$route.current.scope.addMeToSlot($rootScope.stack.storyId, $rootScope.stack.slotName);
-			}
-			// MODE_ADD_TO_NEW_SLOT
-    	else {
-				$route.current.scope.addMeToSlot($rootScope.stack.storyId, $scope.slotName);
-			}
-
-			$scope.cancel();
+    	$scope.$broadcast('addStoryToSlot');
     }
 
     $scope.cancel = function() {
 			//reset stack etc.
-			$scope.slotName = undefined;
-			$rootScope.mode = MODE_BROWSE
+			$rootScope.selectMode = false;
 			$rootScope.stack = undefined;
     }
 
@@ -32,6 +19,14 @@ angular.module('amanuensisApp')
 
     $scope.toggleRight = function() {
     	$scope.$broadcast('toggleRight');
+    }
+
+    $scope.goBack = function() {
+        $window.history.back();
+    }
+
+    $scope.goToStack = function() {
+        $location.url('/story/' + $rootScope.stack.storyId);
     }
 
 	});

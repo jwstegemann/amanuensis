@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"hide",
+				"hideOutStories"
+			],
+			[
+				"showOut",
+				"showOutStories"
+			],
+			[
+				"sh",
+				"shadow-right"
+			],
+			[
+				"s",
+				"stories"
+			],
+			[
 				"background",
 				"background-color"
 			],
@@ -280,45 +296,18 @@
 	"buffers":
 	[
 		{
+			"file": "build.sbt",
+			"settings":
+			{
+				"buffer_size": 2277,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "src/main/webapp/app/index.html",
 			"settings":
 			{
-				"buffer_size": 4328,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/styles/main.css",
-			"settings":
-			{
-				"buffer_size": 3268,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "<!-- #                         -->\n<!-- # The Story itself        --> \n<!-- #                         -->\n\n<div class=\"story-container\" ng-class=\"{'with-stories': inStories}\">\n	<ng-form>\n		<header>\n			<div class=\"story-icon\"><i class=\"fa fa-bookmark fa-5x\"></i></div>\n			<div class=\"story-header\">\n				<input class=\"story-title\" type=\"text\" ng-model=\"context.story.title\"></input>\n		  	<h1><span>edited on January, 1st 2014 by Jens Stegemann</span></h1> <!-- ToDo: get right values here -->\n		  </div>\n		</header>\n		<div class=\"content\">\n		  <textarea class=\"story-content\" ng-model=\"context.story.content\"></textarea></textarea>\n		</div>\n		<p>&nbsp;</p>\n		<div class=\"button-bar\">\n			<button class=\"button\" ng-click=\"save()\">save Story<i class=\"fa fa-save fa-lg on-button\"></i></button>\n			<button class=\"button\" ng-click=\"delete()\">delete Story<i class=\"fa fa-trash-o fa-lg on-button\"></i></button>\n			&nbsp;Slots:<input type=\"checkbox\" ng-model=\"inSlots\">\n			&nbsp;Stories:<input type=\"checkbox\" ng-model=\"inStories\">\n		</div>\n	</ng-form>\n</div>\n\n\n\n<!-- #                         -->\n<!-- # The inSlots             --> \n<!-- #                         -->\n\n<div id=\"in-slot-container\" ng-class=\"{'shown': inSlots, 'with-stories': inStories}\">\n	<div class=\"slot-list-title\"><i class=\"fa fa-link fa-lg on-slot\"></i>&nbsp;Inbound Slots</div>\n	<ul class=\"slot-list\">\n		<li class=\"slot-name\" ng-repeat=\"slot in context.inSlots\"><i class=\"fa fa-mail-reply on-slot\"></i>Slot No. 1</li>\n	</ul>\n</div>\n\n\n<!-- #                         -->\n<!-- # The in-Slots Story-List --> \n<!-- #                         -->\n\n<div id=\"in-slot-story-list\" ng-class=\"{'shown': inStories}\">\n	<div class=\"story-list-title\"><i class=\"fa fa-bars fa-lg on-slot\"></i>&nbsp;Testslot No. 1</div>\n	<ul class=\"story-list\">\n		<li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>Story No. 1</li>\n		<li class=\"story-info\"><i class=\"fa fa-user on-slot\"></i>Story No. 2</li>\n		<li class=\"story-info\"><i class=\"fa fa-heart on-slot\"></i>Story No. 3</li>\n		<li class=\"story-info\"><i class=\"fa fa-folder-open on-slot\"></i>Story No. 4</li>\n	</ul>\n</div>\n\n\n\n<!--\n\n<h2>This is the story view</h2>\n<ng-form>\n	<p>id: <input type=\"text\" ng-model=\"context.story.id\" ng-disabled=\"true\"></input></p>\n	<p>title: <input type=\"text\" ng-model=\"context.story.title\"></input></p>\n	<p>content: <textarea ng-model=\"context.story.content\"></textarea></p>\n</ng-form>\n<p>&nbsp;</p>\n<button ng-click=\"save()\">Save</button>\n<button ng-click=\"delete()\">Delete</button>\n\n<p>{{context}}</p>\n\n<h2>InSlots:</h2>\n<ul>\n  <li ng-repeat=\"slot in context.inSlots\">\n    <a href=\"../#/slot/{{context.story.id}}/{{slot.name}}\">{{slot.name}}</a>\n  </li>\n</ul>\n\n\n<h2>OutSlots:</h2>\n<ul>\n  <li ng-repeat=\"slot in context.outSlots\">\n    <a href=\"../#/slot/{{context.story.id}}/{{slot.name}}\">{{slot.name}}</a>\n  </li>\n</ul>\n\n<button ng-click=\"addStoryToSlot()\">add Story to Slot</button>\n-->",
-			"file": "src/main/webapp/app/views/story.html",
-			"file_size": 3118,
-			"file_write_time": 1389126848000000,
-			"settings":
-			{
-				"buffer_size": 2914,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/app.js",
-			"settings":
-			{
-				"buffer_size": 808,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/controllers/story.js",
-			"settings":
-			{
-				"buffer_size": 1998,
+				"buffer_size": 4846,
 				"line_ending": "Unix"
 			}
 		}
@@ -326,16 +315,16 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 352.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
-				"stb",
-				"SBT: Stop SBT"
+				"sbt",
+				"SBT: Run"
 			],
 			[
-				"sbt",
-				"SBT: Start SBT"
+				"stb",
+				"SBT: Stop SBT"
 			],
 			[
 				"sb",
@@ -434,7 +423,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 449.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -451,26 +440,35 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/Procfile",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/layout.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/slot.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/Gruntfile.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
+		"/home/tiberius/scala/projects/amanuensis/build.sbt",
+		"/home/tiberius/scala/projects/amanuensis/project/plugins.sbt",
+		"/home/tiberius/scala/projects/amanuensis/system.properties",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/buttons.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
+		"/home/tiberius/amanuensis/layout/index.html",
+		"/home/tiberius/amanuensis/layout/amanuensis.js",
+		"/home/tiberius/amanuensis/css-off-canvas-example/amanuensis.js",
+		"/home/tiberius/amanuensis/css-off-canvas-example/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
 		"/home/tiberius/scala/projects/amanuensis/.gitignore",
 		"/home/tiberius/scala/projects/amanuensis/README.md",
 		"/home/tiberius/scala/projects/amanuensis/test.old",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/bower.json",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/slot.js",
 		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/api/ApiSpec.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/slot.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/query.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/Gruntfile.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/slotService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
@@ -484,7 +482,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/main.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/karma.conf.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StaticHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/build.sbt",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/dist/app/views/story.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/main.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/CypherServer.scala",
@@ -540,7 +537,6 @@
 		"/home/tiberius/.config/sublime-text-2/Packages/Git/Git.sublime-settings",
 		"/home/tiberius/scala/projects/amanuensis/update.txt",
 		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/README.md",
-		"/home/tiberius/scala/projects/amanuensis/project/plugins.sbt",
 		"/home/tiberius/scala/projects/amanuensis/.project",
 		"/home/tiberius/.config/sublime-text-2/Packages/Package Control/Package Control.sublime-settings",
 		"/home/tiberius/.config/sublime-text-2/Packages/Ensime/Default (Linux).sublime-keymap",
@@ -571,14 +567,7 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/utils/ReflectionUtils.scala",
 		"/home/tiberius/scala/projects/amanuensis/project/build.properties",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/package.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/dictionary/Dictionaries.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/entity/validation/package.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/BSONConverter.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/BSONDocumentHelper.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/BSONProtocol.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/CollectionConverters.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/mongo/bson/ProductConverters.scala"
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/auth/package.scala"
 	],
 	"find":
 	{
@@ -599,6 +588,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"In",
+			"0.3s",
+			"left",
+			"story",
+			"left",
+			"in",
+			"left",
 			"Story",
 			"slot",
 			"Slot",
@@ -694,111 +690,29 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/main/webapp/app/index.html",
+					"file": "build.sbt",
 					"settings":
 					{
-						"buffer_size": 4328,
+						"buffer_size": 2277,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1815,
-								1815
+								94,
+								94
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 270.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/main/webapp/app/styles/main.css",
-					"settings":
-					{
-						"buffer_size": 3268,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								582,
-								582
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 225.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/main/webapp/app/views/story.html",
-					"settings":
-					{
-						"buffer_size": 2914,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1481,
-								1481
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 360.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/main/webapp/app/scripts/app.js",
-					"settings":
-					{
-						"buffer_size": 808,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								210,
-								210
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -808,25 +722,25 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "src/main/webapp/app/scripts/controllers/story.js",
+					"buffer": 1,
+					"file": "src/main/webapp/app/index.html",
 					"settings":
 					{
-						"buffer_size": 1998,
+						"buffer_size": 4846,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1004,
-								1004
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -994,6 +908,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 364.0,
+	"side_bar_width": 262.0,
 	"status_bar_visible": true
 }

@@ -11,7 +11,10 @@ angular.module('amanuensisApp')
         $scope.outStories = false;
 
         if (angular.isDefined($routeParams.storyId)) {
-        	$scope.context = storyService.get({storyId: $routeParams.storyId});
+        	$scope.context = storyService.get({storyId: $routeParams.storyId}, function(successData) {
+                //Todo: Adjust when opening slots and stories from routeParams
+                $rootScope.appState = 1;
+            });
         } 
         else {
         	// init empty StoryContext
@@ -47,25 +50,29 @@ angular.module('amanuensisApp')
         });
     }
 
-    $scope.addMeToSlot = function(toStoryId, slotName) {
+    $scope.$on('addStoryToSlot', function() {
         if (angular.isUndefined($scope.context.story.id)) {
             alert("cannot add unsaved story to slot");
         }
         else {
             slotService.add({
-                toStoryId: toStoryId,
-                slotName: slotName,
+                toStoryId: $rootScope.stack.storyId,
+                slotName: $rootScope.stack.slotName,
                 storyId: $scope.context.story.id
             }, null, function () {
                 $scope.reload();
+                $rootScope.selectMode = false;
+                $rootScope.stack = undefined;
             });
         }
-    }
+    });
 
     $scope.addStoryToSlot = function() {
-        $rootScope.mode = MODE_ADD_TO_NEW_SLOT;
+        $rootScope.selectMode = true;
         $rootScope.stack = {
-            storyId: $routeParams.storyId,
+            storyId: $scope.context.story.id,
+            storyTitle: $scope.context.story.title.substr(0,25),
+            slotName: 'testSlot17'
         };
         $location.url('/query');
     }
@@ -159,4 +166,5 @@ angular.module('amanuensisApp')
 
     // init controller
     $scope.reload();
+
   });

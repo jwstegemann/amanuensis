@@ -44,8 +44,7 @@
 /* icon-only trigger (menu item) */
 
 .cab-main > li > a {
-    padding: 0 30px;
-    text-transform: uppercase;
+    padding: 0 15px;
     letter-spacing: 1px;
     font-weight: bold;
 }
@@ -55,21 +54,19 @@
     clear: both;
     content: "";
 }
-.cab-main li.trigger-left {
+.cab-main li.trigger {
     position: relative;
     width: 60px;
     vertical-align: middle; 
-    cursor: pointer;
 }
 
-.cab-main li.trigger-right {
-    position: relative;
-    width: 60px;
-    vertical-align: middle;
-
+.cab-main li.cab-right {
     float: right;
     border-right: none;
     border-left: 1px solid #c6d0da;
+}
+
+.cab-main li.cab-action {
     cursor: pointer;
 }
 

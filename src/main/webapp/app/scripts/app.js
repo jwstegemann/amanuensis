@@ -1,12 +1,5 @@
 'use strict';
 
-/* global constants */
-
-var MODE_BROWSE = 0;
-var MODE_ADD_TO_SLOT = 1;
-var MODE_ADD_TO_NEW_SLOT = 2;
-
-
 angular.module('amanuensisApp', [
   'ngResource',
   'ngSanitize',
@@ -33,6 +26,7 @@ angular.module('amanuensisApp', [
 
   }).run(function ($rootScope) {
     //init mode and stack
-    $rootScope.mode = MODE_BROWSE;
+    $rootScope.selectMode = false;
     $rootScope.stack = undefined;
+    $rootScope.appState = undefined;
   });
