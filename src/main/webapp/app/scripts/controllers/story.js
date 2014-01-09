@@ -27,10 +27,12 @@ angular.module('amanuensisApp')
         		inSlots: [],
         		outSlots: []
         	};
+
+            $rootScope.appState = 1;
         }
     }
 
-    $scope.save = function() {
+    $scope.$on('saveStory', function() {
     	if (angular.isDefined($scope.context.story.id)) {
     		storyService.update($scope.context.story);
     		console.log("story gespeichert!");
@@ -41,30 +43,13 @@ angular.module('amanuensisApp')
     		});
     		console.log("story gespeichert!");    		
     	}
-    }
+    });
 
-    $scope.delete = function() {
+    $scope.$on('deleteStory', function() {
     	storyService.delete({storyId: $routeParams.storyId}, function(successData) {
             console.log("story gelöscht!");     
             $window.history.back();
         });
-    }
-
-    $scope.$on('addStoryToSlot', function() {
-        if (angular.isUndefined($scope.context.story.id)) {
-            alert("cannot add unsaved story to slot");
-        }
-        else {
-            slotService.add({
-                toStoryId: $rootScope.stack.storyId,
-                slotName: $rootScope.stack.slotName,
-                storyId: $scope.context.story.id
-            }, null, function () {
-                $scope.reload();
-                $rootScope.selectMode = false;
-                $rootScope.stack = undefined;
-            });
-        }
     });
 
     $scope.addStoryToSlot = function() {
@@ -82,12 +67,12 @@ angular.module('amanuensisApp')
         }  
     }
 
-    $scope.askForNewSlotName = function() {
+    $scope.$on('createSlot', function() {
         if (angular.isDefined($scope.context.story.id)) {
             utilService.showModal('#slot-name-modal');
         }
         //ToDo: show error-message
-    }
+    });
 
     $scope.cancelNewSlot = function() {
         utilService.hideModal('#slot-name-modal');    

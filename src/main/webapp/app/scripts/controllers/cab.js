@@ -29,4 +29,16 @@ angular.module('amanuensisApp')
         $location.url('/story/' + $rootScope.stack.storyId);
     }
 
+    $scope.saveStory = function() {
+        $scope.$broadcast('saveStory');
+    }
+
+    $scope.deleteStory = function() {
+        $scope.$broadcast('deleteStory');
+    }
+
+    $scope.createSlot = function() {
+        $scope.$broadcast('createSlot');
+    }
+
 });

@@ -47,9 +47,16 @@
 
       <li ng-click="goBack()"><a><i class="fa fa-chevron-left fa-fw fa-2x on-cab"></i></a>></li>
 
+      <!-- selecting a story -->
       <li ng-show="selectMode" ng-click="select()"><a><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
       <li ng-show="selectMode" ng-click="goToStack()"><a><i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{stack.storyTitle}}&nbsp;<i class="fa fa-link fa-fw fa-lg on-cab"></i>&nbsp;{{stack.slotName}}</a></li>        
       <li ng-show="selectMode" ng-click="cancel()"><a><i class="fa fa-times fa-fw fa-2x on-cab"></i></a></li>
+
+      <!-- story-editing -->
+      <li ng-show="appState < 128" ng-click="saveStory()"><a><i class="fa fa-save fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128" ng-click="deleteStory()"><a><i class="fa fa-trash-o fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128" ng-click="createSlot()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
+
 
       <li class="cab-right"><a href="/#/query"><i class="fa fa-search fa-fw fa-2x on-cab"></i></a></li>
       <li class="cab-right"><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;Jens Stegemann</a></li>

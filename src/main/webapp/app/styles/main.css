@@ -1,5 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
+*:focus {
+    outline: 0;
+}
+
 body {
   background: #34495e;
   font-family: 'Lato', Arial, sans-serif;

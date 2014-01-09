@@ -61,6 +61,10 @@ div.md-overlay.md-show {
 	border-radius: 3px 3px 0 0;
 }
 
+.md-content h3 i {
+	color: #8499af;
+}
+
 .md-content > div {
 	padding: 15px 40px 30px;
 	margin: 0;

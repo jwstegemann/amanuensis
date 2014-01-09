@@ -9,8 +9,12 @@ angular.module('amanuensisApp')
     return {
 
       showModal: function(modalId)  {
-            overlay.addClass('md-show');            
-            $(modalId).addClass('md-show');
+            overlay.addClass('md-show');   
+            var modal =  $(modalId);        
+            modal.addClass('md-show')
+            setTimeout(function(){
+              modal.find('.start-focus').focus();
+            }, 50);
       },
 
       hideModal: function(modalId) {
