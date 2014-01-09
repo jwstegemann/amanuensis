@@ -4,8 +4,9 @@ angular.module('amanuensisApp')
   .controller('SlotCtrl', function ($scope,slotService,$rootScope,$location,$window) {
 
     // init StoryContext
-    $scope.reload = function(storyId, slotName) {
+    $scope.reload = function(storyId, storyTitle, slotName) {
         $scope.storyId = storyId;
+        $scope.storyTitle = storyTitle;
         $scope.slotName = slotName;
 
        	$scope.stories = slotService.query({
@@ -14,14 +15,15 @@ angular.module('amanuensisApp')
         });
     }
 
-    $scope.add = function() {
-    	$rootScope.mode = MODE_ADD_TO_SLOT;
+    $scope.$on('addStory', function() {
+    	$rootScope.selectMode = true;
     	$rootScope.stack = {
     		storyId: $scope.storyId,
+            storyTitle: $scope.storyTitle,
     		slotName: $scope.slotName
     	};
     	$location.url('/query');
-    }
+    });
 
     $scope.remove = function(storyId, index, $event) {
         //stop the click-event to go further down...
@@ -42,7 +44,7 @@ angular.module('amanuensisApp')
     }
 
     $scope.$on("selectSlot", function(event, params) {
-        $scope.reload(params.storyId, params.slotName);
+        $scope.reload(params.storyId, params.storyTitle, params.slotName);
     });
 
   });

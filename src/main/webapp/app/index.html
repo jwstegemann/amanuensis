@@ -55,7 +55,10 @@
       <!-- story-editing -->
       <li ng-show="appState < 128" ng-click="saveStory()"><a><i class="fa fa-save fa-fw fa-2x on-cab"></i></a></li>
       <li ng-show="appState < 128" ng-click="deleteStory()"><a><i class="fa fa-trash-o fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128" ng-click="createSlot()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 4" ng-click="createSlot()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
+
+      <!-- editing stories in a slot -->
+      <li ng-show="appState === 4" ng-click="addStory()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
 
 
       <li class="cab-right"><a href="/#/query"><i class="fa fa-search fa-fw fa-2x on-cab"></i></a></li>

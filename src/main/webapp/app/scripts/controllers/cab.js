@@ -41,4 +41,8 @@ angular.module('amanuensisApp')
         $scope.$broadcast('createSlot');
     }
 
+    $scope.addStory = function() {
+        $scope.$broadcast('addStory');
+    }
+
 });

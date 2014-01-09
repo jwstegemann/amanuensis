@@ -95,17 +95,18 @@ angular.module('amanuensisApp')
         utilService.hideModal('#slot-name-modal');    
     }
 
-    //FixMe: Handle it just in the right controller!
     $scope.selectSlot = function(slotName, inbound) {
         if ($scope.activeSlot === slotName) {
             if (inbound) $scope.hideInStories();
             else $scope.hideOutStories();
             
             $scope.activeSlot = undefined;
+            $rootScope.appState = 2;
         }
         else {
             $scope.$broadcast('selectSlot',{
                 storyId: $scope.context.story.id,
+                storyTitle: $scope.context.story.title,
                 slotName: slotName
             });
             
@@ -114,6 +115,7 @@ angular.module('amanuensisApp')
             else $scope.showOutStories();
             
             $scope.activeSlot = slotName;
+            $rootScope.appState = 4;
         }
     }
 
@@ -126,13 +128,25 @@ angular.module('amanuensisApp')
      */
 
     $scope.$on('toggleLeft', function() {
-        if ($scope.inSlots) $scope.hideInSlots();
-        else if (angular.isDefined($scope.context.story.id)) $scope.showInSlots();
+        if ($scope.inSlots) {
+            $scope.hideInSlots();
+            $rootScope.appState = 1;
+        }
+        else if (angular.isDefined($scope.context.story.id)) {
+            $scope.showInSlots();
+            $rootScope.appState = 2;
+        }
     });
 
     $scope.$on('toggleRight', function() {
-        if ($scope.outSlots) $scope.hideOutSlots();
-        else if (angular.isDefined($scope.context.story.id)) $scope.showOutSlots();
+        if ($scope.outSlots) {
+            $scope.hideOutSlots();
+            $rootScope.appState = 1;
+        }
+        else if (angular.isDefined($scope.context.story.id)) {
+            $scope.showOutSlots();
+            $rootScope.appState = 2;
+        }
     });
 
 
