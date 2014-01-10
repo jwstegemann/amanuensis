@@ -125,7 +125,7 @@ div.slot-list-title {
   padding: 20px;
   font-family: 'Lato', Arial, sans-serif;
   color: #E3D091;
-  font-size: 24px;
+  font-size: 1.5em;
   margin-top: 40px;
   font-weight: 300; 
   background: rgba(0,0,0,0.05)
@@ -146,7 +146,7 @@ li.slot-name {
   padding: 15px;
   font-family: 'Lato', Arial, sans-serif;
   color: #E3D091;
-  font-size: 20px;
+  font-size: 1.25em;
   margin: 0;
   font-weight: 300;
   cursor: pointer;
@@ -175,7 +175,7 @@ div.story-list-title {
   padding: 20px;
   font-family: 'Lato', Arial, sans-serif;
   color: #DABDB0;
-  font-size: 24px;
+  font-size: 1.5em;
   margin-top: 40px;
   font-weight: 300; 
   background: rgba(0,0,0,0.05)
@@ -196,7 +196,7 @@ li.story-info {
   padding: 15px;
   font-family: 'Lato', Arial, sans-serif;
   color: #DABDB0;
-  font-size: 20px;
+  font-size: 1.25em;
   margin: 0;
   font-weight: 300;
   cursor: pointer;
