@@ -50,6 +50,10 @@ div.md-overlay.md-show {
 	margin: 0 auto;
 }
 
+.md-content.error {
+	background-color: #333230;
+}
+
 .md-content h3 {
 	margin: 0;
 	padding: 0.4em;
@@ -98,6 +102,25 @@ div.md-overlay.md-show {
   border: none;
   border-bottom: 1px solid white;
   width: 300px;
+}
+
+.md-content div.error-message {
+	margin-top: 1.4em;
+  font-size: 1.2em;
+  line-height: 1.2;
+  font-weight: 400;
+  margin: 0;
+  background: transparent;
+  border: none;
+  width: 400px;
+  min-height: 2.4em;
+  vertical-align: middle;
+}
+
+.md-content div.error-icon {
+	float:left; 
+	vertical-align: middle;
+	padding: 15px;
 }
 
 .md-content button {
