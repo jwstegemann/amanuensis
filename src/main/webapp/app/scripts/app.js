@@ -4,9 +4,9 @@ angular.module('amanuensisApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ngAnimate'
-])
-  .config(function ($routeProvider) {
+  'ngAnimate',
+  'angular-growl'
+]).config(function ($routeProvider) {
     $routeProvider
       .when('/story/:storyId?', {
         templateUrl: 'views/story.html',
@@ -24,7 +24,11 @@ angular.module('amanuensisApp', [
         redirectTo: '/query'
       });
 
-  }).run(function ($rootScope) {
+  }).config(['growlProvider', function(growlProvider) {
+    growlProvider.onlyUniqueMessages(false);
+    growlProvider.globalTimeToLive(3000);
+
+  }]).run(function ($rootScope) {
     //init mode and stack
     $rootScope.selectMode = false;
     $rootScope.stack = undefined;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window,utilService) {
+  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window,utilService,growl) {
 
     // init StoryContext
     $scope.reload = function() {
@@ -34,20 +34,23 @@ angular.module('amanuensisApp')
 
     $scope.$on('saveStory', function() {
     	if (angular.isDefined($scope.context.story.id)) {
-    		storyService.update($scope.context.story);
-    		console.log("story gespeichert!");
+    		storyService.update($scope.context.story, function(successData) {
+                growl.addSuccessMessage($scope.context.story.title + ' has been saved.');
+            });
     	}
     	else {
-    		storyService.create($scope.context.story, function(data) {
-    			$scope.context.story.id = data.id;
+    		storyService.create($scope.context.story, function(successData) {
+    			$scope.context.story.id = successData.id;
+                growl.addSuccessMessage($scope.context.story.title + ' has been created.');
     		});
-    		console.log("story gespeichert!");    		
     	}
     });
 
     $scope.$on('deleteStory', function() {
+        //keep title for message
+        var oldTitle = $scope.context.story.title;
     	storyService.delete({storyId: $routeParams.storyId}, function(successData) {
-            console.log("story gelöscht!");     
+            growl.addSuccessMessage(oldTitle + ' has been deleted.');    
             $window.history.back();
         });
     });
@@ -61,10 +64,11 @@ angular.module('amanuensisApp')
                 toStoryId: $rootScope.stack.storyId,
                 slotName: $rootScope.stack.slotName,
                 storyId: $scope.context.story.id
-            }, null, function () {
-                $scope.reload();
+            }, null, function (successData) {
                 $rootScope.selectMode = false;
+                growl.addSuccessMessage($scope.context.story.title + ' has been linked to ' + $rootScope.stack.storyTitle + ' as ' + $rootScope.stack.slotName); 
                 $rootScope.stack = undefined;
+                $scope.reload();
             });
         }
     });    

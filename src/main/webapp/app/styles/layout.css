@@ -15,12 +15,15 @@ div.container.left-container {
   z-index: 2;
   left: -45%;
 
-  -webkit-transition:all linear  0.4s;
-    transition:all linear 0.4s;
+  -webkit-transition:all linear  0.15s;
+    transition:all linear 0.15s;
 }
 
 div.container.left-container.show-slots {
   left: -30%;
+
+  -webkit-transition:all linear  0.25s;
+    transition:all linear 0.25s;
 }
 
 div.container.left-container.show-stories {
@@ -50,12 +53,15 @@ div.container.right-container {
   z-index: 2;
   left: 100%;   
 
-  -webkit-transition:all linear  0.4s;
-    transition:all linear 0.4s;         
+  -webkit-transition:all linear  0.15s;
+    transition:all linear 0.15s;         
 }
 
 div.container.right-container.show-slots {
   left: 85%;
+
+  -webkit-transition:all linear  0.25s;
+    transition:all linear 0.25s; 
 }
 
 div.container.right-container.show-stories {
@@ -85,8 +91,8 @@ div.container.story {
   left: 0;
   z-index: 0;
 
-  -webkit-transition:all linear  0.4s;
-    transition:all linear 0.4s;        
+  -webkit-transition:all linear  0.25s;
+    transition:all linear 0.25s;        
 }
 
 div.container.story.shifted-right {

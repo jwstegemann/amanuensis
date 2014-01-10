@@ -115,12 +115,14 @@ div.shadow-left {
 
 div.slots {
   background-color: #5E4E18;
-  overflow: hidden;   
+  overflow: hidden; 
+  margin: 0;
+  padding: 0;
 }
 
 div.slot-list-title {
   width: 100%;
-  padding: 25px;
+  padding: 20px;
   font-family: 'Lato', Arial, sans-serif;
   color: #E3D091;
   font-size: 24px;
@@ -132,7 +134,7 @@ div.slot-list-title {
 ul.slot-list {
     width: 100%;
     list-style: none;
-    padding: 0px;
+    padding: 0;
     margin: 0;
 }
 
@@ -170,7 +172,7 @@ div.stories {
 
 div.story-list-title {
   width: 100%;
-  padding: 25px;
+  padding: 20px;
   font-family: 'Lato', Arial, sans-serif;
   color: #DABDB0;
   font-size: 24px;

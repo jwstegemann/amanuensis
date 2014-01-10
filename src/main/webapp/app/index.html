@@ -15,7 +15,11 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="bower_components/angular-growl/angular-growl.css">
+">
+
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/story.css">
@@ -83,6 +87,13 @@
 
 
     <!-- #                         -->
+    <!-- # Messages                --> 
+    <!-- #                         -->
+
+    <div growl></div>
+
+
+    <!-- #                         -->
     <!-- # JavaScript              --> 
     <!-- #                         -->
 
@@ -99,6 +110,9 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+    <script src="bower_components/angular-growl/build/angular-growl.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
