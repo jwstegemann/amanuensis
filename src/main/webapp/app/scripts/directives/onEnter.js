@@ -33,22 +33,42 @@ angular.module('amanuensisApp')
   })
   .directive('scrollbar', function($parse) {
     return {
-      restrict: 'E',
-      transclude: true,
-      template:  '<div diesisteintest=17><div ng-transclude></div></div>',
-      replace: true,
+      restrict: 'A',
+      scope: false,
       link: function($scope, $elem, $attr) {
-        $elem.perfectScrollbar({
-          wheelSpeed: $parse($attr.wheelSpeed)() || 50,
-          wheelPropagation: $parse($attr.wheelPropagation)() || false,
-          minScrollbarLength: $parse($attr.minScrollbarLength)() || false,
+        $elem.mCustomScrollbar({
+          autoHideScrollbar: true,
+          horizontalScroll: false,
+          mouseWheel: true,
+          scrollButtons:{
+            enable: false
+          },
+          advanced:{
+            updateOnBrowserResize: true,
+            updateOnContentResize: false,
+            autoExpandHorizontalScroll: false,
+            autoScrollOnFocus: false,
+            normalizeMouseWheelDelta: false,
+          }
+          //theme: 'light-thin'
         });
 
+          
+        console.log("attr: " + $attr.refreshOnChange);
+
         if ($attr.refreshOnChange) {
-          $scope.$watchCollection($attr.refreshOnChange, function(newNames, oldNames) {
-            // I'm not crazy about setting timeouts but it sounds like thie is unavoidable per
-            // http://stackoverflow.com/questions/11125078/is-there-a-post-render-callback-for-angular-js-directive
-            setTimeout(function() { $elem.perfectScrollbar('update'); }, 10);
+          var updateTimeout
+
+//          $scope.$watchCollection($attr.refreshOnChange, function(newNames, oldNames) {
+          $scope.$watch($attr.refreshOnChange, function() {
+//            console.log("should I?");
+            if (!updateTimeout) {
+              updateTimeout = setTimeout(function() {
+                console.log("update scrollbar... on " + $elem.context.className);
+                $elem.mCustomScrollbar('update');
+                updateTimeout = undefined;
+              }, 50);
+            }
           });
         }
       }
