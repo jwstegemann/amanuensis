@@ -25,21 +25,32 @@ trait UsingParams {
 
 
 object CypherServer {
+  val WithCredentials = """(\w+)://(\w+):(\w+)@(\w+):(\w+)""".r
+  val WithoutCredentials = """(\w+)://(\w+):(\w+)""".r
+
   def default(implicit actorSystem: ActorSystem) : CypherServer = {
     val db_server = scala.util.Properties.envOrElse("GRAPHENEDB_URL", "http://localhost:7474")
-    CypherServer(s"$db_server/db/data/cypher")
+
+    db_server match {
+      case WithCredentials(protocol,username,password,host,port) => 
+        CypherServer(s"$protocol://$host:$port/db/data/cypher", Some(BasicHttpCredentials(username, password)))
+      case WithoutCredentials(protocol,host,port) => 
+        CypherServer(s"$protocol://$host:$port/db/data/cypher", None)
+      case _ => throw Neo4JException(s"invalid url for CypherServer: $db_server")
+    }
+
   }
 }
 
-case class CypherServer(url: String)(implicit val actorSystem: ActorSystem) extends DefaultJsonProtocol with SprayJsonSupport with UsingParams {
+case class CypherServer(url: String, credentialsOption: Option[BasicHttpCredentials])(implicit val actorSystem: ActorSystem) extends DefaultJsonProtocol with SprayJsonSupport with UsingParams {
 
   import actorSystem.dispatcher
 
   val log = Logging(actorSystem, classOf[CypherServer])
 
-  log.info(s"created CypherServer @ $url")
+  log.info(s"created CypherServer @ $url with credentials: $credentialsOption")
 
-  // interpret the HttpResponse an throw a Neo4JException if necessary
+  // interpret the HttpResponse and throw a Neo4JException if necessary
   val mapToNeo4JException: HttpResponse => HttpResponse = { response =>
     log.debug("Neo4J-Response: {}", response)
     if (!response.status.isSuccess) throw Neo4JException(response.entity.asString)
@@ -51,17 +62,22 @@ case class CypherServer(url: String)(implicit val actorSystem: ActorSystem) exte
     response => Unit
   }
 
+  val send = credentialsOption match {
+    case Some(credentials) => (addCredentials(credentials) ~> sendReceive)
+    case None => sendReceive
+  }
+
   // pipeline for queries that should return something
   final val pipeline: HttpRequest => Future[JsObject] = (
     addHeader("Accept","application/json; charset=UTF-8")
-    ~> sendReceive
+    ~> send
     ~> mapToNeo4JException
     ~> unmarshal[JsObject]
   )
 
   // pipeline for queries just to be executed
   final val pipelineRaw: HttpRequest => Future[Unit] = (
-    sendReceive
+    send
     ~> mapToNeo4JException
     ~> forgetResponse
   )
