@@ -18,7 +18,7 @@ angular.module('amanuensisApp')
                   '</div>',
                 replace: true,
                 scope: true,
-                controller: function ($scope, $element, utilService, $location, $timeout) {
+                controller: ['$scope', '$element', 'utilService', '$location', '$timeout', function ($scope, $element, utilService, $location, $timeout) {
 
                         $scope.$on("error", function (event, param) {
                           if (angular.isDefined(param.errorMessage)) {
@@ -39,6 +39,6 @@ angular.module('amanuensisApp')
                           
                         };
 
-                }
+                }]
         };
 });

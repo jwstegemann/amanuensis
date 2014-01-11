@@ -3,6 +3,12 @@
 	[
 		{
 			"path": "/home/tiberius/scala/projects/amanuensis"
+		},
+		{
+			"path": "/home/tiberius/scala/projects/amanuensis-web"
+		},
+		{
+			"path": "/home/tiberius/scala/projects/heroku-buildpack-nodejs-grunt"
 		}
 	]
 }

@@ -296,6 +296,12 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>/bower_components/font-awesome/fonts',
+          dest: '<%= yeoman.dist %>/fonts',
+          src: '*'
         }]
       },
       styles: {
@@ -408,4 +414,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('heroku', ['build']);
 };

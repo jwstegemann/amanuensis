@@ -30,7 +30,7 @@ angular.module('amanuensisApp', [
 
   }).config(function($httpProvider) {
     // interecpt error when communication with the backend
-    $httpProvider.interceptors.push(function($q,$rootScope) {
+    $httpProvider.interceptors.push(['$q','$rootScope', function($q,$rootScope) {
       return {
         'responseError': function(rejection) {
           console.log("Fatal-Error communicating with the backend: " + angular.toJson(rejection));
@@ -38,9 +38,9 @@ angular.module('amanuensisApp', [
           return $q.reject(rejection);
         }
       };
-    });
+    }]);
 
-  }).run(function ($rootScope, $http) {
+  }).run(function ($rootScope) {
     //init mode and stack
     $rootScope.selectMode = false;
     $rootScope.stack = undefined;

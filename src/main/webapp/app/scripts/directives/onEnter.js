@@ -35,7 +35,7 @@ angular.module('amanuensisApp')
     return {
       restrict: 'A',
       scope: false,
-      link: function($scope, $elem, $attr) {
+      link: ['$scope', '$elem', '$attr', function($scope, $elem, $attr) {
         $elem.mCustomScrollbar({
           autoHideScrollbar: true,
           horizontalScroll: false,
@@ -71,6 +71,6 @@ angular.module('amanuensisApp')
             }
           });
         }
-      }
+      }]
     } 
   }); 

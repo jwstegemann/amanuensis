@@ -20,6 +20,8 @@ import amanuensis.domain.Severities._
 import amanuensis.domain.MessageJsonProtocol._
 import amanuensis.core.neo4j.Neo4JException
 
+import spray.http.HttpMethods._
+
 
 class RootServiceActor extends Actor with ActorLogging with HttpService with SprayJsonSupport 
   with StoryHttpService 
@@ -47,8 +49,20 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
   }
 
   def receive = runRoute(
-    storyRoute ~
-    queryRoute ~
-    staticRoute
+    // Add CORS-Headers
+    headerValueByName(HttpHeaders.`Access-Control-Request-Headers`.name) { allowRequestHeaders: String =>
+      respondWithHeaders(      
+        HttpHeaders.`Access-Control-Allow-Origin`(AllOrigins),
+        HttpHeaders.`Access-Control-Allow-Credentials`(true),
+        HttpHeaders.`Access-Control-Allow-Headers`(allowRequestHeaders :: Nil),
+        HttpHeaders.`Access-Control-Allow-Methods`(GET :: POST :: PUT :: DELETE :: Nil)
+      ) {
+        storyRoute ~
+        queryRoute ~
+        options {
+          complete(OK)
+        }
+      }
+    }
   )
 }
