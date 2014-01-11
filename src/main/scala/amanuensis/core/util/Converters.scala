@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- package amanuensis.core.util
+package amanuensis.core.util
+
+import scala.language.postfixOps
 
 //FIXME: take this from reactiveMongo if included
 
@@ -52,4 +54,11 @@ object Converters {
 
   /** Computes the MD5 hash of the given String and turns it into a hexadecimal String representation. */
   def md5Hex(s: String): String = hex2Str(md5(s))
+
+  private val digest = java.security.MessageDigest.getInstance("SHA-256")
+
+  private def sha(s: String): String = {
+    val m = digest.digest(s.getBytes("UTF-8"));
+    m map { c => (c & 0xff) toHexString } mkString
+  }
 }

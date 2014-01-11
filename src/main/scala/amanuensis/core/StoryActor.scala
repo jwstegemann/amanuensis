@@ -77,6 +77,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
     case Retrieve(storyId) => retrieve(storyId) pipeTo sender
     case Update(storyId, story) => sender ! update(storyId, story)
     case Delete(storyId) => delete(storyId) pipeTo sender
+    case "test" => println("Bin daaaaaaaaaaaaaaaaaaaaaaaa")
   }
 
   def create(story: Story) = {
