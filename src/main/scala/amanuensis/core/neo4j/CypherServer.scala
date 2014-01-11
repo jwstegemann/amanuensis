@@ -25,8 +25,8 @@ trait UsingParams {
 
 
 object CypherServer {
-  val WithCredentials = """(\w+)://(\w+):(\w+)@(\w+):(\w+)""".r
-  val WithoutCredentials = """(\w+)://(\w+):(\w+)""".r
+  val WithCredentials = """(http|https)://([\w\.-]+):([\w\.-]+)@([\w\.-]+):(\d+)""".r
+  val WithoutCredentials = """(http|https)://([\w\.-]+):(\d+)""".r
 
   def default(implicit actorSystem: ActorSystem) : CypherServer = {
     val db_server = scala.util.Properties.envOrElse("GRAPHENEDB_URL", "http://localhost:7474")
