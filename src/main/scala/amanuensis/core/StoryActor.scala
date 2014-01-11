@@ -66,7 +66,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   implicit def executionContext = context.dispatcher
   implicit val system = context.system
 
-  final val server = CypherServer("http://localhost:7474/db/data/cypher")
+  final val server = CypherServer.default
 
 	override def preStart =  {
     log.info(s"StoryActor started at: {}", self.path)

@@ -23,12 +23,21 @@ trait UsingParams {
   type Param = (String, JsValue)
 }
 
-//FIXME: Make this one log right!
+
+object CypherServer {
+  def default(implicit actorSystem: ActorSystem) : CypherServer = {
+    val db_server = scala.util.Properties.envOrElse("GRAPHENEDB_URL", "http://localhost:7474")
+    CypherServer(s"$db_server/db/data/cypher")
+  }
+}
+
 case class CypherServer(url: String)(implicit val actorSystem: ActorSystem) extends DefaultJsonProtocol with SprayJsonSupport with UsingParams {
 
   import actorSystem.dispatcher
 
   val log = Logging(actorSystem, classOf[CypherServer])
+
+  log.info(s"created CypherServer @ $url")
 
   // interpret the HttpResponse an throw a Neo4JException if necessary
   val mapToNeo4JException: HttpResponse => HttpResponse = { response =>

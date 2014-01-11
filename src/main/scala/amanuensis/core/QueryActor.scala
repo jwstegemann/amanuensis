@@ -35,7 +35,7 @@ class QueryActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
   implicit def executionContext = context.dispatcher
   implicit val system = context.system
 
-  final val server = CypherServer("http://localhost:7474/db/data/cypher")
+  final val server = CypherServer.default
 
 	override def preStart =  {
     log.info(s"QueryActor started at: {}", self.path)
