@@ -14,7 +14,7 @@ scalacOptions ++= Seq( "-deprecation", "-unchecked", "-feature", "-language:impl
 javacOptions ++= Seq( "-XX:+TieredCompilation", "-XX:CICompilerCount=1" )
 
 // use src/main/webapp
-unmanagedResourceDirectories in Compile <+= (baseDirectory) { _ / "src" / "main" / "webapp" / "dist" / "app"}
+unmanagedResourceDirectories in Compile <+= (baseDirectory) { _ / "src" / "main" / "webapp" / "dist" }
 
 
 // fork when running tests

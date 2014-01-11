@@ -21,7 +21,7 @@ trait StaticHttpService extends HttpService { self : ActorLogging =>
   val staticRoute = {
     pathPrefix("app") {
       cache(staticCache) {
-        getFromResourceDirectory("dist/app")
+        getFromResourceDirectory("app")
       }
     }
   }
