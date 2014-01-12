@@ -150,3 +150,8 @@ div.md-overlay.md-show {
 	transform: translateY(0);
 	opacity: 1;
 }
+
+i.on-right {
+	float: right;
+	margin-top: 20px;
+}

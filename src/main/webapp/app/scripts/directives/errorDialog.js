@@ -32,7 +32,6 @@ angular.module('amanuensisApp')
                         });
 
                         $scope.cancelErrorMessage = function (message) {
-                          $location.url("/query");
                           setTimeout(function(){
                             utilService.hideModalElement($element);  
                           }, 500);

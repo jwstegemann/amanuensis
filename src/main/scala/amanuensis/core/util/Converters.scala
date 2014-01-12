@@ -57,7 +57,7 @@ object Converters {
 
   private val digest = java.security.MessageDigest.getInstance("SHA-256")
 
-  private def sha(s: String): String = {
+  def sha(s: String): String = {
     val m = digest.digest(s.getBytes("UTF-8"));
     m map { c => (c & 0xff) toHexString } mkString
   }

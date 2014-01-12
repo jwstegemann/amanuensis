@@ -18,7 +18,7 @@ import spray.http._
 import spray.routing._
 
 
-class AmanuensisApiSpec extends Specification with Specs2RouteTest with StoryHttpService with Core with CoreActors {
+class AmanuensisStoryApiSpec extends Specification with Specs2RouteTest with StoryHttpService with Core with CoreActors {
   
   def actorRefFactory = system // connect the DSL to the test ActorSystem
 
@@ -52,7 +52,7 @@ class AmanuensisApiSpec extends Specification with Specs2RouteTest with StoryHtt
   val testSlot2 = "Autotest_Slot_2"
 
 
-  "The service" should {
+  "The StoryService" should {
 
     sequential
 

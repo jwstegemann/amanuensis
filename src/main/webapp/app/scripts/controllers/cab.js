@@ -45,4 +45,10 @@ angular.module('amanuensisApp')
         $scope.$broadcast('addStory');
     }
 
+    $scope.getUserContext = function() {
+        $http({method: 'GET', url: '/user/login'}).
+            success(function(data, status, headers, config) {
+            })        
+    }
+
 });

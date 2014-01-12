@@ -159,6 +159,18 @@ button.close {
   -webkit-appearance: none;
 }
 
+/*
+ * Login
+ */
+
+#login-modal > div.md-content {
+  width: 450px;
+}
+
+#passwordInput {
+  margin-top: 16px;
+}
+
 
 
 

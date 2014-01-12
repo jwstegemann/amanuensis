@@ -10,12 +10,18 @@ import spray.routing.authentication.UserPass
 import spray.caching._
 
 import amanuensis.core.neo4j._
+import amanuensis.core.util.Converters
+import amanuensis.domain.UserContext
 
-
-case class UserContext(name: String)
 
 object UserActor {
   case class CheckUser(userPassOption: Option[UserPass])
+
+  val retrieveUserString = """MATCH (u:User) WHERE u.login={login} and u.pwd={pwd} RETURN u.login as login, u.name as name, u.permissions as permissions LIMIT 1"""
+}
+
+object UserNeoProtocol extends Neo4JJsonProtocol {
+  implicit val userNeo4JFormat = jsonCaseClassArrayFormat(UserContext)
 }
 
 class UserActor extends Actor with ActorLogging with UsingParams with Neo4JJsonProtocol {
@@ -24,6 +30,9 @@ class UserActor extends Actor with ActorLogging with UsingParams with Neo4JJsonP
   implicit val system = context.system
 
   import UserActor._
+  import UserNeoProtocol._
+
+  final val server = CypherServer.default
 
   val userCache : Cache[Option[UserContext]]  = LruCache() //TODO: set parameters
 
@@ -38,17 +47,16 @@ class UserActor extends Actor with ActorLogging with UsingParams with Neo4JJsonP
   def checkUser(userPassOption: Option[UserPass]) = {
     userPassOption match {
       case Some(userPass) => {
-        log.info("checking user {} with {}...", userPass.user, userPass.pass)
+        log.info("checking user {}...", userPass.user)
         
         userCache(userPass) {
-          log.info("check db for user {}...", userPass.user, userPass.pass)
+          log.info("check neo4j for user {}...", userPass.user)
 
-          if (userPass.user == "hallo" && userPass.pass == "welt07541") {
-            Some(UserContext("Alfred Tetzlaw"))
-          }
-          else {
-            None
-          }
+          server.one[UserContext](retrieveUserString, 
+            ("login" -> userPass.user),
+            ("pwd" -> Converters.sha(userPass.pass))
+          )
+
         } pipeTo sender
       }
       case None => sender ! None

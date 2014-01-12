@@ -47,3 +47,7 @@
 i.action {
   cursor: pointer;
 }
+
+i.opacity-hover:hover {
+  opacity: 0.8;
+}

@@ -5,7 +5,8 @@ angular.module('amanuensisApp', [
   'ngSanitize',
   'ngRoute',
   'ngAnimate',
-  'angular-growl'
+  'angular-growl',
+  'http-auth-interceptor'
 ]).config(function ($routeProvider) {
     $routeProvider
       .when('/story/:storyId?', {
@@ -20,6 +21,10 @@ angular.module('amanuensisApp', [
         templateUrl: 'views/query.html',
         controller: 'QueryCtrl'
       })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      })
       .otherwise({
         redirectTo: '/query'
       });
@@ -33,8 +38,10 @@ angular.module('amanuensisApp', [
     $httpProvider.interceptors.push(['$q','$rootScope', function($q,$rootScope) {
       return {
         'responseError': function(rejection) {
-          console.log("Fatal-Error communicating with the backend: " + angular.toJson(rejection));
-          $rootScope.$broadcast('error',{errorMessage: 'Error communicating with Amanuensis-backend. Please try again or contact your system-administrator.'});
+          if (rejection.status !== 401) {
+            console.log("Fatal-Error communicating with the backend: " + angular.toJson(rejection));
+            $rootScope.$broadcast('error',{errorMessage: 'Error communicating with Amanuensis-backend. Please try again or contact your system-administrator.'});
+          }
           return $q.reject(rejection);
         }
       };

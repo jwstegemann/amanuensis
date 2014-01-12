@@ -81,10 +81,11 @@
 
 <div class="md-modal md-effect-3" id="slot-name-modal">
   <div class="md-content">
-    <h3>Please give the new slot a name <i style="float: right" class="fa fa-times action" ng-click="cancelNewSlot()"></i></h3>
+    <h3>Please give the new slot a name&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelNewSlot()"></i>
+    </h3>
     <div>
-    	<input class="start-focus" type="text" ng-model="newSlotName" on-enter="selectStory()" on-escape="cancelNewSlot()"></input>
-      <i class="fa fa-check fa-2x on-button action" ng-click="selectStory()"></i>
+    	<input class="start-focus" type="text" ng-model="newSlotName" on-enter="selectStory()" on-escape="cancelNewSlot()" placeholder="name of new slot"></input>
+      <i class="fa fa-check fa-2x on-button action opacity-hover" ng-click="selectStory()"></i>
     </div>
   </div>
 </div>
