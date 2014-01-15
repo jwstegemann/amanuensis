@@ -6,7 +6,8 @@ angular.module('amanuensisApp', [
   'ngRoute',
   'ngAnimate',
   'angular-growl',
-  'http-auth-interceptor'
+  'http-auth-interceptor',
+  'chieffancypants.loadingBar'
 ]).config(function ($routeProvider) {
     $routeProvider
       .when('/story/:storyId?', {
