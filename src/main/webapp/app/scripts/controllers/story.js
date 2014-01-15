@@ -21,8 +21,8 @@ angular.module('amanuensisApp')
         	$scope.context = { 
         		story: {
         			id: undefined,
-        			title: 'A Story...',
-        			content: '... that still has to be written.'
+        			title: undefined,
+        			content: undefined
         		},
         		inSlots: [],
         		outSlots: []
@@ -33,17 +33,44 @@ angular.module('amanuensisApp')
     }
 
     $scope.$on('saveStory', function() {
-    	if (angular.isDefined($scope.context.story.id)) {
-    		storyService.update($scope.context.story, function(successData) {
-                growl.addSuccessMessage($scope.context.story.title + ' has been saved.');
-            });
-    	}
-    	else {
-    		storyService.create($scope.context.story, function(successData) {
-    			$scope.context.story.id = successData.id;
-                growl.addSuccessMessage($scope.context.story.title + ' has been created.');
-    		});
-    	}
+        if (
+            angular.isUndefined($scope.context.story.title) ||
+            $scope.context.story.title.length < 3 ||
+            angular.isUndefined($scope.context.story.content) ||
+            $scope.context.story.content.length < 3
+        ) {
+            $rootScope.$broadcast('error',{errorMessage: 'Sorry, but you story must have a title and a content. Please enter one...'});
+        }
+        else {
+            // save existing story
+        	if (angular.isDefined($scope.context.story.id)) {
+        		storyService.update($scope.context.story, function(successData) {
+                    growl.addSuccessMessage($scope.context.story.title + ' has been saved.');
+                });
+        	}
+            // create new story
+        	else {
+                // in a slot
+                if (angular.isDefined($routeParams.slotName) && angular.isDefined($routeParams.fromStoryId)) {
+                    storyService.createInSlot({
+                        fromStoryId : $routeParams.fromStoryId,
+                        slotName: $routeParams.slotName
+                    }, $scope.context.story, function(successData) {
+                        $scope.context.story.id = successData.id;
+                        $location.url("/story/" + $scope.context.story.id);
+                        growl.addSuccessMessage($scope.context.story.title + ' has been created in Slot ' + $routeParams.slotName);
+                    });
+
+                }                    
+                // on its own
+                else {
+            		storyService.create($scope.context.story, function(successData) {
+            			$scope.context.story.id = successData.id;
+                        growl.addSuccessMessage($scope.context.story.title + ' has been created.');
+            		});
+                }
+        	}
+        }
     });
 
     $scope.$on('deleteStory', function() {
@@ -73,31 +100,35 @@ angular.module('amanuensisApp')
         }
     });    
 
-    $scope.selectStory = function() {
-        if ($scope.newSlotName.length > 2) {
-            //ToDo: better check and show error-message
-            $rootScope.selectMode = true;
-            $rootScope.stack = {
-                storyId: $scope.context.story.id,
-                storyTitle: $scope.context.story.title.substr(0,25),
-                slotName: $scope.newSlotName
-            };
-            $location.url('/query');
-
-            utilService.hideModal('#slot-name-modal');
-        }  
-    }
-
     $scope.$on('createSlot', function() {
         if (angular.isDefined($scope.context.story.id)) {
-            utilService.showModal('#slot-name-modal');
+            $scope.$broadcast('askForSlotName',{
+                    create: false,
+                    storyId: $scope.context.story.id,
+                    storyTitle: $scope.context.story.title
+            }); 
         }
-        //ToDo: show error-message
+        else {
+            $rootScope.$broadcast('error',{errorMessage: 'I am sorry, but you cannot create a new slot on an unsaved story.'});            
+        }
     });
 
-    $scope.cancelNewSlot = function() {
-        utilService.hideModal('#slot-name-modal');    
-    }
+    $scope.$on('createStoryInSlot', function() {
+        if (angular.isDefined($scope.context.story.id)) {
+            if (angular.isDefined($scope.activeSlot)) {
+                $location.url('/story/' + $scope.activeSlot + '/' + $scope.context.story.id)
+            }
+            else {
+                $scope.$broadcast('askForSlotName',{
+                    create: true,
+                    storyId: $scope.context.story.id
+                });
+            }
+        }
+        else {
+            $rootScope.$broadcast('error',{errorMessage: 'Excuse me, but you cannot create a new story in a slot of an unsaved story.'});
+        }
+    });    
 
     $scope.selectSlot = function(slotName, inbound) {
         if ($scope.activeSlot === slotName) {
@@ -119,7 +150,13 @@ angular.module('amanuensisApp')
             else $scope.showOutStories();
             
             $scope.activeSlot = slotName;
-            $rootScope.appState = 4;
+            if (inbound) {
+                $rootScope.appState = 3;    
+            }
+            else {
+                $rootScope.appState = 4;
+            }
+            
         }
     }
 
@@ -204,3 +241,47 @@ angular.module('amanuensisApp')
     $scope.reload();
 
   });
+
+
+/*
+ * Controller for Slot-Name-Dialog
+ */
+angular.module('amanuensisApp')
+  .controller('SlotNameModalCtrl', function ($scope,$rootScope,$location,utilService) {
+
+    $scope.$on('askForSlotName',function(event, param) {
+        $scope.title = 'Please give the new slot a name...';
+
+        $scope.storyId = param.storyId;
+        $scope.storyTitle = param.storyTitle;
+        $scope.create = param.create;
+
+        utilService.showModal('#slot-name-modal');
+    });
+
+    $scope.done = function() {
+        if ($scope.newSlotName.length > 3) {
+            if ($scope.create) {
+                $location.url('/story/' + $scope.newSlotName + '/' + $scope.storyId);
+            }
+            else {
+                $rootScope.selectMode = true;
+                    $rootScope.stack = {
+                        storyId: $scope.storyId,
+                        storyTitle: $scope.storyTitle,
+                        slotName: $scope.newSlotName
+                    };
+                $location.url('/query');
+            }
+            utilService.hideModal('#slot-name-modal');
+        }
+        else {
+            $scope.title = 'Too short. Try a longer name for the slot...';
+        }
+    }
+
+    $scope.cancel = function() {
+        utilService.hideModal('#slot-name-modal');
+    }
+
+}); 

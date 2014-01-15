@@ -29,8 +29,6 @@
   </head>
   <body ng-app="amanuensisApp" ng-controller="CabCtrl">
 
-    Dies ist ein Test
-
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -40,7 +38,7 @@
     <!-- # StatusBar               --> 
     <!-- #                         -->
 
-     <ul id="cab" class="cab-main">
+     <ul id="cab" class="cab-main" ng-cloak>
 
       <li ng-show="appState < 128" class="trigger cab-action" ng-click="toggleLeft()">
         <i class="fa fa-th fa-2x on-cab"></i>
@@ -58,12 +56,15 @@
       <li ng-show="selectMode" ng-click="cancel()"><a><i class="fa fa-times fa-fw fa-2x on-cab"></i></a></li>
 
       <!-- story-editing -->
+      <li ng-show="appState < 128" ng-click="createStoryInSlot()"><a><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
       <li ng-show="appState < 128" ng-click="saveStory()"><a><i class="fa fa-save fa-fw fa-2x on-cab"></i></a></li>
       <li ng-show="appState < 128" ng-click="deleteStory()"><a><i class="fa fa-trash-o fa-fw fa-2x on-cab"></i></a></li>
       <li ng-show="appState < 4" ng-click="createSlot()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
-
       <!-- editing stories in a slot -->
       <li ng-show="appState === 4" ng-click="addStory()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
+      
+      <li ng-show="appState === 128"><a href="#/story"><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
+
 
 
       <li class="cab-right"><a href="#/query"><i class="fa fa-search fa-fw fa-2x on-cab"></i></a></li>
@@ -77,7 +78,7 @@
     <!-- # View                    --> 
     <!-- #                         -->
 
-    <div class="view-container" ng-view=""></div>
+    <div class="view-container" ng-view="" ng-cloak></div>
 
 
     <!-- #                         -->

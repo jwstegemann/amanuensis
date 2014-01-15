@@ -10,6 +10,11 @@ angular.module('amanuensisApp')
         url: '/story',
         params: {}
       },
+      createInSlot: {
+        method: 'POST',
+        url: '/story/:fromStoryId/:slotName',
+        params: {}
+      },      
       update: {
         method: 'PUT',
         params: {storyId: '@id'}

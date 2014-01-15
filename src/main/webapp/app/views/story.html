@@ -15,7 +15,7 @@
   </div>
 	<!-- inbound Slot-List	-->
   <div id="slots-left" class="container slots slots-left shadow-right" scrollbar refresh-on-change="context.inSlots">
-    <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Inbound Slots</div>
+    <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Inbound</div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.inSlots" ng-click="selectSlot(slot.name, true)">
       	<i class="fa fa-mail-reply on-slot"></i>{{slot.name}}
@@ -36,12 +36,13 @@
 				<header>
 					<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
 					<div class="story-header">
-						<input class="story-title" type="text" ng-model="context.story.title"></input>
+						<input class="story-title" type="text" ng-model="context.story.title" placeholder="A Story..."></input>
 				  	<h1><span>edited on January, 1st 2014 by Jens Stegemann</span></h1> 
 				  </div>
 				</header>
 				<div class="content">
-				  <textarea class="story-content" ng-model="context.story.content"></textarea></textarea>
+				  <textarea class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">
+          </textarea>
 				</div>
 			</ng-form>       
     </div>
@@ -65,7 +66,7 @@
   </div>
 	<!-- outbound Slot-List	-->
   <div id="slots-right" class="container slots slots-right shadow-left" scrollbar refresh-on-change="context.outSlots">
-    <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Outbound Slots</div>
+    <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Outbound</div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.outSlots" ng-click="selectSlot(slot.name, false)">
       	<i class="fa fa-mail-reply on-slot"></i>{{slot.name}}
@@ -79,13 +80,13 @@
 <!-- # Modals                  --> 
 <!-- #                         -->
 
-<div class="md-modal md-effect-3" id="slot-name-modal">
+<div class="md-modal md-effect-3" id="slot-name-modal" ng-controller="SlotNameModalCtrl">
   <div class="md-content">
-    <h3>Please give the new slot a name&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelNewSlot()"></i>
+    <h3>{{title}}&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
     </h3>
     <div>
-    	<input class="start-focus" type="text" ng-model="newSlotName" on-enter="selectStory()" on-escape="cancelNewSlot()" placeholder="name of new slot"></input>
-      <i class="fa fa-check fa-2x on-button action opacity-hover" ng-click="selectStory()"></i>
+    	<input class="start-focus" type="text" ng-model="newSlotName" on-enter="done()" on-escape="cancel()" placeholder="name of new slot"></input>
+      <i class="fa fa-check fa-2x on-button action opacity-hover" ng-click="done()"></i>
     </div>
   </div>
 </div>
