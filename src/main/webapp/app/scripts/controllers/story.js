@@ -28,6 +28,10 @@ angular.module('amanuensisApp')
         		outSlots: []
         	};
 
+            setTimeout(function() {
+              $('#story-title-input').focus();
+            }, 200);
+
             $rootScope.appState = 1;
         }
     }

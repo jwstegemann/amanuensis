@@ -85,11 +85,11 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
 
   def receive = runRoute(
     staticRoute ~
-    authenticate(BasicAuthWithoutHeader(myUserPassAuthenticator _, realm = "Amanuensis")) { userContext =>
+//    authenticate(BasicAuthWithoutHeader(myUserPassAuthenticator _, realm = "Amanuensis")) { userContext =>
       storyRoute ~
       queryRoute ~
-//      userRoute(UserContext("dummy","Dummy", Nil))
-      userRoute(userContext)
-    } 
+      userRoute(UserContext("dummy","Dummy", Nil))
+//      userRoute(userContext)
+//    } 
   )
 }

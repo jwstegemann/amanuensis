@@ -4,10 +4,10 @@ angular.module('amanuensisApp')
   .factory('queryService', function($resource) {
 
     // Public API here
-    return $resource('/query', {}, {
-      findAll: {
+    return $resource('/query/:queryString', {}, {
+      query: {
         method: 'GET',
-        isArray: true
+        isArray: false
       }});
 
   });

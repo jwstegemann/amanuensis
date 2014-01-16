@@ -1,0 +1,35 @@
+h2.resultHeader {
+  margin: 20px;
+  margin-left: 370px;
+  margin-bottom: 30px;
+  font-size: 2em;
+  font-weight: 300;
+}
+
+ul.resultList {
+  padding-left: 10px;
+  margin-left: 370px;
+  list-style: none;
+  text-transform: none;  
+}
+
+li.resultListItem {
+  margin-bottom: 30px;
+}
+
+li.resultListItem > a {
+  font-size: 1.6em;
+  font-weight: 300;
+  text-decoration: none;
+}
+
+li.resultListItem > p {
+  margin-top: 5px;
+  font-size: 1em;
+  max-width: 940px;
+}
+
+p.stats {
+  margin-left: 370px;  
+  margin-top: 40px;
+}

@@ -1,5 +1,7 @@
 #! /bin/bash
 
+curl -XPUT 'http://localhost:9200/stories/'
+
 curl -XPUT "http://localhost:9200/stories/story/_mapping" -d'
 {
   "story": {

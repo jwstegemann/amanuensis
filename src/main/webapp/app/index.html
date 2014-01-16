@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="styles/cab.css">
     <link rel="stylesheet" href="styles/buttons.css">
     <link rel="stylesheet" href="styles/modals.css">
+    <link rel="stylesheet" href="styles/query.css">
     <!-- endbuild -->
   </head>
   <body ng-app="amanuensisApp" ng-controller="CabCtrl">
@@ -66,10 +67,12 @@
       
       <li ng-show="appState === 128"><a href="#/story"><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
 
-
-
-      <li class="cab-right"><a href="#/query"><i class="fa fa-search fa-fw fa-2x on-cab"></i></a></li>
       <li class="cab-right"><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}</a></li>
+      <li class="cab-right">
+        <input id="query-input" ng-model="cabQueryString" placeholder="search for..." on-enter="search()"></input>
+      </li>
+      <li class="cab-right"><a ng-click="search()"><i class="fa fa-search fa-fw fa-2x on-cab"></i></a></li>
+
       
            
     </ul>

@@ -22,7 +22,7 @@ angular.module('amanuensisApp', [
         templateUrl: 'views/slot.html',
         controller: 'SlotCtrl'
       })
-      .when('/query', {
+      .when('/query/:queryString?', {
         templateUrl: 'views/query.html',
         controller: 'QueryCtrl'
       })

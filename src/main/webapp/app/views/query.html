@@ -1,8 +1,13 @@
-<h2 style="margin-top: 100px">This is the query view.</h2>
-<ul>
-  <li ng-repeat="storyInfo in stories">
-    <a href="#/story/{{storyInfo.id}}">{{storyInfo.title}}</a>
+<h2 ng-show="result" class="resultHeader" style="margin-top: 100px">Results for {{queryString}}</h2>
+
+<ul ng-show="result" class="resultList">
+
+  <li class="resultListItem" ng-repeat="storyResult in result.hits.hits">
+    <a href="#/story/{{storyResult._source.id}}"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;{{storyResult._source.title}}</a>
+    <p>{{storyResult._source.content.substr(0,250)}}</p>
     <!-- &nbsp;<button ng-click="remove(storyInfo.id,$index)">[delete]</button> -->
   </li>
 </ul>
-<a href="#/story">[create new Story]</a>
+
+<p ng-show="result" class="stats">found {{result.hits.total}} stories in {{result.took}} ms.</p>
+

@@ -3,6 +3,8 @@
 angular.module('amanuensisApp')
   .controller('CabCtrl', function ($scope,$route,$rootScope,$location,$window) {
 
+    $scope.cabQueryString = undefined;
+
     $scope.select = function() {
     	$scope.$broadcast('addStoryToSlot');
     }
@@ -53,6 +55,22 @@ angular.module('amanuensisApp')
         $http({method: 'GET', url: '/user/login'}).
             success(function(data, status, headers, config) {
         })        
+    }
+
+    $scope.search = function() {
+        if ($rootScope.appState === 128) {
+            $scope.$broadcast('search', {
+                cabQueryString: $scope.cabQueryString    
+            });
+        }
+        else {
+            if (angular.isDefined($scope.cabQueryString) && $scope.cabQueryString.length > 0) {
+                $location.url('/query/' + $scope.cabQueryString);
+            }
+            else {
+                $location.url('/query');
+            }
+        }
     }
 
 });
