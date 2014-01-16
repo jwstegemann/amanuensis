@@ -11,42 +11,37 @@ import amanuensis.domain.Severities._
 import amanuensis.domain.Story
 import amanuensis.core.util.Failable
 
-import amanuensis.core.neo4j._
-
-import amanuensis.domain.{StoryInfo}
+import amanuensis.core.elasticsearch._
 
 
 object QueryActor {
 
-  //FIXME: reverse attributes fitting to url
-  case class FindAll()
+  case class Fulltext(query: String)
+  case class Index(story: Story)
+  case class Delete(storyId: String)
 
-  val findAllQueryString = """MATCH (s:Story) RETURN s.id as id, s.title as title"""
 }
 
 /**
  * Registers the users. Replies with
  */
-class QueryActor extends Actor with ActorLogging with Failable with Neo4JJsonProtocol {
+class QueryActor extends Actor with ActorLogging with Failable {
 
   import QueryActor._
-  import StoryNeoProtocol._
 
   implicit def executionContext = context.dispatcher
   implicit val system = context.system
 
-  final val server = CypherServer.default
+  final val server = ElasticSearchServer.default
 
 	override def preStart =  {
     log.info(s"QueryActor started at: {}", self.path)
   }
 
   def receive = {
-    case FindAll() => findAll() pipeTo sender
-  }
-
-  def findAll() = {
-  	server.list[StoryInfo](findAllQueryString)
+    case Fulltext(query: String) => server.query(query) pipeTo sender
+    case Index(story: Story) => server.index(story) pipeTo sender
+    case Delete(storyId: String) => server.delete(storyId) pipeTo sender
   }
 
 }

@@ -64,9 +64,13 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   import StoryNeoProtocol._
 
   implicit def executionContext = context.dispatcher
+  //ToDo: is this necessary?
   implicit val system = context.system
+  def actorRefFactory = system
 
   final val server = CypherServer.default
+
+  private val indexActor = actorRefFactory.actorSelection("/user/query")
 
 	override def preStart =  {
     log.info(s"StoryActor started at: {}", self.path)
@@ -82,10 +86,14 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
 
   def create(story: Story) = {
 
+    import QueryActor.Index
+
     if (story.id.nonEmpty) throw ValidationException(Message("A new story must not have an id.",`ERROR`) :: Nil)
     story.check
 
     val id = Neo4JId.generateId
+
+    indexActor ! Index(story.copy(id = Some(id)))
 
     server.execute(createQueryString, 
       ("id" -> id), 
@@ -112,9 +120,13 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
 
   def update(storyId: String, story: Story) = {
 
+    import QueryActor.Index
+
     if (storyId != story.id.getOrElse("")) throw ValidationException(Message("You cannot save story with id $story.id at id $storyId.",`ERROR`) :: Nil)
 
     story.check()
+
+    indexActor ! Index(story)
 
   	server.execute(updateStoryQueryString, 
       ("id" -> storyId),
@@ -124,6 +136,11 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   }
 
   def delete(storyId: String) = {
+
+    import QueryActor.Delete
+
+    indexActor ! Delete(storyId)
+
     server.execute(removeStoryQueryString, 
       ("id" -> storyId)
     )

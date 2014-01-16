@@ -40,8 +40,12 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
 
   implicit def executionContext = context.dispatcher
   implicit val system = context.system
+  def actorRefFactory = system
 
   final val server = CypherServer.default
+
+  private val indexActor = actorRefFactory.actorSelection("/user/query")
+
 
 	override def preStart =  {
     log.info(s"SlotActor started at: {}", self.path)
@@ -79,10 +83,14 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
 
   def createAndAdd(toStory: String, slotName: String, story: Story) = {
 
+    import QueryActor.Index
+
     if (story.id.nonEmpty) throw ValidationException(Message("A new story must not have an id.",`ERROR`) :: Nil)
     story.check
 
     val id = Neo4JId.generateId
+
+    indexActor ! Index(story.copy(id = Some(id)))
 
     server.execute(createAndAddQueryString, 
       ("toStory" -> toStory),

@@ -1,10 +1,10 @@
+package amanuensis.api
+
 import org.specs2.mutable.Specification
 import spray.testkit.Specs2RouteTest
 import spray.routing.HttpService
 import spray.http.StatusCodes._
 import akka.actor.{ActorLogging, Actor}
-
-import amanuensis.api.StoryHttpService
 
 import amanuensis.domain._
 import amanuensis.core._
@@ -18,7 +18,7 @@ import spray.http._
 import spray.routing._
 
 
-class AmanuensisStoryApiSpec extends Specification with Specs2RouteTest with StoryHttpService with Core with CoreActors {
+class StoryApiSpec extends Specification with Specs2RouteTest with StoryHttpService with Core with CoreActors {
   
   def actorRefFactory = system // connect the DSL to the test ActorSystem
 
@@ -149,7 +149,7 @@ class AmanuensisStoryApiSpec extends Specification with Specs2RouteTest with Sto
       }      
     }
 
-    "do not find deleted stories anymore" in {
+     "do not find deleted stories anymore" in {
       Get(s"/story/$testId1") ~> sealRoute(storyRoute) ~> check {
         status === NotFound
       }        

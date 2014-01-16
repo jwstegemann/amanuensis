@@ -14,6 +14,7 @@ import spray.httpx.SprayJsonSupport
 
 import scala.concurrent.future
 
+import amanuensis.core.elasticsearch._
 import amanuensis.core.QueryActor._
 import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol}
 
@@ -22,7 +23,7 @@ import StatusCode._
 
 trait QueryHttpService extends HttpService with SprayJsonSupport { 
 
-  import StoryProtocol._
+  import ElasticSearchProtocol._
 
   private val queryActor = actorRefFactory.actorSelection("/user/query")
 
@@ -32,10 +33,10 @@ trait QueryHttpService extends HttpService with SprayJsonSupport {
 
   val queryRoute =
     pathPrefix("query") {
-      pathEnd {
+      path(Segment) { query: String =>
         get {
           dynamic {
-            complete((queryActor ? FindAll()).mapTo[Seq[StoryInfo]])
+            complete((queryActor ? Fulltext(query)).mapTo[QueryResult])
           }
         }
       }

@@ -25,6 +25,7 @@ import amanuensis.domain.Severities._
 import amanuensis.domain.MessageJsonProtocol._
 import amanuensis.domain.{UserContext, UserContextProtocol}
 import amanuensis.core.neo4j.Neo4JException
+import amanuensis.core.elasticsearch.ElasticSearchException
 
 
 class BasicHttpAuthenticatorWithoutHeader[U](val realm2: String, val userPassAuthenticator2: UserPassAuthenticator[U])(implicit val executionContext2: ExecutionContext)
@@ -70,6 +71,10 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
     case ValidationException(messages) => complete(PreconditionFailed, messages)
     case Neo4JException(message) => {
       log.error(s"Neo4J-error: $message")
+      complete(InternalServerError, Message("An unexpected Error occured. Please inform your system administrator.", `ERROR`))     
+    }
+    case ElasticSearchException(message) => {
+      log.error(s"ElasticSearch-error: $message")
       complete(InternalServerError, Message("An unexpected Error occured. Please inform your system administrator.", `ERROR`))     
     }
     case t: Throwable => {

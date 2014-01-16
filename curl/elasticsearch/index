@@ -1,5 +1,5 @@
 #! /bin/bash
 
 curl -X POST \
-  --data "{\"id\": \"$1\",\"title\": \"$2\",\"conten\": \"$3\"}" \
+  --data "{\"id\": \"$1\",\"title\": \"$2\",\"content\": \"$3\"}" \
   "http://localhost:9200/stories/story"
