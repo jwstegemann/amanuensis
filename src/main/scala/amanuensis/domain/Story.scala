@@ -5,7 +5,7 @@ import spray.json.DefaultJsonProtocol
 import amanuensis.api.exceptions.ValidationException
 
 
-case class Story(id : Option[String], title : String, content : String)  {
+case class Story(id : Option[String], title : String, content : String, created: String, createdBy: String)  {
 	def check() = {
 		//FIXME: Implement checks here
 	}
@@ -20,7 +20,7 @@ object StoryProtocol extends DefaultJsonProtocol {
 	import SlotProtocol._
 
   // JSON-Serialization
-  implicit val storyJsonFormat = jsonFormat3(Story.apply)
+  implicit val storyJsonFormat = jsonFormat5(Story.apply)
   implicit val storyInfoJsonFormat = jsonFormat2(StoryInfo.apply)
   implicit val storyContextJsonFormat = jsonFormat3(StoryContext.apply)
 }

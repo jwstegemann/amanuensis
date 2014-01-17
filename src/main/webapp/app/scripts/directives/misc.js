@@ -31,7 +31,50 @@ angular.module('amanuensisApp')
         });
     };
   })
-  .directive('scrollbar', function($parse) {
+  .directive('scrollbar', function() {
+    return {
+      restrict: 'A',
+      scope: false,
+      link: function(scope, elem, attr) {
+        elem.mCustomScrollbar({
+          autoHideScrollbar: true,
+          horizontalScroll: false,
+          mouseWheel: true,
+          scrollButtons:{
+            enable: false
+          },
+          advanced:{
+            updateOnBrowserResize: true,
+            updateOnContentResize: false,
+            autoExpandHorizontalScroll: false,
+            autoScrollOnFocus: false,
+            normalizeMouseWheelDelta: false,
+          }
+          //theme: 'light-thin'
+        });
+
+          
+        console.log("attr: " + attr.refreshOnChange);
+
+        if (attr.refreshOnChange) {
+          var updateTimeout
+
+//          scope.watchCollection(attr.refreshOnChange, function(newNames, oldNames) {
+          scope.$watch(attr.refreshOnChange, function() {
+//            console.log("should I?");
+            if (!updateTimeout) {
+              updateTimeout = setTimeout(function() {
+                console.log("update scrollbar... on " + elem.context.className);
+                elem.mCustomScrollbar('update');
+                updateTimeout = undefined;
+              }, 50);
+            }
+          });
+        }
+      }
+    } 
+  }); 
+/*  .directive('scrollbar', function() {
     return {
       restrict: 'A',
       scope: false,
@@ -61,7 +104,7 @@ angular.module('amanuensisApp')
 
 //          $scope.$watchCollection($attr.refreshOnChange, function(newNames, oldNames) {
           $scope.$watch($attr.refreshOnChange, function() {
-//            console.log("should I?");
+            console.log("should I?");
             if (!updateTimeout) {
               updateTimeout = setTimeout(function() {
                 console.log("update scrollbar... on " + $elem.context.className);
@@ -73,4 +116,4 @@ angular.module('amanuensisApp')
         }
       }]
     } 
-  }); 
+  });  */

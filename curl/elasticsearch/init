@@ -6,16 +6,33 @@ curl -XPUT "http://localhost:9200/stories/story/_mapping" -d'
 {
   "story": {
     "properties": {
-      "title": {
+      "id": {          
         "type": "string",
-        "store": "yes",
+        "store": "no",
+        "index": "no"
+      },        
+      "title": {          
+        "type": "string",
+        "store": "no",
         "analyzer": "german"
       },
       "content": {
         "type": "string",
         "store": "no",
         "analyzer": "german"
-      } 
+      }
+      "created": {
+        "type": "date",
+        "format": "date_time",
+        "store": "no",
+        "index": "analyzed"
+      }
+      "createdBy": {
+        "type": "string",
+        "store": "no",
+        "index": "no"
+      }
+
     }
   }
 }'

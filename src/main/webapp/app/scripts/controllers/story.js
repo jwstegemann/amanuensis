@@ -22,7 +22,9 @@ angular.module('amanuensisApp')
         		story: {
         			id: undefined,
         			title: undefined,
-        			content: undefined
+        			content: undefined,
+                    created: "not yet",
+                    createdBy: "who knows"
         		},
         		inSlots: [],
         		outSlots: []

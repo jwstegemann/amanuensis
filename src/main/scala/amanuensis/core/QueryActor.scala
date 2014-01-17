@@ -18,7 +18,7 @@ object QueryActor {
 
   case class Fulltext(query: String)
   case class Index(story: Story)
-  case class Delete(storyId: String)
+  case class DeleteFromIndex(storyId: String)
 
 }
 
@@ -40,8 +40,8 @@ class QueryActor extends Actor with ActorLogging with Failable {
 
   def receive = {
     case Fulltext(query: String) => server.query(query) pipeTo sender
-    case Index(story: Story) => server.index(story) pipeTo sender
-    case Delete(storyId: String) => server.delete(storyId) pipeTo sender
+    case Index(story: Story) => server.index(story) // pipeTo sender
+    case DeleteFromIndex(storyId: String) => server.delete(storyId) // pipeTo sender
   }
 
 }

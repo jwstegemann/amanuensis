@@ -1,13 +1,21 @@
-<h2 ng-show="result" class="resultHeader" style="margin-top: 100px">Results for {{queryString}}</h2>
+<div id="query-container" class="container story" scrollbar refresh-on-change="result.hits.hits"> 
 
-<ul ng-show="result" class="resultList">
+  <div class="query">
 
-  <li class="resultListItem" ng-repeat="storyResult in result.hits.hits">
-    <a href="#/story/{{storyResult._source.id}}"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;{{storyResult._source.title}}</a>
-    <p>{{storyResult._source.content.substr(0,250)}}</p>
-    <!-- &nbsp;<button ng-click="remove(storyInfo.id,$index)">[delete]</button> -->
-  </li>
-</ul>
+    <h2 ng-show="result" class="resultHeader" style="margin-top: 100px"><i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Results for "{{queryString}}"</h2>
 
-<p ng-show="result" class="stats">found {{result.hits.total}} stories in {{result.took}} ms.</p>
+    <ul ng-show="result" class="resultList">
 
+      <li class="resultListItem" ng-repeat="storyResult in result.hits.hits">
+        <a href="#/story/{{storyResult._source.id}}"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;{{storyResult._source.title}}</a>
+        <p class="origin">created by {{storyResult._source.createdBy}} on {{storyResult._source.created.substr(0,10)}}</p>
+        <p class="content">{{storyResult._source.content}}...</p>
+        <!-- &nbsp;<button ng-click="remove(storyInfo.id,$index)">[delete]</button> -->
+      </li>
+    </ul>
+
+    <p ng-show="result" class="stats">found {{result.hits.total}} stories in {{result.took}} ms.</p>
+
+  </div>
+
+</div>

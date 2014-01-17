@@ -12,13 +12,13 @@ import amanuensis.domain.Story
 import amanuensis.core.util.Failable
 
 import amanuensis.core.neo4j._
+import amanuensis.core.util.StringUtils
 
 import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol, Slot, SlotProtocol}
 
 import spray.httpx.SprayJsonSupport
 
 import scala.concurrent.Future
-
 
 
 object StoryActor {
@@ -36,9 +36,9 @@ object StoryActor {
    */
   //TODO: use one param of story-object
   //TODO: use merge when creating stories
-  val createQueryString = """CREATE (s:Story { id: {id},title: {title},content: {content} }) RETURN s.id"""
+  val createQueryString = """CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy} }) RETURN s.id"""
   
-  val retrieveStoryQueryString = """MATCH (s:Story) WHERE s.id={id} return s.id as id, s.title as title, s.content as content"""
+  val retrieveStoryQueryString = """MATCH (s:Story) WHERE s.id={id} return s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy"""
 
   val retrieveOutSlotQueryString = """MATCH (s:Story)-[r:Slot]->() WHERE s.id={id} RETURN DISTINCT r.name as name"""
   val retrieveInSlotQueryString = """MATCH (s:Story)<-[r:Slot]-() WHERE s.id={id} RETURN DISTINCT r.name as name"""
@@ -81,7 +81,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
     case Retrieve(storyId) => retrieve(storyId) pipeTo sender
     case Update(storyId, story) => sender ! update(storyId, story)
     case Delete(storyId) => delete(storyId) pipeTo sender
-    case "test" => println("Bin daaaaaaaaaaaaaaaaaaaaaaaa")
+
   }
 
   def create(story: Story) = {
@@ -93,12 +93,14 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
 
     val id = Neo4JId.generateId
 
-    indexActor ! Index(story.copy(id = Some(id)))
+    indexActor ! Index(story.copy(id = Some(id), content = StringUtils.truncate(story.content,250)))
 
     server.execute(createQueryString, 
       ("id" -> id), 
       ("title" -> story.title), 
-      ("content" -> story.content)
+      ("content" -> story.content),
+      ("created" -> story.created),
+      ("createdBy" -> story.createdBy)
     ) map { nothing => StoryInfo(id, story.title) }
   }
 
@@ -126,18 +128,18 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
 
     story.check()
 
-    indexActor ! Index(story)
+    indexActor ! Index(story.copy(content = StringUtils.truncate(story.content,250)))
 
   	server.execute(updateStoryQueryString, 
       ("id" -> storyId),
       ("title" -> story.title), 
-      ("content" -> story.content)
+      ("content" -> story.content)    
     )
   }
 
   def delete(storyId: String) = {
 
-    import QueryActor.Delete
+    import QueryActor.DeleteFromIndex
 
     indexActor ! Delete(storyId)
 

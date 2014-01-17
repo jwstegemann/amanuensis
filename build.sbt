@@ -16,12 +16,15 @@ javacOptions ++= Seq( "-XX:+TieredCompilation", "-XX:CICompilerCount=1" )
 // use src/main/webapp
 unmanagedResourceDirectories in Compile <+= (baseDirectory) { _ / "src" / "main" / "webapp" / "dist" }
 
-
 // fork when running tests
 fork in test := true
 
 // sbt-revolver
 seq(Revolver.settings: _*)
+
+initialize ~= { _ =>
+    scala.util.Properties.setProp("hallo","false")
+}
 
 // Repositories
 resolvers ++= Seq(
@@ -48,6 +51,7 @@ libraryDependencies ++= Seq(
     "com.typesafe.akka"                       %%  "akka-slf4j"                  % "2.2.3",
     "com.typesafe.akka"                       %%  "akka-testkit"                % "2.2.3"        % "test",
     "ch.qos.logback"                          %   "logback-classic"             % "1.0.13",
+    "joda-time"                               %   "joda-time"                   % "2.3",
     "org.specs2"                              %%  "specs2"                      % "1.14"         % "test"
 )
 

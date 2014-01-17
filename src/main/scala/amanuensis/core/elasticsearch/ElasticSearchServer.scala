@@ -93,12 +93,14 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
   )
 
   def query(queryString: String): Future[QueryResult] = {
+    //ToDo: make constants to improve performance
     val queryObject = JsObject(
       ("query", JsObject(
         ("multi_match", JsObject(
           ("query", JsString(queryString)),
           ("fields", JsArray(JsString("title"),JsString("content"))),
-          ("type", JsString("match_phrase"))
+          ("type", JsString("phrase_prefix")),
+          ("max_expansions", JsString("10"))
         ))
       ))
     )
@@ -112,14 +114,14 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     //ToDo: check, if id is valid
     val id = story.id.get
     val myUrl =  s"$indexUrl/$id"
-    log.debug("ElasticSearch-Index-Request: {}", story)
+    log.debug("ElasticSearch-Index-Request: {} @ {}", story, myUrl)
     pipelineRaw(Post(myUrl, story))
   }
 
   def delete(id: String): Future[Unit] = {
     //ToDo: check, if id is valid
     val myUrl =  s"$indexUrl/$id"
-    log.debug("ElasticSearch-Index-Request: {}")
+    log.debug("ElasticSearch-Delete-Request: {}", myUrl)
     pipelineRaw(Delete(myUrl))
   }
 

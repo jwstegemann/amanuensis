@@ -60,6 +60,9 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
 
   val userActor = actorRefFactory.actorSelection("/user/user")
 
+  private val doAuth = scala.util.Properties.envOrElse("amanuensis_auth", "true").toBoolean
+
+  if (!doAuth) log.info("************** DISABLING AUTHENTICATION ********************")
 
   def myUserPassAuthenticator(userPassOption: Option[UserPass]): Future[Option[UserContext]] = {
     (userActor ? new CheckUser(userPassOption)).mapTo[Option[UserContext]]
@@ -83,13 +86,24 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
     }
   }
 
+
+  def innerRoute(userContext: UserContext) = {
+    storyRoute(userContext) ~
+    queryRoute ~
+    userRoute(userContext)      
+  } 
+
   def receive = runRoute(
     staticRoute ~
-//    authenticate(BasicAuthWithoutHeader(myUserPassAuthenticator _, realm = "Amanuensis")) { userContext =>
-      storyRoute ~
-      queryRoute ~
-      userRoute(UserContext("dummy","Dummy", Nil))
-//      userRoute(userContext)
-//    } 
+    (doAuth match {
+      case true => {
+        authenticate(BasicAuthWithoutHeader(myUserPassAuthenticator _, realm = "Amanuensis")) { userContext =>
+          innerRoute(userContext)
+        }
+      }
+      case false => {
+        innerRoute(UserContext("dummy", "Dummy", Nil))
+      }
+    })
   )
 }

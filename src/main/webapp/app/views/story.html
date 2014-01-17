@@ -37,7 +37,7 @@
 					<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
 					<div class="story-header">
 						<input id="story-title-input" class="story-title" type="text" ng-model="context.story.title" placeholder="A Story..."></input>
-				  	<h1><span>edited on January, 1st 2014 by Jens Stegemann</span></h1> 
+				  	<h1><span>created on {{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span></h1> 
 				  </div>
 				</header>
 				<div class="content">

@@ -10,7 +10,6 @@ import amanuensis.domain._
 import amanuensis.core._
 
 import amanuensis.api.exceptions._
-import amanuensis.domain.Message
 import amanuensis.domain.Severities._
 import amanuensis.domain.MessageJsonProtocol._
 import amanuensis.core.neo4j.Neo4JException
@@ -51,13 +50,15 @@ class StoryApiSpec extends Specification with Specs2RouteTest with StoryHttpServ
   val testSlot1 = "Autotest_Slot_1"
   val testSlot2 = "Autotest_Slot_2"
 
+  val authStoryRoute = storyRoute(UserContext("dummy", "Dummy", Nil))
+
 
   "The StoryService" should {
 
     sequential
 
     "create a new story" in {
-      Post("/story",Story(None, testTitle1, testContent1)) ~> storyRoute ~> check {
+      Post("/story",Story(None, testTitle1, testContent1, "", "")) ~> authStoryRoute ~> check {
         responseAs[StoryInfo] must beLike {
           case StoryInfo(id,title) => {
             testId1 = id
@@ -68,13 +69,13 @@ class StoryApiSpec extends Specification with Specs2RouteTest with StoryHttpServ
     }
     
     "update an existing story" in {
-      Put(s"/story/$testId1",Story(Some(testId1), testTitle1, testContent1Updated)) ~> storyRoute ~> check {
+      Put(s"/story/$testId1",Story(Some(testId1), testTitle1, testContent1Updated, "", "")) ~> authStoryRoute ~> check {
         status === OK
       }
     }
 
     "retrieve an existing story" in {
-      Get(s"/story/$testId1") ~> storyRoute ~> check {
+      Get(s"/story/$testId1") ~> authStoryRoute ~> check {
         responseAs[StoryContext] must beLike {
           case StoryContext(story, inSlots, outSlots) => {
             story.id.get === testId1
@@ -88,7 +89,7 @@ class StoryApiSpec extends Specification with Specs2RouteTest with StoryHttpServ
     }
 
     "create a new story in slot" in {
-      Post(s"/story/$testId1/$testSlot1",Story(None, testTitle2, testContent2)) ~> storyRoute ~> check {
+      Post(s"/story/$testId1/$testSlot1",Story(None, testTitle2, testContent2, "", "")) ~> authStoryRoute ~> check {
         responseAs[StoryInfo] must beLike {
           case StoryInfo(id,title) => {
             testId2 = id
@@ -99,25 +100,25 @@ class StoryApiSpec extends Specification with Specs2RouteTest with StoryHttpServ
     }
 
     "find the new created story in slot" in {
-      Get(s"/story/$testId1/$testSlot1") ~> storyRoute ~> check {
+      Get(s"/story/$testId1/$testSlot1") ~> authStoryRoute ~> check {
         responseAs[Seq[StoryInfo]] === (StoryInfo(testId2, testTitle2) :: Nil)
       }
     }
 
     "add existing story to a new slot" in {
-      Put(s"/story/$testId2/$testSlot2/$testId1") ~> storyRoute ~> check {
+      Put(s"/story/$testId2/$testSlot2/$testId1") ~> authStoryRoute ~> check {
         status === OK
       }      
     }
 
     "find the added story in slot" in {
-      Get(s"/story/$testId2/$testSlot2") ~> storyRoute ~> check {
+      Get(s"/story/$testId2/$testSlot2") ~> authStoryRoute ~> check {
         responseAs[Seq[StoryInfo]] === (StoryInfo(testId1, testTitle1) :: Nil)
       }      
     }
 
     "return slots right in retrieve" in {
-      Get(s"/story/$testId1") ~> storyRoute ~> check {
+      Get(s"/story/$testId1") ~> authStoryRoute ~> check {
         responseAs[StoryContext] must beLike {
           case StoryContext(story, inSlots, outSlots) => {
             story.id.get === testId1
@@ -129,31 +130,31 @@ class StoryApiSpec extends Specification with Specs2RouteTest with StoryHttpServ
     }
 
     "remove story from slot" in {
-      Delete(s"/story/$testId1/$testSlot1/$testId2") ~> storyRoute ~> check {
+      Delete(s"/story/$testId1/$testSlot1/$testId2") ~> authStoryRoute ~> check {
         status === OK 
       }      
     }
 
     "do not find removed story in slot anymore" in {
-      Get(s"/story/$testId1/$testSlot1") ~> storyRoute ~> check {
+      Get(s"/story/$testId1/$testSlot1") ~> authStoryRoute ~> check {
         responseAs[Seq[StoryInfo]] must be empty
       }      
     }
 
     "delete existing stories including relations" in {
-      Delete(s"/story/$testId1") ~> storyRoute ~> check {
+      Delete(s"/story/$testId1") ~> authStoryRoute ~> check {
         status === OK
       }      
-      Delete(s"/story/$testId2") ~> storyRoute ~> check {
+      Delete(s"/story/$testId2") ~> authStoryRoute ~> check {
         status === OK
       }      
     }
 
-     "do not find deleted stories anymore" in {
-      Get(s"/story/$testId1") ~> sealRoute(storyRoute) ~> check {
+    "do not find deleted stories anymore" in {
+      Get(s"/story/$testId1") ~> sealRoute(authStoryRoute) ~> check {
         status === NotFound
       }        
-      Get(s"/story/$testId2") ~> sealRoute(storyRoute) ~> check {
+      Get(s"/story/$testId2") ~> sealRoute(authStoryRoute) ~> check {
         status === NotFound
       }        
     }

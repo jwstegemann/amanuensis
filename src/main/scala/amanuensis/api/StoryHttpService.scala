@@ -14,9 +14,11 @@ import spray.httpx.SprayJsonSupport
 
 import scala.concurrent.future
 
+import org.joda.time.DateTime
+
 import amanuensis.core.StoryActor._
 import amanuensis.core.SlotActor._
-import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol}
+import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol, UserContext}
 
 import StatusCode._
 
@@ -28,11 +30,11 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
   private val storyActor = actorRefFactory.actorSelection("/user/story")
   private val slotActor = actorRefFactory.actorSelection("/user/slot")
 
-  private implicit val timeout = new Timeout(2.seconds)
+  private implicit val timeout = new Timeout(2 seconds)
   private implicit def executionContext = actorRefFactory.dispatcher
 
 
-  val storyRoute =
+  def storyRoute(userContext: UserContext) =
     pathPrefix("story") {
       pathPrefix(Segment) { storyId: String =>
         pathEnd {
@@ -70,7 +72,8 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
               entity(as[Story]) { story =>
                 dynamic {
   //                log.debug(s"request: creating new story $story in slot $slotName at story $storyId")
-                  complete((slotActor ? CreateAndAdd(storyId, slotName, story)).mapTo[StoryInfo])
+                  val storyWithMeta = story.copy(created = DateTime.now.toString, createdBy = userContext.name)
+                  complete((slotActor ? CreateAndAdd(storyId, slotName, storyWithMeta)).mapTo[StoryInfo])
                 }
               }              
             }
@@ -96,7 +99,8 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
           entity(as[Story]) { story =>
             dynamic {
    //           log.debug(s"request: creating new story with $story")
-              complete((storyActor ? Create(story)).mapTo[StoryInfo])
+              val storyWithMeta = story.copy(created = DateTime.now.toString, createdBy = userContext.name)
+              complete((storyActor ? Create(storyWithMeta)).mapTo[StoryInfo])
   //            complete(s"creating new story with $story")
             }
           }

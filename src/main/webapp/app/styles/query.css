@@ -1,14 +1,17 @@
+div.query {
+  padding: 0 15%;
+  overflow: hidden;
+}
+
 h2.resultHeader {
-  margin: 20px;
-  margin-left: 370px;
+  margin: 0px;
   margin-bottom: 30px;
   font-size: 2em;
   font-weight: 300;
 }
 
 ul.resultList {
-  padding-left: 10px;
-  margin-left: 370px;
+  padding-left: 20px;
   list-style: none;
   text-transform: none;  
 }
@@ -23,13 +26,18 @@ li.resultListItem > a {
   text-decoration: none;
 }
 
-li.resultListItem > p {
+li.resultListItem > p.origin {
   margin-top: 5px;
-  font-size: 1em;
-  max-width: 940px;
+  margin-bottom: 5px;
+  font-size: 0.8em;
+}
+
+li.resultListItem > p.content {
+  margin-top: 5px;
+  font-size: 1.0em;
+  color: #ffffff;
 }
 
 p.stats {
-  margin-left: 370px;  
   margin-top: 40px;
 }
