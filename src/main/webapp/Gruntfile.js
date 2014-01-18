@@ -94,6 +94,13 @@ module.exports = function (grunt) {
         port: 8080,
         https: false,
         changeOrigin: false
+      },
+      {
+        context: '/attachment',
+        host: 'localhost',
+        port: 8080,
+        https: false,
+        changeOrigin: false
       }],
       livereload: {
         options: {

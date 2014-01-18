@@ -14,6 +14,9 @@ angular.module('amanuensisApp')
         	$scope.context = storyService.get({storyId: $routeParams.storyId}, function(successData) {
                 //Todo: Adjust when opening slots and stories from routeParams
                 $rootScope.appState = 1;
+                $scope.$broadcast('updateView', {
+                    markdown: successData.story.content
+                });
             });
         } 
         else {
@@ -35,6 +38,8 @@ angular.module('amanuensisApp')
             }, 200);
 
             $rootScope.appState = 1;
+
+            $scope.editMode = true;
         }
     }
 
@@ -196,6 +201,9 @@ angular.module('amanuensisApp')
         }
     });
 
+    $scope.receivedFile = function(file) {
+        console.log('received file!', file);
+    }
 
     /* 
      * show and hide slots and strories
@@ -241,6 +249,25 @@ angular.module('amanuensisApp')
 
     $scope.hideOutStories = function() {
         $scope.outStories = false;
+    }
+
+    /*
+     * Preview and Editor
+     */
+
+    $scope.showContentEditor = function() {
+        $scope.editMode = true;
+
+        setTimeout(function() {
+            $('#story-content-editor').focus();
+        }, 200);        
+    }
+
+    $scope.showContentView = function() {
+        $scope.$broadcast('updateView', {
+            markdown: $scope.context.story.content
+        });
+        $scope.editMode = false;
     }
 
     // init controller

@@ -54,7 +54,7 @@ angular.module('amanuensisApp')
         });
 
           
-        console.log("attr: " + attr.refreshOnChange);
+        //console.log("attr: " + attr.refreshOnChange);
 
         if (attr.refreshOnChange) {
           var updateTimeout
@@ -64,7 +64,7 @@ angular.module('amanuensisApp')
 //            console.log("should I?");
             if (!updateTimeout) {
               updateTimeout = setTimeout(function() {
-                console.log("update scrollbar... on " + elem.context.className);
+//                console.log("update scrollbar... on " + elem.context.className);
                 elem.mCustomScrollbar('update');
                 updateTimeout = undefined;
               }, 50);
@@ -73,47 +73,22 @@ angular.module('amanuensisApp')
         }
       }
     } 
-  }); 
-/*  .directive('scrollbar', function() {
+  })
+  .directive("markdown", function () {
     return {
       restrict: 'A',
-      scope: false,
-      link: ['$scope', '$elem', '$attr', function($scope, $elem, $attr) {
-        $elem.mCustomScrollbar({
-          autoHideScrollbar: true,
-          horizontalScroll: false,
-          mouseWheel: true,
-          scrollButtons:{
-            enable: false
-          },
-          advanced:{
-            updateOnBrowserResize: true,
-            updateOnContentResize: false,
-            autoExpandHorizontalScroll: false,
-            autoScrollOnFocus: false,
-            normalizeMouseWheelDelta: false,
+      scope: true,
+      link: function (scope, element, attrs) {
+
+        scope.$on('updateView', function(event, data) {
+          if (data.markdown) {
+            element.html(marked(data.markdown));
           }
-          //theme: 'light-thin'
+
+          //FixMe: Do this only it it is scrollable
+          element.mCustomScrollbar('update');
         });
 
-          
-        console.log("attr: " + $attr.refreshOnChange);
-
-        if ($attr.refreshOnChange) {
-          var updateTimeout
-
-//          $scope.$watchCollection($attr.refreshOnChange, function(newNames, oldNames) {
-          $scope.$watch($attr.refreshOnChange, function() {
-            console.log("should I?");
-            if (!updateTimeout) {
-              updateTimeout = setTimeout(function() {
-                console.log("update scrollbar... on " + $elem.context.className);
-                $elem.mCustomScrollbar('update');
-                updateTimeout = undefined;
-              }, 50);
-            }
-          });
-        }
-      }]
-    } 
-  });  */
+      }
+    };
+  });

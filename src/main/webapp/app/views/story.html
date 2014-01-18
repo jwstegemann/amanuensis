@@ -41,8 +41,16 @@
 				  </div>
 				</header>
 				<div class="content">
-				  <textarea class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">
+				  <textarea ng-show="editMode" id="story-content-editor" class="story-content" ng-model="context.story.content" 
+            placeholder="... that still has to be written." 
+            inlineattach
+            inlineattach-upload-url="/attachment" 
+            inlineattach-progress-text="still uploading..."
+            inlineattach-on-received-file="receivedFile"
+            ng-blur="showContentView()">
           </textarea>
+          <div ng-hide="editMode" ng-dblclick="showContentEditor()" class="story-view" markdown scrollbar>
+          </div>
 				</div>
 			</ng-form>       
     </div>
@@ -62,6 +70,31 @@
 				<i class="fa fa-book on-slot"></i>{{storyInfo.title}}
         <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
 			</li>
+
+<!--
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
+-->
+
 		</ul>  	
   </div>
 	<!-- outbound Slot-List	-->

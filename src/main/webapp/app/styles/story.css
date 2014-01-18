@@ -73,7 +73,7 @@ div.content {
   font-weight: 300;
   color: #fff;
   font-size: 1.2em;
-  padding: 1.8em 15%;
+  padding: 1.0em 15%;
   height: 100%;
 }
 
@@ -98,6 +98,42 @@ textarea.story-content:focus {
   border: 1px solid #8499af;
 }
 
+div.story-view {
+  margin-top: -10px;
+  padding-top: 0px;
+  overflow: hidden;
+  height: 400px;
+}
+
+div.story-view h1 {
+  font-size: 1.6em;
+  font-weight: 300;
+}
+
+div.story-view h2 {
+  font-size: 1.4em;
+  font-weight: 300;
+}
+
+div.story-view h3 {
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+div.story-view h4 {
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+div.story-view h5 {
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+div.story-view h6 {
+  font-size: 1.2em;
+  font-weight: 300;
+}
 /*
  * shadows
  */

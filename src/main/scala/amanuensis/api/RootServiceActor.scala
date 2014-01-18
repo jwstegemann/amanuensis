@@ -47,7 +47,8 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
   with StoryHttpService 
   with QueryHttpService 
   with UserHttpService
-  with StaticHttpService {
+  with StaticHttpService 
+  with AttachmentHttpService {
 
   import amanuensis.core.UserActor._
 
@@ -90,10 +91,11 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
   def innerRoute(userContext: UserContext) = {
     storyRoute(userContext) ~
     queryRoute ~
-    userRoute(userContext)      
+    userRoute(userContext)  
   } 
 
   def receive = runRoute(
+    attachmentRoute ~
     staticRoute ~
     (doAuth match {
       case true => {

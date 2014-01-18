@@ -7,7 +7,8 @@ angular.module('amanuensisApp', [
   'ngAnimate',
   'angular-growl',
   'http-auth-interceptor',
-  'chieffancypants.loadingBar'
+  'chieffancypants.loadingBar',
+  'inlineattachment'
 ]).config(function ($routeProvider) {
     $routeProvider
       .when('/story/:storyId?', {
