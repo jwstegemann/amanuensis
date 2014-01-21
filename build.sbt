@@ -22,10 +22,6 @@ fork in test := true
 // sbt-revolver
 seq(Revolver.settings: _*)
 
-initialize ~= { _ =>
-    scala.util.Properties.setProp("hallo","false")
-}
-
 // Repositories
 resolvers ++= Seq(
 	"spray.io nightlies" at "http://nightlies.spray.io/",
@@ -52,7 +48,10 @@ libraryDependencies ++= Seq(
     "com.typesafe.akka"                       %%  "akka-testkit"                % "2.2.3"        % "test",
     "ch.qos.logback"                          %   "logback-classic"             % "1.0.13",
     "joda-time"                               %   "joda-time"                   % "2.3",
-    "org.specs2"                              %%  "specs2"                      % "1.14"         % "test"
+    "org.joda"                                %   "joda-convert"                % "1.2",    
+    "org.specs2"                              %%  "specs2"                      % "1.14"         % "test",
+    "commons-io"                              %   "commons-io"                  % "2.4"          % "optional",
+    "com.amazonaws"                           %   "aws-java-sdk"                % "1.6.3"    
 )
 
 

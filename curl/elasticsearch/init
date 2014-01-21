@@ -1,8 +1,8 @@
 #! /bin/bash
 
-curl -XPUT 'http://localhost:9200/stories/'
+# curl -XPUT 'http://localhost:9200/stories/'
 
-curl -XPUT "http://localhost:9200/stories/story/_mapping" -d'
+curl -XPUT "https://6llvafxy:snjwm1wszy5mnwgf@redwood-8816963.us-east-1.bonsai.io/stories/story/_mapping" -d'
 {
   "story": {
     "properties": {
@@ -20,19 +20,18 @@ curl -XPUT "http://localhost:9200/stories/story/_mapping" -d'
         "type": "string",
         "store": "no",
         "analyzer": "german"
-      }
+      },
       "created": {
         "type": "date",
         "format": "date_time",
         "store": "no",
         "index": "analyzed"
-      }
+      },
       "createdBy": {
         "type": "string",
         "store": "no",
         "index": "no"
       }
-
     }
   }
 }'
