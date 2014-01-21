@@ -31,7 +31,7 @@ object ElasticSearchServer {
   val WithoutCredentials = """(http|https)://([\w\.-]+):(\d+)""".r
 
   def default(implicit actorSystem: ActorSystem) : ElasticSearchServer = {
-    val db_server = scala.util.Properties.envOrElse("BONSAI_URL", "http://localhost:9200")
+    val db_server = scala.util.Properties.envOrElse("ELASTICSEARCH_URL", "http://localhost:9200")
 
     db_server match {
       case WithCredentials(protocol,username,password,host,port) => 

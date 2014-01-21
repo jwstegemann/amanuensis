@@ -1,0 +1,14 @@
+#! /bin/bash
+
+# curl -XPUT 'http://localhost:9200/stories/'
+
+curl -XGET "https://6llvafxy:snjwm1wszy5mnwgf@redwood-8816963.us-east-1.bonsai.io/stories/story/_search" -d'
+{
+        "query": {
+            "multi_match": {
+               "query": "Test",
+               "fields": ["title","content"],
+               "type": "phrase_prefix"
+            }
+        }
+}'
