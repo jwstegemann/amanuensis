@@ -57,7 +57,8 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
   def actorRefFactory = context
   implicit def executionContext = context.dispatcher
 
-  private implicit val timeout = new Timeout(2 seconds)
+  //FixMe: reduce it again!
+  private implicit val timeout = new Timeout(60 seconds)
 
   val userActor = actorRefFactory.actorSelection("/user/user")
 

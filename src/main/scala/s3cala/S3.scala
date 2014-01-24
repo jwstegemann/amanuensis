@@ -63,11 +63,11 @@ trait Bucket {
     def put ( key: String, file: File ): Future[Unit]
 
     /** Uploads an input stream into a key */
-    def put ( key: String, stream: InputStream ): Future[Unit]
+    def put ( key: String, stream: InputStream , size: Long): Future[Unit]
 
     /** Uploads a Byte Array into a key */
     def put ( key: String, bytes: Array[Byte] ): Future[Unit]
-        = put( key, new ByteArrayInputStream( bytes ) )
+        = put( key, new ByteArrayInputStream( bytes ) , bytes.length)
 
     /** Uploads a String into a key */
     def put ( key: String, str: String ): Future[Unit]

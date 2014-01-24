@@ -1,8 +1,8 @@
 #! /bin/bash
 
-# curl -XPUT 'http://localhost:9200/stories/'
+curl -XPUT 'https://3ls4ugrr:qm04jp3g3gbtboxq@ivy-4178650.us-east-1.bonsai.io/stories'
 
-curl -XPUT "https://6llvafxy:snjwm1wszy5mnwgf@redwood-8816963.us-east-1.bonsai.io/stories/story/_mapping" -d'
+curl -XPUT "https://3ls4ugrr:qm04jp3g3gbtboxq@ivy-4178650.us-east-1.bonsai.io/stories/story/_mapping" -d'
 {
   "story": {
     "properties": {

@@ -17,8 +17,8 @@
         </encoder>
     </appender> -->
 
-    <logger name="akka" level="WARN" />
-    <logger name="spray.io.IOBridge" level="WARN" />
+    <logger name="akka" level="INFO" />
+    <logger name="spray.io.IOBridge" level="INFO" />
     <logger name="amanuensis" level="DEBUG" />
     <logger name="CypherServer" level="DEBUG" />
 
