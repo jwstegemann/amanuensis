@@ -18,6 +18,10 @@ import amanuensis.core.neo4j.Neo4JId
 
 import com.roundeights.s3cala._
 
+import java.io.File
+import spray.routing.directives.ContentTypeResolver
+import scala.concurrent.Future
+
 
 // this trait defines our service behavior independently from the service actor
 trait AttachmentHttpService extends HttpService { self : ActorLogging =>
@@ -38,37 +42,63 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
     import spray.httpx.encoding.{ NoEncoding, Gzip }
     
     pathPrefix("attachment") {
-      pathEnd {
-        post {
-          entity(as[MultipartFormData]) { formData =>
+      //FixMe: check, if storyId is valid
+      pathPrefix(Segment) { storyId: String =>
+        pathEnd {
+          post {
+            entity(as[MultipartFormData]) { formData =>
 
-            formData.get("file") match {
+              formData.get("file") match {
 
-              case Some(bodyPart) => {
+                case Some(bodyPart) => {
 
-                val filename = bodyPart.filename match {
-                  case Some(name) => s"testfolder/$name"
-                  case None => Neo4JId.generateId()
+                  val filename = bodyPart.filename match {
+                    case Some(name) => name
+                    case None => Neo4JId.generateId()
+                  }
+
+                  val file = bodyPart.entity.data.toByteArray
+
+                  val futureUpload = bucket.put(s"$storyId/$filename", file) map (nothing => 
+                    s"""{"filename": "/attachment/$storyId/$filename"}"""
+                  )                
+
+                  complete(futureUpload) 
+
                 }
-
-                val file = bodyPart.entity.data.toByteArray
-
-                val futureUpload = bucket.put(filename, file) map (nothing => 
-                  s"""{"filename": "/attachment/$filename"}"""
-                )                
-
-                complete(futureUpload) 
+                
+                case None => complete(BadRequest, "invalid upload, missing file...")
 
               }
-              
-              case None => complete(BadRequest, "invalid upload, missing file...")
 
             }
-
           }
+        } ~
+        path(Segment) { filename: String =>
+          detach() {
+            val file = File.createTempFile("S3-",".tmp")            // use Metadata
+            file.deleteOnExit()
+            
+            respondWithLastModifiedHeader(file.lastModified) {
+
+              val result: Future[HttpEntity] = bucket.get(s"$storyId/$filename", file) map (metaData =>
+                if (file.isFile && file.canRead) {
+                    //autoChunk(settings.fileChunkingThresholdSize, settings.fileChunkingChunkSize) {
+                      //ToDo: use MetaData for content-type
+                  HttpEntity(ContentTypeResolver.Default(file.getName), HttpData(file))
+                    //}
+                
+                } 
+                else {
+                  throw new Exception("Fehler!")
+                }              
+              )
+
+              complete(result) 
+            }
+          }       
         }
-      } ~
-      getFromResourceDirectory("uploads")
+      }
     }
 
   }

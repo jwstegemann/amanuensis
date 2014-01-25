@@ -91,4 +91,130 @@ angular.module('amanuensisApp')
 
       }
     };
+  })
+  .directive("uploadable", function ($rootScope) {
+    return {
+      restrict: 'A',
+      scope: true,
+      link: function(scope, elem, attrs) {
+
+        var lastValue;
+        var editor = elem.context;
+
+        scope.uploadFile = function(file) {
+          var formData = new FormData(),
+            xhr = new XMLHttpRequest(),
+            filename = "file-" + Date.now();
+
+          if (file.name) {
+            filename = file.name
+          }
+
+          formData.append('file', file, filename);
+
+          xhr.open('POST', '/attachment/' + scope.context.story.id);
+          xhr.onload = function() {
+            // If HTTP status is OK or Created
+            if (xhr.status === 200 || xhr.status === 201) {
+              var data = JSON.parse(xhr.responseText);
+              scope.onUploadedFile(data);
+            } else {
+              scope.onErrorUploading();
+            }
+          };
+          xhr.send(formData);
+        }
+
+        scope.onUploadedFile = function(data) {
+          var filename = data['filename'];
+          if (filename) {
+            var text = editor.value.replace(lastValue, "![file](" + filename + ")");
+            editor.value = text;
+
+            //ToDo: Update scope with new editor-value
+          }
+        };
+
+        scope.onErrorUploading = function() {
+          var text = editor.value.replace(lastValue, "");
+          editor.value = text;
+          $rootScope.$broadcast('error',{errorMessage: 'An error occured uploading your file.'});
+        };
+
+        //helper functions
+        function appendInItsOwnLine(previous, appended) {
+          return (previous + "\n\n[[D]]" + appended)
+            .replace(/(\n{2,})\[\[D\]\]/, "\n\n")
+            .replace(/^(\n*)/, "");
+        }
+
+        scope.insertProgressText = function() {
+              lastValue = '![Uploading file...]()'
+              editor.value = appendInItsOwnLine(editor.value, lastValue);
+        }
+
+        scope.isUploadPossible = function() {
+          if (angular.isDefined(scope.context.story.id) && scope.context.story.id !== "") {
+            return true;
+          }
+          else {
+            $rootScope.$broadcast('error',{errorMessage: 'Sorry, but you cannot upload attachments to an unsaved story.'});
+            return false;
+          }
+        }
+
+        //define event listeners
+        scope.onPaste = function(e) {
+          var clipboardData = e.clipboardData;
+
+          if (typeof clipboardData === "object" && clipboardData.items !== null) {
+            for (var i = 0; i < clipboardData.items.length; i++) {
+              var item = clipboardData.items[i];
+              //ToDo: check if file is allowes
+              var file = item.getAsFile();
+              if (file !== null && scope.isUploadPossible()) {
+                scope.insertProgressText();
+                scope.uploadFile(file);
+              }
+            }
+          }
+
+          return true;
+        }
+
+        scope.onDrop = function(e) {
+          var result = false;
+          for (var i = 0; i < e.dataTransfer.files.length; i++) {
+            var file = e.dataTransfer.files[i];
+            //ToDo: check if file is allowes
+            if (scope.isUploadPossible()) {
+              scope.insertProgressText();
+              scope.uploadFile(file);
+            }
+          }
+
+          return true;
+        }
+
+        //add event listeners
+        editor.addEventListener('paste', function(e) {
+            scope.onPaste(e);
+        }, false);
+        editor.addEventListener('drop', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            scope.onDrop(e);
+        }, false);
+        editor.addEventListener('dragenter', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }, false);
+        editor.addEventListener('dragover', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }, false);        
+
+
+      }
+    }
   });

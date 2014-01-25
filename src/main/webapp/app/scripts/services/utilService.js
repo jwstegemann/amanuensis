@@ -6,10 +6,24 @@ angular.module('amanuensisApp')
 
     var overlay = $('#md-overlay');
 
+    var counter = 0;
+
+    function showOverlay() {
+      if (counter++ === 0) {
+            overlay.addClass('md-show');   
+      }
+    }
+
+    function hideOverlay() {
+      if (--counter === 0) {
+            overlay.removeClass('md-show');            
+      }
+    }
+
     return {
 
       showModalElement: function(modal)  {
-            overlay.addClass('md-show');   
+            showOverlay();
             modal.addClass('md-show')
             setTimeout(function(){
               modal.find('.start-focus').focus();
@@ -18,11 +32,11 @@ angular.module('amanuensisApp')
 
       hideModalElement: function(modal) {
             modal.removeClass('md-show');
-            overlay.removeClass('md-show');            
+            hideOverlay();
       },
 
       showModal: function(modalId)  {
-            overlay.addClass('md-show');   
+            showOverlay();
             var modal =  $(modalId);        
             modal.addClass('md-show')
             setTimeout(function(){
@@ -32,7 +46,7 @@ angular.module('amanuensisApp')
 
       hideModal: function(modalId) {
             $(modalId).removeClass('md-show');
-            overlay.removeClass('md-show');            
+            hideOverlay();
       } 
 
     };

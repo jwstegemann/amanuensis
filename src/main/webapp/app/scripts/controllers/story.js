@@ -39,7 +39,7 @@ angular.module('amanuensisApp')
 
             $rootScope.appState = 1;
 
-            $scope.editMode = true;
+            $rootScope.editMode = true;
         }
     }
 
@@ -256,19 +256,19 @@ angular.module('amanuensisApp')
      */
 
     $scope.showContentEditor = function() {
-        $scope.editMode = true;
+        $rootScope.editMode = true;
 
         setTimeout(function() {
             $('#story-content-editor').focus();
         }, 200);        
     }
 
-    $scope.showContentView = function() {
+    $scope.$on("doneEditing", function() {
         $scope.$broadcast('updateView', {
             markdown: $scope.context.story.content
         });
-        $scope.editMode = false;
-    }
+        $rootScope.editMode = false;
+    });
 
     // init controller
     $scope.reload();

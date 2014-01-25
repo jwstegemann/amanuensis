@@ -139,7 +139,7 @@ angular.module('chieffancypants.loadingBar', [])
    */
   .provider('cfpLoadingBar', function() {
 
-    this.includeSpinner = true;
+    this.includeSpinner = false;
     this.includeBar = true;
     this.parentSelector = 'body';
 

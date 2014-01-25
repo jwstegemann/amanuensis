@@ -7,8 +7,7 @@ angular.module('amanuensisApp', [
   'ngAnimate',
   'angular-growl',
   'http-auth-interceptor',
-  'chieffancypants.loadingBar',
-  'inlineattachment'
+  'chieffancypants.loadingBar'
 ]).config(function ($routeProvider) {
     $routeProvider
       .when('/story/:storyId?', {
@@ -58,6 +57,7 @@ angular.module('amanuensisApp', [
     $rootScope.selectMode = false;
     $rootScope.stack = undefined;
     $rootScope.appState = undefined;
+    $rootScope.editMode = false;
   });
 
 

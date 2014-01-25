@@ -53,6 +53,9 @@
       <li ng-click="goBack()"><a><i class="fa fa-chevron-left fa-fw fa-2x on-cab"></i></a>></li>
 
       <!-- selecting a story -->
+
+      <li ng-show="editMode" ng-click="doneEditing()"><a><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
+
       <li ng-show="selectMode" ng-click="select()"><a><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
       <li ng-show="selectMode" ng-click="goToStack()"><a><i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{stack.storyTitle}}&nbsp;<i class="fa fa-link fa-fw fa-lg on-cab"></i>&nbsp;{{stack.slotName}}</a></li>        
       <li ng-show="selectMode" ng-click="cancel()"><a><i class="fa fa-times fa-fw fa-2x on-cab"></i></a></li>
@@ -141,8 +144,6 @@
     <script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
     <!-- endbower -->
     <script src="bower_components/marked/lib/marked.js"></script>    
-    <script src="manual_components/inlineattachment/inline-attach.js"></script>
-    <script src="manual_components/inlineattachment/angularjs.inline-attach.js"></script>
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->

@@ -9,7 +9,7 @@ angular.module('amanuensisApp')
                 template:
                   '<div class="md-modal md-effect-3" id="slot-name-modal">'+
                     '<div class="md-content error">'+
-                      '<h3>A fatal error occured: <i style="float: right" class="fa fa-times action" ng-click="cancelErrorMessage()"></i></h3>'+
+                      '<h3>An error occured: <i style="float: right" class="fa fa-times action" ng-click="cancelErrorMessage()"></i></h3>'+
                       '<div class="error-icon">'+
                       ' <i class="fa fa-exclamation fa-3x fa-fw"></i>'+
                       '</div>'+

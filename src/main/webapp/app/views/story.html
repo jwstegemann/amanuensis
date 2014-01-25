@@ -43,11 +43,7 @@
 				<div class="content">
 				  <textarea ng-show="editMode" id="story-content-editor" class="story-content" ng-model="context.story.content" 
             placeholder="... that still has to be written." 
-            inlineattach
-            inlineattach-upload-url="/attachment" 
-            inlineattach-progress-text="still uploading..."
-            inlineattach-on-received-file="receivedFile"
-            ng-blur="showContentView()">
+            uploadable>
           </textarea>
           <div ng-hide="editMode" ng-dblclick="showContentEditor()" class="story-view" markdown scrollbar>
           </div>
