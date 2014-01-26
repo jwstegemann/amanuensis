@@ -364,7 +364,10 @@
 	"buffers":
 	[
 		{
+			"contents": "/*! inline-attach - v1.3.0 - 2013-10-25 */\n/*jslint newcap: true */\n/*global XMLHttpRequest: false, inlineAttach: false, FormData: false */\n/*\n * Inline Text Attachment\n *\n * Author: Roy van Kaathoven\n * Contact: ik@royvankaathoven.nl\n */\n(function(document, window) {\n    \"use strict\";\n\n    /**\n     * Simple function to merge the given objects\n     *\n     * @param {Object[]} object Multiple object parameters\n     * @returns {Object}\n     */\n    function merge() {\n        var result = {};\n        for (var i = arguments.length - 1; i >= 0; i--) {\n            var obj = arguments[i];\n            for (var k in obj) {\n                result[k] = obj[k];\n            }\n        }\n        return result;\n    }\n\n    /**\n     * @param {Object} options\n     */\n    window.inlineAttach = function(options, instance) {\n\n        var settings = merge(options, inlineAttach.defaults),\n            editor = instance,\n            filenameTag = '{filename}',\n            lastValue,\n            me = this;\n\n        /**\n         * Upload a given file blob\n         *\n         * @param {Blob} file\n         */\n        this.uploadFile = function(file) {\n            var formData = new FormData(),\n                xhr = new XMLHttpRequest(),\n                extension = 'png';\n\n            // Attach the file. If coming from clipboard, add a default filename (only works in Chrome for now)\n            // http://stackoverflow.com/questions/6664967/how-to-give-a-blob-uploaded-as-formdata-a-file-name\n            if (file.name) {\n                var fileNameMatches = file.name.match(/\\.(.+)$/);\n                if (fileNameMatches) {\n                    extension = fileNameMatches[1];\n                }\n            }\n            formData.append(settings.uploadFieldName, file, \"image-\" + Date.now() + \".\" + extension);\n\n            xhr.open('POST', settings.uploadUrl);\n            xhr.onload = function() {\n                // If HTTP status is OK or Created\n                if (xhr.status === 200 || xhr.status === 201) {\n                    var data = JSON.parse(xhr.responseText);\n                    me.onUploadedFile(data);\n                } else {\n                    me.onErrorUploading();\n                }\n            };\n            xhr.send(formData);\n        };\n\n        /**\n         * Check if the given file is allowed\n         *\n         * @param {File} file\n         */\n        this.isAllowedFile = function(file) {\n            return settings.allowedTypes.indexOf(file.type) >= 0;\n        };\n\n        /**\n         * When a file has finished uploading\n         *\n         * @param {Object} data\n         */\n        this.onUploadedFile = function(data) {\n            var result = settings.onUploadedFile(data),\n                filename = data[settings.downloadFieldName];\n            if (result !== false && filename) {\n                var text = editor.getValue().replace(lastValue, settings.urlText.replace(filenameTag, filename));\n                editor.setValue(text);\n            }\n        };\n\n        /**\n         * Custom upload handler\n         *\n         * @param {Blob} file\n         * @return {Boolean} when false is returned it will prevent default upload behavior\n         */\n        this.customUploadHandler = function(file) {\n            return settings.customUploadHandler(file);\n        };\n\n        /**\n         * When a file didn't upload properly.\n         * Override by passing your own onErrorUploading function with settings.\n         *\n         * @param {Object} data\n         */\n        this.onErrorUploading = function() {\n            var text = editor.getValue().replace(lastValue, \"\");\n            editor.setValue(text);\n            if (settings.customErrorHandler()) {\n                window.alert(settings.errorText);\n            }\n        };\n\n        /**\n         * Append a line of text at the bottom, ensuring there aren't unnecessary newlines\n         *\n         * @param {String} appended Current content\n         * @param {String} previous Value which should be appended after the current content\n         */\n        function appendInItsOwnLine(previous, appended) {\n            return (previous + \"\\n\\n[[D]]\" + appended)\n                  .replace(/(\\n{2,})\\[\\[D\\]\\]/, \"\\n\\n\")\n                  .replace(/^(\\n*)/, \"\");\n        }\n\n        /**\n         * When a file has been received by a drop or paste event\n         * @param {Blob} file\n         */\n        this.onReceivedFile = function(file) {\n            var result = settings.onReceivedFile(file);\n            if (result !== false) {\n                lastValue = settings.progressText;\n                editor.setValue(appendInItsOwnLine(editor.getValue(), lastValue));\n            }\n        };\n\n        /**\n         * Catches the paste event\n         *\n         * @param {Event} e\n         * @returns {Boolean} If a file is handled\n         */\n        this.onPaste = function(e) {\n            var result = false,\n                clipboardData = e.clipboardData;\n\n            if (typeof clipboardData === \"object\" && clipboardData.items !== null) {\n                for (var i = 0; i < clipboardData.items.length; i++) {\n                    var item = clipboardData.items[i];\n                    if (me.isAllowedFile(item)) {\n                        result = true;\n                        this.onReceivedFile(item.getAsFile());\n                        if(this.customUploadHandler(item.getAsFile())){\n                            this.uploadFile(item.getAsFile());\n                        }\n                    }\n                }\n            }\n\n\n            return result;\n        };\n\n        /**\n         * Catches onDrop event\n         *\n         * @param {Event} e\n         * @returns {Boolean} If a file is handled\n         */\n        this.onDrop = function(e) {\n            var result = false;\n            for (var i = 0; i < e.dataTransfer.files.length; i++) {\n                var file = e.dataTransfer.files[i];\n                if (me.isAllowedFile(file)) {\n                    result = true;\n                    this.onReceivedFile(file);\n                    if(this.customUploadHandler(file)){\n                        this.uploadFile(file);\n                    }\n                }\n            }\n\n            return result;\n        };\n    };\n\n    /**\n     * Editor\n     */\n    window.inlineAttach.Editor = function(instance) {\n\n        var input = instance;\n\n        return {\n            getValue: function() {\n                return input.value;\n            },\n            setValue: function(val) {\n                input.value = val;\n            }\n        };\n    };\n\n    /**\n     * Default configuration\n     */\n    window.inlineAttach.defaults = {\n        // URL to upload the attachment\n        uploadUrl: 'upload_attachment.php',\n        // Request field name where the attachment will be placed in the form data\n        uploadFieldName: 'file',\n        // Where is the filename placed in the response\n        downloadFieldName: 'filename',\n        allowedTypes: [\n            'image/jpeg',\n            'image/png',\n            'image/jpg',\n            'image/gif'\n        ],\n\n        /**\n         * Will be inserted on a drop or paste event\n         */\n        progressText: '![Uploading file...]()',\n\n        /**\n         * When a file has successfully been uploaded the last inserted text\n         * will be replaced by the urlText, the {filename} tag will be replaced\n         * by the filename that has been returned by the server\n         */\n        urlText: \"![file]({filename})\",\n\n        /**\n         * When a file is received by drag-drop or paste\n         */\n        onReceivedFile: function() {},\n\n        /**\n         * Custom upload handler\n         *\n         * @return {Boolean} when false is returned it will prevent default upload behavior\n         */\n        customUploadHandler: function() { return true; },\n\n        /**\n         * Custom error handler. Runs after removing the placeholder text and before the alert().\n         * Return false from this function to prevent the alert dialog.\n         *\n         * @return {Boolean} when false is returned it will prevent default error behavior\n         */\n        customErrorHandler: function() { return true; },\n\n        /**\n         * Text for default error when uploading\n         */\n        errorText: \"Error uploading file\",\n\n        /**\n         * When a file has succesfully been uploaded\n         */\n        onUploadedFile: function() {}\n    };\n\n    /**\n     * Attach to a standard input field\n     *\n     * @param {Input} input\n     * @param {Object} options\n     */\n    window.inlineAttach.attachToInput = function(input, options) {\n\n        options = options || {};\n\n        var editor          = new inlineAttach.Editor(input),\n            inlineattach    = new inlineAttach(options, editor);\n\n        input.addEventListener('paste', function(e) {\n            inlineattach.onPaste(e);\n        }, false);\n        input.addEventListener('drop', function(e) {\n            e.stopPropagation();\n            e.preventDefault();\n            inlineattach.onDrop(e);\n        }, false);\n        input.addEventListener('dragenter', function(e) {\n            e.stopPropagation();\n            e.preventDefault();\n        }, false);\n        input.addEventListener('dragover', function(e) {\n            e.stopPropagation();\n            e.preventDefault();\n        }, false);\n    };\n\n})(document, window);\n\n/*jslint newcap: true */\n/*global inlineAttach: false, angular: false */\n/**\n * AngularJS plugin for inline attachment\n *\n * @param {document} document\n * @param {window} window\n * @param {Object} ng\n */\n(function (document, window, ng) {\n    \"use strict\";\n\n    var module      = ng.module('inlineattachment', []),\n        attrName    = 'inlineattach';\n\n    function lcfirst (str) {\n        return str.charAt(0).toLowerCase() + str.substr(1);\n    }\n\n    /**\n     * Read all parameters from the given attributes object\n     * @param  {Object} obj attributes\n     * @return {Object}\n     */\n    function readParameters(obj, scope) {\n        var result = {},\n            attrs = obj.$attr,\n            option, value;\n\n        for (var key in attrs) {\n            option = lcfirst(key.substr(attrName.length));\n            value = obj[key];\n            // Check if the given key is a valid string type, not empty and starts with the attribute name\n            if ((option.length > 0) && (key.substring(0, attrName.length) === attrName)) {\n                result[option] = value;\n                if (typeof scope[value] === 'function') {\n                    result[option] = scope[value];\n                }\n            }\n        }\n\n        return result;\n    }\n\n    module.directive(attrName, function () {\n        return function (scope, element, attrs) {\n            var options = readParameters(attrs, scope);\n            inlineAttach.attachToInput(element.context, options);\n        };\n    });\n})(document, window, angular);\n",
 			"file": "src/main/webapp/app/manual_components/inlineattachment/angularjs.inline-attach.js",
+			"file_size": 10959,
+			"file_write_time": 1390658676000000,
 			"settings":
 			{
 				"buffer_size": 10893,
@@ -375,7 +378,7 @@
 			"file": "src/main/webapp/app/scripts/app.js",
 			"settings":
 			{
-				"buffer_size": 1842,
+				"buffer_size": 1853,
 				"line_ending": "Unix"
 			}
 		},
@@ -383,7 +386,7 @@
 			"file": "src/main/webapp/app/scripts/controllers/story.js",
 			"settings":
 			{
-				"buffer_size": 10001,
+				"buffer_size": 10016,
 				"line_ending": "Unix"
 			}
 		},
@@ -391,7 +394,7 @@
 			"file": "src/main/scala/amanuensis/api/AttachmentService.scala",
 			"settings":
 			{
-				"buffer_size": 1935,
+				"buffer_size": 3062,
 				"line_ending": "Unix"
 			}
 		},
@@ -420,26 +423,60 @@
 			}
 		},
 		{
-			"file": "src/main/scala/amanuensis/api/RootServiceActor.scala",
+			"contents": "<!--                              -->\n<!-- # The inSlots  and -Stories  --> \n<!-- #                            -->\n\n<div id=\"left-container\" class=\"container left-container\" ng-class=\"{'show-slots': inSlots, 'show-stories': inStories}\">\n	<!-- inbound Story-List	-->\n  <div id=\"stories-left\" class=\"container stories stories-left shadow-right\" ng-controller=\"SlotCtrl\" scrollbar refresh-on-change=\"stories\">\n		<div class=\"story-list-title\"><i class=\"fa fa-bars fa-lg on-slot\"></i>{{slotName}}</div>\n		<ul class=\"story-list\">\n			<li class=\"story-info\" ng-repeat=\"storyInfo in stories\" ng-click=\"openStory(storyInfo.id)\">\n				<i class=\"fa fa-book on-slot\"></i>{{storyInfo.title}}\n        <i class=\"fa fa-times fa-lg on-button delete-action\" ng-click=\"remove(storyInfo.id,$index,$event)\"></i>\n			</li>\n		</ul>  	\n  </div>\n	<!-- inbound Slot-List	-->\n  <div id=\"slots-left\" class=\"container slots slots-left shadow-right\" scrollbar refresh-on-change=\"context.inSlots\">\n    <div class=\"slot-list-title\"><i class=\"fa fa-link fa-lg on-slot\"></i>&nbsp;Inbound</div>\n    <ul class=\"slot-list\">\n      <li class=\"slot-name\" ng-repeat=\"slot in context.inSlots\" ng-click=\"selectSlot(slot.name, true)\">\n      	<i class=\"fa fa-mail-reply on-slot\"></i>{{slot.name}}\n      </li>\n    </ul>  	\n  </div>\n</div>\n     \n\n<!-- #                            -->\n<!-- # The Story itself           --> \n<!-- #                            -->\n\n<div id=\"story-container\" class=\"container story\" ng-class=\"{'shifted-right': inStories, 'shifted-left': outStories}\"> \n\n    <div class=\"inner\">\n			<ng-form>\n				<header>\n					<div class=\"story-icon\"><i class=\"fa fa-bookmark fa-5x\"></i></div>\n					<div class=\"story-header\">\n						<input id=\"story-title-input\" class=\"story-title\" type=\"text\" ng-model=\"context.story.title\" placeholder=\"A Story...\"></input>\n				  	<h1><span>created on {{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span></h1> \n				  </div>\n				</header>\n				<div class=\"content\">\n				  <textarea ng-show=\"editMode\" id=\"story-content-editor\" class=\"story-content\" ng-model=\"context.story.content\" \n            placeholder=\"... that still has to be written.\" \n            inlineattach\n            inlineattach-upload-url=\"/attachment\" \n            inlineattach-progress-text=\"still uploading...\"\n            inlineattach-on-received-file=\"receivedFile\">\n          </textarea>\n          <div ng-hide=\"editMode\" ng-dblclick=\"showContentEditor()\" class=\"story-view\" markdown scrollbar>\n          </div>\n				</div>\n			</ng-form>       \n    </div>\n</div>\n\n\n<!-- #                            -->\n<!-- # The outSlots  and -Stories --> \n<!-- #                            -->\n\n<div id=\"right-container\" class=\"container right-container\" ng-class=\"{'show-slots': outSlots, 'show-stories': outStories}\">\n	<!-- outbound Story-List	-->\n  <div id=\"stories-right\" class=\"container stories stories-right shadow-left\" ng-controller=\"SlotCtrl\" scrollbar refresh-on-change=\"stories\">\n		<div class=\"story-list-title\"><i class=\"fa fa-bars fa-lg on-slot\"></i>{{slotName}}</div>\n		<ul class=\"story-list\">\n			<li class=\"story-info\" ng-repeat=\"storyInfo in stories\" ng-click=\"openStory(storyInfo.id)\">\n				<i class=\"fa fa-book on-slot\"></i>{{storyInfo.title}}\n        <i class=\"fa fa-times fa-lg on-button delete-action\" ng-click=\"remove(storyInfo.id,$index,$event)\"></i>\n			</li>\n\n<!--\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n      <li class=\"story-info\"><i class=\"fa fa-book on-slot\"></i>TestStory</li>\n-->\n\n		</ul>  	\n  </div>\n	<!-- outbound Slot-List	-->\n  <div id=\"slots-right\" class=\"container slots slots-right shadow-left\" scrollbar refresh-on-change=\"context.outSlots\">\n    <div class=\"slot-list-title\"><i class=\"fa fa-link fa-lg on-slot\"></i>&nbsp;Outbound</div>\n    <ul class=\"slot-list\">\n      <li class=\"slot-name\" ng-repeat=\"slot in context.outSlots\" ng-click=\"selectSlot(slot.name, false)\">\n      	<i class=\"fa fa-mail-reply on-slot\"></i>{{slot.name}}\n      </li>\n    </ul> \n  </div>\n</div>\n\n\n<!-- #                         -->\n<!-- # Modals                  --> \n<!-- #                         -->\n\n<div class=\"md-modal md-effect-3\" id=\"slot-name-modal\" ng-controller=\"SlotNameModalCtrl\">\n  <div class=\"md-content\">\n    <h3>{{title}}&nbsp;<i style=\"float: right\" class=\"fa fa-times action\" ng-click=\"cancel()\"></i>\n    </h3>\n    <div>\n    	<input class=\"start-focus\" type=\"text\" ng-model=\"newSlotName\" on-enter=\"done()\" on-escape=\"cancel()\" placeholder=\"name of new slot\"></input>\n      <i class=\"fa fa-check fa-2x on-button action opacity-hover\" ng-click=\"done()\"></i>\n    </div>\n  </div>\n</div>\n\n",
+			"file": "src/main/webapp/app/views/story.html",
+			"file_size": 5942,
+			"file_write_time": 1390679807000000,
 			"settings":
 			{
-				"buffer_size": 3867,
+				"buffer_size": 6112,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/resources/logback.xml",
+			"file": "src/main/webapp/app/index.html",
 			"settings":
 			{
-				"buffer_size": 1012,
+				"buffer_size": 7718,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/resources/application.conf",
+			"file": "src/main/webapp/app/scripts/controllers/cab.js",
 			"settings":
 			{
-				"buffer_size": 909,
+				"buffer_size": 1937,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/scripts/directives/misc.js",
+			"settings":
+			{
+				"buffer_size": 6566,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/scripts/directives/errorDialog.js",
+			"settings":
+			{
+				"buffer_size": 1807,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 209,
 				"line_ending": "Unix"
 			}
 		},
@@ -448,14 +485,6 @@
 			"settings":
 			{
 				"buffer_size": 3832,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
-			"settings":
-			{
-				"buffer_size": 4006,
 				"line_ending": "Unix"
 			}
 		}
@@ -588,10 +617,16 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StaticHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-loading-bar/src/loading-bar.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-loading-bar/src/loading-bar.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utilService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/resources/application.conf",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/resources/logback.xml",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StaticHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/query",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/init",
@@ -620,7 +655,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/StringUtils.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/api/QueryApiSpec.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/resources/application.conf",
 		"/home/tiberius/scala/projects/amanuensis/curl/story/create",
 		"/home/tiberius/scala/projects/amanuensis/curl/story/update",
 		"/home/tiberius/scala/projects/amanuensis/curl/slot/create",
@@ -639,7 +673,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/buttons.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/login.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-http-auth/src/http-auth-interceptor.js",
 		"/home/tiberius/scala/projects/amanuensis/curl/user/login",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
@@ -649,7 +682,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/api/UserApiSpec.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/UserHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Converters.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utilService.js",
 		"/home/tiberius/scala/projects/amanuensis/neo4j/init.cypher",
 		"/home/tiberius/scala/projects/amanuensis/.buildpacks",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/UserActor.old",
@@ -708,14 +740,11 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Slot.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/core/SprayClientSpec.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Failable.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/resources/logback.xml",
 		"/home/tiberius/scala/projects/amanuensis/neo4j/queries.cypher",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/Messages.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Query.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JServer.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/CypherActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/core/CypherActorSpec.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/services/StaticHttpService.scala"
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/CypherActor.scala"
 	],
 	"find":
 	{
@@ -741,6 +770,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"progressText",
+			"'{filename}'",
+			"editor.context",
+			"elem",
+			"z-index",
+			"spinner",
+			"loading",
+			"showContenView",
+			"editMode",
 			"downloadFieldName",
 			"onUploadedFile",
 			"inlineAttach",
@@ -894,8 +932,8 @@
 						"selection":
 						[
 							[
-								2550,
-								2550
+								5202,
+								5202
 							]
 						],
 						"settings":
@@ -905,7 +943,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 793.0,
+						"translation.y": 1828.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -915,15 +953,15 @@
 					"file": "src/main/webapp/app/scripts/app.js",
 					"settings":
 					{
-						"buffer_size": 1842,
+						"buffer_size": 1853,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14,
-								14
+								185,
+								185
 							]
 						],
 						"settings":
@@ -943,15 +981,15 @@
 					"file": "src/main/webapp/app/scripts/controllers/story.js",
 					"settings":
 					{
-						"buffer_size": 10001,
+						"buffer_size": 10016,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8611,
-								8611
+								8677,
+								8677
 							]
 						],
 						"settings":
@@ -961,7 +999,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3571.0,
+						"translation.y": 3426.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -971,15 +1009,15 @@
 					"file": "src/main/scala/amanuensis/api/AttachmentService.scala",
 					"settings":
 					{
-						"buffer_size": 1935,
+						"buffer_size": 3062,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1054,
-								1054
+								1756,
+								1756
 							]
 						],
 						"settings":
@@ -989,7 +1027,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 135.0,
+						"translation.y": 666.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1017,7 +1055,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 585.0,
+						"translation.y": 540.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1034,8 +1072,8 @@
 						"selection":
 						[
 							[
-								1819,
-								1819
+								2178,
+								2178
 							]
 						],
 						"settings":
@@ -1045,7 +1083,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 900.0,
+						"translation.y": 765.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1062,8 +1100,8 @@
 						"selection":
 						[
 							[
-								1886,
-								1886
+								1760,
+								1760
 							]
 						],
 						"settings":
@@ -1080,79 +1118,107 @@
 				},
 				{
 					"buffer": 7,
-					"file": "src/main/scala/amanuensis/api/RootServiceActor.scala",
+					"file": "src/main/webapp/app/views/story.html",
 					"settings":
 					{
-						"buffer_size": 3867,
+						"buffer_size": 6112,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1975,
-								1975
+								2236,
+								2236
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 540.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 8,
-					"file": "src/main/resources/logback.xml",
+					"file": "src/main/webapp/app/index.html",
 					"settings":
 					{
-						"buffer_size": 1012,
+						"buffer_size": 7718,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								819,
-								819
+								6863,
+								6863
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/XML/XML.tmLanguage",
-							"tab_size": 4,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 720.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 9,
-					"file": "src/main/resources/application.conf",
+					"file": "src/main/webapp/app/scripts/controllers/cab.js",
 					"settings":
 					{
-						"buffer_size": 909,
+						"buffer_size": 1937,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								71,
-								71
+								1910,
+								1910
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/main/webapp/app/scripts/directives/misc.js",
+					"settings":
+					{
+						"buffer_size": 6566,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2669,
+								2669
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -1163,11 +1229,10 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "src/main/scala/amanuensis/api/StoryHttpService.scala",
+					"buffer": 11,
 					"settings":
 					{
-						"buffer_size": 3832,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -1180,30 +1245,82 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 270.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
+					"buffer": 12,
+					"file": "src/main/webapp/app/scripts/directives/errorDialog.js",
 					"settings":
 					{
-						"buffer_size": 4006,
+						"buffer_size": 1807,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								935,
-								935
+								356,
+								356
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "README.md",
+					"settings":
+					{
+						"buffer_size": 209,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								209,
+								209
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "src/main/scala/amanuensis/api/StoryHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 3832,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1100,
+								1100
 							]
 						],
 						"settings":
@@ -1213,7 +1330,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 675.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1279,6 +1396,22 @@
 		"selected_items":
 		[
 			[
+				"storys",
+				"src/main/scala/amanuensis/api/StoryHttpService.scala"
+			],
+			[
+				"cab",
+				"src/main/webapp/app/scripts/controllers/cab.js"
+			],
+			[
+				"index.html",
+				"src/main/webapp/app/index.html"
+			],
+			[
+				"story.h",
+				"src/main/webapp/app/views/story.html"
+			],
+			[
 				"index",
 				"src/main/webapp/app/index.html"
 			],
@@ -1325,10 +1458,6 @@
 			[
 				"storya",
 				"src/main/scala/amanuensis/core/StoryActor.scala"
-			],
-			[
-				"story.h",
-				"src/main/webapp/app/views/story.html"
 			],
 			[
 				"query",
@@ -1384,14 +1513,6 @@
 			],
 			[
 				"cab.js",
-				"src/main/webapp/app/scripts/controllers/cab.js"
-			],
-			[
-				"index.html",
-				"src/main/webapp/app/index.html"
-			],
-			[
-				"cab",
 				"src/main/webapp/app/scripts/controllers/cab.js"
 			],
 			[

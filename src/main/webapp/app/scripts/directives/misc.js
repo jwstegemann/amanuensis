@@ -101,7 +101,7 @@ angular.module('amanuensisApp')
         var lastValue;
         var editor = elem.context;
 
-        scope.uploadFile = function(file) {
+        scope.uploadFile = function(file, isImage) {
           var formData = new FormData(),
             xhr = new XMLHttpRequest(),
             filename = "file-" + Date.now();
@@ -117,7 +117,7 @@ angular.module('amanuensisApp')
             // If HTTP status is OK or Created
             if (xhr.status === 200 || xhr.status === 201) {
               var data = JSON.parse(xhr.responseText);
-              scope.onUploadedFile(data);
+              scope.onUploadedFile(data, isImage, filename);
             } else {
               scope.onErrorUploading();
             }
@@ -125,10 +125,10 @@ angular.module('amanuensisApp')
           xhr.send(formData);
         }
 
-        scope.onUploadedFile = function(data) {
+        scope.onUploadedFile = function(data, isImage, linkText) {
           var filename = data['filename'];
           if (filename) {
-            var text = editor.value.replace(lastValue, "![file](" + filename + ")");
+            var text = editor.value.replace(lastValue, "[" + linkText + "](" + filename + ")");
             editor.value = text;
 
             //ToDo: Update scope with new editor-value
@@ -148,9 +148,22 @@ angular.module('amanuensisApp')
             .replace(/^(\n*)/, "");
         }
 
-        scope.insertProgressText = function() {
-              lastValue = '![Uploading file...]()'
-              editor.value = appendInItsOwnLine(editor.value, lastValue);
+        function isAnImage(contentType) {
+          if (contentType === 'image/jpeg'
+            || contentType === 'image/png'
+            || contentType === 'image/gif'
+            ) return true;
+          else return false;
+        }
+
+        function imagePrefix(isImage) {
+          if (isImage) return "!";
+          else return "";
+        }
+
+        scope.insertProgressText = function(isImage) {
+              lastValue = '[Uploading file...]()'
+              editor.value = appendInItsOwnLine(editor.value, imagePrefix(isImage) + lastValue);
         }
 
         scope.isUploadPossible = function() {
@@ -173,8 +186,9 @@ angular.module('amanuensisApp')
               //ToDo: check if file is allowes
               var file = item.getAsFile();
               if (file !== null && scope.isUploadPossible()) {
-                scope.insertProgressText();
-                scope.uploadFile(file);
+                var isImage = isAnImage(file.type)
+                scope.insertProgressText(isImage);
+                scope.uploadFile(file, isImage);
               }
             }
           }
@@ -188,8 +202,9 @@ angular.module('amanuensisApp')
             var file = e.dataTransfer.files[i];
             //ToDo: check if file is allowes
             if (scope.isUploadPossible()) {
-              scope.insertProgressText();
-              scope.uploadFile(file);
+              var isImage = isAnImage(file.type)
+              scope.insertProgressText(isImage);
+              scope.uploadFile(file, isImage);
             }
           }
 

@@ -134,6 +134,27 @@ div.story-view h6 {
   font-size: 1.2em;
   font-weight: 300;
 }
+
+div.story-view a {
+  text-decoration: none;
+  font-weight: 400;
+}
+
+div.story-view a:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;  
+  content: "\f0c6";
+  margin-right: 5px;
+}
+
+div.story-view img {
+  max-width: 100%;
+}
+
+
 /*
  * shadows
  */

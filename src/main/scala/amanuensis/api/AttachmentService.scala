@@ -85,7 +85,7 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
                 if (file.isFile && file.canRead) {
                     //autoChunk(settings.fileChunkingThresholdSize, settings.fileChunkingChunkSize) {
                       //ToDo: use MetaData for content-type
-                  HttpEntity(ContentTypeResolver.Default(file.getName), HttpData(file))
+                  HttpEntity(ContentTypeResolver.Default(filename), HttpData(file))
                     //}
                 
                 } 
