@@ -21,6 +21,25 @@ import scala.language.postfixOps
 
 /** Common functions */
 object Converters {
+
+  /**
+   * Constant time equals method.
+   *
+   * Given a length that both Strings are equal to, this method will always run in constant time.  This prevents
+   * timing attacks.
+   */
+  def constantTimeEquals(a: String, b: String) = {
+    if (a.length != b.length) {
+      false
+    } else {
+      var equal = 0
+      for (i <- 0 until a.length) {
+        equal |= a(i) ^ b(i)
+      }
+      equal == 0
+    }
+  }
+  
   private val HEX_CHARS: Array[Char] = "0123456789abcdef".toCharArray();
 
   /** Turns an array of Byte into a String representation in hexadecimal. */

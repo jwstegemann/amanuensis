@@ -4,6 +4,8 @@ import amanuensis.core.{CoreActors, Core}
 import amanuensis.api.Api
 import akka.io.IO
 import spray.can.Http
+import java.security.{SecureRandom, KeyStore}
+import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
 
 /**
  * Provides the web server (spray-can) for the REST api in ``Api``, using the actor system
@@ -16,6 +18,11 @@ import spray.can.Http
  * Benefits of separate ``ActorSystem`` include the ability to use completely different
  * configuration, especially when it comes to the threading model.
  */
+
+import spray.io.ServerSSLEngineProvider
+
+
+
 trait Web {
   this: Api with CoreActors with Core =>
 

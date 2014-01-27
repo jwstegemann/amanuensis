@@ -1,5 +1,7 @@
 package amanuensis.api
 
+import language.postfixOps
+
 import spray.http._
 import spray.routing._
 import scala.concurrent.ExecutionContext

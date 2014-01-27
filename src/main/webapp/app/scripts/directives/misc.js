@@ -92,7 +92,7 @@ angular.module('amanuensisApp')
       }
     };
   })
-  .directive("uploadable", function ($rootScope) {
+  .directive("uploadable", function ($rootScope,$http) {
     return {
       restrict: 'A',
       scope: true,
@@ -103,7 +103,6 @@ angular.module('amanuensisApp')
 
         scope.uploadFile = function(file, isImage) {
           var formData = new FormData(),
-            xhr = new XMLHttpRequest(),
             filename = "file-" + Date.now();
 
           if (file.name) {
@@ -112,17 +111,15 @@ angular.module('amanuensisApp')
 
           formData.append('file', file, filename);
 
-          xhr.open('POST', '/attachment/' + scope.context.story.id);
-          xhr.onload = function() {
-            // If HTTP status is OK or Created
-            if (xhr.status === 200 || xhr.status === 201) {
-              var data = JSON.parse(xhr.responseText);
-              scope.onUploadedFile(data, isImage, filename);
-            } else {
-              scope.onErrorUploading();
-            }
-          };
-          xhr.send(formData);
+          $http.post('/attachment/' + scope.context.story.id, formData, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+          }).success(function(data) {
+            scope.onUploadedFile(data, isImage, filename);
+          }).error(function() {
+            scope.onErrorUploading();
+          });
+
         }
 
         scope.onUploadedFile = function(data, isImage, linkText) {

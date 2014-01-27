@@ -6,7 +6,6 @@ import akka.pattern._
 import scala.concurrent.Future
 
 import spray.httpx.SprayJsonSupport
-import spray.routing.authentication.UserPass
 import spray.caching._
 
 import amanuensis.core.neo4j._
@@ -15,7 +14,8 @@ import amanuensis.domain.UserContext
 
 
 object UserActor {
-  case class CheckUser(userPassOption: Option[UserPass])
+  case class CheckUser(username: String, password: String)
+  case class GetUserContext(username: String)
 
   val retrieveUserString = """MATCH (u:User) WHERE u.login={login} and u.pwd={pwd} RETURN u.login as login, u.name as name, u.permissions as permissions LIMIT 1"""
 }
@@ -41,25 +41,35 @@ class UserActor extends Actor with ActorLogging with UsingParams with Neo4JJsonP
   }
 
   def receive = {
-    case CheckUser(userPassOption) => checkUser(userPassOption)
+    case CheckUser(username: String, password: String) => checkUser(username, password) pipeTo sender
+    case GetUserContext(username: String) => getUserContext(username) pipeTo sender
   }
 
-  def checkUser(userPassOption: Option[UserPass]) = {
-    userPassOption match {
-      case Some(userPass) => {
-        log.info("checking user {}...", userPass.user)
-        
-        userCache(userPass) {
-          log.info("check neo4j for user {}...", userPass.user)
+  def checkUser(username: String, password: String) = {
+    log.info("checking user {}...", username)
+    
+    log.info("check neo4j for user {}...", username)
 
-          server.one[UserContext](retrieveUserString, 
-            ("login" -> userPass.user),
-            ("pwd" -> Converters.sha(userPass.pass))
-          )
-
-        } pipeTo sender
+    //FixMe: handling of cache for UserContext should be refined! Maybe andThen that only caches, if user is correct
+    userCache(username) {
+      server.one[UserContext](retrieveUserString, 
+        ("login" -> username),
+        ("pwd" -> Converters.sha(password))
+      )
+    }.map {
+        case Some(userContext) => Some(userContext)
+        case None => {
+          userCache.remove(username)
+          None
+        }
+      }.recover {
+        case x => userCache.remove(username)
       }
-      case None => sender ! None
+  }
+
+  def getUserContext(username: String): Future[Option[UserContext]] = {
+    userCache(username) {
+      None
     }
   }
 

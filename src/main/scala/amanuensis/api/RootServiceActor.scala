@@ -26,21 +26,9 @@ import amanuensis.domain.MessageJsonProtocol._
 import amanuensis.domain.{UserContext, UserContextProtocol}
 import amanuensis.core.neo4j.Neo4JException
 import amanuensis.core.elasticsearch.ElasticSearchException
+import spray.http.HttpHeaders._
 
-
-class BasicHttpAuthenticatorWithoutHeader[U](val realm2: String, val userPassAuthenticator2: UserPassAuthenticator[U])(implicit val executionContext2: ExecutionContext)
-    extends BasicHttpAuthenticator[U](realm2, userPassAuthenticator2) {
-
-  override def getChallengeHeaders(httpRequest: HttpRequest) = Nil
-//    `WWW-Authenticate`(HttpChallenge(scheme = "Basic", realm = realm, params = Map.empty)) :: Nil
-
-}
-
-object BasicAuthWithoutHeader {
-  def apply[T](authenticator: UserPassAuthenticator[T], realm: String)(implicit ec: ExecutionContext): BasicHttpAuthenticator[T] =
-    new BasicHttpAuthenticatorWithoutHeader[T](realm, authenticator)
-}
-
+import amanuensis.api.security._
 
 
 class RootServiceActor extends Actor with ActorLogging with HttpService with SprayJsonSupport 
@@ -60,15 +48,11 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
   //FixMe: reduce it again!
   private implicit val timeout = new Timeout(60 seconds)
 
-  val userActor = actorRefFactory.actorSelection("/user/user")
+  //val userActor = actorRefFactory.actorSelection("/user/user")
 
-  private val doAuth = scala.util.Properties.envOrElse("amanuensis_auth", "true").toBoolean
+  private val doAuth = scala.util.Properties.envOrElse("AMANUENSIS_AUTH", "true").toBoolean
 
   if (!doAuth) log.info("************** DISABLING AUTHENTICATION ********************")
-
-  def myUserPassAuthenticator(userPassOption: Option[UserPass]): Future[Option[UserContext]] = {
-    (userActor ? new CheckUser(userPassOption)).mapTo[Option[UserContext]]
-  }
 
   implicit val amanuensisExceptionHandler = ExceptionHandler {
     case InternalServerErrorException(messages) => complete(InternalServerError, messages)
@@ -90,17 +74,17 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
 
 
   def innerRoute(userContext: UserContext) = {
-    storyRoute(userContext) ~
-    queryRoute ~
-    userRoute(userContext)  
+      storyRoute(userContext) ~
+      queryRoute ~
+      attachmentRoute
   } 
 
   def receive = runRoute(
-    attachmentRoute ~
+    userRoute() ~
     staticRoute ~
     (doAuth match {
       case true => {
-        authenticate(BasicAuthWithoutHeader(myUserPassAuthenticator _, realm = "Amanuensis")) { userContext =>
+        authenticate(StatelessCookieAuth(userActor)) { userContext =>
           innerRoute(userContext)
         }
       }

@@ -28,10 +28,10 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
 
   private implicit def executionContext = actorRefFactory.dispatcher
   
-  val s3Key = scala.util.Properties.envOrElse("aws_s3_key", "none")
-  val s3Secret = scala.util.Properties.envOrElse("aws_s3_secret", "none")
+  val s3Key = scala.util.Properties.envOrElse("AWS_S3_KEY", "none")
+  val s3Secret = scala.util.Properties.envOrElse("AWS_S3_SECRET", "none")
 
-  val s3BucketName = scala.util.Properties.envOrElse("aws_s3_bucket", "none")
+  val s3BucketName = scala.util.Properties.envOrElse("AWS_S3_BUCKET", "none")
 
   val s3 = S3(s3Key,s3Secret)
   val bucket = s3.bucket(s3BucketName)
