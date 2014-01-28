@@ -54,7 +54,7 @@ angular.module('amanuensisApp')
     $scope.reset();
 
     // force login when loaded and not developing locally
-    if(!($location.host() === 'localhost' && $location.port() === 9000)) {
+    if(!(($location.host() === 'localhost' || $location.host() === '0.0.0.0') && $location.port() === 9000)) {
       $rootScope.$broadcast('event:auth-loginRequired'); 
     } 
     else {

@@ -4,7 +4,6 @@ div.container {
   top: 0;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 /* 
@@ -88,15 +87,12 @@ div.container.stories-right {
  * Story
  */ 
 div.container.story {
-  height: 100%;
   width: 100%;
   left: 0;
   z-index: 0;
 
   -webkit-transition:all linear  0.25s;
-    transition:all linear 0.25s;     
-
-  overflow: hidden;   
+    transition:all linear 0.25s;        
 }
 
 div.container.story.shifted-right {
