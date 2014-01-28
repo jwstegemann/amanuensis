@@ -271,6 +271,7 @@ angular.module('amanuensisApp')
     });
 
     // init controller
+
     $scope.reload();
 
   });

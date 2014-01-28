@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('LoginDialogCtrl', function ($scope, $rootScope, $http, authService, utilService) {
+  .controller('LoginDialogCtrl', function ($scope, $rootScope, $http, $location, authService, utilService) {
 
     var welcomeMessage = 'Welcome to Amanuensis. Please login...';
     var errorMessage = 'Something is wrong. Please try again...';
@@ -53,8 +53,18 @@ angular.module('amanuensisApp')
 
     $scope.reset();
 
-    // force login when loaded
-    $rootScope.$broadcast('event:auth-loginRequired'); 
+    // force login when loaded and not developing locally
+    if(!($location.host() === 'localhost' && $location.port() === 9000)) {
+      $rootScope.$broadcast('event:auth-loginRequired'); 
+    } 
+    else {
+      $scope.login = 'dummy';
+      $scope.pwd = 'dummy';
+
+      $scope.doLogin();
+
+      console.log("switched of login at app-start because you are developing locally...");
+    }
 
   });
 

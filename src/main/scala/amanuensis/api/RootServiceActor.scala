@@ -79,17 +79,24 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
       attachmentRoute
   } 
 
+  val dummyUser = UserContext("dummy", "Dummy", Nil)
+
   def receive = runRoute(
-    userRoute() ~
     staticRoute ~
     (doAuth match {
       case true => {
+        userRoute()
         authenticate(StatelessCookieAuth(userActor)) { userContext =>
           innerRoute(userContext)
         }
       }
       case false => {
-        innerRoute(UserContext("dummy", "Dummy", Nil))
+        path("user" / "login") {
+          post {
+            complete(dummyUser)
+          }
+        } ~
+        innerRoute(dummyUser)
       }
     })
   )

@@ -37,7 +37,7 @@ angular.module('amanuensisApp')
       scope: false,
       link: function(scope, elem, attr) {
         elem.mCustomScrollbar({
-          autoHideScrollbar: true,
+          autoHideScrollbar: false,
           horizontalScroll: false,
           mouseWheel: true,
           scrollButtons:{
@@ -83,10 +83,11 @@ angular.module('amanuensisApp')
         scope.$on('updateView', function(event, data) {
           if (data.markdown) {
             element.html(marked(data.markdown));
+            setTimeout(function() {
+              $("#story-content").mCustomScrollbar('update');
+            }, 100);
           }
 
-          //FixMe: Do this only it it is scrollable
-          element.mCustomScrollbar('update');
         });
 
       }
