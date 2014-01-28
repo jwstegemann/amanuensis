@@ -53,6 +53,9 @@ angular.module('amanuensisApp')
 
     $scope.reset();
 
+    // force login when loaded
+    $rootScope.$broadcast('event:auth-loginRequired'); 
+
   });
 
 

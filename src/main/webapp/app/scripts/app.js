@@ -57,7 +57,7 @@ angular.module('amanuensisApp', [
     $rootScope.selectMode = false;
     $rootScope.stack = undefined;
     $rootScope.appState = undefined;
-    $rootScope.editMode = false;
+    $rootScope.editMode = false;   
   });
 
 
