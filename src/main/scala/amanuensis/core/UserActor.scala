@@ -18,6 +18,7 @@ object UserActor {
   case class GetUserContext(username: String)
 
   val retrieveUserString = """MATCH (u:User) WHERE u.login={login} and u.pwd={pwd} RETURN u.login as login, u.name as name, u.permissions as permissions LIMIT 1"""
+  val retrieveUserWithoutPasswordString = """MATCH (u:User) WHERE u.login={login} RETURN u.login as login, u.name as name, u.permissions as permissions LIMIT 1"""
 }
 
 object UserNeoProtocol extends Neo4JJsonProtocol {
@@ -34,7 +35,7 @@ class UserActor extends Actor with ActorLogging with UsingParams with Neo4JJsonP
 
   final val server = CypherServer.default
 
-  val userCache : Cache[Option[UserContext]]  = LruCache() //TODO: set parameters
+  val userCache : Cache[UserContext]  = LruCache() //TODO: set parameters
 
   override def preStart =  {
     log.info(s"UserActor started at: {}", self.path)
@@ -48,28 +49,27 @@ class UserActor extends Actor with ActorLogging with UsingParams with Neo4JJsonP
   def checkUser(username: String, password: String) = {
     log.info("checking user {}...", username)
     
-    log.info("check neo4j for user {}...", username)
-
     //FixMe: handling of cache for UserContext should be refined! Maybe andThen that only caches, if user is correct
     userCache(username) {
+      log.info("check neo4j for user {}...", username)
+
       server.one[UserContext](retrieveUserString, 
         ("login" -> username),
         ("pwd" -> Converters.sha(password))
-      )
-    }.map {
-        case Some(userContext) => Some(userContext)
-        case None => {
-          userCache.remove(username)
-          None
-        }
-      }.recover {
-        case x => userCache.remove(username)
-      }
+      ).map (_.get)
+    }
   }
 
-  def getUserContext(username: String): Future[Option[UserContext]] = {
+  def getUserContext(username: String) = {
+    log.info("******************** getting user {}...", username)
+    
+    //FixMe: handling of cache for UserContext should be refined! Maybe andThen that only caches, if user is correct
     userCache(username) {
-      None
+      log.info("get user {} from neo4j...", username)
+
+      server.one[UserContext](retrieveUserWithoutPasswordString, 
+        ("login" -> username)
+      ).map (_.get)
     }
   }
 

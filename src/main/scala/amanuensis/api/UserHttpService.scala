@@ -41,23 +41,34 @@ trait UserHttpService extends HttpService with SprayJsonSupport  { self: ActorLo
     /*
        * return UserContext when successfully logged in
        */
-      path("user" / "login") {
+    pathPrefix("user") {
+      path("login") {
         post {
           hostName { hostName =>
             entity(as[LoginRequest]) { loginRequest =>
               log.info(loginRequest.username + " logged in (or tried at least)")
-              val future = (userActor ? CheckUser(loginRequest.username, loginRequest.password))
-              val result = future map {
-                case Some(userContext : UserContext) => {
-                  val token = StatelessCookieAuth.getSignedToken(loginRequest.username, hostName)
-                  val cookie = HttpCookie(StatelessCookieAuth.AUTH_COOKIE_NAME, token, path = Some("/"), maxAge = Some(3600))
-                  HttpResponse(status=OK,headers=`Set-Cookie`(cookie) :: Nil, entity=HttpEntity(userContext.toJson.compactPrint))
-                }
-                case None => HttpResponse(Unauthorized)
+
+              val future = (userActor ? CheckUser(loginRequest.username, loginRequest.password)).mapTo[UserContext]
+                
+              val result = future.map { userContext => 
+                val token = StatelessCookieAuth.getSignedToken(loginRequest.username, hostName)
+                //ToDo: read cookie ttl from config
+                val cookie = HttpCookie(StatelessCookieAuth.AUTH_COOKIE_NAME, token, path = Some("/"), maxAge = Some(43200))
+                HttpResponse(status=OK,headers=`Set-Cookie`(cookie) :: Nil, entity=HttpEntity(userContext.toJson.compactPrint))
+              }.recover {
+                case _ => HttpResponse(Unauthorized)
               }
               complete(result)
             }
           }
+        }
+      } ~
+      path("logout") {
+        get {
+          deleteCookie(name=StatelessCookieAuth.AUTH_COOKIE_NAME, path = "/"  ) {
+            complete(OK)
+          }
+        }
       }
     }
   }
