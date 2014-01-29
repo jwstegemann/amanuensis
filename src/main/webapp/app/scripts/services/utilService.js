@@ -15,8 +15,9 @@ angular.module('amanuensisApp')
     }
 
     function hideOverlay() {
-      if (--counter === 0) {
-            overlay.removeClass('md-show');            
+      if (--counter <= 0) {
+            overlay.removeClass('md-show');
+            counter = 0;
       }
     }
 
