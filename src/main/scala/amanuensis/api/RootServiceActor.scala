@@ -85,7 +85,7 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
     staticRoute ~
     (doAuth match {
       case true => {
-        userRoute()
+        userRoute() ~
         authenticate(StatelessCookieAuth(userActor)) { userContext =>
           innerRoute(userContext)
         }

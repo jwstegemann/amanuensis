@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"update",
+				"updateScrollbar"
+			],
+			[
 				"table",
 				"table-row"
 			],
@@ -375,7 +379,7 @@
 			"file": "src/main/webapp/app/views/story.html",
 			"settings":
 			{
-				"buffer_size": 37357,
+				"buffer_size": 5939,
 				"line_ending": "Unix"
 			}
 		},
@@ -383,7 +387,7 @@
 			"file": "src/main/webapp/app/styles/layout.css",
 			"settings":
 			{
-				"buffer_size": 1689,
+				"buffer_size": 1937,
 				"line_ending": "Unix"
 			}
 		},
@@ -399,7 +403,7 @@
 			"file": "src/main/webapp/app/styles/story.css",
 			"settings":
 			{
-				"buffer_size": 4294,
+				"buffer_size": 5039,
 				"line_ending": "Unix"
 			}
 		},
@@ -415,7 +419,7 @@
 			"file": "src/main/webapp/app/scripts/controllers/story.js",
 			"settings":
 			{
-				"buffer_size": 10017,
+				"buffer_size": 10367,
 				"line_ending": "Unix"
 			}
 		},
@@ -423,7 +427,7 @@
 			"file": "src/main/webapp/app/scripts/directives/misc.js",
 			"settings":
 			{
-				"buffer_size": 7030,
+				"buffer_size": 6910,
 				"line_ending": "Unix"
 			}
 		},
@@ -432,6 +436,30 @@
 			"settings":
 			{
 				"buffer_size": 1969,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/styles/cab.css",
+			"settings":
+			{
+				"buffer_size": 1414,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/styles/modals.css",
+			"settings":
+			{
+				"buffer_size": 2713,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/styles/main.css",
+			"settings":
+			{
+				"buffer_size": 2364,
 				"line_ending": "Unix"
 			}
 		}
@@ -551,7 +579,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 467.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -568,6 +596,8 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-loading-bar/src/loading-bar.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/dist/app/styles/4cbbf425.main.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/UserHttpService.scala",
@@ -599,7 +629,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/s3cala/Local.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-loading-bar/src/loading-bar.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-loading-bar/src/loading-bar.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utilService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StaticHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/query",
@@ -661,7 +690,6 @@
 		"/home/tiberius/scala/projects/amanuensis-web/app/scripts/directives/errorDialog.js",
 		"/home/tiberius/scala/projects/amanuensis-web/package.json",
 		"/home/tiberius/scala/projects/amanuensis-web/web.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/onEnter.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-growl/build/angular-growl.min.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-growl/angular-growl.css",
@@ -703,7 +731,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp",
@@ -723,6 +751,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"background",
+			"story-padding",
+			"bottom",
+			"auto",
 			"http://fonts.googleapis.com/css",
 			"http:",
 			"progressText",
@@ -846,9 +878,7 @@
 			"showstat",
 			"Sphere",
 			"de.ste.mymoney.",
-			"/* =============================================================",
-			"Dies ist ein Test",
-			"ctrl+p"
+			"/* ============================================================="
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -872,7 +902,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -880,15 +910,15 @@
 					"file": "src/main/webapp/app/views/story.html",
 					"settings":
 					{
-						"buffer_size": 37357,
+						"buffer_size": 5939,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1987,
-								1987
+								3215,
+								3215
 							]
 						],
 						"settings":
@@ -898,7 +928,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 583.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -908,15 +938,15 @@
 					"file": "src/main/webapp/app/styles/layout.css",
 					"settings":
 					{
-						"buffer_size": 1689,
+						"buffer_size": 1937,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1624,
-								1624
+								1384,
+								1384
 							]
 						],
 						"settings":
@@ -926,7 +956,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1408.0,
+						"translation.y": 1305.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -964,15 +994,15 @@
 					"file": "src/main/webapp/app/styles/story.css",
 					"settings":
 					{
-						"buffer_size": 4294,
+						"buffer_size": 5039,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1346,
-								1346
+								4236,
+								4236
 							]
 						],
 						"settings":
@@ -982,7 +1012,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1018.0,
+						"translation.y": 3283.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1020,15 +1050,15 @@
 					"file": "src/main/webapp/app/scripts/controllers/story.js",
 					"settings":
 					{
-						"buffer_size": 10017,
+						"buffer_size": 10367,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9427,
-								9427
+								9137,
+								9137
 							]
 						],
 						"settings":
@@ -1038,7 +1068,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3677.0,
+						"translation.y": 3930.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1048,15 +1078,15 @@
 					"file": "src/main/webapp/app/scripts/directives/misc.js",
 					"settings":
 					{
-						"buffer_size": 7030,
+						"buffer_size": 6910,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2491,
-								2491
+								1120,
+								1120
 							]
 						],
 						"settings":
@@ -1066,7 +1096,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 765.0,
+						"translation.y": 450.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1095,6 +1125,89 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 540.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/main/webapp/app/styles/cab.css",
+					"settings":
+					{
+						"buffer_size": 1414,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								278,
+								278
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/main/webapp/app/styles/modals.css",
+					"settings":
+					{
+						"buffer_size": 2713,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								141,
+								141
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/main/webapp/app/styles/main.css",
+					"settings":
+					{
+						"buffer_size": 2364,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2354,
+								2354
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 517.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1159,6 +1272,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"main.css",
+				"src/main/webapp/app/styles/main.css"
+			],
+			[
+				"cab.css",
+				"src/main/webapp/app/styles/cab.css"
+			],
 			[
 				"login.js",
 				"src/main/webapp/app/scripts/controllers/login.js"
