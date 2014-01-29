@@ -83,9 +83,6 @@ angular.module('amanuensisApp')
         scope.$on('updateView', function(event, data) {
           if (data.markdown) {
             element.html(marked(data.markdown));
-            setTimeout(function() {
-              $("#story-content").mCustomScrollbar('update');
-            }, 100);
           }
 
         });

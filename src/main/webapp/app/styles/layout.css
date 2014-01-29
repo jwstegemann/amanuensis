@@ -87,7 +87,10 @@ div.container.stories-right {
  * Story
  */ 
 div.container.story {
+  position: absolute;
   width: 100%;
+  max-width: 100%;
+
   left: 0;
   z-index: 0;
 
@@ -110,8 +113,22 @@ div.story-padding {
 }     
 
 div.container.story div.inner {
-  position: relative;
+  position: absolute;
   height: 100%; 
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
   padding-left: 20px;
   padding-right: 20px;
+  margin-top: 0px;
+  -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  display: -webkit-flex;
+  display: flex;
+    -webkit-flex-flow: column wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
 }

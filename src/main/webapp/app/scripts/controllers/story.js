@@ -17,6 +17,7 @@ angular.module('amanuensisApp')
                 $scope.$broadcast('updateView', {
                     markdown: successData.story.content
                 });
+                updateScrollbar();
             });
         } 
         else {
@@ -261,6 +262,8 @@ angular.module('amanuensisApp')
         setTimeout(function() {
             $('#story-content-editor').focus();
         }, 200);        
+
+        updateScrollbar();
     }
 
     $scope.$on("doneEditing", function() {
@@ -268,7 +271,17 @@ angular.module('amanuensisApp')
             markdown: $scope.context.story.content
         });
         $rootScope.editMode = false;
+        updateScrollbar();
     });
+
+    function updateScrollbar() {
+        setTimeout(function() {
+          $("#story-content").height($("#story-content").outerHeight());
+          $("#story-content").mCustomScrollbar('update');
+        }, 100);
+    }
+
+    $(window).resize(updateScrollbar);
 
     // init controller
 

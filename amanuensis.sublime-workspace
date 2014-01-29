@@ -399,7 +399,7 @@
 			"file": "src/main/webapp/app/styles/story.css",
 			"settings":
 			{
-				"buffer_size": 4328,
+				"buffer_size": 4294,
 				"line_ending": "Unix"
 			}
 		},
@@ -431,7 +431,7 @@
 			"file": "src/main/webapp/app/scripts/controllers/login.js",
 			"settings":
 			{
-				"buffer_size": 1933,
+				"buffer_size": 1969,
 				"line_ending": "Unix"
 			}
 		}
@@ -551,7 +551,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 449.0
+		"width": 467.0
 	},
 	"console":
 	{
@@ -568,6 +568,7 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/dist/app/styles/4cbbf425.main.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/UserHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js",
@@ -694,8 +695,7 @@
 		"/home/tiberius/scala/projects/amanuensis/curl/slot/retrieve",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/SlotHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/exceptions/Exceptions.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Slot.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/core/SprayClientSpec.scala"
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Slot.scala"
 	],
 	"find":
 	{
@@ -703,7 +703,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp",
@@ -872,7 +872,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -915,8 +915,8 @@
 						"selection":
 						[
 							[
-								1603,
-								1603
+								1624,
+								1624
 							]
 						],
 						"settings":
@@ -926,7 +926,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 913.0,
+						"translation.y": 1408.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -964,7 +964,7 @@
 					"file": "src/main/webapp/app/styles/story.css",
 					"settings":
 					{
-						"buffer_size": 4328,
+						"buffer_size": 4294,
 						"regions":
 						{
 						},
@@ -982,7 +982,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 928.0,
+						"translation.y": 1018.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1076,15 +1076,15 @@
 					"file": "src/main/webapp/app/scripts/controllers/login.js",
 					"settings":
 					{
-						"buffer_size": 1933,
+						"buffer_size": 1969,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1785,
-								1785
+								1466,
+								1466
 							]
 						],
 						"settings":
@@ -1094,7 +1094,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 540.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
