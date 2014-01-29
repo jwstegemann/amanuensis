@@ -34,7 +34,7 @@ resolvers ++= Seq(
     "Typesafe repository" at "http://repo.typesafe.com/typesafe/repo1/"
 )
 
-// Libraries
+// Libraries to add
 libraryDependencies ++= Seq(
 	"io.spray"								  %   "spray-routing"				% "1.2.0",
 	"io.spray"								  %   "spray-can"					% "1.2.0",
