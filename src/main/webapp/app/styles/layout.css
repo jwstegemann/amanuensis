@@ -48,7 +48,6 @@ div.container.slots-left {
  */
  
 div.container.right-container {
-  background-color: yellow;
   width: 45%;
   z-index: 2;
   left: 100%;   
@@ -99,18 +98,14 @@ div.container.story {
 }
 
 div.container.story.shifted-right {
-  left: 30%;
+  left: 45%;
+  width: 55%;
 }
 
 div.container.story.shifted-left {
-  left: -15%;
+  left: 0%;
+  width: 55%;
 }
-
-div.story-padding {
-  padding-left: 15%;
-  padding-right: 15%;
-  height: 100%;
-}     
 
 div.container.story div.inner {
   position: absolute;

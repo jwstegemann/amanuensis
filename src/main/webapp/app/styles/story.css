@@ -9,7 +9,16 @@ div.story-header {
   margin-top: 40px;
   background: rgba(0,0,0,0.05);
   padding: 1.8em 15%;
-  flex: auto 0;
+  flex: auto auto ;
+  overflow: hidden;
+}
+
+div.container.story.shifted-right div.story-header {
+  padding: 1.8em 0.6em;
+}
+
+div.container.story.shifted-left div.story-header {
+  padding: 1.8em 0.6em;
 }
 
 div.story-header a {
@@ -45,6 +54,7 @@ input.story-title {
   font-weight: 300;
   background: transparent;
   border: none;
+  width: 80%;
 }
 
 div.story-icon {
@@ -76,6 +86,14 @@ div.content {
     box-sizing: border-box;
   flex: 1 1;
   overflow: hidden;  
+}
+
+div.container.story.shifted-right div.content {
+  padding: 1.8em 0.6em;
+}
+
+div.container.story.shifted-left div.content {
+  padding: 1.8em 0.6em;
 }
 
 #story-content .mCSB_scrollTools .mCSB_draggerContainer{

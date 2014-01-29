@@ -172,7 +172,9 @@ button.close {
   margin-top: 16px;
 }
 
-
+#loading-bar .bar {
+  background: #29d;
+}
 
 
 
