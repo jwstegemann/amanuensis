@@ -18,7 +18,7 @@
       <div ng-switch-when="single">
         <li class="story-info" ng-repeat="storyInfo in stories" 
           ng-click="openStory(storyInfo.id)">
-          <p class="single-story">{{storyInfo.content}}</p>
+          <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
         </li>
       </div>
@@ -88,7 +88,7 @@
       <div ng-switch-when="single">
         <li class="story-info" ng-repeat="storyInfo in stories" 
           ng-click="openStory(storyInfo.id)">
-          <p class="single-story">{{storyInfo.content}}</p>
+          <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
         </li>
       </div>

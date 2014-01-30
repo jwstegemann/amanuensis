@@ -74,7 +74,25 @@ angular.module('amanuensisApp')
       }
     } 
   })
-  .directive("markdown", function () {
+  .directive("markdown", function ($rootScope) {
+
+    marked.setOptions({
+      renderer: new marked.Renderer(),
+      gfm: true,
+      tables: true,
+      breaks: true,
+      pedantic: false,
+      sanitize: true,
+      smartLists: true,
+      smartypants: false
+    });
+
+    var markdownRenderer = new marked.Renderer();
+
+    markdownRenderer.link = function (href, title, text) {
+      return '<a href="' + href+ '" class="link">' + text + '</a>';
+    }    
+
     return {
       restrict: 'A',
       scope: true,
@@ -82,9 +100,30 @@ angular.module('amanuensisApp')
 
         scope.$on('updateView', function(event, data) {
           if (data.markdown) {
-            element.html(marked(data.markdown));
+            element.html(marked(data.markdown, {renderer: markdownRenderer}));
           }
 
+        });
+
+      }
+    };
+  })
+  .directive("storyPreview", function () {
+
+    //FixMe: put this into a service
+    var markdownRenderer = new marked.Renderer();
+
+    markdownRenderer.link = function (href, title, text) {
+      return '<a href="' + href+ '" class="link">' + text + '</a>';
+    }    
+
+    return {
+      restrict: 'A',
+      scope: false,
+      link: function (scope, element, attrs) {
+
+        scope.$watch("storyInfo.content", function() {
+          element.html(marked(scope.storyInfo.content, {renderer: markdownRenderer}));
         });
 
       }

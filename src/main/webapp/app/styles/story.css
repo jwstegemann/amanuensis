@@ -182,6 +182,16 @@ div.story-view a:before {
   margin-right: 5px;
 }
 
+div.story-view a.link:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;  
+  content: "\f14c";
+  margin-right: 5px;
+}
+
 div.story-view img {
   max-width: 100%;
 }
