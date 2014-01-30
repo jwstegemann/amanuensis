@@ -18,13 +18,13 @@ import amanuensis.domain.{StoryInfo}
 
 object SlotActor {
 
-  //FIXME: reverse attributes fitting to url
   case class List(storyId: String, slotName: String)
   case class Add(toStory: String, slotName: String, storyId: String)
   case class Remove(fromStory: String, slotName: String, storyId: String)
   case class CreateAndAdd(toStory: String, slotName: String, story: Story)
 
-  val retrieveQueryString = """MATCH (s:Story)-[r:Slot]-(m:Story) WHERE s.id={id} and r.name={slot} RETURN m.id as id, m.title as title"""
+  //TODO: get content only if number of stories is small enough
+  val retrieveQueryString = """MATCH (s:Story)-[r:Slot]-(m:Story) WHERE s.id={id} and r.name={slot} RETURN m.id as id, m.title as title, m.created as created, m.content as content"""
   val addQueryString = """MATCH (n:Story {id: {toStory}}),(m:Story {id: {story}}) MERGE (n)-[r:Slot]->(m) SET r.name={slot}"""
   val removeQueryString = """MATCH (n:Story {id: {fromStory}})-[r:Slot {name: {slot}}]-(m:Story {id: {story}}) DELETE r"""
   val createAndAddQueryString = """MATCH (n:Story {id: {toStory}}) MERGE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy} })"""
@@ -100,7 +100,7 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
       ("content" -> story.content),
       ("created" -> story.created),
       ("createdBy" -> story.createdBy)      
-    ) map { nothing => StoryInfo(id, story.title) }
+    ) map { nothing => StoryInfo(id, story.title, story.created, None) }
   }
 
 }

@@ -101,7 +101,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
       ("content" -> story.content),
       ("created" -> story.created),
       ("createdBy" -> story.createdBy)
-    ) map { nothing => StoryInfo(id, story.title) }
+    ) map { nothing => StoryInfo(id, story.title, story.created, None) }
   }
 
   def retrieve(storyId: String) = {

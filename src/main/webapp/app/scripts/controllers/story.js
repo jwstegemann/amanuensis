@@ -18,6 +18,7 @@ angular.module('amanuensisApp')
                     markdown: successData.story.content
                 });
                 updateScrollbar();
+                $rootScope.editMode = false;
             });
         } 
         else {

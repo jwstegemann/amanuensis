@@ -221,7 +221,11 @@ div.slot-list-title {
   font-size: 1.5em;
   margin-top: 40px;
   font-weight: 300; 
-  background: rgba(0,0,0,0.05)
+  background: rgba(0,0,0,0.05);
+  word-wrap: break-word;  
+  -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;    
 }
 
 ul.slot-list {
@@ -243,6 +247,10 @@ li.slot-name {
   margin: 0;
   font-weight: 300;
   cursor: pointer;
+  word-wrap: break-word;
+  -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;    
 }
 
 li.slot-name:hover {
@@ -271,7 +279,11 @@ div.story-list-title {
   font-size: 1.5em;
   margin-top: 40px;
   font-weight: 300; 
-  background: rgba(0,0,0,0.05)
+  background: rgba(0,0,0,0.05);
+  word-wrap: break-word;  
+  -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;    
 }
 
 ul.story-list {
@@ -293,6 +305,9 @@ li.story-info {
   margin: 0;
   font-weight: 300;
   cursor: pointer;
+  -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;   
 }
 
 li.story-info:hover {
@@ -302,9 +317,23 @@ li.story-info:hover {
 li.story-info > .delete-action {
   float: right;
   visibility: hidden;
-  margin-right: 30px;
 }
 
 li.story-info:hover > .delete-action {
   visibility: visible; 
+}
+
+li.story-info p {
+  font-size: 0.8em;
+  padding: 0;
+  width: 100%;
+  word-wrap:break-word;
+}
+
+li.story-info p.single-story {
+  font-size: 1.0em;
+  width: 100%;
+  padding: 0px;
+  margin: 0;
+  word-wrap:break-word;
 }

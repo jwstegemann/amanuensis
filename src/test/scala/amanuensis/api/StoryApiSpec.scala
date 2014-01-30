@@ -60,7 +60,7 @@ class StoryApiSpec extends Specification with Specs2RouteTest with StoryHttpServ
     "create a new story" in {
       Post("/story",Story(None, testTitle1, testContent1, "", "")) ~> authStoryRoute ~> check {
         responseAs[StoryInfo] must beLike {
-          case StoryInfo(id,title) => {
+          case StoryInfo(id,title,created,content) => {
             testId1 = id
             title ===  testTitle1
           }
@@ -91,7 +91,7 @@ class StoryApiSpec extends Specification with Specs2RouteTest with StoryHttpServ
     "create a new story in slot" in {
       Post(s"/story/$testId1/$testSlot1",Story(None, testTitle2, testContent2, "", "")) ~> authStoryRoute ~> check {
         responseAs[StoryInfo] must beLike {
-          case StoryInfo(id,title) => {
+          case StoryInfo(id,title,created,content) => {
             testId2 = id
             title ===  testTitle2
           }
@@ -101,7 +101,8 @@ class StoryApiSpec extends Specification with Specs2RouteTest with StoryHttpServ
 
     "find the new created story in slot" in {
       Get(s"/story/$testId1/$testSlot1") ~> authStoryRoute ~> check {
-        responseAs[Seq[StoryInfo]] === (StoryInfo(testId2, testTitle2) :: Nil)
+        (responseAs[Seq[StoryInfo]]
+          .count(storyInfo => (storyInfo.id == testId2 && storyInfo.title == testTitle2))) mustEqual 1
       }
     }
 
@@ -113,7 +114,8 @@ class StoryApiSpec extends Specification with Specs2RouteTest with StoryHttpServ
 
     "find the added story in slot" in {
       Get(s"/story/$testId2/$testSlot2") ~> authStoryRoute ~> check {
-        responseAs[Seq[StoryInfo]] === (StoryInfo(testId1, testTitle1) :: Nil)
+        (responseAs[Seq[StoryInfo]]
+          .count(storyInfo => (storyInfo.id == testId1 && storyInfo.title == testTitle1))) mustEqual 1
       }      
     }
 

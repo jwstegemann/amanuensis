@@ -6,11 +6,28 @@
 	<!-- inbound Story-List	-->
   <div id="stories-left" class="container stories stories-left shadow-right" ng-controller="SlotCtrl" scrollbar refresh-on-change="stories">
 		<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>{{slotName}}</div>
-		<ul class="story-list">
-			<li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id)">
-				<i class="fa fa-book on-slot"></i>{{storyInfo.title}}
-        <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
-			</li>
+		<ul class="story-list" ng-switch on="storyListViewMode">
+      <div ng-switch-when="few">
+        <li class="story-info" ng-repeat="storyInfo in stories" 
+          ng-click="openStory(storyInfo.id)">
+          <i class="fa fa-book on-slot"></i>{{storyInfo.title}}
+          <p>{{storyInfo.content}}</p>
+          <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+        </li>
+      </div>
+      <div ng-switch-when="single">
+        <li class="story-info" ng-repeat="storyInfo in stories" 
+          ng-click="openStory(storyInfo.id)">
+          <p class="single-story">{{storyInfo.content}}</p>
+          <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+        </li>
+      </div>
+      <div ng-switch-when="all">
+        <li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id)">
+          <i class="fa fa-book on-slot"></i>{{storyInfo.title}}
+          <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+        </li>
+      </div>
 		</ul>  	
   </div>
 	<!-- inbound Slot-List	-->
@@ -59,11 +76,29 @@
 	<!-- outbound Story-List	-->
   <div id="stories-right" class="container stories stories-right shadow-left" ng-controller="SlotCtrl" scrollbar refresh-on-change="stories">
 		<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>{{slotName}}</div>
-		<ul class="story-list">
-			<li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id)">
-				<i class="fa fa-book on-slot"></i>{{storyInfo.title}}
-        <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
-			</li>
+		<ul class="story-list" ng-switch on="storyListViewMode">
+      <div ng-switch-when="few">
+        <li class="story-info" ng-repeat="storyInfo in stories" 
+          ng-click="openStory(storyInfo.id)">
+          <i class="fa fa-book on-slot"></i>{{storyInfo.title}}
+          <p>{{storyInfo.content}}</p>
+          <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+        </li>
+      </div>
+      <div ng-switch-when="single">
+        <li class="story-info" ng-repeat="storyInfo in stories" 
+          ng-click="openStory(storyInfo.id)">
+          <p class="single-story">{{storyInfo.content}}</p>
+          <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+        </li>
+      </div>
+      <div ng-switch-when="all">
+        <li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id)">
+          <i class="fa fa-book on-slot"></i>{{storyInfo.title}}
+          <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+        </li>
+      </div>
+
 
 <!--
       <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>

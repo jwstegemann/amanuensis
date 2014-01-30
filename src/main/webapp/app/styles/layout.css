@@ -34,7 +34,10 @@ div.container.left-container.show-stories {
 div.container.stories-left {
   left: 0;
   width: 67%;
-  z-index: 4;  
+  z-index: 4;
+  -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;  
 }
 
 div.container.slots-left {

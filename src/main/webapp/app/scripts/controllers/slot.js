@@ -3,6 +3,8 @@
 angular.module('amanuensisApp')
   .controller('SlotCtrl', function ($scope,slotService,$rootScope,$location,$window) {
 
+    $scope.storyListViewMode = "all"        
+
     // init StoryContext
     $scope.reload = function(storyId, storyTitle, slotName) {
         $scope.storyId = storyId;
@@ -12,7 +14,12 @@ angular.module('amanuensisApp')
        	$scope.stories = slotService.query({
         	storyId: $scope.storyId,
         	slotName: $scope.slotName
+        }, function(successData) {
+            if (successData.lenth > 4) $scope.storyListViewMode = "all"
+            else if (successData.length == 1) $scope.storyListViewMode = "single"
+            else $scope.storyListViewMode = "few"
         });
+
     }
 
     $scope.$on('addStory', function() {

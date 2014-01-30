@@ -9,11 +9,11 @@
         </encoder>
     </appender>
 
-    <!-- <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>akka.log</file>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>/tmp/akka.log</file>
         <append>false</append>
         <encoder>
-            <pattern>%date{MM/dd HH:mm:ss} %-5level[%thread] %logger{1} - %msg%n</pattern>
+            <pattern>%date{ISO8601} %-5level %logger{36} %X{akkaSource} - %msg%n</pattern>
         </encoder>
     </appender> -->
 
@@ -21,9 +21,11 @@
     <logger name="spray.io.IOBridge" level="INFO" />
     <logger name="amanuensis" level="DEBUG" />
     <logger name="CypherServer" level="DEBUG" />
+    <logger name="ElasticSearchServer" level="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
     </root>
 
 </configuration>
