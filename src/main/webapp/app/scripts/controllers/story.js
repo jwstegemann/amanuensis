@@ -3,6 +3,14 @@
 angular.module('amanuensisApp')
   .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window,utilService,growl) {
 
+    function hasSlot(name, slots) {
+        var i = slots.length;
+        while(i--) {
+            if (slots[i].name === name) return true;
+        }
+        return false;
+    }
+
     // init StoryContext
     $scope.reload = function() {
         $scope.inSlots = false;
@@ -19,6 +27,23 @@ angular.module('amanuensisApp')
                 });
                 updateScrollbar();
                 $rootScope.editMode = false;
+
+                //open up slot and story-list by queryParameter
+                var slotToOpen = $location.search()['openSlot']
+                var inbound = angular.isDefined($location.search()['inbound'])
+
+//                console.log("should open slot: " + slotToOpen);
+//                console.log("  in direction: ") + (inbound)?'inbound':'outbound';
+
+                //eck, of slot is available in the given direction
+                if (angular.isDefined(slotToOpen)
+                    && (
+                        (inbound && hasSlot(slotToOpen, successData.inSlots)) 
+                        || (!inbound && hasSlot(slotToOpen, successData.outSlots))
+                    )
+                ) {
+                    $scope.selectSlot(slotToOpen, inbound);
+                }
             });
         } 
         else {
@@ -79,6 +104,7 @@ angular.module('amanuensisApp')
                 else {
             		storyService.create($scope.context.story, function(successData) {
             			$scope.context.story.id = successData.id;
+                        $location.url("/story/" + $scope.context.story.id);
                         growl.addSuccessMessage($scope.context.story.title + ' has been created.');
             		});
                 }
@@ -173,8 +199,14 @@ angular.module('amanuensisApp')
         }
     }
 
-    $scope.openStory = function(storyId) {
-        $location.url('/story/' + storyId);
+    $scope.openStory = function(storyId,slotName,inbound) {
+        var query = {
+            'openSlot': slotName
+        };
+
+        if (inbound) query.inbound='true';
+
+        $location.url('/story/' + storyId).search(query)
     }
 
     /*

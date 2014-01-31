@@ -9,7 +9,7 @@
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
         <li class="story-info" ng-repeat="storyInfo in stories" 
-          ng-click="openStory(storyInfo.id)">
+          ng-click="openStory(storyInfo.id, slotName, false)">
           <i class="fa fa-book on-slot"></i>{{storyInfo.title}}
           <p>{{storyInfo.content}}</p>
           <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
@@ -17,13 +17,13 @@
       </div>
       <div ng-switch-when="single">
         <li class="story-info" ng-repeat="storyInfo in stories" 
-          ng-click="openStory(storyInfo.id)">
+          ng-click="openStory(storyInfo.id, slotName, false)">
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="all">
-        <li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id)">
+        <li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id, slotName, false)">
           <i class="fa fa-book on-slot"></i>{{storyInfo.title}}
           <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
         </li>
@@ -79,7 +79,7 @@
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
         <li class="story-info" ng-repeat="storyInfo in stories" 
-          ng-click="openStory(storyInfo.id)">
+          ng-click="openStory(storyInfo.id, slotName, true)">
           <i class="fa fa-book on-slot"></i>{{storyInfo.title}}
           <p>{{storyInfo.content}}</p>
           <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
@@ -87,13 +87,13 @@
       </div>
       <div ng-switch-when="single">
         <li class="story-info" ng-repeat="storyInfo in stories" 
-          ng-click="openStory(storyInfo.id)">
+          ng-click="openStory(storyInfo.id, slotName, true)">
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="all">
-        <li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id)">
+        <li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id, slotName, true)">
           <i class="fa fa-book on-slot"></i>{{storyInfo.title}}
           <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
         </li>
