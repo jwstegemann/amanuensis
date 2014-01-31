@@ -9,16 +9,23 @@ angular.module('amanuensisApp')
     var counter = 0;
 
     function showOverlay() {
+      console.log('+++ show Overlay, counter before: ' + counter);
       if (counter++ === 0) {
             overlay.addClass('md-show');   
       }
+      console.log('+++ show Overlay, counter after: ' + counter);
     }
 
     function hideOverlay() {
+      console.log('--- hide Overlay, counter before: ' + counter);
+
       if (--counter <= 0) {
             overlay.removeClass('md-show');
             counter = 0;
       }
+
+      console.log('--- hide Overlay, counter after: ' + counter);
+
     }
 
     return {

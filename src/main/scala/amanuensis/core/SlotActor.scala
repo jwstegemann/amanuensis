@@ -23,8 +23,17 @@ object SlotActor {
   case class Remove(fromStory: String, slotName: String, storyId: String)
   case class CreateAndAdd(toStory: String, slotName: String, story: Story)
 
-  //TODO: get content only if number of stories is small enough
-  val retrieveQueryString = """MATCH (s:Story)-[r:Slot]-(m:Story) WHERE s.id={id} and r.name={slot} RETURN m.id as id, m.title as title, m.created as created, m.content as content"""
+
+  val retrieveQueryString = """MATCH (s:Story {id: {story}})
+    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)
+    WITH s, count(*) as weight
+    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)
+    WITH m, weight,
+      (CASE
+        WHEN weight < 5 THEN m.content
+        ELSE null 
+      END) as content
+    RETURN m.id, m.title, m.created, content"""
   val addQueryString = """MATCH (n:Story {id: {toStory}}),(m:Story {id: {story}}) MERGE (n)-[r:Slot]->(m) SET r.name={slot}"""
   val removeQueryString = """MATCH (n:Story {id: {fromStory}})-[r:Slot {name: {slot}}]-(m:Story {id: {story}}) DELETE r"""
   val createAndAddQueryString = """MATCH (n:Story {id: {toStory}}) MERGE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy} })"""
@@ -60,7 +69,7 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
 
   def list(storyId: String, slotName: String) = {
   	server.list[StoryInfo](retrieveQueryString,
-      ("id" -> storyId),
+      ("story" -> storyId),
       ("slot" -> slotName)
     )
   }

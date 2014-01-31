@@ -379,7 +379,7 @@
 			"file": "src/main/webapp/app/views/story.html",
 			"settings":
 			{
-				"buffer_size": 6752,
+				"buffer_size": 7664,
 				"line_ending": "Unix"
 			}
 		},
@@ -387,15 +387,7 @@
 			"file": "src/main/webapp/app/scripts/controllers/story.js",
 			"settings":
 			{
-				"buffer_size": 10367,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/styles/story.css",
-			"settings":
-			{
-				"buffer_size": 5039,
+				"buffer_size": 10412,
 				"line_ending": "Unix"
 			}
 		},
@@ -443,7 +435,47 @@
 			"file": "src/main/webapp/app/scripts/controllers/slot.js",
 			"settings":
 			{
-				"buffer_size": 1664,
+				"buffer_size": 1665,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/styles/story.css",
+			"settings":
+			{
+				"buffer_size": 5912,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/styles/layout.css",
+			"settings":
+			{
+				"buffer_size": 2032,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/scripts/directives/misc.js",
+			"settings":
+			{
+				"buffer_size": 7910,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/bower_components/font-awesome/css/font-awesome.css",
+			"settings":
+			{
+				"buffer_size": 21658,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/scripts/services/utilService.js",
+			"settings":
+			{
+				"buffer_size": 1430,
 				"line_ending": "Unix"
 			}
 		}
@@ -563,7 +595,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 449.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -580,6 +612,7 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JRestFormats.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/api/StoryApiSpec.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/api/QueryApiSpec.scala",
@@ -588,7 +621,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/layout.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/query.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
@@ -886,7 +918,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 12,
 			"sheets":
 			[
 				{
@@ -894,15 +926,15 @@
 					"file": "src/main/webapp/app/views/story.html",
 					"settings":
 					{
-						"buffer_size": 6752,
+						"buffer_size": 7664,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3493,
-								3493
+								1153,
+								1153
 							]
 						],
 						"settings":
@@ -912,7 +944,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 630.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -922,15 +954,15 @@
 					"file": "src/main/webapp/app/scripts/controllers/story.js",
 					"settings":
 					{
-						"buffer_size": 10367,
+						"buffer_size": 10412,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								371,
-								371
+								852,
+								852
 							]
 						],
 						"settings":
@@ -947,34 +979,6 @@
 				},
 				{
 					"buffer": 2,
-					"file": "src/main/webapp/app/styles/story.css",
-					"settings":
-					{
-						"buffer_size": 5039,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "src/main/webapp/app/scripts/services/storyService.js",
 					"settings":
 					{
@@ -1002,7 +1006,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "src/main/webapp/app/scripts/services/slotService.js",
 					"settings":
 					{
@@ -1030,7 +1034,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 4,
 					"file": "src/main/scala/amanuensis/core/SlotActor.scala",
 					"settings":
 					{
@@ -1058,7 +1062,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 5,
 					"file": "src/main/scala/amanuensis/core/StoryActor.scala",
 					"settings":
 					{
@@ -1086,7 +1090,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "src/main/scala/amanuensis/domain/Story.scala",
 					"settings":
 					{
@@ -1112,25 +1116,165 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "src/main/webapp/app/scripts/controllers/slot.js",
 					"settings":
 					{
-						"buffer_size": 1664,
+						"buffer_size": 1665,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								163,
-								163
+								637,
+								637
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/main/webapp/app/styles/story.css",
+					"settings":
+					{
+						"buffer_size": 5912,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3173,
+								3173
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2173.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/main/webapp/app/styles/layout.css",
+					"settings":
+					{
+						"buffer_size": 2032,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								526,
+								526
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 419.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/main/webapp/app/scripts/directives/misc.js",
+					"settings":
+					{
+						"buffer_size": 7910,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2927,
+								2927
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1260.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "src/main/webapp/app/bower_components/font-awesome/css/font-awesome.css",
+					"settings":
+					{
+						"buffer_size": 21658,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18225,
+								18225
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 16266.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "src/main/webapp/app/scripts/services/utilService.js",
+					"settings":
+					{
+						"buffer_size": 1430,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								348,
+								348
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -1200,8 +1344,16 @@
 		"selected_items":
 		[
 			[
+				"misc",
+				"src/main/webapp/app/scripts/directives/misc.js"
+			],
+			[
+				"layout",
+				"src/main/webapp/app/styles/layout.css"
+			],
+			[
 				"story",
-				"src/main/scala/amanuensis/domain/Story.scala"
+				"src/main/webapp/app/styles/story.css"
 			],
 			[
 				"slotact",
@@ -1342,10 +1494,6 @@
 			[
 				"query.css",
 				"src/main/webapp/app/styles/query.css"
-			],
-			[
-				"layout",
-				"src/main/webapp/app/styles/layout.css"
 			],
 			[
 				"storya",
