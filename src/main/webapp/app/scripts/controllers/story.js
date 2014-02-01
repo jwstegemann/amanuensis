@@ -57,7 +57,8 @@ angular.module('amanuensisApp')
                     createdBy: "who knows"
         		},
         		inSlots: [],
-        		outSlots: []
+        		outSlots: [],
+                tags: []
         	};
 
             setTimeout(function() {
