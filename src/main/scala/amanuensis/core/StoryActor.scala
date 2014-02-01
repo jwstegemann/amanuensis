@@ -36,7 +36,12 @@ object StoryActor {
    */
   //TODO: use one param of story-object
   //TODO: use merge when creating stories
-  val createQueryString = """CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy} }) RETURN s.id"""
+  val createQueryString = """
+  CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy} })
+  FOREACH (tagname {tags} |
+    MERGE (t:Tag {name: tagname})
+    MERGE (s)-[:IsA]->(t:Tag))
+  RETURN s.id"""
   
   val retrieveStoryQueryString = """MATCH (s:Story) WHERE s.id={id} return s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy"""
 
@@ -45,7 +50,12 @@ object StoryActor {
 
   val removeStoryQueryString = """MATCH (s:Story) WHERE s.id={id} WITH s OPTIONAL MATCH s-[r]-() DELETE r,s"""
 
-  val updateStoryQueryString = """MATCH (s:Story) WHERE s.id={id} SET s.title={title}, s.content={content}"""
+  val updateStoryQueryString = """
+  MATCH (s:Story {id={id}}) SET s.title={title}, s.content={content}
+  FOREACH (tagname {tags} |
+    MERGE (t:Tag {name: tagname})
+    MERGE (s)-[:IsA]->(t:Tag))
+  """
 }
 
 
