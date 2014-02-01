@@ -38,12 +38,16 @@ object StoryActor {
   //TODO: use merge when creating stories
   val createQueryString = """
   CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy} })
-  FOREACH (tagname {tags} |
+  WITH s
+  FOREACH (tagname IN {tags} |
     MERGE (t:Tag {name: tagname})
-    MERGE (s)-[:IsA]->(t:Tag))
+    MERGE (s)-[:is]->(t:Tag))
   RETURN s.id"""
   
-  val retrieveStoryQueryString = """MATCH (s:Story) WHERE s.id={id} return s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy"""
+  val retrieveStoryQueryString = """MATCH (s:Story {id: {id}})
+    OPTIONAL MATCH (s)-[:is]->(t:Tag)
+    return s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy, collect(t.name) as tags
+  """
 
   val retrieveOutSlotQueryString = """MATCH (s:Story)-[r:Slot]->() WHERE s.id={id} RETURN DISTINCT r.name as name"""
   val retrieveInSlotQueryString = """MATCH (s:Story)<-[r:Slot]-() WHERE s.id={id} RETURN DISTINCT r.name as name"""
@@ -51,10 +55,12 @@ object StoryActor {
   val removeStoryQueryString = """MATCH (s:Story) WHERE s.id={id} WITH s OPTIONAL MATCH s-[r]-() DELETE r,s"""
 
   val updateStoryQueryString = """
-  MATCH (s:Story {id={id}}) SET s.title={title}, s.content={content}
-  FOREACH (tagname {tags} |
+  MATCH (s:Story {id: {id}}) 
+  MATCH (s)-[r:is]->(:Tag) DELETE r
+  SET s.title={title}, s.content={content}
+  FOREACH (tagname IN {tags} |
     MERGE (t:Tag {name: tagname})
-    MERGE (s)-[:IsA]->(t:Tag))
+    MERGE (s)-[:is]->(t:Tag))
   """
 }
 
@@ -110,7 +116,8 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
       ("title" -> story.title), 
       ("content" -> story.content),
       ("created" -> story.created),
-      ("createdBy" -> story.createdBy)
+      ("createdBy" -> story.createdBy),
+      ("tags" -> story.tags)
     ) map { nothing => StoryInfo(id, story.title, story.created, None) }
   }
 
@@ -143,7 +150,8 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   	server.execute(updateStoryQueryString, 
       ("id" -> storyId),
       ("title" -> story.title), 
-      ("content" -> story.content)    
+      ("content" -> story.content),
+      ("tags" -> story.tags)
     )
   }
 

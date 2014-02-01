@@ -5,6 +5,8 @@ create constraint on (s:Story) assert s.id is unique
 
 create constraint on (u:User) assert u.login is unique
 
+create constraint on (t:Tag) assert t.name is unique
+
 create index on :Slot(name)
 
 

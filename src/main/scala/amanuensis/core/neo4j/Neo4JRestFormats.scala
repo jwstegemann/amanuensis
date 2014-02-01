@@ -17,10 +17,12 @@ trait Neo4JJsonProtocol extends DefaultJsonProtocol with Neo4JRestFormats {
   implicit def double2JsonObject(v: Double) = JsNumber(v)
   
   implicit def boolean2JsonObject(v: Boolean) = JsBoolean(v)
+
+  implicit def seq2JsonArray[T](s: Seq[T])(implicit format: JsonFormat[T]) = s.toJson 
 }
 
 
-trait Neo4JRestFormats { this: StandardFormats => 
+trait Neo4JRestFormats { this: StandardFormats with CollectionFormats => 
 
   type JFo[T] = JsonFormat[T] // simple alias for reduced verbosity
 
@@ -73,5 +75,16 @@ trait Neo4JRestFormats { this: StandardFormats =>
       }
     }
   }  
+
+  def jsonCaseClassArrayFormat[A: JFo, B: JFo, C: JFo, D: JFo, E: JFo, F: JFo, T <: Product](construct: (A, B, C, D, E, F) => T) = {
+    new RootJsonFormat[T] {
+      def write(t: T) = serializationError("row is not to be written")
+      def read(value: JsValue) = value match {
+        case JsArray(a :: b :: c :: d :: e :: f :: Nil) => construct(a.convertTo[A], b.convertTo[B], c.convertTo[C], d.convertTo[D], 
+          e.convertTo[E], f.convertTo[F])
+        case x => deserializationError("Expected case class as JsArray")
+      }
+    }
+  } 
 
 }

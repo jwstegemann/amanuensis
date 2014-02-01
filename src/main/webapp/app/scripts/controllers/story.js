@@ -54,11 +54,11 @@ angular.module('amanuensisApp')
         			title: undefined,
         			content: undefined,
                     created: "not yet",
-                    createdBy: "who knows"
+                    createdBy: "who knows",
+                    tags: []
         		},
         		inSlots: [],
-        		outSlots: [],
-                tags: []
+        		outSlots: []
         	};
 
             setTimeout(function() {
