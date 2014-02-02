@@ -25,7 +25,7 @@ object SlotActor {
 
 
   val retrieveQueryString = """MATCH (s:Story {id: {story}})
-    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)
+    MATCH (s)-[r:Slot {name: {slot}}]-(:Story)
     WITH s, count(*) as weight
     MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)
     WITH m, weight,

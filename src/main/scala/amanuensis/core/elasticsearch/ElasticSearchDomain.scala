@@ -3,6 +3,7 @@ package amanuensis.core.elasticsearch
 import spray.json.DefaultJsonProtocol
 import amanuensis.domain.{Story, StoryProtocol}
 
+case class QueryRequest(query: String, tags: Seq[String])
 
 case class QueryResult(took: Int, hits: Hits)
 
@@ -18,4 +19,5 @@ object ElasticSearchProtocol extends DefaultJsonProtocol {
   implicit val hitJsonFormat = jsonFormat3(Hit)
   implicit val hitsJsonFormat = jsonFormat3(Hits)
   implicit val queryResultJsonFormat = jsonFormat2(QueryResult)
+  implicit val queryRequestJsonFormat = jsonFormat2(QueryRequest)
 }

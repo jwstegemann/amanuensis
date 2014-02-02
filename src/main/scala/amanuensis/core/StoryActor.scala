@@ -109,7 +109,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
 
     val id = Neo4JId.generateId
 
-    indexActor ! Index(story.copy(id = Some(id), content = StringUtils.truncate(story.content,250)))
+    indexActor ! Index(story.copy(id = Some(id)))
 
     server.execute(createQueryString, 
       ("id" -> id), 
@@ -145,7 +145,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
 
     story.check()
 
-    indexActor ! Index(story.copy(content = StringUtils.truncate(story.content,250)))
+    indexActor ! Index(story)
 
   	server.execute(updateStoryQueryString, 
       ("id" -> storyId),

@@ -92,18 +92,34 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     ~> forgetResponse
   )
 
-  def query(queryString: String): Future[QueryResult] = {
+  def query(queryRequest: QueryRequest): Future[QueryResult] = {
     //ToDo: make constants to improve performance
     val queryObject = JsObject(
       ("query", JsObject(
         ("multi_match", JsObject(
-          ("query", JsString(queryString)),
-          ("fields", JsArray(JsString("title"),JsString("content"))),
+          ("query", JsString(queryRequest.query)),
+          ("fields", JsArray(JsString("title"),JsString("content"),JsString("tags"))),
           ("type", JsString("phrase_prefix")),
           ("max_expansions", JsString("10"))
         ))
-      ))
+      )),
+      ("facets", JsObject(
+        ("tags", JsObject(
+          ("terms", JsObject(
+            ("field", JsString("tags"))
+          ))
+        ))
+      )),
+      queryRequest.tags match {
+        case (first :: rest) => ("filter", JsObject(
+            ("terms", JsObject(
+              ("tags", (first :: rest).toJson)
+            ))
+          ))
+        case _ => ("filter", JsObject())
+      }
     )
+
     log.debug("ElasticSearch-Query-Request: {}", queryObject)
     pipeline(Get(searchUrl, queryObject)) recover {
       case x => throw ElasticSearchException(s"Error retrieving response from ElasticSearch-server: $x")
