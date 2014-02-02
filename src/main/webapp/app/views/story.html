@@ -36,7 +36,7 @@
     <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Inbound</div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.inSlots" ng-click="selectSlot(slot.name, true)">
-      	<i class="fa fa-mail-reply on-slot"></i>{{slot.name}}
+      	<i class="fa fa-caret-left on-slot"></i>{{slot.name}}
       </li>
     </ul>  	
   </div>
@@ -134,7 +134,7 @@
     <div class="slot-list-title"><i class="fa fa-link fa-lg on-slot"></i>&nbsp;Outbound</div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.outSlots" ng-click="selectSlot(slot.name, false)">
-      	<i class="fa fa-mail-reply on-slot"></i>{{slot.name}}
+      	<i class="fa fa-caret-right on-slot"></i>{{slot.name}}
       </li>
     </ul> 
   </div>

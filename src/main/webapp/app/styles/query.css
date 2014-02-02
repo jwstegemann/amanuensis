@@ -1,6 +1,6 @@
 
 div.query-sidebar {
-  width: 15%;
+  width: 20%;
   min-width: 200px;
   float: left;
   padding: 1.0em;
@@ -13,8 +13,8 @@ div.query-sidebar {
 }
 
 div.query-results {
-  width: 85%;
-  left: 15%;
+  width: 80%;
+  left: 20%;
   min-width: 200px;
   float: left;
   padding: 2.4em 2.0em; 

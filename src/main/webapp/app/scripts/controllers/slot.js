@@ -15,7 +15,7 @@ angular.module('amanuensisApp')
         	storyId: $scope.storyId,
         	slotName: $scope.slotName
         }, function(successData) {
-            if (successData.lenth > 4) $scope.storyListViewMode = "all"
+            if (successData.length > 4) $scope.storyListViewMode = "all"
             else if (successData.length == 1) $scope.storyListViewMode = "single"
             else $scope.storyListViewMode = "few"
         });

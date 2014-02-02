@@ -49,7 +49,6 @@ class UserActor extends Actor with ActorLogging with UsingParams with Neo4JJsonP
   def checkUser(username: String, password: String) = {
     log.info("checking user {}...", username)
     
-    //FixMe: handling of cache for UserContext should be refined! Maybe andThen that only caches, if user is correct
     userCache(username) {
       log.info("check neo4j for user {}...", username)
 
@@ -61,9 +60,6 @@ class UserActor extends Actor with ActorLogging with UsingParams with Neo4JJsonP
   }
 
   def getUserContext(username: String) = {
-    log.info("******************** getting user {}...", username)
-    
-    //FixMe: handling of cache for UserContext should be refined! Maybe andThen that only caches, if user is correct
     userCache(username) {
       log.info("get user {} from neo4j...", username)
 
