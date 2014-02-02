@@ -37,17 +37,12 @@ class StatelessCookieAuthenticator(userActor: ActorSelection)(implicit val ec: E
   def apply(ctx: RequestContext) = {
     val cookieOption: Option[HttpCookie] = ctx.request.cookies.find(_.name == StatelessCookieAuth.AUTH_COOKIE_NAME)
 
+    //FIXME: do not use host. Find a way to get the users ip, etc.
     ctx.request.header[Host] match {
       case Some(host) => {
         cookieOption match {
           case Some(token) => {
             val username = token.content.slice(41,token.content.length)
-
-            println("username:" + username)
-            println("host:" + host.host)            
-
-            println("token from cookie:" + token.content)
-            println("generated token:" + StatelessCookieAuth.getSignedToken(username, host.host))
 
             if (Converters.constantTimeEquals(token.content, StatelessCookieAuth.getSignedToken(username, host.host))) {
 
