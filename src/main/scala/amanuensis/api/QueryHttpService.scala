@@ -27,7 +27,7 @@ trait QueryHttpService extends HttpService with SprayJsonSupport {
 
   private val queryActor = actorRefFactory.actorSelection("/user/query")
 
-  private implicit val timeout = new Timeout(2.seconds)
+  private implicit val timeout = new Timeout(5.seconds)
   private implicit def executionContext = actorRefFactory.dispatcher
 
 

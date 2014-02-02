@@ -1,19 +1,71 @@
-div.query {
-  padding: 0 15%;
+
+div.query-sidebar {
+  width: 15%;
+  min-width: 200px;
+  float: left;
+  padding: 1.0em;
+  padding-top: 2.4em;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;  
   overflow: hidden;
+  background-color: #11273d;
+  color: #dacea6;
+}
+
+div.query-results {
+  width: 85%;
+  left: 15%;
+  min-width: 200px;
+  float: left;
+  padding: 2.4em 2.0em; 
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;  
+  overflow: hidden;
+}
+
+h3.filterHeader {
+  margin-top: 2.2em;
+  font-size: 1.2em;
+  font-weight: 300;
 }
 
 h2.resultHeader {
   margin: 0px;
-  margin-bottom: 30px;
+  margin-top: 1em;
+  margin-bottom: 1em;
   font-size: 2em;
   font-weight: 300;
+}
+
+h2.resultHeader span i {
+  margin-left: 0.25em;
+  margin-right: 0.25em;
 }
 
 ul.resultList {
   padding-left: 20px;
   list-style: none;
   text-transform: none;  
+  font-size: 1.0em;
+  word-wrap: break-word;  
+}
+
+ul.tag-list {
+  list-style: none;
+  text-transform: none;
+  padding-left: 0.8em;
+}
+
+ul.tag-list > li {
+  margin-top: 0.25em;
+}
+
+ul.tag-list a {
+  cursor: pointer;
+}
+
+ul.tag-list i {
+  margin-right: 5px;
 }
 
 li.resultListItem {

@@ -32,7 +32,7 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
   private val storyActor = actorRefFactory.actorSelection("/user/story")
   private val slotActor = actorRefFactory.actorSelection("/user/slot")
 
-  private implicit val timeout = new Timeout(2 seconds)
+  private implicit val timeout = new Timeout(5 seconds)
   private implicit def executionContext = actorRefFactory.dispatcher
 
 
