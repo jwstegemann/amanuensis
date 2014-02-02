@@ -2,7 +2,12 @@
 
   <div class="query">
 
-    <h2 ng-show="result" class="resultHeader" style="margin-top: 100px"><i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Results for "{{queryString}}"</h2>
+    <h2 style="margin:4em;">Facets</h2>
+    <ul>
+      <li ng-repeat="term in result.facets.tags.terms" ng-click="searchWithFilter(term.term)"><a><i class="fa fa-tag"></i>{{term.term}} ({{term.count}})</a></li>
+    </ul>
+
+    <h2 ng-show="result" class="resultHeader" style="margin-top: 100px"><i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Results for "{{queryString}}"<span ng-show="terms"> with Tags <span ng-repeat="term in terms"><i class="fa fa-tag"></i>{{term}}</span></span></h2>
 
     <ul ng-show="result" class="resultList">
 

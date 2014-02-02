@@ -4,9 +4,9 @@ angular.module('amanuensisApp')
   .factory('queryService', function($resource) {
 
     // Public API here
-    return $resource('/query/:queryString', {}, {
+    return $resource('/query', {}, {
       query: {
-        method: 'GET',
+        method: 'POST',
         isArray: false
       }});
 
