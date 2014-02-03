@@ -56,7 +56,7 @@ object StoryActor {
 
   val updateStoryQueryString = """
   MATCH (s:Story {id: {id}}) 
-  MATCH (s)-[r:is]->(:Tag) DELETE r
+  OPTIONAL MATCH (s)-[r:is]->(:Tag) DELETE r
   SET s.title={title}, s.content={content}
   FOREACH (tagname IN {tags} |
     MERGE (t:Tag {name: tagname})

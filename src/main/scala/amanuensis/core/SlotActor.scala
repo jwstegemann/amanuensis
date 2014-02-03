@@ -36,7 +36,12 @@ object SlotActor {
     RETURN m.id, m.title, m.created, content"""
   val addQueryString = """MATCH (n:Story {id: {toStory}}),(m:Story {id: {story}}) MERGE (n)-[r:Slot]->(m) SET r.name={slot}"""
   val removeQueryString = """MATCH (n:Story {id: {fromStory}})-[r:Slot {name: {slot}}]-(m:Story {id: {story}}) DELETE r"""
-  val createAndAddQueryString = """MATCH (n:Story {id: {toStory}}) MERGE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy} })"""
+  val createAndAddQueryString = """MATCH (n:Story {id: {toStory}}) 
+    MERGE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy}})
+    WITH m
+    FOREACH (tagname IN {tags} |
+      MERGE (t:Tag {name: tagname})
+      MERGE (m)-[:is]->(t:Tag))"""
 }
 
 /**
@@ -108,7 +113,8 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
       ("title" -> story.title),
       ("content" -> story.content),
       ("created" -> story.created),
-      ("createdBy" -> story.createdBy)      
+      ("createdBy" -> story.createdBy),
+      ("tags" -> story.tags)      
     ) map { nothing => StoryInfo(id, story.title, story.created, None) }
   }
 
