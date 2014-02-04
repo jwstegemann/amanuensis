@@ -137,42 +137,42 @@ div.story-view {
     box-sizing: border-box;  
 }
 
-div.story-view h1 {
+div.story-view h1, li.story-info h1 {
   font-size: 1.6em;
   font-weight: 300;
 }
 
-div.story-view h2 {
+div.story-view h2, li.story-info h2 {
   font-size: 1.4em;
   font-weight: 300;
 }
 
-div.story-view h3 {
+div.story-view h3, li.story-info h3 {
   font-size: 1.2em;
   font-weight: 300;
 }
 
-div.story-view h4 {
+div.story-view h4, li.story-info h4 {
   font-size: 1.2em;
   font-weight: 300;
 }
 
-div.story-view h5 {
+div.story-view h5, li.story-info h5 {
   font-size: 1.2em;
   font-weight: 300;
 }
 
-div.story-view h6 {
+div.story-view h6, li.story-info h6 {
   font-size: 1.2em;
   font-weight: 300;
 }
 
-div.story-view a {
+div.story-view a, li.story-info a {
   text-decoration: none;
   font-weight: 400;
 }
 
-div.story-view a:before {
+div.story-view a:before, li.story-info a:before{
   font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
@@ -182,7 +182,7 @@ div.story-view a:before {
   margin-right: 5px;
 }
 
-div.story-view a.link:before {
+div.story-view a.link:before, li.story-info a.link:before {
   font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
@@ -192,7 +192,7 @@ div.story-view a.link:before {
   margin-right: 5px;
 }
 
-div.story-view img {
+div.story-view img, li.story-info img {
   max-width: 100%;
 }
 
@@ -311,13 +311,17 @@ li.story-info {
   padding: 15px;
   font-family: 'Lato', Arial, sans-serif;
   color: #DABDB0;
-  font-size: 1.25em;
+  font-size: 1.0em;
   margin: 0;
   font-weight: 300;
   cursor: pointer;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;   
+}
+
+li.story-info > span.title {
+  font-size: 1.25em;
 }
 
 li.story-info:hover {
@@ -334,7 +338,6 @@ li.story-info:hover > .delete-action {
 }
 
 li.story-info p {
-  font-size: 0.8em;
   padding: 0;
   width: 100%;
   word-wrap:break-word;
