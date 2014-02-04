@@ -38,13 +38,13 @@ class StatelessCookieAuthenticator(userActor: ActorSelection)(implicit val ec: E
     val cookieOption: Option[HttpCookie] = ctx.request.cookies.find(_.name == StatelessCookieAuth.AUTH_COOKIE_NAME)
 
     //FIXME: do not use host. Find a way to get the users ip, etc.
-    ctx.request.header[Host] match {
+    ctx.request.header[`Remote-Address`] match {
       case Some(host) => {
         cookieOption match {
           case Some(token) => {
             val username = token.content.slice(41,token.content.length)
 
-            if (Converters.constantTimeEquals(token.content, StatelessCookieAuth.getSignedToken(username, host.host))) {
+            if (Converters.constantTimeEquals(token.content, StatelessCookieAuth.getSignedToken(username, host.address.toString()))) {
 
               ((userActor ? GetUserContext(username)).mapTo[UserContext]).map { anything: UserContext =>
                 Right(anything)
@@ -77,9 +77,11 @@ object StatelessCookieAuth {
   }
 
   def getSignedToken(username: String, host: String): String = {
-    //ToDo: Add actual Date
-    val token = username + host
-    sign(token) + "-" + username
+    //ToDo: Use Calculation of daynumber from spray.http.DateTime here for performance-Reasons
+    val date = DateTime.now.toIsoDateString
+    val token = s"$username$host$date"
+    val signature = sign(token)
+    s"$signature-$username"
   }
 
 

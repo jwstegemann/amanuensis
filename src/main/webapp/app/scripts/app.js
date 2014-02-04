@@ -31,6 +31,10 @@ angular.module('amanuensisApp', [
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
+      .when('/graph', {
+        templateUrl: 'views/graph.html',
+        controller: 'GraphCtrl'
+      })
       .otherwise({
         redirectTo: '/query'
       });
@@ -53,12 +57,20 @@ angular.module('amanuensisApp', [
       };
     }]);
 
-  }).run(function ($rootScope) {
+  }).run(function ($rootScope, $location) {
     //init mode and stack
     $rootScope.selectMode = false;
     $rootScope.stack = undefined;
     $rootScope.appState = undefined;
-    $rootScope.editMode = false;   
+    $rootScope.editMode = false;
+
+    if(!(($location.host() === 'localhost' || $location.host() === '0.0.0.0') && $location.port() === 9000)) {
+      if ($location.protocol !== 'https') {
+        //FixMe: Is there a way to switch the protocol?
+        $rootScope.$broadcast('error',{errorMessage: 'Please use https in your URL to make sure, that nobody gets to know your credentials.'});
+      }
+    }
+
   });
 
 

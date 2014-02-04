@@ -1,8 +1,10 @@
 #! /bin/bash
 
-curl -XPUT 'http://f91d1o0g:6w3p5o4f75mjgp5j@apricot-4613157.us-east-1.bonsai.io:80/stories'
+curl -XDELETE 'http://6llvafxy:snjwm1wszy5mnwgf@redwood-8816963.us-east-1.bonsai.io:80/stories'
 
-curl -XPUT "http://f91d1o0g:6w3p5o4f75mjgp5j@apricot-4613157.us-east-1.bonsai.io:80/stories/story/_mapping" -d'
+curl -XPUT 'http://6llvafxy:snjwm1wszy5mnwgf@redwood-8816963.us-east-1.bonsai.io:80/stories'
+
+curl -XPUT "http://6llvafxy:snjwm1wszy5mnwgf@redwood-8816963.us-east-1.bonsai.io:80/stories/story/_mapping" -d'
 {
   "story": {
     "properties": {

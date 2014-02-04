@@ -24,21 +24,22 @@ import amanuensis.domain.Message
 import amanuensis.domain.Severities._
 import amanuensis.domain.MessageJsonProtocol._
 import amanuensis.domain.{UserContext, UserContextProtocol}
-import amanuensis.core.neo4j.Neo4JException
-import amanuensis.core.elasticsearch.ElasticSearchException
+
 import spray.http.HttpHeaders._
 
 import amanuensis.api.security._
 
+import amanuensis.core.neo4j.Neo4JException
+import amanuensis.core.elasticsearch.ElasticSearchException
 
-class RootServiceActor extends Actor with ActorLogging with HttpService with SprayJsonSupport 
+
+class RootServiceActor extends Actor with ActorLogging with HttpService with AmanuensisExceptionHandler with SprayJsonSupport 
   with StoryHttpService 
   with QueryHttpService 
   with UserHttpService
   with StaticHttpService 
-  with AttachmentHttpService {
-
-  import amanuensis.core.UserActor._
+  with AttachmentHttpService 
+  with GraphHttpService {
 
   import UserContextProtocol._
 
@@ -48,35 +49,15 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Spr
   //FixMe: reduce it again!
   private implicit val timeout = new Timeout(60 seconds)
 
-  //val userActor = actorRefFactory.actorSelection("/user/user")
-
+  // check if auth is disabled for development
   private val doAuth = scala.util.Properties.envOrElse("AMANUENSIS_AUTH", "true").toBoolean
-
   if (!doAuth) log.info("************** DISABLING AUTHENTICATION ********************")
-
-  implicit val amanuensisExceptionHandler = ExceptionHandler {
-    case InternalServerErrorException(messages) => complete(InternalServerError, messages)
-    case NotFoundException(message) => complete(NotFound, message)
-    case ValidationException(messages) => complete(PreconditionFailed, messages)
-    case Neo4JException(message) => {
-      log.error(s"Neo4J-error: $message")
-      complete(InternalServerError, Message("An unexpected Error occured. Please inform your system administrator.", `ERROR`))     
-    }
-    case ElasticSearchException(message) => {
-      log.error(s"ElasticSearch-error: $message")
-      complete(InternalServerError, Message("An unexpected Error occured. Please inform your system administrator.", `ERROR`))     
-    }
-    case t: Throwable => {
-      log.error(t, "Unexpected error:")
-      complete(InternalServerError, Message("An unexpected Error occured. Please inform your system administrator.", `ERROR`))
-    }
-  }
-
 
   def innerRoute(userContext: UserContext) = {
       storyRoute(userContext) ~
       queryRoute ~
-      attachmentRoute
+      attachmentRoute ~
+      graphRoute
   } 
 
   val dummyUser = UserContext("dummy", "Dummy", Nil)

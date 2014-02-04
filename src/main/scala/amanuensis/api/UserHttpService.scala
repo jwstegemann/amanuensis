@@ -37,6 +37,9 @@ trait UserHttpService extends HttpService with SprayJsonSupport  { self: ActorLo
 
   val userActor = actorRefFactory.actorSelection("/user/user")
 
+  val secureCookie = scala.util.Properties.envOrElse("AMANUENSIS_SECURE_COOKIE", "true").toBoolean
+  if (!secureCookie) log.info("************** DISABLING SECURE COOKIES ********************")
+
   def userRoute() = {
     /*
        * return UserContext when successfully logged in
@@ -44,16 +47,16 @@ trait UserHttpService extends HttpService with SprayJsonSupport  { self: ActorLo
     pathPrefix("user") {
       path("login") {
         post {
-          hostName { hostName =>
+          clientIP { ip =>
             entity(as[LoginRequest]) { loginRequest =>
               log.info(loginRequest.username + " logged in (or tried at least)")
 
               val future = (userActor ? CheckUser(loginRequest.username, loginRequest.password)).mapTo[UserContext]
                 
               val result = future.map { userContext => 
-                val token = StatelessCookieAuth.getSignedToken(loginRequest.username, hostName)
+                val token = StatelessCookieAuth.getSignedToken(loginRequest.username, ip.toString)
                 //ToDo: read cookie ttl from config
-                val cookie = HttpCookie(StatelessCookieAuth.AUTH_COOKIE_NAME, token, path = Some("/"), maxAge = Some(43200))
+                val cookie = HttpCookie(StatelessCookieAuth.AUTH_COOKIE_NAME, token, path = Some("/"), maxAge = Some(86400L), httpOnly = true, secure = secureCookie)
                 HttpResponse(status=OK,headers=`Set-Cookie`(cookie) :: Nil, entity=HttpEntity(userContext.toJson.compactPrint))
               }.recover {
                 case _ => HttpResponse(Unauthorized)
