@@ -77,4 +77,8 @@ angular.module('amanuensisApp')
         $scope.$broadcast('doneEditing');        
     }    
 
+    $scope.logout = function() {
+        $scope.$broadcast('logout');        
+    }  
+
 });
