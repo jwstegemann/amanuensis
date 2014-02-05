@@ -34,3 +34,7 @@ start: 52f101192fcd935400587fd5
 ziel: 52f1020f2fcd935c00587fdb
 
 match p=(start:Story {id: "52f101192fcd935400587fd5"})-[:Slot*1..10]-(ziel:Story {id: "52f1020f2fcd935c00587fdb"}) return p
+
+match (start:Story {id: "52f101192fcd935400587fd5"})-[:Slot*1..10]-(middle:Story)-[:Slot*1..10]-(ziel:Story {id: "52f101442fcd935600587fd7"})
+match (middle)-[:is]->(t:Tag {name: "offen"})
+return middle

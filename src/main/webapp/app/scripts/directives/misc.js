@@ -132,7 +132,9 @@ angular.module('amanuensisApp')
   .directive("uploadable", function ($rootScope,$http) {
     return {
       restrict: 'A',
-      scope: true,
+      scope: {
+        ngModel: '=' 
+      },
       link: function(scope, elem, attrs) {
 
         var lastValue;
@@ -148,7 +150,7 @@ angular.module('amanuensisApp')
 
           formData.append('file', file, filename);
 
-          $http.post('/attachment/' + scope.context.story.id, formData, {
+          $http.post('/attachment/' + scope.$parent.context.story.id, formData, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
           }).success(function(data) {
@@ -162,16 +164,16 @@ angular.module('amanuensisApp')
         scope.onUploadedFile = function(data, isImage, linkText) {
           var filename = data['filename'];
           if (filename) {
-            var text = editor.value.replace(lastValue, "[" + linkText + "](" + filename + ")");
-            editor.value = text;
+            var text = scope.ngModel.replace(lastValue, "[" + linkText + "](" + filename + ")");
+            scope.ngModel = text;
 
             //ToDo: Update scope with new editor-value
           }
         };
 
         scope.onErrorUploading = function() {
-          var text = editor.value.replace(lastValue, "");
-          editor.value = text;
+          var text = scope.ngModel.replace(lastValue, "");
+          scope.ngModel = text;
           $rootScope.$broadcast('error',{errorMessage: 'An error occured uploading your file.'});
         };
 
@@ -197,11 +199,11 @@ angular.module('amanuensisApp')
 
         scope.insertProgressText = function(isImage) {
               lastValue = '[Uploading file...]()'
-              editor.value = appendInItsOwnLine(editor.value, imagePrefix(isImage) + lastValue);
+              scope.ngModel = appendInItsOwnLine(scope.ngModel, imagePrefix(isImage) + lastValue);
         }
 
         scope.isUploadPossible = function() {
-          if (angular.isDefined(scope.context.story.id) && scope.context.story.id !== "") {
+          if (angular.isDefined(scope.$parent.context.story.id) && scope.$parent.context.story.id !== "") {
             return true;
           }
           else {

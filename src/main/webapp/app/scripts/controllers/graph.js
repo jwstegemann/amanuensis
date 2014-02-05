@@ -13,8 +13,4 @@ angular.module('amanuensisApp')
       title: "Testtarget"
     };
 
-    $scope.findPaths = function {
-
-    }
-
   });
