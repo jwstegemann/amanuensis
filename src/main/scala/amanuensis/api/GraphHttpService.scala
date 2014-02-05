@@ -25,19 +25,16 @@ trait GraphHttpService extends HttpService with SprayJsonSupport {
 
   private val graphActor = actorRefFactory.actorSelection("/user/graph")
 
-  private implicit val timeout = new Timeout(5.seconds)
+  private implicit val timeout = new Timeout(10.seconds)
   private implicit def executionContext = actorRefFactory.dispatcher
 
 
   val graphRoute =
     pathPrefix("graph") {
-      path("paths") {
-        entity(as[FindPathsRequest]) { findPathsRequest: FindPathsRequest =>
-          post {
-            dynamic {
-              complete(StatusCodes.OK)
-//              complete((graphActor ? FindPaths(findPathsRequest)).mapTo[FindPathsResult])
-            }
+      path("findpaths" / Segment / Segment / Segment) { (sourceStoryId: String, tagName: String, targetStoryId: String ) =>
+        get {
+          dynamic {
+            complete((graphActor ? FindPaths(sourceStoryId, targetStoryId, tagName)).mapTo[Seq[StoryNode]])
           }
         }
       }

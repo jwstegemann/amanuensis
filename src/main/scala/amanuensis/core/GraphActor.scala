@@ -18,27 +18,26 @@ import amanuensis.domain._
 
 object GraphActor {
 
-  case class FindPaths(request: FindPathsRequest)
+  case class FindPaths(sourceStoryId: String, targetStoryId: String, tagName: String)
 
-  val pathQueryString = """MATCH (s:Story {id: {story}})
-    MATCH (s)-[r:Slot {name: {slot}}]-(:Story)
-    WITH s, count(*) as weight
-    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)
-    WITH m, weight,
-      (CASE
-        WHEN weight < 5 THEN m.content
-        ELSE null 
-      END) as content
-    RETURN m.id, m.title, m.created, content"""
+  val pathQueryString = """match (:Story {id: {source}})-[:Slot*1..10]-(m:Story)-[:Slot*1..10]-(:Story {id: {target}})
+    match (m)-[:is]->(:Tag {name: {tagName}})
+    return m.id, m.title, m.content, m.created, m.createdBy
+  """
+}
+
+
+object GraphNeoProtocol extends Neo4JJsonProtocol {
+  implicit val storyNodeNeo4JFormat = jsonCaseClassArrayFormat(StoryNode)
 }
 
 /**
- * Registers the users. Replies with
+ * Performs graph queries
  */
 class GraphActor extends Actor with ActorLogging with Failable with Neo4JJsonProtocol {
 
   import GraphActor._
-  import StoryNeoProtocol._
+  import GraphNeoProtocol._
 
   implicit def executionContext = context.dispatcher
   implicit val system = context.system
@@ -51,13 +50,14 @@ class GraphActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
   }
 
   def receive = {
-    case FindPaths(request) => findPaths(request) pipeTo sender
+    case FindPaths(sourceStoryId, targetStoryId, tagName) => findPaths(sourceStoryId, targetStoryId, tagName) pipeTo sender
   }
 
-  def findPaths(request: FindPathsRequest) = {
-    server.list[StoryInfo](pathQueryString
-//      ("story" -> storyId),
-//      ("slot" -> slotName)
+  def findPaths(sourceStoryId: String, targetStoryId: String, tagName: String) = {
+    server.list[StoryNode](pathQueryString,
+      ("source" -> sourceStoryId),
+      ("target" -> targetStoryId),
+      ("tagName" -> tagName)
     )
   }
 
