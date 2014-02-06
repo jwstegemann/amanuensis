@@ -14,6 +14,10 @@ angular.module('amanuensisApp')
     		$rootScope.selectMode = false;
     		$rootScope.stack = undefined;
     }
+    
+    $scope.goToStack = function() {
+        $location.url('/story/' + $rootScope.stack.storyId);
+    }
 
     $scope.toggleLeft = function() {
     	$scope.$broadcast('toggleLeft');
@@ -25,10 +29,6 @@ angular.module('amanuensisApp')
 
     $scope.goBack = function() {
         $window.history.back();
-    }
-
-    $scope.goToStack = function() {
-        $location.url('/story/' + $rootScope.stack.storyId);
     }
 
     $scope.saveStory = function() {
@@ -73,6 +73,22 @@ angular.module('amanuensisApp')
         }
     }
 
+    $scope.search = function() {
+        if ($rootScope.appState === 128) {
+            $scope.$broadcast('search', {
+                cabQueryString: $scope.cabQueryString    
+            });
+        }
+        else {
+            if (angular.isDefined($scope.cabQueryString) && $scope.cabQueryString.length > 0) {
+                $location.url('/query/' + $scope.cabQueryString);
+            }
+            else {
+                $location.url('/query');
+            }
+        }
+    }
+
     $scope.doneEditing = function() {
         $scope.$broadcast('doneEditing');        
     }    
@@ -80,5 +96,23 @@ angular.module('amanuensisApp')
     $scope.logout = function() {
         $scope.$broadcast('logout');        
     }  
+
+    $scope.findPaths = function() {
+        $scope.$broadcast('selectTarget');
+    }
+
+    $scope.selectTarget = function() {
+        $scope.$broadcast('findPaths');
+    }
+
+    $scope.cancelTarget = function() {
+            //reset stack etc.
+            $rootScope.targetMode = false;
+            $rootScope.targetStack = undefined;
+    }
+    
+    $scope.goToTargetStack = function() {
+        $location.url('/story/' + $rootScope.targetStack.storyId);
+    }    
 
 });

@@ -31,9 +31,9 @@ angular.module('amanuensisApp', [
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-      .when('/graph', {
-        templateUrl: 'views/graph.html',
-        controller: 'GraphCtrl'
+      .when('/graph/findpaths', {
+        templateUrl: 'views/findpaths.html',
+        controller: 'FindPathsCtrl'
       })
       .otherwise({
         redirectTo: '/query'
@@ -63,6 +63,8 @@ angular.module('amanuensisApp', [
     $rootScope.stack = undefined;
     $rootScope.appState = undefined;
     $rootScope.editMode = false;
+    $rootScope.targetMode = false;    
+    $rootScope.targetStack = undefined;    
 
     if(!(($location.host() === 'localhost' || $location.host() === '0.0.0.0') && $location.port() === 9000)) {
       if ($location.protocol !== 'https') {

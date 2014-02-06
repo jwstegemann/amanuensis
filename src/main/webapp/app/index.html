@@ -53,13 +53,17 @@
 
       <li ng-click="goBack()"><a><i class="fa fa-chevron-left fa-fw fa-2x on-cab"></i></a>></li>
 
-      <!-- selecting a story -->
-
       <li ng-show="editMode" ng-click="doneEditing()"><a><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
 
+      <!-- selecting a story for slot-->
       <li ng-show="selectMode" ng-click="select()"><a><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
       <li ng-show="selectMode" ng-click="goToStack()"><a><i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{stack.storyTitle}}&nbsp;<i class="fa fa-link fa-fw fa-lg on-cab"></i>&nbsp;{{stack.slotName}}</a></li>        
       <li ng-show="selectMode" ng-click="cancel()"><a><i class="fa fa-times fa-fw fa-2x on-cab"></i></a></li>
+
+      <!-- selecting a story for graph-search -->
+      <li ng-show="targetMode" ng-click="selectTarget()"><a><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
+      <li ng-show="targetMode" ng-click="goToTargetStack()"><a><i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{targetStack.source.title}}&nbsp;<i class="fa fa-code-fork fa-fw fa-lg on-cab"></i></a></li>        
+      <li ng-show="targetMode" ng-click="cancelTarget()"><a><i class="fa fa-times fa-fw fa-2x on-cab"></i></a></li>
 
       <!-- story-editing -->
       <li ng-show="appState < 128" ng-click="createStoryInSlot()"><a><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
@@ -76,6 +80,7 @@
         <input id="query-input" ng-model="cabQueryString" placeholder="search for..." on-enter="search()"></input>
       </li>
       <li class="cab-right"><a ng-click="search()"><i class="fa fa-search fa-fw fa-2x on-cab"></i></a></li>
+      <li class="cab-right" ng-show="appState < 128"><a ng-click="findPaths()"><i class="fa fa-code-fork fa-fw fa-2x on-cab"></i></a></li>
 
       
            

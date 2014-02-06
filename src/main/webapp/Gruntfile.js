@@ -101,6 +101,13 @@ module.exports = function (grunt) {
         port: 8080,
         https: false,
         changeOrigin: false
+      },
+      {
+        context: '/graph',
+        host: 'localhost',
+        port: 8080,
+        https: false,
+        changeOrigin: false
       }],
       livereload: {
         options: {

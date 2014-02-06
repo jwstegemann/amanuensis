@@ -300,12 +300,32 @@ angular.module('amanuensisApp')
         updateScrollbar();
     }
 
-    $scope.$on("doneEditing", function() {
+    $scope.$on('doneEditing', function() {
         $scope.$broadcast('updateView', {
             markdown: $scope.context.story.content
         });
         $rootScope.editMode = false;
         updateScrollbar();
+    });
+
+
+    $scope.$on('selectTarget', function() {
+        $rootScope.targetMode = true;
+        $rootScope.targetStack = {
+            source: {
+                id: $scope.context.story.id,
+                title: $scope.context.story.title
+            },
+            target: {
+            }
+        };
+        $location.url('/query');
+    });
+
+    $scope.$on('findPaths', function() {
+        $rootScope.targetStack.target.id = $scope.context.story.id;
+        $rootScope.targetStack.target.title = $scope.context.story.title;
+        $location.url('/graph/findpaths');
     });
 
     function updateScrollbar() {
@@ -315,10 +335,12 @@ angular.module('amanuensisApp')
         }, 100);
     }
 
+    /*
+     * resize scrollbar for content on window-resize-event
+     */
     $(window).resize(updateScrollbar);
 
     // init controller
-
     $scope.reload();
 
   });

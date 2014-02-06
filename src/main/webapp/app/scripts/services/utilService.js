@@ -35,7 +35,7 @@ angular.module('amanuensisApp')
             modal.addClass('md-show')
             setTimeout(function(){
               modal.find('.start-focus').focus();
-            }, 50);
+            }, 120);
       },
 
       hideModalElement: function(modal) {
@@ -49,7 +49,7 @@ angular.module('amanuensisApp')
             modal.addClass('md-show')
             setTimeout(function(){
               modal.find('.start-focus').focus();
-            }, 50);
+            }, 120);
       },
 
       hideModal: function(modalId) {
