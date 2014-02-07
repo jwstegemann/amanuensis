@@ -40,6 +40,7 @@ class StatelessCookieAuthenticator(userActor: ActorSelection)(implicit val ec: E
     //FIXME: do not use host. Find a way to get the users ip, etc.
     ctx.request.header[`Remote-Address`] match {
       case Some(host) => {
+        println("HOST: " + host.address.toString())
         cookieOption match {
           case Some(token) => {
             val username = token.content.slice(41,token.content.length)
@@ -59,7 +60,10 @@ class StatelessCookieAuthenticator(userActor: ActorSelection)(implicit val ec: E
           case None => invalid // no cookie
         }
       }
-      case None => invalid // no host
+      case None => {
+        println("------------------- NO HOST!")
+        invalid // no host
+      }
     }
   }
 }
