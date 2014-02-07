@@ -16,7 +16,7 @@ angular.module('amanuensisApp')
 
     $scope.doLogin = function() {
       if(!(($location.host() === 'localhost' || $location.host() === '0.0.0.0') && $location.port() === 9000)) {
-        if ($location.protocol !== 'https') {
+        if ($location.protocol() !== 'https') {
             $rootScope.$broadcast('error',{errorMessage: 'Please use https in your URL to make sure, that nobody gets to know your credentials.'});
             return;
         }
