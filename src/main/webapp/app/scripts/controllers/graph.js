@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('FindPathsCtrl', function ($scope, graphService, $rootScope) {
+  .controller('FindPathsCtrl', function ($scope, graphService, $rootScope, utilService) {
 
     $scope.searchStories = function(queryString, terms) {
       $scope.result = graphService.query({
@@ -12,9 +12,38 @@ angular.module('amanuensisApp')
       });      
     }
 
+    $scope.tagNameEntered = function() {
+      if ($scope.newTagName.length > 3) {
+
+            $scope.tagName = $scope.newTagName;
+            $scope.searchStories();
+
+            utilService.hideModal('#tag-name-modal');
+
+            $scope.newTagName = undefined;
+        }
+        else {
+            $scope.title = 'Your input was too short...';
+        }      
+
+    };
+
+
+    $scope.askForTagName = function() {
+        $scope.title = 'Please enter a tag-name...';
+        utilService.showModal('#tag-name-modal');
+    };
+
+    $scope.cancelTagName = function() {
+        utilService.hideModal('#tag-name-modal');
+    }
+
     /*
      * init controller
      */
+
+   $rootScope.$broadcast('testMe');
+
 
     $rootScope.appState = 256;
 
@@ -26,12 +55,34 @@ angular.module('amanuensisApp')
 
     }
     else {
+
       $scope.sourceStory = $rootScope.targetStack.source;
       $scope.targetStory = $rootScope.targetStack.target;
 
-      $scope.tagName ='offen';
       $rootScope.targetMode = false;
-      $scope.searchStories();
+
+      $scope.askForTagName();
     }
 
   });
+
+
+/*
+ * Controller for Tag-Name-Dialog
+ */
+angular.module('amanuensisApp')
+  .controller('MyModalCtrl', function ($scope,utilService) {
+    $scope.$on('testMe',function() {
+    console.log("init modal");
+  });
+
+});
+
+
+
+/*
+
+    
+
+
+*/
