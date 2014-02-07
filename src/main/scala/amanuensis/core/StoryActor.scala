@@ -159,7 +159,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
 
     import QueryActor.DeleteFromIndex
 
-    indexActor ! Delete(storyId)
+    indexActor ! DeleteFromIndex(storyId)
 
     server.execute(removeStoryQueryString, 
       ("id" -> storyId)

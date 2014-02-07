@@ -105,6 +105,22 @@ div.md-overlay.md-show {
   width: 300px;
 }
 
+.md-content div.confirmation-message {
+	margin-top: 1.4em;
+  font-size: 1.2em;
+  line-height: 1.2;
+  font-weight: 400;
+  margin: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  background: transparent;
+  border: none;
+  width: 400px;
+  min-height: 2.4em;
+  vertical-align: middle;
+}
+
 .md-content div.error-message {
 	margin-top: 1.4em;
   font-size: 1.2em;
@@ -122,6 +138,16 @@ div.md-overlay.md-show {
 	float:left; 
 	vertical-align: middle;
 	padding: 15px;
+}
+
+.md-content div.confirmation-icon {
+	float:right; 
+	vertical-align: middle;
+	padding: 15px;
+}
+
+.md-content div.confirmation-icon > i {
+	cursor: pointer;
 }
 
 .md-content button {
@@ -154,4 +180,8 @@ div.md-overlay.md-show {
 i.on-right {
 	float: right;
 	margin-top: 20px;
+}
+
+i.confirmation {
+	float: right;
 }

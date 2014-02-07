@@ -7,7 +7,7 @@ angular.module('amanuensisApp')
         return {
                 restrict: 'A',
                 template:
-                  '<div class="md-modal md-effect-3" id="slot-name-modal">'+
+                  '<div class="md-modal md-effect-3" id="error-message-modal">'+
                     '<div class="md-content error">'+
                       '<h3>An error occured: <i style="float: right" class="fa fa-times action" ng-click="cancelErrorMessage()"></i></h3>'+
                       '<div class="error-icon">'+

@@ -114,13 +114,22 @@ angular.module('amanuensisApp')
     });
 
     $scope.$on('deleteStory', function() {
+        utilService.showModal('#confirm-delete-modal');    
+    });
+
+    $scope.deleteStoryConfirmed = function() {
         //keep title for message
         var oldTitle = $scope.context.story.title;
-    	storyService.delete({storyId: $routeParams.storyId}, function(successData) {
+        storyService.delete({storyId: $routeParams.storyId}, function(successData) {
             growl.addSuccessMessage(oldTitle + ' has been deleted.');    
             $window.history.back();
+            utilService.hideModal('#confirm-delete-modal');    
         });
-    });
+    }
+
+    $scope.cancelConfirmDelete = function() {
+        utilService.hideModal('#confirm-delete-modal');    
+    }
 
     $scope.$on('addStoryToSlot', function() {
         if (angular.isUndefined($scope.context.story.id)) {

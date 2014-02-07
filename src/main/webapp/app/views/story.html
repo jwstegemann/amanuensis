@@ -156,3 +156,13 @@
   </div>
 </div>
 
+
+<div class="md-modal md-effect-3" id="confirm-delete-modal">
+  <div class="md-content">
+    <h3>Are you sure?&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelConfirmDelete()"></i></h3>
+    <div class="confirmation-icon">
+      <i class="fa fa-check fa-2x opacity-hover" ng-click="deleteStoryConfirmed()"></i>
+    </div>
+    <div class="confirmation-message">Do you really want to delete the Story<br>'{{context.story.title}}'?</div>
+  </div>
+</div>
