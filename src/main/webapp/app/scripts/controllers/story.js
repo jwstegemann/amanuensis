@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window,utilService,growl) {
+  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window,utilService,growl,queryService,$http) {
 
     function hasSlot(name, slots) {
         var i = slots.length;
@@ -344,6 +344,15 @@ angular.module('amanuensisApp')
         }, 100);
     }
 
+    $scope.suggestTags = function(query) {
+        return ($http.get('/query/suggest/tags/' + query).then(function(result) {
+            result.data = result.data.suggest[0].options.map(function(value) {
+                return value.text
+            });
+            return result;
+        }));
+    }
+
     /*
      * resize scrollbar for content on window-resize-event
      */
@@ -394,6 +403,10 @@ angular.module('amanuensisApp')
 
     $scope.cancel = function() {
         utilService.hideModal('#slot-name-modal');
+    }
+
+    $scope.test = function(event) {
+        console.log(event);
     }
 
 }); 

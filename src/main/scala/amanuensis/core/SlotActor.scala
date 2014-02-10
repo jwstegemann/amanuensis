@@ -80,6 +80,10 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
   }
 
   def add(toStory: String, slotName: String, storyId: String) = {
+    import QueryActor.IndexSlotName
+
+    indexActor ! IndexSlotName(slotName)
+
     server.execute(addQueryString, 
       ("toStory" -> toStory),
       ("slot" -> slotName), 
@@ -97,7 +101,7 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
 
   def createAndAdd(toStory: String, slotName: String, story: Story) = {
 
-    import QueryActor.Index
+    import QueryActor.{Index, IndexSlotName}
 
     if (story.id.nonEmpty) throw ValidationException(Message("A new story must not have an id.",`ERROR`) :: Nil)
     story.check
@@ -105,6 +109,7 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
     val id = Neo4JId.generateId
 
     indexActor ! Index(story.copy(id = Some(id)))
+    indexActor ! IndexSlotName(slotName)
 
     server.execute(createAndAddQueryString, 
       ("toStory" -> toStory),

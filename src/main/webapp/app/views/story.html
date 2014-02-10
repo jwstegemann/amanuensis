@@ -55,7 +55,9 @@
 					<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
           <input id="story-title-input" class="story-title" type="text" ng-model="context.story.title" placeholder="A Story..."></input>
 				  <h1><span>created on {{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span></h1>
-            <tags-input ng-model="context.story.tags"></tags-input>
+            <tags-input ng-model="context.story.tags">
+              <auto-complete class="autocomplete-master" source="suggestTags($query)"></auto-complete>
+            </tags-input>
         </div>
 				<div id="story-content" class="content" scrollbar>
 				  <textarea ng-show="editMode" id="story-content-editor" class="story-content" ng-model="context.story.content" 
@@ -150,7 +152,13 @@
     <h3>{{title}}&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
     </h3>
     <div>
-    	<input class="start-focus" type="text" ng-model="newSlotName" on-enter="done()" on-escape="cancel()" placeholder="name of new slot"></input>
+    	<input class="start-focus" type="text" ng-model="newSlotName" on-enter="done()" on-escape="cancel()" placeholder="name of new slot">
+      </input>
+      <div ng-show="options.length" class="autocomplete">
+        <ul>
+          <li ng-repeat="option in options">{{option.text}}</li>
+        </ul>
+      </div>
       <i class="fa fa-check fa-2x on-button action opacity-hover" ng-click="done()"></i>
     </div>
   </div>

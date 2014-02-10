@@ -32,12 +32,26 @@ trait QueryHttpService extends HttpService with SprayJsonSupport {
 
 
   val queryRoute =
-    path("query") {
-      entity(as[QueryRequest]) { queryRequest: QueryRequest =>
-        post {
+    pathPrefix("query") {
+      pathEnd {
+        entity(as[QueryRequest]) { queryRequest: QueryRequest =>
+          post {
+            dynamic {
+              //FixMe: we do not need a Message-Type Fulltext here...
+              complete((queryActor ? Fulltext(queryRequest)).mapTo[QueryResult])
+            }
+          }
+        }
+      } ~
+      pathPrefix("suggest") {
+        get {
           dynamic {
-            //FixMe: we do not need a Message-Type Fulltext here...
-            complete((queryActor ? Fulltext(queryRequest)).mapTo[QueryResult])
+            path("tags" / Segment) { text: String =>
+              complete((queryActor ? SuggestTags(text)).mapTo[SuggestResult])
+            } ~
+            path("slots" / Segment) { text: String =>
+              complete((queryActor ? SuggestSlots(text)).mapTo[SuggestResult])
+            }
           }
         }
       }

@@ -16,7 +16,7 @@ import spray.util._
 import akka.actor.ActorSystem
 import akka.event.Logging
 
-import amanuensis.domain.{Story, StoryProtocol}
+import amanuensis.domain.{Story, StoryProtocol, Slot, SlotProtocol}
 
 
 case class ElasticSearchException(val message: String) extends Exception
@@ -51,6 +51,7 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
 
   import ElasticSearchProtocol._
   import StoryProtocol._
+  import SlotProtocol._
 
   val log = Logging(actorSystem, classOf[ElasticSearchServer])
 
@@ -58,7 +59,10 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
 
 
   val searchUrl = s"$url/stories/story/_search"
+  val tagSuggestUrl = s"$url/stories/_suggest"
+  val slotSuggestUrl = s"$url/slots/_suggest"
   val indexUrl = s"$url/stories/story"
+  val slotIndexUrl = s"$url/slots/slot"  
 
   // interpret the HttpResponse and throw a Neo4JException if necessary
   val mapToElasticSeachException: HttpResponse => HttpResponse = { response =>
@@ -83,6 +87,14 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     ~> send
     ~> mapToElasticSeachException
     ~> unmarshal[QueryResult]
+  )
+
+  // pipeline for queries that should return something
+  final def pipelineSuggest: HttpRequest => Future[SuggestResult] = (
+    addHeader("Accept","application/json; charset=UTF-8")
+    ~> send
+    ~> mapToElasticSeachException
+    ~> unmarshal[SuggestResult]
   )
 
   // pipeline for queries just to be executed
@@ -140,6 +152,42 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     log.debug("ElasticSearch-Delete-Request: {}", myUrl)
     pipelineRaw(Delete(myUrl))
   }
+
+  def indexSlotName(slotName: String): Future[Unit] = {
+    val myUrl =  s"$slotIndexUrl/$slotName"
+    log.debug("ElasticSearch-Index-Slot-Request: {}", myUrl)
+    pipelineRaw(Post(myUrl, Slot(slotName)))
+  }
+
+  def suggestTags(text: String): Future[SuggestResult] = {
+    val queryObject = JsObject(
+      ("suggest", JsObject(
+        ("text", JsString(text)),
+        ("completion", JsObject(
+          ("field", JsString("tags.suggest"))
+        ))
+    )))
+
+    log.debug("ElasticSearch-Suggestion-Request: {}", queryObject)
+    pipelineSuggest(Get(tagSuggestUrl, queryObject)) recover {
+      case x => throw ElasticSearchException(s"Error retrieving response from ElasticSearch-server: $x")
+    }    
+  }
+
+  def suggestSlots(text: String): Future[SuggestResult] = {
+    val queryObject = JsObject(
+      ("suggest", JsObject(
+        ("text", JsString(text)),
+        ("completion", JsObject(
+          ("field", JsString("name"))
+        ))
+    )))
+
+    log.debug("ElasticSearch-Suggestion-Request: {}", queryObject)
+    pipelineSuggest(Get(slotSuggestUrl, queryObject)) recover {
+      case x => throw ElasticSearchException(s"Error retrieving response from ElasticSearch-server: $x")
+    }    
+  }  
 
 }
 

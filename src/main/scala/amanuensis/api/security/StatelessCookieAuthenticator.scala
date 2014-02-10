@@ -51,7 +51,6 @@ class StatelessCookieAuthenticator(userActor: ActorSelection)(implicit val ec: E
 
     host match {
       case Some(host) => {
-        println("HOST: " + host)
         cookieOption match {
           case Some(token) => {
             val username = token.content.slice(41,token.content.length)
@@ -71,10 +70,7 @@ class StatelessCookieAuthenticator(userActor: ActorSelection)(implicit val ec: E
           case None => invalid // no cookie
         }
       }
-      case None => {
-        //println("------------------- NO HOST!")
-        invalid // no host
-      }
+      case None => invalid // no host
     }
   }
 }

@@ -10,7 +10,7 @@ div.story-header {
   background: rgba(0,0,0,0.05);
   padding: 1.8em 15%;
   flex: auto auto ;
-  overflow: hidden;
+  overflow: visible;
 }
 
 div.container.story.shifted-right div.story-header {
@@ -59,7 +59,7 @@ input.story-title {
 
 div.story-icon {
   width: 64px;
-  height: 100px;
+  height: 88px;
   margin: 0px ;
   float: left;
   text-align: center;

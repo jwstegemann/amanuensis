@@ -17,6 +17,13 @@ case class Tags(total: Int, terms: Seq[Term])
 
 case class Term(term: String, count: Int)
 
+case class SuggestResult(suggest: Seq[Suggestion])
+
+case class Suggestion(options: Seq[SuggestOption])
+
+case class SuggestOption(text: String, score: Double)
+
+
 object ElasticSearchProtocol extends DefaultJsonProtocol {
   import StoryProtocol._
 
@@ -28,4 +35,8 @@ object ElasticSearchProtocol extends DefaultJsonProtocol {
   implicit val tagsJsonFormat = jsonFormat2(Tags)
   implicit val facetsJsonFormat = jsonFormat1(Facets)
   implicit val queryResultJsonFormat = jsonFormat3(QueryResult)
+
+  implicit val suggestOptionJsonFormat = jsonFormat2(SuggestOption)
+  implicit val suggestionJsonFormat = jsonFormat1(Suggestion)
+  implicit val SuggestResultJsonFormat = jsonFormat1(SuggestResult)
 }

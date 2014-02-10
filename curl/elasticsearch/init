@@ -1,10 +1,12 @@
 #! /bin/bash
 
-curl -XDELETE 'http://6llvafxy:snjwm1wszy5mnwgf@redwood-8816963.us-east-1.bonsai.io:80/stories'
+curl -XDELETE "$1/stories"
+curl -XDELETE "$1/slots"
 
-curl -XPUT 'http://6llvafxy:snjwm1wszy5mnwgf@redwood-8816963.us-east-1.bonsai.io:80/stories'
+curl -XPUT "$1/stories"
+curl -XPUT "$1/slots"
 
-curl -XPUT "http://6llvafxy:snjwm1wszy5mnwgf@redwood-8816963.us-east-1.bonsai.io:80/stories/story/_mapping" -d'
+curl -XPUT "$1/stories/story/_mapping" -d'
 {
   "story": {
     "properties": {
@@ -35,9 +37,35 @@ curl -XPUT "http://6llvafxy:snjwm1wszy5mnwgf@redwood-8816963.us-east-1.bonsai.io
         "index": "no"
       },
       "tags" : { 
-        "type": "string", 
-        "analyzer" : "keyword" 
+        "type": "multi_field",
+        "fields": {
+            "tags": {
+                "type": "string", 
+                "analyzer" : "keyword" 
+            },
+            "suggest": {
+                "type": "completion",
+                "index_analyzer": "simple",
+                "search_analyzer": "simple",
+                "payloads": "false"
+            }
+        }
       }
+    }
+  }
+}'
+
+
+curl -XPUT "$1/slots/slot/_mapping" -d'
+{
+  "slot": {
+    "properties": {
+        "name": {
+            "type": "completion",
+            "index_analyzer": "simple",
+            "search_analyzer": "simple",
+            "payloads": "false"
+        }
     }
   }
 }'
