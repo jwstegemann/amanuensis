@@ -19,7 +19,7 @@ angular.module('amanuensisApp')
   .directive('onEscape', function() {
     return function(scope, elm, attrs) {
         function applyKeyup() {
-          scope.$apply(attrs.onEnter);
+          scope.$apply(attrs.onEscape);
         };           
         
         var allowedKeys = scope.$eval(attrs.keys);

@@ -151,15 +151,11 @@
   <div class="md-content">
     <h3>{{title}}&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
     </h3>
-    <div>
-    	<input class="start-focus" type="text" ng-model="newSlotName" on-enter="done()" on-escape="cancel()" placeholder="name of new slot">
-      </input>
-      <div ng-show="options.length" class="autocomplete">
-        <ul>
-          <li ng-repeat="option in options">{{option.text}}</li>
-        </ul>
-      </div>
-      <i class="fa fa-check fa-2x on-button action opacity-hover" ng-click="done()"></i>
+    <div class="one-line">
+    	<typeahead style="height: 37px" ng-model="newSlotName" on-enter="done()" on-escape="cancel()" input-class="start-focus" 
+        placeholder="name of new slot" source="suggestSlots($query)">
+      </typeahead>
+      <div class="confirmation"><i class="fa fa-check fa-2x on-button action opacity-hover" ng-click="done()"></i></div>  
     </div>
   </div>
 </div>
@@ -174,3 +170,4 @@
     <div class="confirmation-message">Do you really want to delete the Story<br>'{{context.story.title}}'?</div>
   </div>
 </div>
+

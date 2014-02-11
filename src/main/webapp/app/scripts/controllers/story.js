@@ -353,6 +353,15 @@ angular.module('amanuensisApp')
         }));
     }
 
+    $scope.suggestSlots = function(query) {
+        return ($http.get('/query/suggest/slots/' + query).then(function(result) {
+            result.data = result.data.suggest[0].options.map(function(value) {
+                return value.text
+            });
+            return result;
+        }));
+    }    
+
     /*
      * resize scrollbar for content on window-resize-event
      */
@@ -403,10 +412,6 @@ angular.module('amanuensisApp')
 
     $scope.cancel = function() {
         utilService.hideModal('#slot-name-modal');
-    }
-
-    $scope.test = function(event) {
-        console.log(event);
     }
 
 }); 

@@ -8,7 +8,8 @@ angular.module('amanuensisApp', [
   'angular-growl',
   'http-auth-interceptor',
   'chieffancypants.loadingBar',
-  'ngTagsInput'
+  'ngTagsInput',
+  'typeahead'
 ]).config(function ($routeProvider) {
     $routeProvider
       .when('/story/:storyId?', {
