@@ -65,11 +65,13 @@ object Converters {
     bytes
   }
 
+  private val md5Digest = java.security.MessageDigest.getInstance("MD5")
+
   /** Computes the MD5 hash of the given String. */
-  def md5(s: String) = java.security.MessageDigest.getInstance("MD5").digest(s.getBytes)
+  def md5(s: String) = md5Digest.digest(s.getBytes)
 
   /** Computes the MD5 hash of the given Array of Bytes. */
-  def md5(array: Array[Byte]) = java.security.MessageDigest.getInstance("MD5").digest(array)
+  def md5(array: Array[Byte]) = md5Digest.digest(array)
 
   /** Computes the MD5 hash of the given String and turns it into a hexadecimal String representation. */
   def md5Hex(s: String): String = hex2Str(md5(s))

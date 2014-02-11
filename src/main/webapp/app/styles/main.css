@@ -37,7 +37,7 @@ a, a:link, a:visited, a:active, a:hover {
 }
 
 .one-line {
-  .white-space: nowrap;
+  white-space: nowrap;
 }
 
 /*

@@ -82,7 +82,7 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
   def add(toStory: String, slotName: String, storyId: String) = {
     import QueryActor.IndexSlotName
 
-    indexActor ! IndexSlotName(slotName)
+    indexActor ! IndexSlotName(slotName, toStory, storyId)
 
     server.execute(addQueryString, 
       ("toStory" -> toStory),
@@ -92,6 +92,10 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
   }
 
   def remove(fromStory: String, slotName: String, storyId: String) = {
+    import QueryActor.DeleteSlotName
+
+    indexActor ! DeleteSlotName(slotName, fromStory, storyId)
+
     server.execute(removeQueryString, 
       ("fromStory" -> fromStory),
       ("slot" -> slotName), 
@@ -109,7 +113,7 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
     val id = Neo4JId.generateId
 
     indexActor ! Index(story.copy(id = Some(id)))
-    indexActor ! IndexSlotName(slotName)
+    indexActor ! IndexSlotName(slotName, toStory, id)
 
     server.execute(createAndAddQueryString, 
       ("toStory" -> toStory),

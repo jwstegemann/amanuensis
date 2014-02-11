@@ -18,6 +18,8 @@ import akka.event.Logging
 
 import amanuensis.domain.{Story, StoryProtocol, Slot, SlotProtocol}
 
+import amanuensis.core.util.Converters
+
 
 case class ElasticSearchException(val message: String) extends Exception
 
@@ -153,10 +155,20 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     pipelineRaw(Delete(myUrl))
   }
 
-  def indexSlotName(slotName: String): Future[Unit] = {
-    val myUrl =  s"$slotIndexUrl/$slotName"
+  def calcSlotId(slotName: String, sourceStoryId: String, targetStoryId: String): String = Converters.md5Hex(s"$sourceStoryId$slotName$targetStoryId")
+
+  def indexSlotName(slotName: String, sourceStoryId: String, targetStoryId: String): Future[Unit] = {
+    val id = calcSlotId(slotName, sourceStoryId, targetStoryId)
+    val myUrl =  s"$slotIndexUrl/$id"
     log.debug("ElasticSearch-Index-Slot-Request: {}", myUrl)
     pipelineRaw(Post(myUrl, Slot(slotName)))
+  }
+
+  def deleteSlotName(slotName: String, sourceStoryId: String, targetStoryId: String): Future[Unit] = {
+    val id = calcSlotId(slotName, sourceStoryId, targetStoryId)
+    val myUrl =  s"$slotIndexUrl/$id"
+    log.debug("ElasticSearch-Delete-Slot-Request: {}", myUrl)
+    pipelineRaw(Delete(myUrl))
   }
 
   def suggestTags(text: String): Future[SuggestResult] = {
