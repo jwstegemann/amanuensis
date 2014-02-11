@@ -69,3 +69,14 @@ curl -XPUT "$1/slots/slot/_mapping" -d'
     }
   }
 }'
+
+curl -XPOST "$1/stories/story/dummyxyz" -d'
+{
+    "id": "dummyxyz",
+    "tags": [""]
+}'
+
+curl -XPOST "$1/slots/slot/dummyabcde" -d'
+{
+    "name": ""
+}'
