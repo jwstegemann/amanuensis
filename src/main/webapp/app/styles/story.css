@@ -242,7 +242,7 @@ input.slot-filter {
   outline: none;
   font-family: 'Lato', Arial, sans-serif;
   color: #E3D091;
-  width: 175px;
+  width: 6em;
   font-size: 1.1em;
   font-weight: 300; 
   background: transparent;
@@ -323,6 +323,7 @@ div.story-list-title i {
 
 input.story-filter {
   outline: none;
+  width: 12em;
   font-family: 'Lato', Arial, sans-serif;
   color: #DABDB0;
   font-size: 1.5em;

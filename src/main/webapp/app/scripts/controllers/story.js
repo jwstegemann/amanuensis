@@ -263,6 +263,7 @@ angular.module('amanuensisApp')
     $scope.showInSlots = function() {
         $scope.inSlots = true;
         $scope.outStories = false;
+        $scope.activeSlot = undefined;
     }
 
     $scope.hideInSlots = function() {
@@ -285,6 +286,7 @@ angular.module('amanuensisApp')
     $scope.showOutSlots = function() {
         $scope.outSlots = true;
         $scope.inStories = false;
+        $scope.activeSlot = undefined;        
     }
 
     $scope.hideOutSlots = function() {
