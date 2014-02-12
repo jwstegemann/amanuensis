@@ -67,7 +67,7 @@ angular.module('amanuensisApp')
 //                console.log("update scrollbar... on " + elem.context.className);
                 elem.mCustomScrollbar('update');
                 updateTimeout = undefined;
-              }, 50);
+              }, 250);
             }
           });
         }
