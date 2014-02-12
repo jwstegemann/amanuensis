@@ -164,7 +164,7 @@ angular.module('amanuensisApp')
 
     $scope.$on('createStoryInSlot', function() {
         if (angular.isDefined($scope.context.story.id)) {
-            if (angular.isDefined($scope.activeSlot)) {
+            if (angular.isDefined($scope.activeSlot) && $rootScope.appState === 4) {
                 $location.url('/story/' + $scope.activeSlot + '/' + $scope.context.story.id)
             }
             else {
