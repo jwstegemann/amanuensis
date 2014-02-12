@@ -225,7 +225,7 @@ div.slots {
 
 div.slot-list-title {
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   font-family: 'Lato', Arial, sans-serif;
   color: #E3D091;
   font-size: 1.5em;
@@ -236,6 +236,27 @@ div.slot-list-title {
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;    
+}
+
+input.slot-filter {
+  outline: none;
+  font-family: 'Lato', Arial, sans-serif;
+  color: #E3D091;
+  width: 175px;
+  font-size: 1.1em;
+  font-weight: 300; 
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+input.slot-filter::-webkit-input-placeholder {
+  color: #E3D091;  
+}
+
+input.slot-filter::-moz-placeholder {
+  color: #E3D091;  
 }
 
 ul.slot-list {

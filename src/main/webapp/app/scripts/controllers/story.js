@@ -69,6 +69,10 @@ angular.module('amanuensisApp')
 
             $rootScope.editMode = true;
         }
+
+        $scope.storyFilter = {};
+        $scope.slotFilterRight = undefined;
+        $scope.slotFilterLeft = undefined;
     }
 
     $scope.$on('saveStory', function() {
@@ -207,6 +211,8 @@ angular.module('amanuensisApp')
             }
             
         }
+
+        $scope.storyFilter = {};
     }
 
     $scope.openStory = function(storyId,slotName,inbound) {
@@ -227,6 +233,9 @@ angular.module('amanuensisApp')
         if ($scope.inSlots) {
             $scope.hideInSlots();
             $rootScope.appState = 1;
+
+            $scope.slotFilterLeft = undefined;
+            $scope.storyFilter = {};
         }
         else if (angular.isDefined($scope.context.story.id)) {
             $scope.showInSlots();
@@ -238,16 +247,15 @@ angular.module('amanuensisApp')
         if ($scope.outSlots) {
             $scope.hideOutSlots();
             $rootScope.appState = 1;
+
+            $scope.slotFilterRight = undefined;
+            $scope.storyFilter = {};
         }
         else if (angular.isDefined($scope.context.story.id)) {
             $scope.showOutSlots();
             $rootScope.appState = 2;
         }
     });
-
-    $scope.receivedFile = function(file) {
-        console.log('received file!', file);
-    }
 
     /* 
      * show and hide slots and strories
@@ -304,9 +312,9 @@ angular.module('amanuensisApp')
 
         setTimeout(function() {
             $('#story-content-editor').focus();
+            updateScrollbar();
         }, 200);        
 
-        updateScrollbar();
     }
 
     $scope.$on('doneEditing', function() {
@@ -367,7 +375,10 @@ angular.module('amanuensisApp')
      */
     $(window).resize(updateScrollbar);
 
-    $scope.storyFilter = {}
+    // reset filter
+    $scope.storyFilter = {};
+    $scope.slotFilterLeft = undefined;
+    $scope.slotFilterRight = undefined;
 
     // init controller
     $scope.reload();
