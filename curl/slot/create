@@ -8,7 +8,7 @@ curl -X POST \
 	--user hallo:welt \
 	--header "Content-Type: application/json" \
 	--cookie cookies.txt \
-	--data "{\"title\": \"$3\", \"content\": \"$4\", \"created\": \"nobody\", \"createdBy\": \"now\"}" \
+	--data "{\"title\": \"$3\", \"content\": \"$4\", \"created\": \"2014-01-15T11:22:33.444+01\", \"createdBy\": \"nobody\", \"tags\": [\"$5\"] }" \
 	$url
 
 echo 

@@ -31,10 +31,12 @@ trait GraphHttpService extends HttpService with SprayJsonSupport {
 
   val graphRoute =
     pathPrefix("graph") {
-      path("findpaths" / Segment / Segment / Segment) { (sourceStoryId: String, tagName: String, targetStoryId: String ) =>
-        get {
-          dynamic {
-            complete((graphActor ? FindPaths(sourceStoryId, targetStoryId, tagName)).mapTo[Seq[StoryNode]])
+      path("findpaths" / Segment / Segment / Segment) { (sourceStoryId: String, tagName: String, targetStoryId: String) =>
+        parameter("page".as[Int] ? 0) { page =>
+          get {
+            dynamic {
+              complete((graphActor ? FindPaths(sourceStoryId, targetStoryId, tagName, page)).mapTo[Seq[StoryNode]])
+            }
           }
         }
       }

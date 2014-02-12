@@ -18,11 +18,11 @@ import amanuensis.domain._
 
 object GraphActor {
 
-  case class FindPaths(sourceStoryId: String, targetStoryId: String, tagName: String)
+  case class FindPaths(sourceStoryId: String, targetStoryId: String, tagName: String, page: Int)
 
   val pathQueryString = """match (:Story {id: {source}})-[:Slot*1..10]-(m:Story)-[:Slot*1..10]-(:Story {id: {target}})
     match (m)-[:is]->(:Tag {name: {tagName}})
-    return m.id, m.title, m.content, m.created, m.createdBy
+    return m.id, m.title, m.content, m.created, m.createdBy SKIP {skip} LIMIT 25
   """
 }
 
@@ -50,14 +50,15 @@ class GraphActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
   }
 
   def receive = {
-    case FindPaths(sourceStoryId, targetStoryId, tagName) => findPaths(sourceStoryId, targetStoryId, tagName) pipeTo sender
+    case FindPaths(sourceStoryId, targetStoryId, tagName, page) => findPaths(sourceStoryId, targetStoryId, tagName, page) pipeTo sender
   }
 
-  def findPaths(sourceStoryId: String, targetStoryId: String, tagName: String) = {
+  def findPaths(sourceStoryId: String, targetStoryId: String, tagName: String, page: Int) = {
     server.list[StoryNode](pathQueryString,
       ("source" -> sourceStoryId),
       ("target" -> targetStoryId),
-      ("tagName" -> tagName)
+      ("tagName" -> tagName),
+      ("skip" -> (page*25))
     )
   }
 

@@ -4,7 +4,7 @@ angular.module('amanuensisApp')
   .factory('graphService', function($resource) {
 
     // Public API here
-    return $resource('/graph/findpaths/:sourceStoryId/:tagName/:targetStoryId', {}, {
+    return $resource('/graph/findpaths/:sourceStoryId/:tagName/:targetStoryId?page=:page', {}, {
       query: {
         method: 'GET',
         isArray: true

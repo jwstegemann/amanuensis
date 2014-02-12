@@ -33,7 +33,7 @@ object SlotActor {
         WHEN weight < 5 THEN m.content
         ELSE null 
       END) as content
-    RETURN m.id, m.title, m.created, content"""
+    RETURN m.id, m.title, m.created, content LIMIT 250"""
   val addQueryString = """MATCH (n:Story {id: {toStory}}),(m:Story {id: {story}}) MERGE (n)-[r:Slot]->(m) SET r.name={slot}"""
   val removeQueryString = """MATCH (n:Story {id: {fromStory}})-[r:Slot {name: {slot}}]-(m:Story {id: {story}}) DELETE r"""
   val createAndAddQueryString = """MATCH (n:Story {id: {toStory}}) 

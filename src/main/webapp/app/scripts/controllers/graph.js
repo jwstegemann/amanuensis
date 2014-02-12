@@ -3,11 +3,12 @@
 angular.module('amanuensisApp')
   .controller('FindPathsCtrl', function ($scope, graphService, $rootScope, utilService) {
 
-    $scope.searchStories = function(queryString, terms) {
+    $scope.searchStories = function() {
       $scope.result = graphService.query({
         sourceStoryId: $scope.sourceStory.id,
         tagName: $scope.tagName,
-        targetStoryId: $scope.targetStory.id
+        targetStoryId: $scope.targetStory.id,
+        page: $scope.page
       }, function(successData) {
       });      
     }
@@ -38,12 +39,21 @@ angular.module('amanuensisApp')
         utilService.hideModal('#tag-name-modal');
     }
 
+    $scope.nextPage = function() {
+      $scope.page++;
+      $scope.searchStories();
+    }
+
+    $scope.previousPage = function() {
+      $scope.page--;
+      $scope.searchStories();
+    }
+
     /*
      * init controller
      */
 
-   $rootScope.$broadcast('testMe');
-
+    $scope.page = 0;
 
     $rootScope.appState = 256;
 
