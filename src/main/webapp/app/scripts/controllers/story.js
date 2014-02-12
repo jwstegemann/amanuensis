@@ -367,6 +367,8 @@ angular.module('amanuensisApp')
      */
     $(window).resize(updateScrollbar);
 
+    $scope.storyFilter = {}
+
     // init controller
     $scope.reload();
 

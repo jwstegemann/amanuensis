@@ -79,10 +79,13 @@
 <div id="right-container" class="container right-container" ng-class="{'show-slots': outSlots, 'show-stories': outStories}">
 	<!-- outbound Story-List	-->
   <div id="stories-right" class="container stories stories-right shadow-left" ng-controller="SlotCtrl" scrollbar refresh-on-change="stories">
-		<div class="story-list-title"><i class="fa fa-bars fa-lg on-slot"></i>{{slotName}}</div>
+		<div class="story-list-title">
+      <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
+      <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title"></input>
+    </div>
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
-        <li class="story-info" ng-repeat="storyInfo in stories" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter" 
           ng-click="openStory(storyInfo.id, slotName, true)">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p story-preview markdown-source="storyInfo.content"></p>
@@ -90,7 +93,7 @@
         </li>
       </div>
       <div ng-switch-when="single">
-        <li class="story-info" ng-repeat="storyInfo in stories" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter" 
           ng-click="openStory(storyInfo.id, slotName, true)">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
@@ -98,7 +101,7 @@
         </li>
       </div>
       <div ng-switch-when="all">
-        <li class="story-info" ng-repeat="storyInfo in stories" ng-click="openStory(storyInfo.id, slotName, true)">
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter" ng-click="openStory(storyInfo.id, slotName, true)">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <i class="fa fa-times fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
         </li>
