@@ -176,7 +176,8 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
       ("suggest", JsObject(
         ("text", JsString(text)),
         ("completion", JsObject(
-          ("field", JsString("tags.suggest"))
+          ("field", JsString("tags.suggest")),
+          ("size", JsNumber(20))
         ))
     )))
 
@@ -191,7 +192,8 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
       ("suggest", JsObject(
         ("text", JsString(text)),
         ("completion", JsObject(
-          ("field", JsString("name"))
+          ("field", JsString("name")),
+          ("size", JsNumber(20))
         ))
     )))
 
