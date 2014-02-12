@@ -6,14 +6,21 @@ angular.module('amanuensisApp')
     $rootScope.appState = 128;
     $scope.result = undefined;
 
+    $scope.page = 0;
+    $scope.lastQuery = undefined;
+
     $scope.searchStories = function(queryString, terms) {
-      $scope.result = queryService.query({
+      $scope.lastQuery = {
         query: queryString,
-        tags: terms ? terms : []
-      }, function(successData) {
+        tags: terms ? terms : [],
+        page: $scope.page
+      };
+
+      $scope.result = queryService.query($scope.lastQuery, function(successData) {
         $scope.queryString = queryString;
         $scope.terms = terms;
-      });      
+      });   
+   
     }
 
     $scope.searchWithFilter = function(term) {
@@ -32,6 +39,21 @@ angular.module('amanuensisApp')
       $scope.searchStories(params.cabQueryString);
     });
 
+    $scope.pages = function() {
+      if (angular.isUndefined($scope.result)) return 0;
+      else {
+        return Math.floor($scope.result.hits.total / 25) + 1
+      }
+    }
 
+    $scope.nextPage = function() {
+      $scope.page++;
+      $scope.searchStories($scope.lastQuery.query, $scope.lastQuery.terms);
+    }
+
+    $scope.previousPage = function() {
+      $scope.page--;
+      $scope.searchStories($scope.lastQuery.query, $scope.lastQuery.terms);
+    }
 
   });

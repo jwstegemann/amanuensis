@@ -180,5 +180,17 @@ button.close {
   background: #29d;
 }
 
+/*
+ * Pagination
+ */
+p.pagination {
+  text-align: center;
+}
 
+p.pagination span.pagination-nav {
+  cursor: pointer;
+  font-weight: 400;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 

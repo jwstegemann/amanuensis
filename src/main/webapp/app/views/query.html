@@ -13,6 +13,8 @@
     <span ng-show="terms"> with Tag <span ng-repeat="term in terms"><i class="fa fa-tag"></i>{{term}}</span></span>
   </h2>
 
+  <p ng-show="result" class="stats">found {{result.hits.total}} stories in {{result.took}} ms.</p>
+
     <ul ng-show="result" class="resultList">
 
       <li class="resultListItem" ng-repeat="storyResult in result.hits.hits">
@@ -22,5 +24,12 @@
       </li>
     </ul>
 
-    <p ng-show="result" class="stats">found {{result.hits.total}} stories in {{result.took}} ms.</p>  
+  <p class="pagination" ng-show="pages() > 1">
+    <span class="pagination-nav" ng-show="page > 0" ng-click="previousPage()">
+      <i class="fa fa-angle-double-left"></i>&nbsp;previous
+    </span>&nbsp;&nbsp;
+    <span>page&nbsp;{{page+1}}&nbsp;of&nbsp;{{pages()}}</span>&nbsp;&nbsp;
+    <span class="pagination-nav" ng-hide="(page+1) === pages()" ng-click="nextPage()">next&nbsp;<i class="fa fa-angle-double-right"></i></span>
+  </p>  
+
 </div>

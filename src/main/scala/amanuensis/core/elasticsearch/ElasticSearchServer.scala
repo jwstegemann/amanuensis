@@ -107,6 +107,7 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
   )
 
   def query(queryRequest: QueryRequest): Future[QueryResult] = {
+
     //ToDo: make constants to improve performance
     val queryObject = JsObject(
       ("query", JsObject(
@@ -117,6 +118,8 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
           ("max_expansions", JsString("10"))
         ))
       )),
+      ("from", JsNumber(queryRequest.page * 25)),
+      ("size", JsNumber(25)),
       ("facets", JsObject(
         ("tags", JsObject(
           ("terms", JsObject(
