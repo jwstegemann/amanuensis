@@ -1,0 +1,11 @@
+#! /bin/bash
+
+curl -XPOST "$1/stories/story/zzz$2" -d'
+{
+    "id": "zzz$2",
+    "title": "Suchtest$2",
+    "content": "Suchtest$2",
+    "created": "2014-01-15T11:22:33.444+01",
+    "createdBy": "Suchtest",
+    "tags": []
+}'

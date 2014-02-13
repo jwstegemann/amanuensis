@@ -20,8 +20,11 @@ import amanuensis.domain.{Story, StoryProtocol, Slot, SlotProtocol}
 
 import amanuensis.core.util.Converters
 
+import org.joda.time.{DateTime, Years, Months, Weeks, Days}
+
 
 case class ElasticSearchException(val message: String) extends Exception
+
 
 trait UsingParams {
   type Param = (String, JsValue)
@@ -107,6 +110,12 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
   )
 
   def query(queryRequest: QueryRequest): Future[QueryResult] = {
+    val today = DateTime.now.withTimeAtStartOfDay
+    val aYearAgo = today minus Years.ONE
+    val aMonthAgo = today minus Months.ONE
+    val twoWeeksAgo = today minus Weeks.TWO
+    val aWeekAgo = today minus Weeks.ONE
+    val yesterday = today minus Days.ONE
 
     //ToDo: make constants to improve performance
     val queryObject = JsObject(
@@ -125,6 +134,19 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
           ("terms", JsObject(
             ("field", JsString("tags"))
           ))
+        )),
+        ("dates", JsObject(
+          ("range", JsObject(
+            ("field", JsString("created")),
+            ("ranges", JsArray(
+              JsObject(("from", JsString(today.toString()))),
+              JsObject(("from", JsString(yesterday.toString()))),
+              JsObject(("from", JsString(aWeekAgo.toString()))),
+              JsObject(("from", JsString(twoWeeksAgo.toString()))),
+              JsObject(("from", JsString(aMonthAgo.toString()))),
+              JsObject(("from", JsString(aYearAgo.toString())))
+            ))
+          ))
         ))
       )),
       queryRequest.tags match {
@@ -134,7 +156,17 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
             ))
           ))
         case _ => ("filter", JsObject())
-      }
+      },
+      queryRequest.fromDate match {
+        case Some(fromDate) => ("filter", JsObject(
+            ("range", JsObject(
+              ("created", JsObject (
+                ("gte", JsString(fromDate))
+              ))
+            ))
+          ))
+        case None => ("filter", JsObject())
+      }      
     )
 
     log.debug("ElasticSearch-Query-Request: {}", queryObject)

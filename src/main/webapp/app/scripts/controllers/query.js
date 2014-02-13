@@ -9,12 +9,16 @@ angular.module('amanuensisApp')
     $scope.page = 0;
     $scope.lastQuery = undefined;
 
-    $scope.searchStories = function(queryString, terms) {
+    $scope.searchStories = function(queryString, terms, fromDate) {
       $scope.lastQuery = {
         query: queryString,
         tags: terms ? terms : [],
         page: $scope.page
       };
+
+      if (angular.isDefined(fromDate)) {
+        $scope.lastQuery.fromDate = fromDate;
+      }
 
       $scope.result = queryService.query($scope.lastQuery, function(successData) {
         $scope.queryString = queryString;
@@ -25,6 +29,10 @@ angular.module('amanuensisApp')
 
     $scope.searchWithFilter = function(term) {
       $scope.searchStories($scope.queryString, [term]);
+    }
+
+    $scope.searchWithDate = function(fromDate) {
+      $scope.searchStories($scope.queryString, [], fromDate);
     }
 
     if (angular.isDefined($routeParams.queryString)) {
