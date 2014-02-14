@@ -84,7 +84,12 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
             put {
               dynamic {
     //            log.debug(s"request: add story $targetStoryId to slot $slotName at story $storyId")
-                complete((slotActor ? Add(storyId, slotName, targetStoryId)) map { value => StatusCodes.OK })
+                if (targetStoryId == storyId) {
+                  reject(ValidationRejection("A story cannot be added to a slot at itself."))
+                }
+                else {
+                  complete((slotActor ? Add(storyId, slotName, targetStoryId)) map { value => StatusCodes.OK })
+                }
               }
             } ~
             delete {
