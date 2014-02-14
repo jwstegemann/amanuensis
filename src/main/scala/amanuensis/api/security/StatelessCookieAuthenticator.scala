@@ -34,24 +34,22 @@ class StatelessCookieAuthenticator(userActor: ActorSelection)(implicit val ec: E
 
   val invalid = future { Left(AuthenticationFailedRejection(CredentialsMissing, Nil)) }
 
-  val useForward = scala.util.Properties.envOrElse("AMANUENSIS_USE_FORWARDED_FOR", "true").toBoolean
-  //if (useForward) log.info("************** USING FORWARD HEADER ********************")  
+  // get client-ip from the right header depending on environment-variable
+  val clientIP = scala.util.Properties.envOrElse("AMANUENSIS_USE_FORWARDED_FOR", "true").toBoolean match {
+    case true => (ctx: RequestContext) => {
+      ctx.request.header[`X-Forwarded-For`] map { _.addresses.head.toString() }
+    }
+    case false => (ctx: RequestContext) => {
+      ctx.request.header[`Remote-Address`] map { _.address.toString() }
+    }
+  }
+
+  def authCookie(ctx: RequestContext) = ctx.request.cookies.find(_.name == StatelessCookieAuth.AUTH_COOKIE_NAME)
 
   def apply(ctx: RequestContext) = {
-    val cookieOption: Option[HttpCookie] = ctx.request.cookies.find(_.name == StatelessCookieAuth.AUTH_COOKIE_NAME)
-  
-    val host = useForward match {
-      case true => {
-        ctx.request.header[`X-Forwarded-For`] map { _.addresses.head.toString() }
-      }
-      case false => {
-        ctx.request.header[`Remote-Address`] map { _.address.toString() }
-      }
-    }
-
-    host match {
+    clientIP(ctx) match {
       case Some(host) => {
-        cookieOption match {
+        authCookie(ctx) match {
           case Some(token) => {
             val username = token.content.slice(41,token.content.length)
 
