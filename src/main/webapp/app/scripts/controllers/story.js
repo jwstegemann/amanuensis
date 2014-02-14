@@ -139,7 +139,10 @@ angular.module('amanuensisApp')
 
     $scope.$on('addStoryToSlot', function() {
         if (angular.isUndefined($scope.context.story.id)) {
-            alert("cannot add unsaved story to slot");
+            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot add an unsaved story to a slot.'});
+        }
+        else if ($scope.context.story.id === $rootScope.stack.storyId) {
+            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately it is not possible to link a story to itself.'});                        
         }
         else {
             slotService.add({
