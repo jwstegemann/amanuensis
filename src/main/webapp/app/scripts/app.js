@@ -16,7 +16,7 @@ angular.module('amanuensisApp', [
         templateUrl: 'views/story.html',
         controller: 'StoryCtrl'
       })
-      .when('/story/:slotName/:fromStoryId', {
+      .when('/story/:slotName/:fromStoryId/:fromStoryTitle', {
         templateUrl: 'views/story.html',
         controller: 'StoryCtrl'
       })

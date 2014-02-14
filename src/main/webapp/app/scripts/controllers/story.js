@@ -35,7 +35,7 @@ angular.module('amanuensisApp')
 //                console.log("should open slot: " + slotToOpen);
 //                console.log("  in direction: ") + (inbound)?'inbound':'outbound';
 
-                //eck, of slot is available in the given direction
+                //check, of slot is available in the given direction
                 if (angular.isDefined(slotToOpen)
                     && (
                         (inbound && hasSlot(slotToOpen, successData.inSlots)) 
@@ -101,8 +101,10 @@ angular.module('amanuensisApp')
                     }, $scope.context.story, function(successData) {
                         $scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id);
-                        growl.addSuccessMessage($scope.context.story.title + ' has been created in Slot ' + $routeParams.slotName);
+                        growl.addSuccessMessage($scope.context.story.title + ' has been created in Slot ' + $routeParams.slotName + ' at Story ' + $routeParams.fromStoryTitle);
                     });
+
+                    $rootScope.stack = undefined;
 
                 }                    
                 // on its own
@@ -169,12 +171,18 @@ angular.module('amanuensisApp')
     $scope.$on('createStoryInSlot', function() {
         if (angular.isDefined($scope.context.story.id)) {
             if (angular.isDefined($scope.activeSlot) && $rootScope.appState === 4) {
-                $location.url('/story/' + $scope.activeSlot + '/' + $scope.context.story.id)
+                $rootScope.stack = {
+                    storyId: $scope.context.story.id,
+                    storyTitle: $scope.context.story.title,
+                    slotName: $scope.activeSlot
+                };                
+                $location.url('/story/' + $scope.activeSlot + '/' + $scope.context.story.id + '/' + $scope.context.story.title)
             }
             else {
                 $scope.$broadcast('askForSlotName',{
                     create: true,
-                    storyId: $scope.context.story.id
+                    storyId: $scope.context.story.id,
+                    storyTitle: $scope.context.story.title
                 });
             }
         }
@@ -406,16 +414,18 @@ angular.module('amanuensisApp')
 
     $scope.done = function() {
         if ($scope.newSlotName.length > 3) {
+            $rootScope.stack = {
+                storyId: $scope.storyId,
+                storyTitle: $scope.storyTitle,
+                slotName: $scope.newSlotName
+            };
+            // create a new story in a slot
             if ($scope.create) {
-                $location.url('/story/' + $scope.newSlotName + '/' + $scope.storyId);
+                $location.url('/story/' + $scope.newSlotName + '/' + $scope.storyId + '/' + $scope.storyTitle);
             }
+            // link an existing story
             else {
                 $rootScope.selectMode = true;
-                    $rootScope.stack = {
-                        storyId: $scope.storyId,
-                        storyTitle: $scope.storyTitle,
-                        slotName: $scope.newSlotName
-                    };
                 $location.url('/query');
             }
             utilService.hideModal('#slot-name-modal');
