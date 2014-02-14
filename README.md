@@ -16,7 +16,10 @@ Buildpack: heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-bui
     AUTH_SECRET="..."
 
     AMANUENSIS_AUTH="true" / "false"
+
     AMANUENSIS_SECURE_COOKIE="true" / "false"
+
+    AMANUENSIS_USE_FORWARDED_FOR="true" / "false"
 
     GRAPHENEDB_URL="http://user:pwd@localhost:9200"
 
@@ -53,44 +56,4 @@ Buildpack: heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-bui
 
 4. Create Index and Define Mappings in ElasticSearch
 
-    curl -XDELETE '<url>/stories'
-
-    curl -XPUT '<url>/stories'
-
-    curl -XPUT "<url>/stories/story/_mapping" -d'
-    {
-      "story": {
-        "properties": {
-          "id": {          
-            "type": "string",
-            "store": "no",
-            "index": "no"
-          },        
-          "title": {          
-            "type": "string",
-            "store": "no",
-            "analyzer": "german"
-          },
-          "content": {
-            "type": "string",
-            "store": "no",
-            "analyzer": "german"
-          },
-          "created": {
-            "type": "date",
-            "format": "date_time",
-            "store": "no",
-            "index": "analyzed"
-          },
-          "createdBy": {
-            "type": "string",
-            "store": "no",
-            "index": "no"
-          },
-          "tags" : { 
-            "type": "string", 
-            "analyzer" : "keyword" 
-          }
-        }
-      }
-    }'
+    curl/elasticsearch/init <url>
