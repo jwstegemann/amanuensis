@@ -81,7 +81,11 @@
       
       <li ng-show="appState === 128"><a href="#/story"><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
 
-      <li class="cab-right" ng-click="logout()"><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}</a></li>
+      <li class="cab-right" id="user-menu"><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}</a>
+        <ul>
+          <li ng-click="logout()"><i class="fa fa-power-off fa-fw"></i>&nbsp;log me out</li>
+        </ul>
+      </li>
       <li class="cab-right">
         <input id="query-input" ng-model="cabQueryString" placeholder="search for..." on-enter="search()"></input>
       </li>

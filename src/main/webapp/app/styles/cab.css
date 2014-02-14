@@ -42,6 +42,11 @@
     text-align: center;
 }
 
+.cab-main > li:hover {
+    background: rgba(0,0,1,0.025);
+}
+
+
 /* icon-only trigger (menu item) */
 
 .cab-main > li > a {
@@ -50,6 +55,29 @@
     font-weight: bold;
 }
 
+.cab-main > li > ul {
+    display: none;
+    top: 40px;
+}
+
+.cab-main > li:hover ul {
+    display: block;
+    border-radius: 0px 0px 3px 3px;
+}
+
+.cab-main > li > ul > li {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 400;
+    border-top: 1px solid #c6d0da;
+    line-height: 2.6em;
+    cursor: pointer;
+    text-align: left;
+}
+
+.cab-main > li > ul > li:hover {
+    background: rgba(0,0,1,0.05);
+}
 .cab-main > li > input {
     font-family: 'Lato', Arial, sans-serif;
     color: #333;
@@ -86,4 +114,8 @@
 
 i.on-cab {
     margin-top: 8px;
+}
+
+#user-menu {
+    min-width: 10em;
 }
