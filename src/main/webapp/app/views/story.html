@@ -61,8 +61,9 @@
 					<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
           <input id="story-title-input" class="story-title" type="text" ng-model="context.story.title" placeholder="A Story..."></input>
 				  <h1><span>created on {{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span></h1>
-            <tags-input ng-model="context.story.tags">
-              <auto-complete class="autocomplete-master" source="suggestTags($query)"></auto-complete>
+            <tags-input ng-model="context.story.tags" maxLength="50" allowedTagPattern="^[\w_\-äöüÄÖÜß]*$">
+              <auto-complete class="autocomplete-master" source="suggestTags($query)" debounceDelay="250" maxResultsToShow="20">
+              </auto-complete>
             </tags-input>
         </div>
 				<div id="story-content" class="content" scrollbar>

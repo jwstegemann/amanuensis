@@ -7,6 +7,7 @@ angular.module('amanuensisApp')
     $scope.result = undefined;
 
     $scope.page = 0;
+    $scope.pages = 0;
     $scope.lastQuery = undefined;
 
     $scope.searchStories = function(queryString, terms, fromDate) {
@@ -23,6 +24,8 @@ angular.module('amanuensisApp')
       $scope.result = queryService.query($scope.lastQuery, function(successData) {
         $scope.queryString = queryString;
         $scope.terms = terms;
+
+        $scope.pages = $scope.calcPages();
       });   
    
     }
@@ -47,7 +50,7 @@ angular.module('amanuensisApp')
       $scope.searchStories(params.cabQueryString);
     });
 
-    $scope.pages = function() {
+    $scope.calcPages = function() {
       if (angular.isUndefined($scope.result)) return 0;
       else {
         return Math.floor($scope.result.hits.total / 25) + 1
