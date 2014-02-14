@@ -79,6 +79,9 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Ama
         } ~
         innerRoute(dummyUser)
       }
-    })
+    }) ~
+    pathSingleSlash {
+      redirect("/app/index.html", MovedPermanently)
+    }
   )
 }
