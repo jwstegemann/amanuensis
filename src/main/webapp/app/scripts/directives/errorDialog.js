@@ -28,6 +28,7 @@ angular.module('amanuensisApp')
                             $scope.errorMessage = 'This should not have happened. Please inform your system-administrator.';
                           }
 
+                          $scope.$apply();
                           utilService.showModalElement($element);
                         });
 

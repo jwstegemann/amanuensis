@@ -31,16 +31,16 @@ angular.module('amanuensisApp')
     return {
 
       showModalElement: function(modal)  {
-            showOverlay();
-            modal.addClass('md-show')
-            setTimeout(function(){
-              modal.find('.start-focus').focus();
-            }, 120);
+        showOverlay();
+        modal.addClass('md-show')
+        setTimeout(function(){
+          modal.find('.start-focus').focus();
+        }, 120);
       },
 
       hideModalElement: function(modal) {
-            modal.removeClass('md-show');
-            hideOverlay();
+        modal.removeClass('md-show');
+        hideOverlay();
       },
 
       showModal: function(modalId)  {
