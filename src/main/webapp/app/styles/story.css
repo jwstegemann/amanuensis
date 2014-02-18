@@ -194,8 +194,10 @@ div.story-view a.link:before, li.story-info a.link:before {
 
 div.story-view img, li.story-info img {
   max-width: 100%;
+  transform: scale3d(0.3,0.3,1);
+    -webkit-transform: scale3d(0.3,0.3,1);
+    -moz-transform: scale3d(0.3,0.3,1);
 }
-
 
 /*
  * shadows

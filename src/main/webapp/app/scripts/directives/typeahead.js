@@ -65,7 +65,7 @@ typeahead.directive('typeahead', ["$timeout", function($timeout) {
         replace: true,
         controller: ["$scope","$attrs","$element", function($scope, $attrs, $element) {
 
-            console.log("input-class:" + $scope.inputClass)
+//            console.log("input-class:" + $scope.inputClass)
 
             var debouncedLoadId;
             var lastPromise;

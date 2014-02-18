@@ -87,9 +87,9 @@
         </ul>
       </li>
       <li class="cab-right">
-        <input id="query-input" ng-model="cabQueryString" placeholder="search for..." on-enter="search()"></input>
+        <input id="query-input" ng-model="cabQueryString" placeholder="search for..." on-enter="search()" select-on-focus></input>
       </li>
-      <li class="cab-right"><a ng-click="search()"><i class="fa fa-search fa-fw fa-2x on-cab"></i></a></li>
+      <li class="cab-right"><a ng-click="search(true)"><i class="fa fa-search fa-fw fa-2x on-cab"></i></a></li>
       <li class="cab-right" ng-show="appState < 128"><a ng-click="findPaths()"><i class="fa fa-code-fork fa-fw fa-2x on-cab"></i></a></li>
 
       

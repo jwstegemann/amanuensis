@@ -57,21 +57,23 @@ angular.module('amanuensisApp')
         })        
     }
 
-    $scope.search = function() {
-        if ( angular.isDefined($scope.cabQueryString) && $scope.cabQueryString !== '') {
+    $scope.resetSearch = function() {
+        $scope.cabQueryString = undefined;
+    }
+
+    $scope.search = function(jumpIfEmpty) {
+        if (angular.isDefined($scope.cabQueryString) && $scope.cabQueryString.length > 0) {
             if ($rootScope.appState === 128) {
                 $scope.$broadcast('search', {
                     cabQueryString: $scope.cabQueryString    
                 });
             }
             else {
-                if (angular.isDefined($scope.cabQueryString) && $scope.cabQueryString.length > 0) {
-                    $location.url('/query/' + $scope.cabQueryString);
-                }
-                else {
-                    $location.url('/query');
-                }
-            }
+                $location.url('/query/' + $scope.cabQueryString);   
+            }       
+        }
+        else if (jumpIfEmpty){
+            $location.url('/query');
         }
     }
 

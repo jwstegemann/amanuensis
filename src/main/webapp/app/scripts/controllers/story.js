@@ -100,7 +100,7 @@ angular.module('amanuensisApp')
                         slotName: $routeParams.slotName
                     }, $scope.context.story, function(successData) {
                         $scope.context.story.id = successData.id;
-                        $location.url("/story/" + $scope.context.story.id);
+                        $location.url("/story/" + $scope.context.story.id).replace();
                         growl.addSuccessMessage($scope.context.story.title + ' has been created in Slot ' + $routeParams.slotName + ' at Story ' + $routeParams.fromStoryTitle);
                     });
 
@@ -111,7 +111,7 @@ angular.module('amanuensisApp')
                 else {
             		storyService.create($scope.context.story, function(successData) {
             			$scope.context.story.id = successData.id;
-                        $location.url("/story/" + $scope.context.story.id);
+                        $location.url("/story/" + $scope.context.story.id).replace();
                         growl.addSuccessMessage($scope.context.story.title + ' has been created.');
             		});
                 }
@@ -201,8 +201,19 @@ angular.module('amanuensisApp')
             
             $scope.activeSlot = undefined;
             $rootScope.appState = 2;
+
+            //adjust location
+            $location.search({});
         }
         else {
+            //adjust location
+            var query = {
+                openSlot: slotName                
+            };
+            if (inbound) query.inbound=true;
+            $location.search(query);
+
+            // emit signal
             $scope.$broadcast('selectSlot',{
                 storyId: $scope.context.story.id,
                 storyTitle: $scope.context.story.title,
@@ -227,13 +238,13 @@ angular.module('amanuensisApp')
     }
 
     $scope.openStory = function(storyId,slotName,inbound) {
-        var query = {
-            'openSlot': slotName
-        };
+        var query = {};
 
-        if (inbound) query.inbound='true';
+        if (!inbound) {
+            query.openSlot = slotName;
+        }
 
-        $location.url('/story/' + storyId).search(query)
+        $location.url('/story/' + storyId).search(query);
     }
 
     /*

@@ -32,7 +32,7 @@ h3.filterHeader {
 h2.resultHeader {
   margin: 0px;
   margin-top: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 0.8em;
   font-size: 2em;
   font-weight: 300;
 }
@@ -91,5 +91,6 @@ li.resultListItem > p.content {
 }
 
 p.stats {
-  margin-top: 40px;
+  padding-left: 1.0em;
+  margin-bottom: 25px;
 }

@@ -18,12 +18,13 @@ curl -XPUT "$1/stories/story/_mapping" -d'
       "title": {          
         "type": "string",
         "store": "no",
-        "analyzer": "german"
+        "analyzer": "german",
+        "boost": 2.0
       },
       "content": {
         "type": "string",
         "store": "no",
-        "analyzer": "german"
+        "analyzer": "german",
       },
       "created": {
         "type": "date",

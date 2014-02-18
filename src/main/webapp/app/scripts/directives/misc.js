@@ -31,6 +31,13 @@ angular.module('amanuensisApp')
         });
     };
   })
+  .directive('selectOnFocus', function() {
+    return function(scope, elm, attrs) {
+      elm.on('click', function() {
+        this.select();
+      });  
+    };
+  })
   .directive('scrollbar', function() {
     return {
       restrict: 'A',

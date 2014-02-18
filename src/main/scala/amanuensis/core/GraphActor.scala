@@ -21,6 +21,7 @@ object GraphActor {
   case class FindPaths(sourceStoryId: String, targetStoryId: String, tagName: String, page: Int)
 
   val pathQueryString = """match (:Story {id: {source}})-[:Slot*1..10]-(m:Story)-[:Slot*1..10]-(:Story {id: {target}})
+    with distinct m
     match (m)-[:is]->(:Tag {name: {tagName}})
     return m.id, m.title, m.content, m.created, m.createdBy SKIP {skip} LIMIT 25
   """

@@ -14,15 +14,13 @@ angular.module('amanuensisApp', [
     $routeProvider
       .when('/story/:storyId?', {
         templateUrl: 'views/story.html',
-        controller: 'StoryCtrl'
+        controller: 'StoryCtrl',
+        reloadOnSearch: false
       })
       .when('/story/:slotName/:fromStoryId/:fromStoryTitle', {
         templateUrl: 'views/story.html',
-        controller: 'StoryCtrl'
-      })
-      .when('/slot/:storyId/:slotName', {
-        templateUrl: 'views/slot.html',
-        controller: 'SlotCtrl'
+        controller: 'StoryCtrl',
+        reloadOnSearch: false
       })
       .when('/query/:queryString?', {
         templateUrl: 'views/query.html',
