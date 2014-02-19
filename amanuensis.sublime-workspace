@@ -475,16 +475,16 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 92.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
-				"kill",
-				"SBT: Kill SBT"
-			],
-			[
 				"sbt",
 				"SBT: Start SBT"
+			],
+			[
+				"kill",
+				"SBT: Kill SBT"
 			],
 			[
 				"start",
@@ -591,7 +591,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 449.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -608,9 +608,13 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/init",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/query.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
-		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/init",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/GraphActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/login.html",
@@ -622,12 +626,9 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/typeahead.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/query.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/layout.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/slot.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/UserHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/security/StatelessCookieAuthenticator.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
@@ -636,7 +637,6 @@
 		"/home/tiberius/scala/projects/amanuensis/README.md",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/query.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchDomain.scala",
@@ -743,7 +743,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
@@ -767,6 +767,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"searc",
 			"distinct",
 			"showModalElement(",
 			"apply(",
@@ -893,8 +894,7 @@
 			"jsonArrayFormat2",
 			"execute2",
 			"\"http://localhost:7474/db/data/cypher\"",
-			"TestParams",
-			"TestRow"
+			"TestParams"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -983,6 +983,22 @@
 		"selected_items":
 		[
 			[
+				"story.css",
+				"src/main/webapp/app/styles/story.css"
+			],
+			[
+				"query.js",
+				"src/main/webapp/app/scripts/controllers/query.js"
+			],
+			[
+				"index",
+				"src/main/webapp/app/index.html"
+			],
+			[
+				"story.html",
+				"src/main/webapp/app/views/story.html"
+			],
+			[
 				"init",
 				"curl/elasticsearch/init"
 			],
@@ -999,16 +1015,8 @@
 				"src/main/webapp/app/styles/layout.css"
 			],
 			[
-				"story.css",
-				"src/main/webapp/app/styles/story.css"
-			],
-			[
 				"misc",
 				"src/main/webapp/app/scripts/directives/misc.js"
-			],
-			[
-				"index",
-				"src/main/webapp/app/index.html"
 			],
 			[
 				"cab.js",
@@ -1029,10 +1037,6 @@
 			[
 				"app.js",
 				"src/main/webapp/app/scripts/app.js"
-			],
-			[
-				"story.html",
-				"src/main/webapp/app/views/story.html"
 			],
 			[
 				"story.js",
@@ -1109,10 +1113,6 @@
 			[
 				"queryhttp",
 				"src/main/scala/amanuensis/api/QueryHttpService.scala"
-			],
-			[
-				"query.js",
-				"src/main/webapp/app/scripts/controllers/query.js"
 			],
 			[
 				"elas",
