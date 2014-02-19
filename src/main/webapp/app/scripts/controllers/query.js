@@ -44,7 +44,7 @@ angular.module('amanuensisApp')
 
     setTimeout(function() {
       $('#query-input').focus();
-    }, 100);
+    }, 50);
 
     $scope.$on('search', function(event, params) {
       $scope.searchStories(params.cabQueryString);

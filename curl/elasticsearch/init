@@ -24,7 +24,7 @@ curl -XPUT "$1/stories/story/_mapping" -d'
       "content": {
         "type": "string",
         "store": "no",
-        "analyzer": "german",
+        "analyzer": "german"
       },
       "created": {
         "type": "date",
