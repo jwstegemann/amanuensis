@@ -44,21 +44,21 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
           get {
             dynamic {
 //              log.debug(s"request: get details for story $storyId")
-              complete((storyActor ? Retrieve(storyId)).mapTo[StoryContext])
+              complete((storyActor ? Retrieve(storyId, userContext.login)).mapTo[StoryContext])
             }
           } ~
           put {
             entity(as[Story]) { story =>
               dynamic {
  //               log.debug(s"request: update story $storyId with $story")
-                complete((storyActor ? Update(storyId, story)) map { value => StatusCodes.OK })
+                complete((storyActor ? Update(storyId, story, userContext.login)) map { value => StatusCodes.OK })
               }
             }
           } ~
           delete {
             dynamic {
   //            log.debug(s"request: remove story $storyId")
-              complete((storyActor ? Delete(storyId)) map { value => StatusCodes.OK })
+              complete((storyActor ? Delete(storyId, userContext.login)) map { value => StatusCodes.OK })
             }
           }
         } ~
@@ -107,7 +107,7 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
             dynamic {
    //           log.debug(s"request: creating new story with $story")
               val storyWithMeta = story.copy(created = DateTime.now.toString, createdBy = userContext.name)
-              complete((storyActor ? Create(storyWithMeta)).mapTo[StoryInfo])
+              complete((storyActor ? Create(storyWithMeta, userContext.login)).mapTo[StoryInfo])
   //            complete(s"creating new story with $story")
             }
           }

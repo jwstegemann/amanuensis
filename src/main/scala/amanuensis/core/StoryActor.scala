@@ -14,7 +14,7 @@ import amanuensis.core.util.Failable
 import amanuensis.core.neo4j._
 import amanuensis.core.util.StringUtils
 
-import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol, Slot, SlotProtocol}
+import amanuensis.domain._
 
 import spray.httpx.SprayJsonSupport
 
@@ -26,10 +26,10 @@ object StoryActor {
   /*
    * messages to be used with this actor
    */
-  case class Create(story: Story)  
-  case class Retrieve(storyId: String)
-  case class Update(storyId: String, story: Story)
-  case class Delete(storyId: String)
+  case class Create(story: Story, login: String)  
+  case class Retrieve(storyId: String, login: String)
+  case class Update(storyId: String, story: Story, login: String)
+  case class Delete(storyId: String, login: String)
 
   /*
    * query-string for neo4j
@@ -37,30 +37,48 @@ object StoryActor {
   //TODO: use one param of story-object
   //TODO: use merge when creating stories
   val createQueryString = """
-  CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy} })
-  WITH s
-  FOREACH (tagname IN {tags} |
-    MERGE (t:Tag {name: tagname})
-    MERGE (s)-[:is]->(t:Tag))
-  RETURN s.id"""
+    MATCH (u:User {login: {login}})
+    CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy} })<-[:canRead]-(u)
+    CREATE (s)<-[:canWrite]-(u)
+    WITH s
+    FOREACH (tagname IN {tags} |
+      MERGE (t:Tag {name: tagname})
+      MERGE (s)-[:is]->(t:Tag))
+    RETURN s.id
+  """
   
-  val retrieveStoryQueryString = """MATCH (s:Story {id: {id}})
+  val retrieveStoryQueryString = """
+    MATCH (s:Story {id: {id}})<-[:canRead]-(:User {login: {login}})
     OPTIONAL MATCH (s)-[:is]->(t:Tag)
-    return s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy, collect(t.name) as tags
+    RETURN s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy, collect(t.name) as tags
   """
 
-  val retrieveOutSlotQueryString = """MATCH (s:Story)-[r:Slot]->() WHERE s.id={id} RETURN DISTINCT r.name as name LIMIT 250"""
-  val retrieveInSlotQueryString = """MATCH (s:Story)<-[r:Slot]-() WHERE s.id={id} RETURN DISTINCT r.name as name LIMIT 250"""
+  val retrieveOutSlotQueryString = """
+    MATCH (s:Story)-[r:Slot]->()<-[:canRead]-(:User {login: {login}})
+    WHERE s.id={id} RETURN DISTINCT r.name as name LIMIT 250
+  """
 
-  val removeStoryQueryString = """MATCH (s:Story) WHERE s.id={id} WITH s OPTIONAL MATCH s-[r]-() DELETE r,s"""
+  val retrieveInSlotQueryString = """
+    MATCH (s:Story)<-[r:Slot]-()<-[:canRead]-(:User {login: {login}}) 
+    WHERE s.id={id} RETURN DISTINCT r.name as name LIMIT 250
+  """
+
+  val removeStoryQueryString = """
+    MATCH (s:Story {id: {id}})<-[:canWrite]-(:User {login: {login}}) 
+    WITH s.id as id, s
+    OPTIONAL MATCH s-[r]-() 
+    DELETE r,s
+    RETURN id
+  """
 
   val updateStoryQueryString = """
-  MATCH (s:Story {id: {id}}) 
-  OPTIONAL MATCH (s)-[r:is]->(:Tag) DELETE r
-  SET s.title={title}, s.content={content}
-  FOREACH (tagname IN {tags} |
-    MERGE (t:Tag {name: tagname})
-    MERGE (s)-[:is]->(t:Tag))
+    MATCH (s:Story {id: {id}})<-[:canWrite]-(:User {login: {login}})
+    OPTIONAL MATCH (s)-[r:is]->(:Tag) DELETE r
+    SET s.title={title}, s.content={content}
+    FOREACH (tagname IN {tags} |
+      MERGE (t:Tag {name: tagname})
+      MERGE (s)-[:is]->(t:Tag))
+    RETURN s.id
   """
 }
 
@@ -69,6 +87,7 @@ object StoryNeoProtocol extends Neo4JJsonProtocol {
   implicit val storyNeo4JFormat = jsonCaseClassArrayFormat(Story)
   implicit val slotNeo4JFormat = jsonCaseClassArrayFormat(Slot)
   implicit val storyInfoNeo4JFormat = jsonCaseClassArrayFormat(StoryInfo)
+  implicit val storyIdNeo4JFormat = jsonCaseClassArrayFormat(StoryId)
 }
 
 /**
@@ -93,18 +112,18 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   }
 
   def receive = {
-    case Create(story) => create(story) pipeTo sender
-    case Retrieve(storyId) => retrieve(storyId) pipeTo sender
-    case Update(storyId, story) => sender ! update(storyId, story)
-    case Delete(storyId) => delete(storyId) pipeTo sender
+    case Create(story, login) => create(story, login) pipeTo sender
+    case Retrieve(storyId, login) => retrieve(storyId, login) pipeTo sender
+    case Update(storyId, story, login) => update(storyId, story, login) pipeTo sender
+    case Delete(storyId, login) => delete(storyId, login) pipeTo sender
 
   }
 
-  def create(story: Story) = {
+  def create(story: Story, login: String) = {
 
     import QueryActor.Index
 
-    if (story.id.nonEmpty) throw ValidationException(Message("A new story must not have an id.",`ERROR`) :: Nil)
+    if (story.id.nonEmpty) failWith(ValidationException(Message("A new story must not have an id.",`ERROR`) :: Nil))
     story.check
 
     val id = Neo4JId.generateId
@@ -117,53 +136,61 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
       ("content" -> story.content),
       ("created" -> story.created),
       ("createdBy" -> story.createdBy),
-      ("tags" -> story.tags)
+      ("tags" -> story.tags),
+      ("login" -> login)
     ) map { nothing => StoryInfo(id, story.title, story.created, None) }
   }
 
-  def retrieve(storyId: String) = {
-
-    val paramList: Param = ("id" -> storyId)
+  def retrieve(storyId: String, login: String) = {
 
     for {
-      story <- server.one[Story](retrieveStoryQueryString, paramList) map {
-        case Some(s) => s
-        case None => throw NotFoundException(Message(s"story with id '$storyId' could not be found",`ERROR`) :: Nil)
-      }
+      story <- server.one[Story](retrieveStoryQueryString, 
+        ("id" -> storyId), 
+        ("login" -> login)) map {
+          case Some(s) => s
+          case None => throw NotFoundException(Message(s"story with id '$storyId' could not be found",`ERROR`) :: Nil)
+        }
       //FIXME: allow simple strings here as a result!
-      inSlots <- server.list[Slot](retrieveInSlotQueryString, paramList) 
-      outSlots <- server.list[Slot](retrieveOutSlotQueryString, paramList) 
+      inSlots <- server.list[Slot](retrieveInSlotQueryString, 
+        ("id" -> storyId),
+        ("login" -> login)) 
+      outSlots <- server.list[Slot](retrieveOutSlotQueryString, 
+        ("id" -> storyId),
+        ("login" -> login)) 
     } yield StoryContext(story,inSlots,outSlots)
 
   }
 
-  def update(storyId: String, story: Story) = {
+  def update(storyId: String, story: Story, login: String) = {
 
     import QueryActor.Index
 
-    if (storyId != story.id.getOrElse("")) throw ValidationException(Message("You cannot save story with id $story.id at id $storyId.",`ERROR`) :: Nil)
-
+    if (storyId != story.id.getOrElse("")) failWith(ValidationException(Message("You cannot save story with id $story.id at id $storyId.",`ERROR`) :: Nil))
     story.check()
 
-    indexActor ! Index(story)
-
-  	server.execute(updateStoryQueryString, 
+  	server.one[StoryId](updateStoryQueryString, 
       ("id" -> storyId),
       ("title" -> story.title), 
       ("content" -> story.content),
-      ("tags" -> story.tags)
-    )
+      ("tags" -> story.tags),
+      ("login" -> login)
+    ) map {
+        case Some(s) => indexActor ! Index(story)
+        case None => throw NotFoundException(Message(s"story with id '$storyId' could not be updated",`ERROR`) :: Nil)
+      }    
   }
 
-  def delete(storyId: String) = {
+  def delete(storyId: String, login: String) = {
 
     import QueryActor.DeleteFromIndex
 
-    indexActor ! DeleteFromIndex(storyId)
-
-    server.execute(removeStoryQueryString, 
-      ("id" -> storyId)
-    )
+    server.one[StoryId](removeStoryQueryString, 
+      ("id" -> storyId),
+      ("login" -> login)
+    ) map {
+        case Some(s) => indexActor ! DeleteFromIndex(storyId)
+        case None => throw NotFoundException(Message(s"story with id '$storyId' could not be deleted",`ERROR`) :: Nil)
+      }    
   }
 
 }
