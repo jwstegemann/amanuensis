@@ -13,7 +13,7 @@ import amanuensis.core.util.Failable
 
 import amanuensis.core.neo4j._
 
-import amanuensis.domain.{StoryInfo}
+import amanuensis.domain.{StoryInfo, StoryId}
 
 
 object SlotActor {
@@ -44,6 +44,7 @@ object SlotActor {
     MATCH (m:Story {id: {story}})<-[:canRead]-(u)
     MERGE (n)-[r:Slot]->(m) 
     SET r.name={slot}
+    RETURN n.id
   """
 
   val removeQueryString = """
@@ -52,6 +53,7 @@ object SlotActor {
     MATCH (m:Story {id: {story}})<-[:canRead]-(u)
     MATCH (n)-[r:Slot {name: {slot}}]-(m)
     DELETE r
+    RETURN n.id
   """
 
   val createAndAddQueryString = """
@@ -63,6 +65,7 @@ object SlotActor {
     FOREACH (tagname IN {tags} |
       MERGE (t:Tag {name: tagname})
       MERGE (m)-[:is]->(t:Tag))
+    RETURN m.id
   """
 }
 
@@ -105,27 +108,29 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
   def add(toStory: String, slotName: String, storyId: String, login: String) = {
     import QueryActor.IndexSlotName
 
-    indexActor ! IndexSlotName(slotName, toStory, storyId)
-
-    server.execute(addQueryString, 
+    server.one[StoryId](addQueryString, 
       ("toStory" -> toStory),
       ("slot" -> slotName), 
       ("story" -> storyId),
       ("login" -> login)
-    )
+    ) map {
+        case Some(s) => indexActor ! IndexSlotName(slotName, toStory, storyId)
+        case None => throw NotFoundException(Message(s"could not add story $storyId to slot $slotName",`ERROR`) :: Nil)
+      }
   }
 
   def remove(fromStory: String, slotName: String, storyId: String, login: String) = {
     import QueryActor.DeleteSlotName
 
-    indexActor ! DeleteSlotName(slotName, fromStory, storyId)
-
-    server.execute(removeQueryString, 
+    server.one[StoryId](removeQueryString, 
       ("fromStory" -> fromStory),
       ("slot" -> slotName), 
       ("story" -> storyId),
       ("login" -> login)
-    )
+    ) map {
+        case Some(s) => indexActor ! DeleteSlotName(slotName, fromStory, storyId)
+        case None => throw NotFoundException(Message(s"could not remove story $storyId from slot $slotName",`ERROR`) :: Nil)
+      }
   }
 
   def createAndAdd(toStory: String, slotName: String, story: Story, login: String) = {
@@ -137,10 +142,7 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
 
     val id = Neo4JId.generateId
 
-    indexActor ! Index(story.copy(id = Some(id)))
-    indexActor ! IndexSlotName(slotName, toStory, id)
-
-    server.execute(createAndAddQueryString, 
+    server.one[StoryId](createAndAddQueryString, 
       ("toStory" -> toStory),
       ("slot" -> slotName), 
       ("id" -> id),
@@ -150,7 +152,14 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
       ("createdBy" -> story.createdBy),
       ("tags" -> story.tags),
       ("login" -> login)   
-    ) map { nothing => StoryInfo(id, story.title, story.created, None) }
+    ) map {
+        case Some(s) => {
+          indexActor ! Index(story.copy(id = Some(id)))
+          indexActor ! IndexSlotName(slotName, toStory, id)
+          StoryInfo(id, story.title, story.created, None)
+        }
+        case None => throw NotFoundException(Message(s"could not create new story in slot $slotName",`ERROR`) :: Nil)
+      }
   }
 
 }
