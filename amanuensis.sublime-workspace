@@ -591,7 +591,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 575.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -608,15 +608,19 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/init",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/UserContext.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Failable.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
+		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/init",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/query.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/GraphActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/login.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/graph.js",
@@ -635,9 +639,7 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utilService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
 		"/home/tiberius/scala/projects/amanuensis/README.md",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchDomain.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/QueryHttpService.scala",
@@ -689,7 +691,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/Api.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-loading-bar/src/loading-bar.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/dist/app/styles/4cbbf425.main.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/UserContext.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/CypherServer.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-http-auth/src/http-auth-interceptor.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/web/Web.scala",
@@ -734,8 +735,7 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-growl/build/angular-growl.min.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-growl/angular-growl.css",
 		"/home/tiberius/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utils.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/404.html"
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utils.js"
 	],
 	"find":
 	{
@@ -743,7 +743,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
@@ -767,6 +767,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"fa-times",
+			"match",
 			"searc",
 			"distinct",
 			"showModalElement(",
@@ -892,9 +894,7 @@
 			"}\"\"\"\n",
 			"Long",
 			"jsonArrayFormat2",
-			"execute2",
-			"\"http://localhost:7474/db/data/cypher\"",
-			"TestParams"
+			"execute2"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -966,7 +966,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 254.0
+		"height": 383.0
 	},
 	"output.sbt_error":
 	{
@@ -983,20 +983,40 @@
 		"selected_items":
 		[
 			[
-				"story.css",
-				"src/main/webapp/app/styles/story.css"
-			],
-			[
-				"query.js",
-				"src/main/webapp/app/scripts/controllers/query.js"
-			],
-			[
 				"index",
 				"src/main/webapp/app/index.html"
 			],
 			[
 				"story.html",
 				"src/main/webapp/app/views/story.html"
+			],
+			[
+				"fail",
+				"src/main/scala/amanuensis/core/util/Failable.scala"
+			],
+			[
+				"story",
+				"src/main/scala/amanuensis/domain/Story.scala"
+			],
+			[
+				"user",
+				"src/main/scala/amanuensis/domain/UserContext.scala"
+			],
+			[
+				"storyhttpse",
+				"src/main/scala/amanuensis/api/StoryHttpService.scala"
+			],
+			[
+				"storyact",
+				"src/main/scala/amanuensis/core/StoryActor.scala"
+			],
+			[
+				"story.css",
+				"src/main/webapp/app/styles/story.css"
+			],
+			[
+				"query.js",
+				"src/main/webapp/app/scripts/controllers/query.js"
 			],
 			[
 				"init",
@@ -1093,10 +1113,6 @@
 			[
 				"stateless",
 				"src/main/scala/amanuensis/api/security/StatelessCookieAuthenticator.scala"
-			],
-			[
-				"user",
-				"src/main/scala/amanuensis/api/UserHttpService.scala"
 			],
 			[
 				"index.html",
@@ -1297,10 +1313,6 @@
 			[
 				"neo4",
 				"src/main/scala/amanuensis/core/neo4j/Neo4JRestFormats.scala"
-			],
-			[
-				"story",
-				"src/main/scala/amanuensis/domain/Story.scala"
 			],
 			[
 				"app.s",

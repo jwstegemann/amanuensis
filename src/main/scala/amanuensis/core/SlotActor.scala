@@ -18,30 +18,52 @@ import amanuensis.domain.{StoryInfo}
 
 object SlotActor {
 
-  case class List(storyId: String, slotName: String)
-  case class Add(toStory: String, slotName: String, storyId: String)
-  case class Remove(fromStory: String, slotName: String, storyId: String)
-  case class CreateAndAdd(toStory: String, slotName: String, story: Story)
+  case class List(storyId: String, slotName: String, login: String)
+  case class Add(toStory: String, slotName: String, storyId: String, login: String)
+  case class Remove(fromStory: String, slotName: String, storyId: String, login: String)
+  case class CreateAndAdd(toStory: String, slotName: String, story: Story, login: String)
 
 
-  val retrieveQueryString = """MATCH (s:Story {id: {story}})
+  val retrieveQueryString = """
+    MATCH (u:User {login: {login}})
+    MATCH (s:Story {id: {story}})<-[:canRead]-(u)
     MATCH (s)-[r:Slot {name: {slot}}]-(:Story)
     WITH s, count(*) as weight
-    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)
+    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)<-[:canRead]-(u)
     WITH m, weight,
       (CASE
         WHEN weight < 5 THEN m.content
         ELSE null 
       END) as content
-    RETURN m.id, m.title, m.created, content LIMIT 250"""
-  val addQueryString = """MATCH (n:Story {id: {toStory}}),(m:Story {id: {story}}) MERGE (n)-[r:Slot]->(m) SET r.name={slot}"""
-  val removeQueryString = """MATCH (n:Story {id: {fromStory}})-[r:Slot {name: {slot}}]-(m:Story {id: {story}}) DELETE r"""
-  val createAndAddQueryString = """MATCH (n:Story {id: {toStory}}) 
+    RETURN m.id, m.title, m.created, content LIMIT 250
+  """
+
+  val addQueryString = """
+    MATCH (u:User {login: {login}})
+    MATCH (n:Story {id: {toStory}})<-[:canWrite]-(u)
+    MATCH (m:Story {id: {story}})<-[:canRead]-(u)
+    MERGE (n)-[r:Slot]->(m) 
+    SET r.name={slot}
+  """
+
+  val removeQueryString = """
+    MATCH (u:User {login: {login}})
+    MATCH (n:Story {id: {fromStory}})<-[:canWrite]-(u)
+    MATCH (m:Story {id: {story}})<-[:canRead]-(u)
+    MATCH (n)-[r:Slot {name: {slot}}]-(m)
+    DELETE r
+  """
+
+  val createAndAddQueryString = """
+    MATCH (u:User {login: {login}})  
+    MATCH (n:Story {id: {toStory}})<-[:canWrite]-(u)
     MERGE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy}})
-    WITH m
+    WITH m,u
+    CREATE (u)-[:canRead]->(m)<-[:canWrite]-(u)
     FOREACH (tagname IN {tags} |
       MERGE (t:Tag {name: tagname})
-      MERGE (m)-[:is]->(t:Tag))"""
+      MERGE (m)-[:is]->(t:Tag))
+  """
 }
 
 /**
@@ -66,20 +88,21 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
   }
 
   def receive = {
-    case List(storyId, slotName) => list(storyId, slotName) pipeTo sender
-    case Add(toStory, slotName, storyId) => add(toStory, slotName, storyId) pipeTo sender
-    case Remove(fromStory, slotName, storyId) => remove(fromStory, slotName, storyId) pipeTo sender
-    case CreateAndAdd(toStory, slotName, story) => createAndAdd(toStory, slotName, story) pipeTo sender
+    case List(storyId, slotName, login) => list(storyId, slotName, login) pipeTo sender
+    case Add(toStory, slotName, storyId, login) => add(toStory, slotName, storyId, login) pipeTo sender
+    case Remove(fromStory, slotName, storyId, login) => remove(fromStory, slotName, storyId, login) pipeTo sender
+    case CreateAndAdd(toStory, slotName, story, login) => createAndAdd(toStory, slotName, story, login) pipeTo sender
   }
 
-  def list(storyId: String, slotName: String) = {
+  def list(storyId: String, slotName: String, login: String) = {
   	server.list[StoryInfo](retrieveQueryString,
       ("story" -> storyId),
-      ("slot" -> slotName)
+      ("slot" -> slotName),
+      ("login" -> login)
     )
   }
 
-  def add(toStory: String, slotName: String, storyId: String) = {
+  def add(toStory: String, slotName: String, storyId: String, login: String) = {
     import QueryActor.IndexSlotName
 
     indexActor ! IndexSlotName(slotName, toStory, storyId)
@@ -87,11 +110,12 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
     server.execute(addQueryString, 
       ("toStory" -> toStory),
       ("slot" -> slotName), 
-      ("story" -> storyId)
+      ("story" -> storyId),
+      ("login" -> login)
     )
   }
 
-  def remove(fromStory: String, slotName: String, storyId: String) = {
+  def remove(fromStory: String, slotName: String, storyId: String, login: String) = {
     import QueryActor.DeleteSlotName
 
     indexActor ! DeleteSlotName(slotName, fromStory, storyId)
@@ -99,11 +123,12 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
     server.execute(removeQueryString, 
       ("fromStory" -> fromStory),
       ("slot" -> slotName), 
-      ("story" -> storyId)
+      ("story" -> storyId),
+      ("login" -> login)
     )
   }
 
-  def createAndAdd(toStory: String, slotName: String, story: Story) = {
+  def createAndAdd(toStory: String, slotName: String, story: Story, login: String) = {
 
     import QueryActor.{Index, IndexSlotName}
 
@@ -123,7 +148,8 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
       ("content" -> story.content),
       ("created" -> story.created),
       ("createdBy" -> story.createdBy),
-      ("tags" -> story.tags)      
+      ("tags" -> story.tags),
+      ("login" -> login)   
     ) map { nothing => StoryInfo(id, story.title, story.created, None) }
   }
 

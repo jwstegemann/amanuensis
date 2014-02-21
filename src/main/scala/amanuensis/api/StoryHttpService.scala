@@ -67,7 +67,7 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
             get {
               dynamic {
     //            log.debug(s"request: get stories in slot $slotName for story $storyId")
-                complete((slotActor ? List(storyId, slotName)).mapTo[Seq[StoryInfo]])
+                complete((slotActor ? List(storyId, slotName, userContext.login)).mapTo[Seq[StoryInfo]])
               }
             } ~
             post {
@@ -75,7 +75,7 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
                 dynamic {
   //                log.debug(s"request: creating new story $story in slot $slotName at story $storyId")
                   val storyWithMeta = story.copy(created = DateTime.now.toString, createdBy = userContext.name)
-                  complete((slotActor ? CreateAndAdd(storyId, slotName, storyWithMeta)).mapTo[StoryInfo])
+                  complete((slotActor ? CreateAndAdd(storyId, slotName, storyWithMeta, userContext.login)).mapTo[StoryInfo])
                 }
               }              
             }
@@ -88,14 +88,14 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
                   reject(ValidationRejection("A story cannot be added to a slot at itself."))
                 }
                 else {
-                  complete((slotActor ? Add(storyId, slotName, targetStoryId)) map { value => StatusCodes.OK })
+                  complete((slotActor ? Add(storyId, slotName, targetStoryId, userContext.login)) map { value => StatusCodes.OK })
                 }
               }
             } ~
             delete {
               dynamic {
       //          log.debug(s"request: remove story $targetStoryId from slot $slotName at story $storyId")
-                complete((slotActor ? Remove(storyId, slotName, targetStoryId)) map { value => StatusCodes.OK })
+                complete((slotActor ? Remove(storyId, slotName, targetStoryId, userContext.login)) map { value => StatusCodes.OK })
               }
             }
           }
