@@ -29,13 +29,13 @@ trait GraphHttpService extends HttpService with SprayJsonSupport {
   private implicit def executionContext = actorRefFactory.dispatcher
 
 
-  val graphRoute =
+  def graphRoute(userContext: UserContext)=
     pathPrefix("graph") {
       path("findpaths" / Segment / Segment / Segment) { (sourceStoryId: String, tagName: String, targetStoryId: String) =>
         parameter("page".as[Int] ? 0) { page =>
           get {
             dynamic {
-              complete((graphActor ? FindPaths(sourceStoryId, targetStoryId, tagName, page)).mapTo[Seq[StoryNode]])
+              complete((graphActor ? FindPaths(sourceStoryId, targetStoryId, tagName, page, userContext.login)).mapTo[Seq[StoryNode]])
             }
           }
         }

@@ -57,7 +57,7 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Ama
       storyRoute(userContext) ~
       queryRoute ~
       attachmentRoute ~
-      graphRoute
+      graphRoute(userContext)
   } 
 
   val dummyUser = UserContext("dummy", "Dummy", Nil)
