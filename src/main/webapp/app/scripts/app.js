@@ -48,8 +48,14 @@ angular.module('amanuensisApp', [
       return {
         'responseError': function(rejection) {
           if (rejection.status !== 401) {
-            console.log("Fatal-Error communicating with the backend: " + angular.toJson(rejection));
-            $rootScope.$broadcast('error',{errorMessage: 'Error communicating with Amanuensis-backend. Please try again or contact your system-administrator.'});
+            if (rejection.status === 404) {
+              console.log("NotFound-Error communicating with the backend: " + angular.toJson(rejection));
+              $rootScope.$broadcast('error',{errorMessage: 'The object you wanted to work with could not be found.'});
+            }
+            else {
+              console.log("Fatal-Error communicating with the backend: " + angular.toJson(rejection));
+              $rootScope.$broadcast('error',{errorMessage: 'Error communicating with Amanuensis-backend. Please try again or contact your system-administrator.'});
+            }
           }
           return $q.reject(rejection);
         }

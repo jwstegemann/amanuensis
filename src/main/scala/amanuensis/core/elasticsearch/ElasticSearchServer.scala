@@ -16,7 +16,7 @@ import spray.util._
 import akka.actor.ActorSystem
 import akka.event.Logging
 
-import amanuensis.domain.{Story, StoryProtocol, Slot, SlotProtocol}
+import amanuensis.domain.{Story, StoryProtocol, Slot, SlotProtocol, StoryIndex}
 
 import amanuensis.core.util.Converters
 
@@ -109,7 +109,7 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     ~> forgetResponse
   )
 
-  def query(queryRequest: QueryRequest): Future[QueryResult] = {
+  def query(queryRequest: QueryRequest, login: String): Future[QueryResult] = {
     val today = DateTime.now.withTimeAtStartOfDay
     val aYearAgo = today minus Years.ONE
     val aMonthAgo = today minus Months.ONE
@@ -118,6 +118,30 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     val yesterday = today minus Days.ONE
 
     //ToDo: make constants to improve performance
+
+    val userFilter: JsObject = JsObject(
+      ("term", JsObject(
+        ("canRead", JsString(login))
+      )))
+
+    val tagFilter: JsObject = queryRequest.tags match {
+        case (first :: rest) => JsObject(
+          ("terms", JsObject(
+            ("tags", (first :: rest).toJson)
+          )))
+        case _ => JsObject()
+      }
+
+    val dateFilter: JsObject = queryRequest.fromDate match {
+        case Some(fromDate) => JsObject(
+          ("range", JsObject(
+            ("created", JsObject (
+              ("gte", JsString(fromDate))
+            ))
+          )))
+        case None => JsObject()
+      }
+
     val queryObject = JsObject(
       ("query", JsObject(
         ("multi_match", JsObject(
@@ -149,24 +173,9 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
           ))
         ))
       )),
-      queryRequest.tags match {
-        case (first :: rest) => ("filter", JsObject(
-            ("terms", JsObject(
-              ("tags", (first :: rest).toJson)
-            ))
-          ))
-        case _ => ("filter", JsObject())
-      },
-      queryRequest.fromDate match {
-        case Some(fromDate) => ("filter", JsObject(
-            ("range", JsObject(
-              ("created", JsObject (
-                ("gte", JsString(fromDate))
-              ))
-            ))
-          ))
-        case None => ("filter", JsObject())
-      }      
+      ("filter", JsObject(
+        ("and", JsArray(userFilter :: tagFilter :: dateFilter :: Nil))
+      ))    
     )
 
     log.debug("ElasticSearch-Query-Request: {}", queryObject)
@@ -175,13 +184,26 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     }
   }
 
-  def index(story: Story): Future[Unit] = {
+  def index(story: StoryIndex): Future[Unit] = {
     //ToDo: check, if id is valid
     val id = story.id.get
     val myUrl =  s"$indexUrl/$id"
     log.debug("ElasticSearch-Index-Request: {} @ {}", story, myUrl)
     pipelineRaw(Post(myUrl, story))
   }
+
+  def update(story: Story): Future[Unit] = {
+    //ToDo: check, if id is valid
+    val id = story.id.get
+    val myUrl =  s"$indexUrl/$id/_update"
+
+    val updateObject = JsObject(
+      ("doc", story.toJson)
+    ) 
+
+    log.debug("ElasticSearch-Update-Request: {} @ {}", updateObject, myUrl)
+    pipelineRaw(Post(myUrl, updateObject))
+  }  
 
   def delete(id: String): Future[Unit] = {
     //ToDo: check, if id is valid

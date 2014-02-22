@@ -471,6 +471,57 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/main/scala/amanuensis/core/SlotActor.scala",
+			"settings":
+			{
+				"buffer_size": 5230,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/StoryHttpService.scala",
+			"settings":
+			{
+				"buffer_size": 4215,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/RootServiceActor.scala",
+			"settings":
+			{
+				"buffer_size": 2354,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "package amanuensis.core\n\nimport akka.actor.{Actor, ActorLogging}\nimport akka.pattern._\n\nimport amanuensis.api.exceptions._\n\nimport amanuensis.domain.Message\nimport amanuensis.domain.Severities._\n\nimport amanuensis.domain.Story\nimport amanuensis.core.util.Failable\n\nimport amanuensis.core.neo4j._\nimport amanuensis.core.util.StringUtils\n\nimport amanuensis.domain._\n\nimport spray.httpx.SprayJsonSupport\n\nimport scala.concurrent.Future\n\n\nobject StoryActor {\n\n  /*\n   * messages to be used with this actor\n   */\n  case class Create(story: Story, login: String)  \n  case class Retrieve(storyId: String, login: String)\n  case class Update(storyId: String, story: Story, login: String)\n  case class Delete(storyId: String, login: String)\n\n  /*\n   * query-string for neo4j\n   */\n  //TODO: use one param of story-object\n  //TODO: use merge when creating stories\n  val createQueryString = \"\"\"\n    MATCH (u:User {login: {login}})\n    CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy} })<-[:canRead]-(u)\n    CREATE (s)<-[:canWrite]-(u)\n    WITH s\n    FOREACH (tagname IN {tags} |\n      MERGE (t:Tag {name: tagname})\n      MERGE (s)-[:is]->(t:Tag))\n    RETURN s.id\n  \"\"\"\n  \n  val retrieveStoryQueryString = \"\"\"\n    MATCH (s:Story {id: {id}})<-[:canRead]-(:User {login: {login}})\n    OPTIONAL MATCH (s)-[:is]->(t:Tag)\n    RETURN s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy, collect(t.name) as tags\n  \"\"\"\n\n  val retrieveOutSlotQueryString = \"\"\"\n    MATCH (s:Story)-[r:Slot]->()<-[:canRead]-(:User {login: {login}})\n    WHERE s.id={id} RETURN DISTINCT r.name as name LIMIT 250\n  \"\"\"\n\n  val retrieveInSlotQueryString = \"\"\"\n    MATCH (s:Story)<-[r:Slot]-()<-[:canRead]-(:User {login: {login}}) \n    WHERE s.id={id} RETURN DISTINCT r.name as name LIMIT 250\n  \"\"\"\n\n  val removeStoryQueryString = \"\"\"\n    MATCH (s:Story {id: {id}})<-[:canWrite]-(:User {login: {login}})\n    WITH s.id as id, s\n    OPTIONAL MATCH s-[r]-() \n    DELETE r,s\n    RETURN id\n  \"\"\"\n\n  val updateStoryQueryString = \"\"\"\n    MATCH (s:Story {id: {id}})<-[:canWrite]-(:User {login: {login}})\n    OPTIONAL MATCH (s)-[r:is]->(:Tag) DELETE r\n    SET s.title={title}, s.content={content}\n    FOREACH (tagname IN {tags} |\n      MERGE (t:Tag {name: tagname})\n      MERGE (s)-[:is]->(t:Tag))\n    RETURN s.id\n  \"\"\"\n}\n\n\nobject StoryNeoProtocol extends Neo4JJsonProtocol {\n  implicit val storyNeo4JFormat = jsonCaseClassArrayFormat(Story)\n  implicit val slotNeo4JFormat = jsonCaseClassArrayFormat(Slot)\n  implicit val storyInfoNeo4JFormat = jsonCaseClassArrayFormat(StoryInfo)\n  implicit val storyIdNeo4JFormat = jsonCaseClassArrayFormat(StoryId)\n}\n\n/**\n * Registers the users. Replies with\n */\nclass StoryActor extends Actor with ActorLogging with Failable with UsingParams with Neo4JJsonProtocol {\n\n  import StoryActor._\n  import StoryNeoProtocol._\n\n  implicit def executionContext = context.dispatcher\n  //ToDo: is this necessary?\n  implicit val system = context.system\n  def actorRefFactory = system\n\n  final val server = CypherServer.default\n\n  private val indexActor = actorRefFactory.actorSelection(\"/user/query\")\n\n	override def preStart =  {\n    log.info(s\"StoryActor started at: {}\", self.path)\n  }\n\n  def receive = {\n    case Create(story, login) => create(story, login) pipeTo sender\n    case Retrieve(storyId, login) => retrieve(storyId, login) pipeTo sender\n    case Update(storyId, story, login) => update(storyId, story, login) pipeTo sender\n    case Delete(storyId, login) => delete(storyId, login) pipeTo sender\n\n  }\n\n  def create(story: Story, login: String) = {\n\n    import QueryActor.Index\n\n    if (story.id.nonEmpty) failWith(ValidationException(Message(\"A new story must not have an id.\",`ERROR`) :: Nil))\n    story.check\n\n    val id = Neo4JId.generateId\n\n    indexActor ! Index(story.copy(id = Some(id)))\n\n    server.execute(createQueryString, \n      (\"id\" -> id), \n      (\"title\" -> story.title), \n      (\"content\" -> story.content),\n      (\"created\" -> story.created),\n      (\"createdBy\" -> story.createdBy),\n      (\"tags\" -> story.tags),\n      (\"login\" -> login)\n    ) map { nothing => StoryInfo(id, story.title, story.created, None) }\n  }\n\n  def retrieve(storyId: String, login: String) = {\n\n    for {\n      story <- server.one[Story](retrieveStoryQueryString, \n        (\"id\" -> storyId), \n        (\"login\" -> login)) map {\n          case Some(s) => s\n          case None => throw NotFoundException(Message(s\"story with id '$storyId' could not be found\",`ERROR`) :: Nil)\n        }\n      //FIXME: allow simple strings here as a result!\n      inSlots <- server.list[Slot](retrieveInSlotQueryString, \n        (\"id\" -> storyId),\n        (\"login\" -> login)) \n      outSlots <- server.list[Slot](retrieveOutSlotQueryString, \n        (\"id\" -> storyId),\n        (\"login\" -> login)) \n    } yield StoryContext(story,inSlots,outSlots)\n\n  }\n\n  def update(storyId: String, story: Story, login: String) = {\n\n    import QueryActor.Index\n\n    if (storyId != story.id.getOrElse(\"\")) failWith(ValidationException(Message(\"You cannot save story with id $story.id at id $storyId.\",`ERROR`) :: Nil))\n    story.check()\n\n  	server.one[StoryId](updateStoryQueryString, \n      (\"id\" -> storyId),\n      (\"title\" -> story.title), \n      (\"content\" -> story.content),\n      (\"tags\" -> story.tags),\n      (\"login\" -> login)\n    ) map {\n        case Some(s) => indexActor ! Index(story)\n        case None => throw NotFoundException(Message(s\"story with id '$storyId' could not be updated\",`ERROR`) :: Nil)\n      }    \n  }\n\n  def delete(storyId: String, login: String) = {\n\n    import QueryActor.DeleteFromIndex\n\n    server.one[StoryId](removeStoryQueryString, \n      (\"id\" -> storyId),\n      (\"login\" -> login)\n    ) map {\n        case Some(s) => indexActor ! DeleteFromIndex(storyId)\n        case None => throw NotFoundException(Message(s\"story with id '$storyId' could not be deleted\",`ERROR`) :: Nil)\n      }    \n  }\n\n}",
+			"file": "src/main/scala/amanuensis/core/StoryActor.scala",
+			"file_size": 5969,
+			"file_write_time": 1392930229000000,
+			"settings":
+			{
+				"buffer_size": 5968,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/core/GraphActor.scala",
+			"settings":
+			{
+				"buffer_size": 1906,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/GraphHttpService.scala",
+			"settings":
+			{
+				"buffer_size": 1222,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -608,6 +659,7 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/UserContext.scala",
@@ -626,7 +678,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/graph.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/findpaths.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/typeahead.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/query.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
@@ -743,7 +794,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
@@ -920,8 +971,177 @@
 	"groups":
 	[
 		{
+			"selected": 5,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/main/scala/amanuensis/core/SlotActor.scala",
+					"settings":
+					{
+						"buffer_size": 5230,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								765,
+								765
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 278.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/main/scala/amanuensis/api/StoryHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 4215,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1052,
+								1052
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/main/scala/amanuensis/api/RootServiceActor.scala",
+					"settings":
+					{
+						"buffer_size": 2354,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1803,
+								1803
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 768.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/main/scala/amanuensis/core/StoryActor.scala",
+					"settings":
+					{
+						"buffer_size": 5968,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2150,
+								2150
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 900.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/main/scala/amanuensis/core/GraphActor.scala",
+					"settings":
+					{
+						"buffer_size": 1906,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1899,
+								1899
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 585.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/main/scala/amanuensis/api/GraphHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 1222,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1082,
+								1082
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -982,6 +1202,34 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"app",
+				"src/main/webapp/app/scripts/app.js"
+			],
+			[
+				"graphhtt",
+				"src/main/scala/amanuensis/api/GraphHttpService.scala"
+			],
+			[
+				"graph",
+				"src/main/scala/amanuensis/core/GraphActor.scala"
+			],
+			[
+				"storyac",
+				"src/main/scala/amanuensis/core/StoryActor.scala"
+			],
+			[
+				"root",
+				"src/main/scala/amanuensis/api/RootServiceActor.scala"
+			],
+			[
+				"storyhtt",
+				"src/main/scala/amanuensis/api/StoryHttpService.scala"
+			],
+			[
+				"slotact",
+				"src/main/scala/amanuensis/core/SlotActor.scala"
+			],
 			[
 				"index",
 				"src/main/webapp/app/index.html"
@@ -1071,10 +1319,6 @@
 				"src/main/webapp/app/views/findpaths.html"
 			],
 			[
-				"graph",
-				"src/main/webapp/app/scripts/controllers/graph.js"
-			],
-			[
 				"login.js",
 				"src/main/webapp/app/scripts/controllers/login.js"
 			],
@@ -1135,10 +1379,6 @@
 				"src/main/scala/amanuensis/core/elasticsearch/ElasticSearchDomain.scala"
 			],
 			[
-				"storyac",
-				"src/main/scala/amanuensis/core/StoryActor.scala"
-			],
-			[
 				"story.",
 				"src/main/scala/amanuensis/domain/Story.scala"
 			],
@@ -1197,10 +1437,6 @@
 			[
 				"tags.css",
 				"src/main/webapp/.tmp/styles/tags.css"
-			],
-			[
-				"app",
-				"src/main/webapp/app/scripts/app.js"
 			],
 			[
 				"slotser",
@@ -1283,10 +1519,6 @@
 				"src/main/webapp/app/scripts/controllers/cab.js"
 			],
 			[
-				"root",
-				"src/main/scala/amanuensis/api/RootServiceActor.scala"
-			],
-			[
 				"userhtt",
 				"src/main/scala/amanuensis/api/UserHttpService.scala"
 			],
@@ -1321,10 +1553,6 @@
 			[
 				"story.htm",
 				"src/main/webapp/app/views/story.html"
-			],
-			[
-				"slotact",
-				"src/main/scala/amanuensis/core/SlotActor.scala"
 			],
 			[
 				"storyser",
@@ -1397,10 +1625,6 @@
 			[
 				"cab.",
 				"src/main/webapp/app/scripts/controllers/cab.js"
-			],
-			[
-				"storyhtt",
-				"src/main/scala/amanuensis/api/StoryHttpService.scala"
 			],
 			[
 				"core",

@@ -16,7 +16,7 @@ import scala.concurrent.future
 
 import amanuensis.core.elasticsearch._
 import amanuensis.core.QueryActor._
-import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol}
+import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol, UserContext}
 
 import StatusCode._
 
@@ -31,14 +31,14 @@ trait QueryHttpService extends HttpService with SprayJsonSupport {
   private implicit def executionContext = actorRefFactory.dispatcher
 
 
-  val queryRoute =
+  def queryRoute(userContext: UserContext) =
     pathPrefix("query") {
       pathEnd {
         entity(as[QueryRequest]) { queryRequest: QueryRequest =>
           post {
             dynamic {
               //FixMe: we do not need a Message-Type Fulltext here...
-              complete((queryActor ? Fulltext(queryRequest)).mapTo[QueryResult])
+              complete((queryActor ? Fulltext(queryRequest, userContext.login)).mapTo[QueryResult])
             }
           }
         }

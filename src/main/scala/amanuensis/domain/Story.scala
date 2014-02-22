@@ -17,6 +17,9 @@ case class StoryContext(story: Story, inSlots: Seq[Slot], outSlots: Seq[Slot])
 
 case class StoryId(id: String)
 
+case class StoryIndex(id : Option[String], title : String, content : String, created: String, createdBy: String, 
+  tags: Seq[String], canRead: Seq[String])
+
 
 object StoryProtocol extends DefaultJsonProtocol {
 	import SlotProtocol._
@@ -26,4 +29,5 @@ object StoryProtocol extends DefaultJsonProtocol {
   implicit val storyInfoJsonFormat = jsonFormat4(StoryInfo.apply)
   implicit val storyContextJsonFormat = jsonFormat3(StoryContext.apply)
   implicit val storyIdJsonFormat = jsonFormat1(StoryId.apply)
+  implicit val storyIndexJsonFormat = jsonFormat7(StoryIndex.apply)
 }

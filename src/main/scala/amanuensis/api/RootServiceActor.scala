@@ -55,7 +55,7 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Ama
 
   def innerRoute(userContext: UserContext) = {
       storyRoute(userContext) ~
-      queryRoute ~
+      queryRoute(userContext) ~
       attachmentRoute ~
       graphRoute(userContext)
   } 

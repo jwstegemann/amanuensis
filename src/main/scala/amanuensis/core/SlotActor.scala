@@ -154,7 +154,7 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
       ("login" -> login)   
     ) map {
         case Some(s) => {
-          indexActor ! Index(story.copy(id = Some(id)))
+          indexActor ! Index(story.copy(id = Some(id)), login :: Nil)
           indexActor ! IndexSlotName(slotName, toStory, id)
           StoryInfo(id, story.title, story.created, None)
         }

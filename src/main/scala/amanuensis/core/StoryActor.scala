@@ -64,7 +64,7 @@ object StoryActor {
   """
 
   val removeStoryQueryString = """
-    MATCH (s:Story {id: {id}})<-[:canWrite]-(:User {login: {login}}) 
+    MATCH (s:Story {id: {id}})<-[:canWrite]-(:User {login: {login}})
     WITH s.id as id, s
     OPTIONAL MATCH s-[r]-() 
     DELETE r,s
@@ -128,8 +128,6 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
 
     val id = Neo4JId.generateId
 
-    indexActor ! Index(story.copy(id = Some(id)))
-
     server.execute(createQueryString, 
       ("id" -> id), 
       ("title" -> story.title), 
@@ -138,7 +136,10 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
       ("createdBy" -> story.createdBy),
       ("tags" -> story.tags),
       ("login" -> login)
-    ) map { nothing => StoryInfo(id, story.title, story.created, None) }
+    ) map { nothing =>
+        indexActor ! Index(story.copy(id = Some(id)), login :: Nil)
+        StoryInfo(id, story.title, story.created, None) 
+      }
   }
 
   def retrieve(storyId: String, login: String) = {
@@ -163,7 +164,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
 
   def update(storyId: String, story: Story, login: String) = {
 
-    import QueryActor.Index
+    import QueryActor.UpdateIndex
 
     if (storyId != story.id.getOrElse("")) failWith(ValidationException(Message("You cannot save story with id $story.id at id $storyId.",`ERROR`) :: Nil))
     story.check()
@@ -175,7 +176,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
       ("tags" -> story.tags),
       ("login" -> login)
     ) map {
-        case Some(s) => indexActor ! Index(story)
+        case Some(s) => indexActor ! UpdateIndex(story)
         case None => throw NotFoundException(Message(s"story with id '$storyId' could not be updated",`ERROR`) :: Nil)
       }    
   }

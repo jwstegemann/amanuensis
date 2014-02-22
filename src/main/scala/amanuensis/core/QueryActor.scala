@@ -8,7 +8,7 @@ import amanuensis.api.exceptions._
 import amanuensis.domain.Message
 import amanuensis.domain.Severities._
 
-import amanuensis.domain.Story
+import amanuensis.domain.{Story, StoryIndex}
 import amanuensis.core.util.Failable
 
 import amanuensis.core.elasticsearch._
@@ -16,8 +16,9 @@ import amanuensis.core.elasticsearch._
 
 object QueryActor {
 
-  case class Fulltext(queryRequest: QueryRequest)
-  case class Index(story: Story)
+  case class Fulltext(queryRequest: QueryRequest, login: String)
+  case class Index(story: Story, canRead: Seq[String])
+  case class UpdateIndex(story: Story)
   case class DeleteFromIndex(storyId: String)
   case class IndexSlotName(slotName: String, sourceStoryId: String, targetStoryId: String)
   case class DeleteSlotName(slotName: String, sourceStoryId: String, targetStoryId: String)
@@ -43,8 +44,10 @@ class QueryActor extends Actor with ActorLogging with Failable {
   }
 
   def receive = {
-    case Fulltext(queryRequest: QueryRequest) => server.query(queryRequest) pipeTo sender
-    case Index(story: Story) => server.index(story) // pipeTo sender
+    case Fulltext(queryRequest: QueryRequest, login: String) => server.query(queryRequest, login) pipeTo sender
+    case Index(story: Story, canRead: Seq[String]) => server.index(StoryIndex(story.id, story.title, story.content, story.created, story.createdBy, 
+      story.tags, canRead))
+    case UpdateIndex(story: Story) => server.update(story) // pipeTo sender    
     case DeleteFromIndex(storyId: String) => server.delete(storyId) // pipeTo sender
     case IndexSlotName(slotName: String, sourceStoryId: String, targetStoryId: String) => server.indexSlotName(slotName, sourceStoryId, targetStoryId)
     case DeleteSlotName(slotName: String, sourceStoryId: String, targetStoryId: String) => server.deleteSlotName(slotName, sourceStoryId, targetStoryId)
