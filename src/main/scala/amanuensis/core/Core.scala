@@ -45,5 +45,6 @@ trait CoreActors {
   val queryActorInstance = system.actorOf(Props[QueryActor], "query")
   val userActorInstance = system.actorOf(Props[UserActor], "user")
   val graphActorInstance = system.actorOf(Props[GraphActor], "graph")
+  val accessActorInstance = system.actorOf(Props[AccessActor], "access")
 }
 

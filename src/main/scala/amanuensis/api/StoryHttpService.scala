@@ -20,7 +20,8 @@ import org.joda.time.DateTime
 
 import amanuensis.core.StoryActor._
 import amanuensis.core.SlotActor._
-import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol, UserContext}
+import amanuensis.core.AccessActor._
+import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol, UserContext, StoryAccess}
 
 import StatusCode._
 
@@ -31,6 +32,7 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
 
   private val storyActor = actorRefFactory.actorSelection("/user/story")
   private val slotActor = actorRefFactory.actorSelection("/user/slot")
+  private val accessActor = actorRefFactory.actorSelection("/user/access")
 
   private implicit val timeout = new Timeout(5 seconds)
   private implicit def executionContext = actorRefFactory.dispatcher
@@ -59,6 +61,39 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
             dynamic {
   //            log.debug(s"request: remove story $storyId")
               complete((storyActor ? Delete(storyId, userContext.login)) map { value => StatusCodes.OK })
+            }
+          }
+        } ~
+        pathPrefix("access") {
+          pathEnd {
+            get {
+              dynamic {
+                complete((accessActor ? RetrieveAccess(storyId, userContext.login)).mapTo[Seq[StoryAccess]])
+              }
+            }
+          } ~
+          path("read" / Segment) { userId: String =>
+            post {
+              dynamic {
+                complete((accessActor ? AddReadAccess(storyId, userId, userContext.login)) map { value => StatusCodes.OK })
+              }
+            } ~
+            delete {
+              dynamic {
+                complete((accessActor ? RemoveReadAccess(storyId, userId, userContext.login)) map { value => StatusCodes.OK })
+              }
+            }
+          } ~ 
+          path("write" / Segment) { userId: String =>
+            post {
+              dynamic {
+                complete((accessActor ? AddWriteAccess(storyId, userId, userContext.login)) map { value => StatusCodes.OK })
+              }
+            } ~
+            delete {
+              dynamic {
+                complete((accessActor ? RemoveWriteAccess(storyId, userId, userContext.login)) map { value => StatusCodes.OK })
+              }
             }
           }
         } ~

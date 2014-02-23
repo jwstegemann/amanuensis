@@ -16,12 +16,10 @@ import spray.util._
 import akka.actor.ActorSystem
 import akka.event.Logging
 
+import amanuensis.core.UsingParams
+
 
 case class Neo4JException(val message: String) extends Exception
-
-trait UsingParams {
-  type Param = (String, JsValue)
-}
 
 
 object CypherServer {

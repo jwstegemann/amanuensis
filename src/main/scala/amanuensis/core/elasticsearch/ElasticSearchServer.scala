@@ -19,16 +19,13 @@ import akka.event.Logging
 import amanuensis.domain.{Story, StoryProtocol, Slot, SlotProtocol, StoryIndex}
 
 import amanuensis.core.util.Converters
+import amanuensis.core.UsingParams
 
 import org.joda.time.{DateTime, Years, Months, Weeks, Days}
 
 
 case class ElasticSearchException(val message: String) extends Exception
 
-
-trait UsingParams {
-  type Param = (String, JsValue)
-}
 
 object ElasticSearchServer {
   //ToDo: externalize this for both server types
@@ -260,6 +257,23 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     }    
   }  
 
+
+  private val addUserScript = "if (!ctx._source.canRead.contains(user)) {ctx._source.canRead += user}"
+  private val removeUserScript = "ctx._source.canRead.remove(user)"
+
+  def changeReadAccess(storyId: String, userId: String, allow: Boolean) = {
+    val myUrl =  s"$indexUrl/$storyId/_update"
+    val script = if(allow) addUserScript else removeUserScript
+    val queryObject = JsObject(
+      ("script", JsString(script)),
+      ("params", JsObject(
+        ("user", JsString(userId))
+      ))
+    )
+
+    log.debug("ElasticSearch-AddReadAccess-Request: {} @ {}", queryObject, storyId)
+    pipelineRaw(Post(myUrl, queryObject))
+  }
 }
 
 

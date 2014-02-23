@@ -54,7 +54,6 @@ class QueryActor extends Actor with ActorLogging with Failable {
 
     case SuggestTags(text: String) => server.suggestTags(text) pipeTo sender
     case SuggestSlots(text: String) => server.suggestSlots(text) pipeTo sender
-
   }
 
 }
