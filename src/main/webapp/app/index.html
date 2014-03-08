@@ -8,7 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
@@ -78,7 +79,11 @@
       <li ng-show="appState < 4" ng-click="createSlot()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
       <!-- editing stories in a slot -->
       <li ng-show="appState === 4" ng-click="addStory()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
-      
+      <!-- share a story -->
+      <li ng-show="appState < 128" ng-click="shareStory()"><a><i class="fa fa-random fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128" ng-click="watchStory()"><a><i class="fa fa-star-o fa-fw fa-2x on-cab"></i></a></li>
+
+      <!-- create a new story on it's own -->
       <li ng-show="appState === 128"><a href="#/story"><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
 
       <li class="cab-right" id="user-menu"><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}</a>
@@ -181,6 +186,7 @@
         <script src="scripts/controllers/graph.js"></script>
         <script src="scripts/services/graphService.js"></script>
         <script src="scripts/directives/typeahead.js"></script>
+        <script src="scripts/services/shareService.js"></script>        
         <!-- endbuild -->
 </body>
 </html>

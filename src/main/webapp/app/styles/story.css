@@ -192,11 +192,23 @@ div.story-view a.link:before, li.story-info a.link:before {
   margin-right: 5px;
 }
 
-div.story-view img, li.story-info img {
+div.story-view img {
   max-width: 100%;
 }
 
+div.story-view table, li.story-info table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+div.story-view td, div.story-view th, li.story-info td, li.story-info th {
+  border: 1px solid white;
+  padding: 0.3em;
+  margin: 0;
+}
+
 li.story-info img {
+  height: auto;
   transform: scale(0.3);
     -webkit-transform: scale(0.3);
     -moz-transform: scale(0.3);
@@ -293,7 +305,7 @@ li.slot-name {
 }
 
 li.slot-name:hover {
-  background-color: rgba(75,75,75,0.25);
+  background-color: rgba(75,75,75,0.5);
 }
 
 i.on-slot {
@@ -457,4 +469,70 @@ div.suggestions .suggestion-item.selected {
 div.suggestions .suggestion-item em {
   font-weight: bold;
   font-style: normal;
+}
+
+/*
+ * share
+ */
+
+table.shares {
+  width: 30em;
+  padding: 0;
+  margin: 0;
+}
+
+table.shares td.login {
+  width: 30%;
+}
+
+table.shares td.name {
+  width: 50%;
+}
+
+table.shares td.rights {
+  width: 5%;
+}
+
+table.shares td.unshare {
+  text-align: right;
+}
+
+td.unshare > i {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+
+table.shares tr:nth-child(odd) {
+  background-color: rgba(75,75,75,0.5);  
+}
+
+div.share-list {
+  overflow: hidden;
+  max-height: 10em;
+}
+
+div.share-list .mCSB_scrollTools .mCSB_draggerContainer{
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0; 
+  margin-top: 0px;
+  margin-bottom: 5px;
+  margin-right: 0px;
+  height:auto;
+}
+
+#share-modal input.share-login {
+  font-size: 1em;
+  width: 16em;
+}
+
+#share-modal div.typeahead {
+  width: 19em;
+}
+
+#share-modal select {
+  margin-right: 20px;
 }

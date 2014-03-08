@@ -1,0 +1,13 @@
+#! /bin/bash
+
+
+curl -X POST http://localhost:9200/stories/story/$1/_update -d'
+{
+    "doc": {
+      "canRead": ["dummy"]
+    }
+    
+}'
+
+#curl -X POST http://localhost:8080/story/$1/access/read/$2
+#curl -X POST http://localhost:8080/story/$1/access/write/$2

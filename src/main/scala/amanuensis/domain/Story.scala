@@ -20,7 +20,7 @@ case class StoryId(id: String)
 case class StoryIndex(id : Option[String], title : String, content : String, created: String, createdBy: String, 
   tags: Seq[String], canRead: Seq[String])
 
-case class StoryAccess(login: String, name: String, access: Seq[String])
+case class StoryAccess(login: String, name: String, access: String)
 
 
 object StoryProtocol extends DefaultJsonProtocol {

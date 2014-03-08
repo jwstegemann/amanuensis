@@ -48,11 +48,12 @@ typeahead.directive('typeahead', ["$timeout", function($timeout) {
         scope: {
             value: '=ngModel',
             source: '&',
-            inputClass: '@'
+            inputClass: '@',
+            placeholder: '@'
         },
         template: ' \
             <div class="typeahead"> \
-                <input class=\"typeahead-input {{inputClass}}\" type=\"text\" ng-model=\"value\" ng-change=\"onChange()\"></input> \
+                <input class=\"typeahead-input {{inputClass}}\" type=\"text\" ng-model=\"value\" ng-change=\"onChange()\" placeholder=\"{{placeholder}}\"></input> \
                 <div class=\"suggestions\" ng-show=\"suggestionsVisible\"> \
                     <ul class=\"suggestion-list\"> \
                         <li class=\"suggestion-item\" ng-repeat=\"item in suggestionList | limitTo:10\" \

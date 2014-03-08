@@ -26,10 +26,10 @@ object SlotActor {
 
   val retrieveQueryString = """
     MATCH (u:User {login: {login}})
-    MATCH (s:Story {id: {story}})<-[:canRead]-(u)
+    MATCH (s:Story {id: {story}})<-[:canRead|:canWrite|:canGrant]-(u)
     MATCH (s)-[r:Slot {name: {slot}}]-(:Story)
     WITH s, count(*) as weight
-    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)<-[:canRead]-(u)
+    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)<-[:canRead|:canWrite|:canGrant]-(u)
     WITH m, weight,
       (CASE
         WHEN weight < 5 THEN m.content
@@ -40,8 +40,8 @@ object SlotActor {
 
   val addQueryString = """
     MATCH (u:User {login: {login}})
-    MATCH (n:Story {id: {toStory}})<-[:canWrite]-(u)
-    MATCH (m:Story {id: {story}})<-[:canRead]-(u)
+    MATCH (n:Story {id: {toStory}})<-[:canWrite|:canGrant]-(u)
+    MATCH (m:Story {id: {story}})<-[:canRead|:canWrite|:canGrant]-(u)
     MERGE (n)-[r:Slot]->(m) 
     SET r.name={slot}
     RETURN n.id
@@ -49,8 +49,8 @@ object SlotActor {
 
   val removeQueryString = """
     MATCH (u:User {login: {login}})
-    MATCH (n:Story {id: {fromStory}})<-[:canWrite]-(u)
-    MATCH (m:Story {id: {story}})<-[:canRead]-(u)
+    MATCH (n:Story {id: {fromStory}})<-[:canWrite|:canGrant]-(u)
+    MATCH (m:Story {id: {story}})<-[:canRead|:canWrite|:canGrant]-(u)
     MATCH (n)-[r:Slot {name: {slot}}]-(m)
     DELETE r
     RETURN n.id
@@ -58,10 +58,10 @@ object SlotActor {
 
   val createAndAddQueryString = """
     MATCH (u:User {login: {login}})  
-    MATCH (n:Story {id: {toStory}})<-[:canWrite]-(u)
+    MATCH (n:Story {id: {toStory}})<-[:canWrite|:canGrant]-(u)
     MERGE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy}})
     WITH m,u
-    CREATE (u)-[:canRead]->(m)<-[:canWrite]-(u)
+    CREATE (m)<-[:canGrant]-(u)
     FOREACH (tagname IN {tags} |
       MERGE (t:Tag {name: tagname})
       MERGE (m)-[:is]->(t:Tag))

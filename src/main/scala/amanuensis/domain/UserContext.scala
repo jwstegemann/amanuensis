@@ -3,6 +3,11 @@ package amanuensis.domain
 import spray.json.DefaultJsonProtocol
 
 
+object UserRights extends Enumeration {
+    type UserRight = Value
+    val canRead, canWrite, canGrant = Value
+  }
+
 case class UserContext(login: String, name: String, permissions: Seq[String])
 
 case class LoginRequest(username: String, password: String)

@@ -20,7 +20,7 @@ import spray.httpx.SprayJsonSupport
 
 import scala.concurrent.Future
 import amanuensis.core.elasticsearch._
-
+import amanuensis.domain.UserRights._
 
 object AccessActor {
 
@@ -30,50 +30,51 @@ object AccessActor {
 
   case class RetrieveAccess(storyId: String, login: String)
   
-  case class AddReadAccess(storyId: String, userId: String, login: String)
-  case class RemoveReadAccess(storyId: String, userId: String, login: String)
+  case class Share(storyId: String, userId: String, rights: UserRight, login: String)
+  case class Unshare(storyId: String, userId: String, login: String)
 
-  case class AddWriteAccess(storyId: String, userId: String, login: String)
-  case class RemoveWriteAccess(storyId: String, userId: String, login: String)
 
   /*
    * query-string for neo4j
    */
 
   val retrieveAccessQueryString = """
-    MATCH (l:User {login: {login}})-[:canWrite]->(s:Story {id: {storyId}})
-    MATCH (s)<-[r:canRead | :canWrite]-(u:User)
-    RETURN u.login,u.name,collect(type(r))
+    MATCH (l:User {login: {login}})-[:canRead|:canWrite|:canGrant]->(s:Story {id: {storyId}})
+    MATCH (s)<-[r:canRead|:canWrite|:canGrant]-(u:User)
+    RETURN u.login,u.name,type(r)
   """
   
-  val addReadAccessQueryString = """
-    MATCH (l:User {login: {login}})-[:canWrite]->(s:Story {id: {storyId}}), (u:User {login: {userId}})
+  val shareReadOnlyQueryString = """
+    MATCH (s:Story {id: {storyId}})<-[:canGrant]-(l:User {login: {login}}), (u:User {login: {userId}})
+    OPTIONAL MATCH (s)<-[r:canWrite | :canGrant]-(u)
+    DELETE (r)
     CREATE UNIQUE (s)<-[:canRead]-(u)
     RETURN s.id
   """
 
-  val removeReadAccessQueryString = """
-    MATCH (l:User {login: {login}})-[:canWrite]->(s:Story {id: {storyId}})
-    MATCH (s)<-[r:canRead]-(u:User {login: {userId}})
-    WITH r, s.id as id
-    DELETE r
-    RETURN id
-  """
-
-  val addWriteAccessQueryString = """
-    MATCH (l:User {login: {login}})-[:canWrite]->(s:Story {id: {storyId}}), (u:User {login: {userId}})
+  val shareReadWriteQueryString = """
+    MATCH (s:Story {id: {storyId}})<-[:canGrant]-(l:User {login: {login}}), (u:User {login: {userId}})
+    OPTIONAL MATCH (s)<-[r:canRead | :canGrant]-(u)
+    DELETE (r)
     CREATE UNIQUE (s)<-[:canWrite]-(u)
     RETURN s.id
   """
 
-  val removeWriteAccessQueryString = """
-    MATCH (l:User {login: {login}})-[:canWrite]->(s:Story {id: {storyId}})
-    MATCH (s)<-[r:canWrite]-(u:User {login: {userId}})
-    WITH r, s.id as id
-    DELETE r
-    RETURN id
+  val shareReadWriteGrantQueryString = """
+    MATCH (s:Story {id: {storyId}})<-[:canGrant]-(l:User {login: {login}}), (u:User {login: {userId}})
+    OPTIONAL MATCH (s)<-[r:canRead | :canWrite]-(u)
+    DELETE (r)
+    CREATE UNIQUE (s)<-[:canGrant]-(u)
+    RETURN s.id
   """
 
+
+  val unshareQueryString = """
+    MATCH (s:Story {id: {storyId}})<-[:canGrant]-(l:User {login: {login}}), (u:User {login: {userId}})
+    MATCH (s)<-[r:canRead | :canWrite | :canGrant]-(u)
+    DELETE r
+    RETURN s.id
+  """
 }
 
 
@@ -102,24 +103,25 @@ class AccessActor extends Actor with ActorLogging with Failable with UsingParams
 
     case RetrieveAccess(storyId, login) => retrieveAccess(storyId, login) pipeTo sender
     
-    case AddReadAccess(storyId, userId, login) => {
-      chmod(addReadAccessQueryString, storyId, userId, login) pipeTo sender
+    case Share(storyId, userId, UserRights.canRead, login) => {
+      chmod(shareReadOnlyQueryString, storyId, userId, login) pipeTo sender
       elastic_server.changeReadAccess(storyId, userId, true)
     }
 
-    case RemoveReadAccess(storyId, userId, login) => {
-      chmod(removeReadAccessQueryString, storyId, userId, login) pipeTo sender
+    case Share(storyId, userId, UserRights.canWrite, login) => {
+      chmod(shareReadWriteQueryString, storyId, userId, login) pipeTo sender
+      elastic_server.changeReadAccess(storyId, userId, true)
+    }
+
+    case Share(storyId, userId, UserRights.canGrant, login) => {
+      chmod(shareReadWriteGrantQueryString, storyId, userId, login) pipeTo sender
+      elastic_server.changeReadAccess(storyId, userId, true)
+    }
+
+    case Unshare(storyId, userId, login) => {
+      chmod(unshareQueryString, storyId, userId, login) pipeTo sender
       elastic_server.changeReadAccess(storyId, userId, false)
     }
-
-    case AddWriteAccess(storyId, userId, login) => {
-      chmod(addWriteAccessQueryString, storyId, userId, login) pipeTo sender
-    }
-
-    case RemoveWriteAccess(storyId, userId, login) => {
-      chmod(removeWriteAccessQueryString, storyId, userId, login) pipeTo sender
-    }
-
   }
 
 

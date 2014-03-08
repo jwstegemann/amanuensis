@@ -51,6 +51,14 @@ angular.module('amanuensisApp')
         $scope.$broadcast('createStoryInSlot');   
     }
 
+    $scope.shareStory = function() {
+        $scope.$broadcast('shareStory');   
+    }
+
+    $scope.watchStory = function() {
+        $scope.$broadcast('watchStory');   
+    }
+
     $scope.getUserContext = function() {
         $http({method: 'GET', url: '/user/login'}).
             success(function(data, status, headers, config) {

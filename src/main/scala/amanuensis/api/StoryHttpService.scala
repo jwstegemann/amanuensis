@@ -64,39 +64,6 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
             }
           }
         } ~
-        pathPrefix("access") {
-          pathEnd {
-            get {
-              dynamic {
-                complete((accessActor ? RetrieveAccess(storyId, userContext.login)).mapTo[Seq[StoryAccess]])
-              }
-            }
-          } ~
-          path("read" / Segment) { userId: String =>
-            post {
-              dynamic {
-                complete((accessActor ? AddReadAccess(storyId, userId, userContext.login)) map { value => StatusCodes.OK })
-              }
-            } ~
-            delete {
-              dynamic {
-                complete((accessActor ? RemoveReadAccess(storyId, userId, userContext.login)) map { value => StatusCodes.OK })
-              }
-            }
-          } ~ 
-          path("write" / Segment) { userId: String =>
-            post {
-              dynamic {
-                complete((accessActor ? AddWriteAccess(storyId, userId, userContext.login)) map { value => StatusCodes.OK })
-              }
-            } ~
-            delete {
-              dynamic {
-                complete((accessActor ? RemoveWriteAccess(storyId, userId, userContext.login)) map { value => StatusCodes.OK })
-              }
-            }
-          }
-        } ~
         pathPrefix(Segment) { slotName: String =>
           pathEnd {
             get {

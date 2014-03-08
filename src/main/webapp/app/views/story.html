@@ -15,7 +15,7 @@
           ng-click="openStory(storyInfo.id, slotName, false)">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p story-preview markdown-source="storyInfo.content"></p>
-          <i class="fa fa-fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="single">
@@ -164,6 +164,7 @@
 <!-- # Modals                  --> 
 <!-- #                         -->
 
+<!-- Modal to create a new Slot -->
 <div class="md-modal md-effect-3" id="slot-name-modal" ng-controller="SlotNameModalCtrl">
   <div class="md-content">
     <h3>{{title}}&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
@@ -178,6 +179,7 @@
 </div>
 
 
+<!-- Modal to confirm deletion of a Story -->
 <div class="md-modal md-effect-3" id="confirm-delete-modal">
   <div class="md-content">
     <h3>Are you sure?&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelConfirmDelete()"></i></h3>
@@ -188,3 +190,48 @@
   </div>
 </div>
 
+
+<!-- Modal to watch a Story for changes -->
+<div class="md-modal md-effect-3" id="watch-modal">
+  <div class="md-content">
+    <h3>You are watching this Story now.&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelWatch()"></i></h3>
+    <div class="confirmation-icon">
+      <i class="fa fa-check fa-2x opacity-hover" ng-click="cancelWatch()"></i>
+    </div>
+    <div class="confirmation-message">When someone else modifies this story,<br>we will inform you by email to <br><b>dummy@dummy.org</b></div>
+  </div>
+</div>
+
+<!-- Modal to share a Story with other users -->
+<div class="md-modal md-effect-3" id="share-modal" ng-controller="ShareModalCtrl">
+  <div class="md-content">
+    <h3>You are already sharing this story with...&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
+    </h3>
+    <div class="share-list" scrollbar refresh-on-change="shares">
+      <table class="shares">
+        <tr ng-repeat="share in shares | orderBy:'login'">
+          <td class="login">
+            {{share.login}}
+          </td>
+          <td class="name">
+            {{share.name}}
+          </td>
+          <td class="rights">
+            {{share.access}}
+          </td>
+          <td class="unshare">
+            <i class="fa fa-trash-o" ng-click="unshare(share.login)"></i>            
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="one-line">
+      <typeahead style="height: 37px" ng-model="userToShare" input-class="start-focus share-login" 
+        placeholder="share with another user" source="suggestSlots($query)">
+      </typeahead>
+      <select ng-model="rightToShare" ng-options="r.value as r.name for r in userRights">
+      </select>  
+      <div class="confirmation"><i class="fa fa-plus fa-lg on-button action opacity-hover" ng-click="share()"></i></div>  
+    </div>
+  </div>
+</div>

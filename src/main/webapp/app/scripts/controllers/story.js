@@ -119,6 +119,9 @@ angular.module('amanuensisApp')
         }
     });
 
+    /*
+     * Delete a Story after confirmation
+     */
     $scope.$on('deleteStory', function() {
         utilService.showModal('#confirm-delete-modal');    
     });
@@ -137,6 +140,34 @@ angular.module('amanuensisApp')
         utilService.hideModal('#confirm-delete-modal');    
     }
 
+    /*
+     * Watch a Story for being changed by others
+     */
+    $scope.$on('watchStory', function() {
+        utilService.showModal('#watch-modal');    
+    });
+
+    $scope.cancelWatch = function() {
+        utilService.hideModal('#watch-modal');    
+    }
+
+    /*
+     * Share a Story with other users
+     */
+    $scope.$on('shareStory', function() {
+        if (angular.isDefined($scope.context.story.id)) {
+            $scope.$broadcast("openShareStoryModal", {
+                storyId: $scope.context.story.id
+            });
+        }
+        else {
+            $rootScope.$broadcast('error',{errorMessage: 'You cannot share a story that has not been saved yet.'});            
+        }
+    });
+
+    /*
+     * Add a Story to a Slot
+     */
     $scope.$on('addStoryToSlot', function() {
         if (angular.isUndefined($scope.context.story.id)) {
             $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot add an unsaved story to a slot.'});
@@ -451,6 +482,66 @@ angular.module('amanuensisApp')
 
     $scope.cancel = function() {
         utilService.hideModal('#slot-name-modal');
+    }
+
+}); 
+
+/*
+ * Controller for Share-Dialog
+ */
+angular.module('amanuensisApp')
+  .controller('ShareModalCtrl', function ($scope,$rootScope,$location,utilService,shareService) {
+
+    $scope.userRights = [
+        {name: 'read', value: 'canRead'},
+        {name: 'read & write', value: 'canWrite'},
+        {name: 'read, write & grant', value: 'canGrant'},
+    ];
+
+    $scope.$on('openShareStoryModal',function(event, param) {
+
+        $scope.storyId = param.storyId;
+    
+        $scope.userToShare = undefined;
+        $scope.rightToShare = undefined;
+
+        $scope.reloadShares();
+    });
+
+    $scope.reloadShares = function() {
+        $scope.shares = shareService.listShares({storyId: $scope.storyId}, function(successData) {
+            utilService.showModal('#share-modal');
+        });
+    }
+
+    $scope.share = function() {
+        if ($scope.userToShare.length > 3) {
+            shareService.share({
+                storyId: $scope.storyId,
+                rights: $scope.rightToShare,
+                user: $scope.userToShare
+            }, {}, function(successData) {
+                console.log("done sharing");
+                $scope.reloadShares();
+            });
+        }
+        else {
+            $scope.title = 'Username is too short. Try a longer name for the slot...';
+        }
+    }
+
+    $scope.unshare = function(userToShare) {
+        shareService.unshare({
+            storyId: $scope.storyId,
+            user: userToShare
+        }, {}, function(successData) {
+            console.log("done unsharing");
+            $scope.reloadShares();
+        });
+    }
+
+    $scope.cancel = function() {
+        utilService.hideModal('#share-modal');
     }
 
 }); 

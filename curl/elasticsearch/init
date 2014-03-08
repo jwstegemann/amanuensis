@@ -81,3 +81,23 @@ curl -XPOST "$1/slots/slot/dummyabcde" -d'
 {
     "name": ""
 }'
+
+
+curl -XPUT "$1/users/user/_mapping" -d'
+{
+  "slot": {
+    "properties": {
+        "login": {
+            "type": "completion",
+            "index_analyzer": "simple",
+            "search_analyzer": "simple",
+            "payloads": "false"
+        }
+    }
+  }
+}'
+
+curl -XPOST "$1/users/user/dummyfghi" -d'
+{
+    "login": ""
+}'
