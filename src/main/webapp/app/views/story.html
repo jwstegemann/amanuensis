@@ -4,7 +4,7 @@
 
 <div id="left-container" class="container left-container" ng-class="{'show-slots': inSlots, 'show-stories': inStories}">
 	<!-- inbound Story-List	-->
-  <div id="stories-left" class="container stories stories-left shadow-right" ng-controller="SlotCtrl" scrollbar refresh-on-change="stories">
+  <div id="stories-left" class="container stories stories-left shadow-right" ng-controller="SlotCtrl" scrollbar>
 		<div class="story-list-title">
       <i class="fa fa-bars fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title"></input>
@@ -12,7 +12,7 @@
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
-          ng-click="openStory(storyInfo.id, slotName, false)">
+          ng-click="openStory(storyInfo.id, slotName, false)" on-finish-render="#stories-left">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
@@ -20,7 +20,7 @@
       </div>
       <div ng-switch-when="single">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'"
-          ng-click="openStory(storyInfo.id, slotName, false)">
+          ng-click="openStory(storyInfo.id, slotName, false)" on-finish-render="#stories-left">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
@@ -28,7 +28,7 @@
       </div>
       <div ng-switch-when="all">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
-          ng-click="openStory(storyInfo.id, slotName, false)">
+          ng-click="openStory(storyInfo.id, slotName, false)" on-finish-render="#stories-left">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
         </li>
@@ -36,14 +36,14 @@
 		</ul>  	
   </div>
 	<!-- inbound Slot-List	-->
-  <div id="slots-left" class="container slots slots-left shadow-right" scrollbar refresh-on-change="context.inSlots">
+  <div id="slots-left" class="container slots slots-left shadow-right" scrollbar>
     <div class="slot-list-title">
       <i class="fa on-slot" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i>
       <input class="slot-filter" type="text" placeholder="Inbound" ng-model="slotFilterLeft"></input>
     </div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.inSlots | filter:slotFilterLeft | orderBy:'name'" 
-        ng-click="selectSlot(slot.name, true)">
+        ng-click="selectSlot(slot.name, true)" on-finish-render="#slots-left">
       	<i class="fa fa-caret-left on-slot"></i>{{slot.name}}
       </li>
     </ul>  	
@@ -88,7 +88,7 @@
 
 <div id="right-container" class="container right-container" ng-class="{'show-slots': outSlots, 'show-stories': outStories}">
 	<!-- outbound Story-List	-->
-  <div id="stories-right" class="container stories stories-right shadow-left" ng-controller="SlotCtrl" scrollbar refresh-on-change="stories">
+  <div id="stories-right" class="container stories stories-right shadow-left" ng-controller="SlotCtrl" scrollbar>
 		<div class="story-list-title">
       <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title"></input>
@@ -96,7 +96,7 @@
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
-          ng-click="openStory(storyInfo.id, slotName, true)">
+          ng-click="openStory(storyInfo.id, slotName, true)" on-finish-render="#stories-right">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
@@ -104,7 +104,7 @@
       </div>
       <div ng-switch-when="single">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
-          ng-click="openStory(storyInfo.id, slotName, true)">
+          ng-click="openStory(storyInfo.id, slotName, true)" on-finish-render="#stories-right">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
@@ -112,7 +112,7 @@
       </div>
       <div ng-switch-when="all">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
-          ng-click="openStory(storyInfo.id, slotName, true)">
+          ng-click="openStory(storyInfo.id, slotName, true)" on-finish-render="#stories-right">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
         </li>
@@ -146,13 +146,14 @@
 		</ul>  	
   </div>
 	<!-- outbound Slot-List	-->
-  <div id="slots-right" class="container slots slots-right shadow-left" scrollbar refresh-on-change="context.outSlots">
+  <div id="slots-right" class="container slots slots-right shadow-left" scrollbar>
     <div class="slot-list-title">
       <i class="fa on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i>
       <input class="slot-filter" type="text" placeholder="Outbound" ng-model="slotFilterRight"></input>
     </div>
     <ul class="slot-list">
-      <li class="slot-name" ng-repeat="slot in context.outSlots | filter:slotFilterRight | orderBy:'name'" ng-click="selectSlot(slot.name, false)">
+      <li class="slot-name" ng-repeat="slot in context.outSlots | filter:slotFilterRight | orderBy:'name'" 
+        ng-click="selectSlot(slot.name, false)" on-finish-render="#slots-right">
       	<i class="fa fa-caret-right on-slot"></i>{{slot.name}}
       </li>
     </ul> 
@@ -207,9 +208,9 @@
   <div class="md-content">
     <h3>You are already sharing this story with...&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
     </h3>
-    <div class="share-list" scrollbar refresh-on-change="shares">
+    <div id="share-list" class="share-list" scrollbar>
       <table class="shares">
-        <tr ng-repeat="share in shares | orderBy:'login'" ng-click="editUser(share.login, share.access)">
+        <tr ng-repeat="share in shares | orderBy:'login'" ng-click="editUser(share.login, share.access)" on-finish-render="#share-list">
           <td class="login">
             {{share.login}}
           </td>

@@ -40,6 +40,7 @@ object AccessActor {
 
   val retrieveAccessQueryString = """
     MATCH (l:User {login: {login}})-[:canRead|:canWrite|:canGrant*1..5]->(s:Story {id: {storyId}})
+    WITH distinct s
     MATCH (s)<-[r:canRead|:canWrite|:canGrant]-(u:User)
     RETURN u.login,u.name,type(r)
   """

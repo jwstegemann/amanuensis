@@ -1,7 +1,7 @@
-<div class="query-sidebar container shadow-right" scrollbar refresh-on-change="result.facets.tags.terms">
+<div id="query-sidebar" class="query-sidebar container shadow-right" scrollbar>
     <h3 ng-show="result"class="filterHeader"><i class="fa fa-filter fa-lg on-slot"></i>&nbsp;Filter Tags:</h3>
     <ul ng-show="result" class="tag-list">
-      <li ng-repeat="term in result.facets.tags.terms" ng-click="searchWithFilter(term.term)">
+      <li ng-repeat="term in result.facets.tags.terms" ng-click="searchWithFilter(term.term)" on-finish-render="#graph-query-results">
         <a><i class="fa fa-tag"></i>{{term.term}} ({{term.count}})</a>
       </li>
     </ul>
@@ -28,7 +28,7 @@
     </ul>    
 </div>
 
-<div class="query-results container" scrollbar refresh-on-change="result.hits.hits">
+<div id="query-results" class="query-results container" scrollbar>
   <h2 ng-show="result" class="resultHeader">
     <i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Results for "{{queryString}}"
     <span ng-show="terms"> with Tag <span ng-repeat="term in terms"><i class="fa fa-tag"></i>{{term}}</span></span>
@@ -39,7 +39,7 @@
 
     <ul ng-show="result" class="resultList">
 
-      <li class="resultListItem" ng-repeat="storyResult in result.hits.hits">
+      <li class="resultListItem" ng-repeat="storyResult in result.hits.hits" on-finish-render="#query-results">
         <a href="#/story/{{storyResult._source.id}}"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;{{storyResult._source.title}}</a>
         <p class="origin">created by {{storyResult._source.createdBy}} on {{storyResult._source.created.substr(0,10)}}</p>
         <p class="content">{{storyResult._source.content}}...</p>
