@@ -16,7 +16,7 @@ import amanuensis.core.elasticsearch._
 
 object QueryActor {
 
-  case class Fulltext(queryRequest: QueryRequest, login: String)
+  case class Fulltext(queryRequest: QueryRequest, groups: Seq[String])
   case class Index(story: Story, canRead: Seq[String])
   case class UpdateIndex(story: Story)
   case class DeleteFromIndex(storyId: String)
@@ -44,7 +44,7 @@ class QueryActor extends Actor with ActorLogging with Failable {
   }
 
   def receive = {
-    case Fulltext(queryRequest: QueryRequest, login: String) => server.query(queryRequest, login) pipeTo sender
+    case Fulltext(queryRequest: QueryRequest, groups: Seq[String]) => server.query(queryRequest, groups) pipeTo sender
     case Index(story: Story, canRead: Seq[String]) => server.index(StoryIndex(story.id, story.title, story.content, story.created, story.createdBy, 
       story.tags, canRead))
     case UpdateIndex(story: Story) => server.update(story) // pipeTo sender    

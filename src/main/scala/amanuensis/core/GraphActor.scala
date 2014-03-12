@@ -27,7 +27,7 @@ object GraphActor {
     WITH distinct m
     MATCH (m)-[:is]->(:Tag {name: {tagName}})
     WITH m
-    MATCH (m)<-[:canRead|:canWrite|:canGrant]-(u)
+    MATCH (m)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     RETURN m.id, m.title, m.content, m.created, m.createdBy SKIP {skip} LIMIT 25
   """
 }

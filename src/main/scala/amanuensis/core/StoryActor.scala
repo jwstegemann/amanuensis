@@ -47,23 +47,23 @@ object StoryActor {
   """
   
   val retrieveStoryQueryString = """
-    MATCH (s:Story {id: {id}})<-[:canRead|:canWrite|:canGrant]-(:User {login: {login}})
+    MATCH (s:Story {id: {id}})<-[:canRead|:canWrite|:canGrant*1..5]-(:User {login: {login}})
     OPTIONAL MATCH (s)-[:is]->(t:Tag)
     RETURN s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy, collect(t.name) as tags
   """
 
   val retrieveOutSlotQueryString = """
-    MATCH (s:Story)-[r:Slot]->()<-[:canRead|:canWrite|:canGrant]-(:User {login: {login}})
+    MATCH (s:Story)-[r:Slot]->()<-[:canRead|:canWrite|:canGrant*1..5]-(:User {login: {login}})
     WHERE s.id={id} RETURN DISTINCT r.name as name LIMIT 250
   """
 
   val retrieveInSlotQueryString = """
-    MATCH (s:Story)<-[r:Slot]-()<-[:canRead|:canWrite|:canGrant]-(:User {login: {login}}) 
+    MATCH (s:Story)<-[r:Slot]-()<-[:canRead|:canWrite|:canGrant*1..5]-(:User {login: {login}}) 
     WHERE s.id={id} RETURN DISTINCT r.name as name LIMIT 250
   """
 
   val removeStoryQueryString = """
-    MATCH (s:Story {id: {id}})<-[:canWrite|:canGrant]-(:User {login: {login}})
+    MATCH (s:Story {id: {id}})<-[:canWrite|:canGrant*1..5]-(:User {login: {login}})
     WITH s.id as id, s
     OPTIONAL MATCH s-[r]-() 
     DELETE r,s
@@ -71,7 +71,7 @@ object StoryActor {
   """
 
   val updateStoryQueryString = """
-    MATCH (s:Story {id: {id}})<-[:canWrite|:canGrant]-(:User {login: {login}})
+    MATCH (s:Story {id: {id}})<-[:canWrite|:canGrant*1..5]-(:User {login: {login}})
     OPTIONAL MATCH (s)-[r:is]->(:Tag) DELETE r
     SET s.title={title}, s.content={content}
     FOREACH (tagname IN {tags} |

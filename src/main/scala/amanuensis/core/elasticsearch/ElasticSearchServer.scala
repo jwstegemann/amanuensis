@@ -106,7 +106,7 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     ~> forgetResponse
   )
 
-  def query(queryRequest: QueryRequest, login: String): Future[QueryResult] = {
+  def query(queryRequest: QueryRequest, groups: Seq[String]): Future[QueryResult] = {
     val today = DateTime.now.withTimeAtStartOfDay
     val aYearAgo = today minus Years.ONE
     val aMonthAgo = today minus Months.ONE
@@ -114,11 +114,12 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     val aWeekAgo = today minus Weeks.ONE
     val yesterday = today minus Days.ONE
 
-    //ToDo: make constants to improve performance
+    //ToDo: make constants for query-json-objects to improve performance
 
+    //FIXME: terms or term-query-filter
     val userFilter: JsObject = JsObject(
-      ("term", JsObject(
-        ("canRead", JsString(login))
+      ("terms", JsObject(
+        ("canRead", groups.toJson)
       )))
 
     val tagFilter: JsObject = queryRequest.tags match {

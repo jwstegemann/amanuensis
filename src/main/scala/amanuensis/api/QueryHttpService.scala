@@ -38,7 +38,7 @@ trait QueryHttpService extends HttpService with SprayJsonSupport {
           post {
             dynamic {
               //FixMe: we do not need a Message-Type Fulltext here...
-              complete((queryActor ? Fulltext(queryRequest, userContext.login)).mapTo[QueryResult])
+              complete((queryActor ? Fulltext(queryRequest, userContext.permissions)).mapTo[QueryResult])
             }
           }
         }

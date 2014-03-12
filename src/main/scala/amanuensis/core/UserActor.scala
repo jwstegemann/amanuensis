@@ -17,8 +17,17 @@ object UserActor {
   case class CheckUser(username: String, password: String)
   case class GetUserContext(username: String)
 
-  val retrieveUserString = """MATCH (u:User) WHERE u.login={login} and u.pwd={pwd} RETURN u.login as login, u.name as name, u.permissions as permissions LIMIT 1"""
-  val retrieveUserWithoutPasswordString = """MATCH (u:User) WHERE u.login={login} RETURN u.login as login, u.name as name, u.permissions as permissions LIMIT 1"""
+  //FIXME: change g:User to g:Group
+
+  val retrieveUserString = """
+    MATCH (u:User {login: {login}, pwd: {pwd}})-[:canRead|:canWrite|:canGrant*1..5]->(g:User)
+    RETURN u.login as login, u.name as name, collect(g.login)+u.login as permissions LIMIT 1
+  """
+
+  val retrieveUserWithoutPasswordString = """
+    MATCH (u:User {login: {login}, pwd: {pwd}})-[:canRead|:canWrite|:canGrant*1..5]->(g:User)
+    RETURN u.login as login, u.name as name, collect(g.login)+u.login as permissions LIMIT 1
+  """
 }
 
 object UserNeoProtocol extends Neo4JJsonProtocol {

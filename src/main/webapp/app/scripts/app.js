@@ -9,7 +9,8 @@ angular.module('amanuensisApp', [
   'http-auth-interceptor',
   'chieffancypants.loadingBar',
   'ngTagsInput',
-  'typeahead'
+  'typeahead',
+  'selectbox'
 ]).config(function ($routeProvider) {
     $routeProvider
       .when('/story/:storyId?', {

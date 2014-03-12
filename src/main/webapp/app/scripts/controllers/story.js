@@ -493,15 +493,19 @@ angular.module('amanuensisApp')
   .controller('ShareModalCtrl', function ($scope,$rootScope,$location,utilService,shareService) {
 
     $scope.userRights = [
-        {name: 'read', value: 'canRead'},
-        {name: 'read & write', value: 'canWrite'},
-        {name: 'read, write & grant', value: 'canGrant'},
+        {label: 'read', value: 'canRead'},
+        {label: 'read & write', value: 'canWrite'},
+        {label: 'read, write & grant', value: 'canGrant'},
     ];
+
+    $scope.title = 'Share with somebody else...';
 
     $scope.$on('openShareStoryModal',function(event, param) {
 
         $scope.storyId = param.storyId;
     
+        $scope.mode = 'user';
+
         $scope.userToShare = undefined;
         $scope.rightToShare = undefined;
 
@@ -515,18 +519,18 @@ angular.module('amanuensisApp')
     }
 
     $scope.share = function() {
-        if ($scope.userToShare.length > 3) {
+        if (angular.isDefined($scope.userToShare) && $scope.userToShare.length > 3 && angular.isDefined($scope.rightToShare)) {
             shareService.share({
                 storyId: $scope.storyId,
                 rights: $scope.rightToShare,
                 user: $scope.userToShare
             }, {}, function(successData) {
-                console.log("done sharing");
                 $scope.reloadShares();
+                $scope.title = 'Share with somebody else...';
             });
         }
         else {
-            $scope.title = 'Username is too short. Try a longer name for the slot...';
+            $scope.title = 'Please enter a valid username and the rights to grant...';
         }
     }
 
@@ -540,8 +544,26 @@ angular.module('amanuensisApp')
         });
     }
 
+    $scope.changeMode = function() {
+        if ($scope.mode === 'user') {
+            $scope.userToShare = 'public';
+            $scope.rightToShare = undefined;
+            $scope.mode = 'public';
+        }
+        else {
+            $scope.userToShare = undefined;
+            $scope.rightToShare = undefined;
+            $scope.mode = 'user';
+        }
+    }
+
     $scope.cancel = function() {
         utilService.hideModal('#share-modal');
+    }
+
+    $scope.editUser = function(login, access) {
+        $scope.userToShare = login;
+        $scope.rightToShare = access;        
     }
 
 }); 

@@ -417,59 +417,7 @@ li.story-info p.single-story {
   word-wrap:break-word;
 }
 
-/*
- * typeahead
- */
 
-div.typeahead {
-  width: 400px;
-  -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  display: inline-block;  
-}
-
-div.typeahead > input.typeahead-input {
-  width: 100%;
-}
-
-div.typeahead > div.suggestions {
-  margin-top: 5px;
-  position: absolute;
-  padding: 5px 0;
-  background-color: #566473;
-  width: 400px;
-  z-index: 10000;
-  border-radius: 3px;
-}
-
-div.suggestions .suggestion-list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-div.suggestions .suggestion-item {
-  padding: 3px 16px;
-  font-family: 'Lato', Arial, sans-serif;
-  font-size: 1.0em;
-  line-height: 1.4em;
-  cursor: pointer;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-div.suggestions .suggestion-item.selected {
-  color: #fff;
-  background: rgba(0,0,0,0.1);
-}
-
-div.suggestions .suggestion-item em {
-  font-weight: bold;
-  font-style: normal;
-}
 
 /*
  * share
@@ -518,19 +466,37 @@ div.share-list .mCSB_scrollTools .mCSB_draggerContainer{
   left:0;
   bottom:0;
   right:0; 
-  margin-top: 0px;
-  margin-bottom: 5px;
-  margin-right: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 0;
   height:auto;
 }
 
 #share-modal input.share-login {
   font-size: 1em;
-  width: 16em;
 }
 
 #share-modal div.typeahead {
-  width: 19em;
+  width: 12em;
+  margin-left: 1em;
+  margin-right: 1em;  
+}
+
+#share-modal div.typeahead > div.suggestions {
+  width: 12em;
+}
+
+#share-modal span.everybody {
+  font-size: 1em;
+  min-width: 12em;
+  margin-left: 1em;
+  margin-right: 1em;
+  display: inline-block;
+}
+
+#share-modal div.selectbox {
+  width: 10em;
+  margin-right: 1em;
 }
 
 #share-modal select {

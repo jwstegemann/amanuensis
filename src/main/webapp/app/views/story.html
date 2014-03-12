@@ -209,7 +209,7 @@
     </h3>
     <div class="share-list" scrollbar refresh-on-change="shares">
       <table class="shares">
-        <tr ng-repeat="share in shares | orderBy:'login'">
+        <tr ng-repeat="share in shares | orderBy:'login'" ng-click="editUser(share.login, share.access)">
           <td class="login">
             {{share.login}}
           </td>
@@ -225,12 +225,17 @@
         </tr>
       </table>
     </div>
+    <h3>{{title}}</h3>
     <div class="one-line">
+      <span class="" ng-click="changeMode()">
+        <i class="fa fa-lg" ng-class="{'fa-globe': mode==='public', 'fa-user': mode==='user'}"></i>
+        <i class="fa fa-sort-asc"></i>
+      </span>      
       <typeahead style="height: 37px" ng-model="userToShare" input-class="start-focus share-login" 
-        placeholder="share with another user" source="suggestSlots($query)">
+        placeholder="share with another user" source="suggestSlots($query)" ng-show="mode === 'user'">
       </typeahead>
-      <select ng-model="rightToShare" ng-options="r.value as r.name for r in userRights">
-      </select>  
+      <span ng-show="mode === 'public'" class="everybody">everybody</span>
+      <selectbox ng-model="rightToShare" options="userRights"></selectbox>  
       <div class="confirmation"><i class="fa fa-plus fa-lg on-button action opacity-hover" ng-click="share()"></i></div>  
     </div>
   </div>

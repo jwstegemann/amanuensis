@@ -39,13 +39,13 @@ object AccessActor {
    */
 
   val retrieveAccessQueryString = """
-    MATCH (l:User {login: {login}})-[:canRead|:canWrite|:canGrant]->(s:Story {id: {storyId}})
+    MATCH (l:User {login: {login}})-[:canRead|:canWrite|:canGrant*1..5]->(s:Story {id: {storyId}})
     MATCH (s)<-[r:canRead|:canWrite|:canGrant]-(u:User)
     RETURN u.login,u.name,type(r)
   """
   
   val shareReadOnlyQueryString = """
-    MATCH (s:Story {id: {storyId}})<-[:canGrant]-(l:User {login: {login}}), (u:User {login: {userId}})
+    MATCH (s:Story {id: {storyId}})<-[:canGrant*1..5]-(l:User {login: {login}}), (u:User {login: {userId}})
     OPTIONAL MATCH (s)<-[r:canWrite | :canGrant]-(u)
     DELETE (r)
     CREATE UNIQUE (s)<-[:canRead]-(u)
@@ -53,7 +53,7 @@ object AccessActor {
   """
 
   val shareReadWriteQueryString = """
-    MATCH (s:Story {id: {storyId}})<-[:canGrant]-(l:User {login: {login}}), (u:User {login: {userId}})
+    MATCH (s:Story {id: {storyId}})<-[:canGrant*1..5]-(l:User {login: {login}}), (u:User {login: {userId}})
     OPTIONAL MATCH (s)<-[r:canRead | :canGrant]-(u)
     DELETE (r)
     CREATE UNIQUE (s)<-[:canWrite]-(u)
@@ -61,7 +61,7 @@ object AccessActor {
   """
 
   val shareReadWriteGrantQueryString = """
-    MATCH (s:Story {id: {storyId}})<-[:canGrant]-(l:User {login: {login}}), (u:User {login: {userId}})
+    MATCH (s:Story {id: {storyId}})<-[:canGrant*1..5]-(l:User {login: {login}}), (u:User {login: {userId}})
     OPTIONAL MATCH (s)<-[r:canRead | :canWrite]-(u)
     DELETE (r)
     CREATE UNIQUE (s)<-[:canGrant]-(u)
@@ -70,7 +70,7 @@ object AccessActor {
 
 
   val unshareQueryString = """
-    MATCH (s:Story {id: {storyId}})<-[:canGrant]-(l:User {login: {login}}), (u:User {login: {userId}})
+    MATCH (s:Story {id: {storyId}})<-[:canGrant*1..5]-(l:User {login: {login}}), (u:User {login: {userId}})
     MATCH (s)<-[r:canRead | :canWrite | :canGrant]-(u)
     DELETE r
     RETURN s.id
