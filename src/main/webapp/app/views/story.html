@@ -217,7 +217,7 @@
             {{share.name}}
           </td>
           <td class="rights">
-            {{share.access}}
+            {{share.access | userRights}}
           </td>
           <td class="unshare">
             <i class="fa fa-trash-o" ng-click="unshare(share.login)"></i>            
@@ -227,14 +227,11 @@
     </div>
     <h3>{{title}}</h3>
     <div class="one-line">
-      <span class="" ng-click="changeMode()">
-        <i class="fa fa-lg" ng-class="{'fa-globe': mode==='public', 'fa-user': mode==='user'}"></i>
-        <i class="fa fa-sort-asc"></i>
-      </span>      
+      <selectbox class="select-mode" ng-model="mode" options="modes" value-selected="changeMode(value)"></selectbox>     
       <typeahead style="height: 37px" ng-model="userToShare" input-class="start-focus share-login" 
-        placeholder="share with another user" source="suggestSlots($query)" ng-show="mode === 'user'">
+        placeholder="please enter a name" source="suggestSlots($query)" ng-show="mode === 'user' || mode === 'group'">
       </typeahead>
-      <span ng-show="mode === 'public'" class="everybody">everybody</span>
+      <div ng-show="mode === 'public'" class="everybody"></div>
       <selectbox ng-model="rightToShare" options="userRights"></selectbox>  
       <div class="confirmation"><i class="fa fa-plus fa-lg on-button action opacity-hover" ng-click="share()"></i></div>  
     </div>

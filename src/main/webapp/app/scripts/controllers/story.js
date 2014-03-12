@@ -498,6 +498,12 @@ angular.module('amanuensisApp')
         {label: 'read, write & grant', value: 'canGrant'},
     ];
 
+    $scope.modes = [
+        {label: 'user ', value: 'user', icon: 'fa-user'},
+        {label: 'group', value: 'group', icon: 'fa-users'},
+        {label: 'everybody', value: 'public', icon: 'fa-globe'},
+    ];
+
     $scope.title = 'Share with somebody else...';
 
     $scope.$on('openShareStoryModal',function(event, param) {
@@ -519,7 +525,10 @@ angular.module('amanuensisApp')
     }
 
     $scope.share = function() {
-        if (angular.isDefined($scope.userToShare) && $scope.userToShare.length > 3 && angular.isDefined($scope.rightToShare)) {
+        if (angular.isUndefined($scope.mode)) {
+            $scope.title = 'Please choose, how to share this story...';            
+        }
+        else if (angular.isDefined($scope.userToShare) && $scope.userToShare.length > 3 && angular.isDefined($scope.rightToShare)) {
             shareService.share({
                 storyId: $scope.storyId,
                 rights: $scope.rightToShare,
@@ -530,7 +539,12 @@ angular.module('amanuensisApp')
             });
         }
         else {
-            $scope.title = 'Please enter a valid username and the rights to grant...';
+            if ($scope.mode === 'public') {
+                $scope.title = 'Please choose the rights to grant to everybody else...';
+            }
+            else {
+                $scope.title = 'Please enter a valid username and the rights to grant...';
+            }
         }
     }
 
@@ -544,19 +558,6 @@ angular.module('amanuensisApp')
         });
     }
 
-    $scope.changeMode = function() {
-        if ($scope.mode === 'user') {
-            $scope.userToShare = 'public';
-            $scope.rightToShare = undefined;
-            $scope.mode = 'public';
-        }
-        else {
-            $scope.userToShare = undefined;
-            $scope.rightToShare = undefined;
-            $scope.mode = 'user';
-        }
-    }
-
     $scope.cancel = function() {
         utilService.hideModal('#share-modal');
     }
@@ -564,6 +565,17 @@ angular.module('amanuensisApp')
     $scope.editUser = function(login, access) {
         $scope.userToShare = login;
         $scope.rightToShare = access;        
+        $scope.mode = 'user';
+    }
+
+    $scope.changeMode = function(value) {
+        if (value === 'public' ) {
+            $scope.userToShare = 'public';
+        }
+        else {
+            $scope.userToShare = undefined;
+        }
+        $scope.rightsToShare = undefined;
     }
 
 }); 

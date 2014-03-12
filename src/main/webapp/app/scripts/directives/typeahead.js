@@ -83,7 +83,7 @@ typeahead.directive('typeahead', ["$timeout", function($timeout) {
                     index = 0;
                 }
 
-                console.log("selected: " + index);
+//                console.log("selected: " + index);
                 $scope.selected = index
             }
 
@@ -153,24 +153,24 @@ typeahead.directive('typeahead', ["$timeout", function($timeout) {
                 // handle keys only when suggestions are visible
                 if ($scope.suggestionsVisible) {
                     if (evt.which === KEYS.down) {
-                        console.log("select next")
+//                        console.log("select next")
                         $scope.selectNext();
                         handled = true;
                     }
                     else if (evt.which === KEYS.up) {
                         $scope.selectPrev();
-                        console.log("select prev")                        
+//                        console.log("select prev")                        
                         handled = true;
                     }
                     else if (evt.which === KEYS.enter) {
-                        console.log("enter")
+//                        console.log("enter")
                         if (angular.isDefined($scope.selected)) {
                             $scope.commit();
                         }   
                         handled = true;
                     }
                     else if (evt.which === KEYS.escape) {
-                        console.log("escape")
+//                        console.log("escape")
                         $scope.suggestionsVisible = false;
                         $scope.selected = undefined;
                         handled = true;

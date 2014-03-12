@@ -13,7 +13,7 @@ div.selectbox > span.value {
 
 }
 
-div.selectbox i {
+div.selectbox i.handler {
   margin-left: 0.5em;
 }
 
@@ -53,4 +53,8 @@ div.options .option-item.selected {
 div.options .option-item em {
   font-weight: bold;
   font-style: normal;
+}
+
+div.selectbox i.on-selectbox {
+  margin-right: 0.3em;
 }
