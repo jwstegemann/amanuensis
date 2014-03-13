@@ -32,17 +32,20 @@ angular.module('amanuensisApp')
     	$location.url('/query');
     });
 
-    $scope.remove = function(storyId, index, $event) {
+    $scope.remove = function(storyInfo, $event) {
         //stop the click-event to go further down...
         if(typeof($event) !== 'undefined') $event.stopPropagation();
     	
         slotService.remove({
     		fromStoryId: $scope.storyId,
     		slotName: $scope.slotName,
-    		storyId: storyId
+    		storyId: storyInfo.id
     	}, function (successData) {
-    		$scope.stories.splice(index,1);
-	    	console.log("story aus slot entfernt!");    	
+            var index = $scope.stories.indexOf(storyInfo);
+            if (index >= 0) {
+                $scope.stories.splice(index,1);
+            }
+//	    	console.log("story aus slot entfernt!");    	
     	});
     }
 

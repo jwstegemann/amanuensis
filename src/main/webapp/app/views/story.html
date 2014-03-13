@@ -15,7 +15,7 @@
           ng-click="openStory(storyInfo.id, slotName, false)" on-finish-render="#stories-left">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p story-preview markdown-source="storyInfo.content"></p>
-          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="single">
@@ -23,14 +23,14 @@
           ng-click="openStory(storyInfo.id, slotName, false)" on-finish-render="#stories-left">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
-          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="all">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
           ng-click="openStory(storyInfo.id, slotName, false)" on-finish-render="#stories-left">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
-          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
 		</ul>  	
@@ -99,7 +99,7 @@
           ng-click="openStory(storyInfo.id, slotName, true)" on-finish-render="#stories-right">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p story-preview markdown-source="storyInfo.content"></p>
-          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="single">
@@ -107,14 +107,14 @@
           ng-click="openStory(storyInfo.id, slotName, true)" on-finish-render="#stories-right">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
-          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="all">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
           ng-click="openStory(storyInfo.id, slotName, true)" on-finish-render="#stories-right">
           <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
-          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo.id,$index,$event)"></i>
+          <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
 
