@@ -26,8 +26,7 @@ object GraphActor {
     MATCH (s)-[:Slot*1..5]-(m:Story)-[:Slot*1..5]-(t)
     WITH distinct m
     MATCH (m)-[:is]->(:Tag {name: {tagName}})
-    WITH m
-    MATCH (m)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(:User {login: {login}})
     RETURN m.id, m.title, m.content, m.created, m.createdBy SKIP {skip} LIMIT 25
   """
 }

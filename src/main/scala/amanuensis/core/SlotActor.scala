@@ -26,7 +26,8 @@ object SlotActor {
 
   val retrieveQueryString = """
     MATCH (u:User {login: {login}})
-    MATCH (s:Story {id: {story}})<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    MATCH (s:Story {id: {story}})
+    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     MATCH (s)-[r:Slot {name: {slot}}]-(:Story)
     WITH s, u, count(*) as weight
     MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)
@@ -41,8 +42,10 @@ object SlotActor {
 
   val addQueryString = """
     MATCH (u:User {login: {login}})
-    MATCH (n:Story {id: {toStory}})<-[:canWrite|:canGrant*1..5]-(u)
-    MATCH (m:Story {id: {story}})<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    MATCH (n:Story {id: {toStory}})
+    WHERE (n)<-[:canWrite|:canGrant*1..5]-(u)
+    MATCH (m:Story {id: {story}})
+    WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     MERGE (n)-[r:Slot]->(m) 
     SET r.name={slot}
     RETURN n.id
@@ -50,19 +53,32 @@ object SlotActor {
 
   val removeQueryString = """
     MATCH (u:User {login: {login}})
-    MATCH (n:Story {id: {fromStory}})<-[:canWrite|:canGrant*1..5]-(u)
-    MATCH (m:Story {id: {story}})<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    MATCH (n:Story {id: {fromStory}})
+    WHERE (n)<-[:canWrite|:canGrant*1..5]-(u)
+    MATCH (m:Story {id: {story}})
+    WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     MATCH (n)-[r:Slot {name: {slot}}]-(m)
     DELETE r
     RETURN n.id
   """
 
   val createAndAddQueryString = """
-    MATCH (u:User {login: {login}})  
-    MATCH (n:Story {id: {toStory}})<-[:canWrite|:canGrant*1..5]-(u)
+    MATCH (u:User {login: {login}})
+    MATCH (n:Story {id: {toStory}})
+      WHERE (n)<-[:canWrite|:canGrant*1..5]-(u)
+    OPTIONAL MATCH (n)<-[:canRead]-(x:User)
+    OPTIONAL MATCH (n)<-[:canWrite]-(y:User)
+    OPTIONAL MATCH (n)<-[:canGrant]-(z:User)
+    WITH n,u,collect(x) as readers, collect(y) as writers, collect(z) as granters    
     MERGE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy}})
-    WITH m,u
-    CREATE (m)<-[:canGrant]-(u)
+    WITH m,u,readers,writers,granters
+    FOREACH (reader IN readers |
+      MERGE (m)<-[:canRead]-(reader))
+    FOREACH (writer IN writers |
+      MERGE (m)<-[:canWrite]-(writer))
+    FOREACH (granter IN granters |
+      MERGE (m)<-[:canGrant]-(granter))
+    MERGE (m)<-[:canGrant]-(u)
     FOREACH (tagname IN {tags} |
       MERGE (t:Tag {name: tagname})
       MERGE (m)-[:is]->(t:Tag))
