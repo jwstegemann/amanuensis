@@ -28,8 +28,9 @@ object SlotActor {
     MATCH (u:User {login: {login}})
     MATCH (s:Story {id: {story}})<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     MATCH (s)-[r:Slot {name: {slot}}]-(:Story)
-    WITH s, count(*) as weight
-    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    WITH s, u, count(*) as weight
+    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)
+    WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     WITH m, weight,
       (CASE
         WHEN weight < 5 THEN m.content
