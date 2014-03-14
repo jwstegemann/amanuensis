@@ -65,6 +65,8 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
   val slotSuggestUrl = s"$url/slots/_suggest"
   val indexUrl = s"$url/stories/story"
   val slotIndexUrl = s"$url/slots/slot"  
+  val userSuggestUrl = s"$url/users/_suggest"
+  val groupSuggestUrl = s"$url/groups/_suggest"
 
   // interpret the HttpResponse and throw a Neo4JException if necessary
   val mapToElasticSeachException: HttpResponse => HttpResponse = { response =>
@@ -226,37 +228,27 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     pipelineRaw(Delete(myUrl))
   }
 
-  def suggestTags(text: String): Future[SuggestResult] = {
+
+  def suggest(url: String, field: String, text: String): Future[SuggestResult] = {
     val queryObject = JsObject(
       ("suggest", JsObject(
         ("text", JsString(text)),
         ("completion", JsObject(
-          ("field", JsString("tags.suggest")),
+          ("field", JsString(field)),
           ("size", JsNumber(20))
         ))
     )))
 
     log.debug("ElasticSearch-Suggestion-Request: {}", queryObject)
-    pipelineSuggest(Get(tagSuggestUrl, queryObject)) recover {
-      case x => throw ElasticSearchException(s"Error retrieving response from ElasticSearch-server: $x")
-    }    
-  }
-
-  def suggestSlots(text: String): Future[SuggestResult] = {
-    val queryObject = JsObject(
-      ("suggest", JsObject(
-        ("text", JsString(text)),
-        ("completion", JsObject(
-          ("field", JsString("name")),
-          ("size", JsNumber(20))
-        ))
-    )))
-
-    log.debug("ElasticSearch-Suggestion-Request: {}", queryObject)
-    pipelineSuggest(Get(slotSuggestUrl, queryObject)) recover {
+    pipelineSuggest(Get(url, queryObject)) recover {
       case x => throw ElasticSearchException(s"Error retrieving response from ElasticSearch-server: $x")
     }    
   }  
+
+  def suggestTags(text: String) = suggest(tagSuggestUrl, "tags.suggest", text)
+  def suggestSlots(text: String) = suggest(slotSuggestUrl, "name", text)
+  def suggestUsers(text: String) = suggest(userSuggestUrl, "login", text)
+  def suggestGroups(text: String) = suggest(groupSuggestUrl, "login", text)
 
 
   private val addUserScript = "if (!ctx._source.canRead.contains(user)) {ctx._source.canRead += user}"

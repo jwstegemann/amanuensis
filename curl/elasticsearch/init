@@ -82,10 +82,11 @@ curl -XPOST "$1/slots/slot/dummyabcde" -d'
     "name": ""
 }'
 
+curl -XPUT "$1/users"
 
 curl -XPUT "$1/users/user/_mapping" -d'
 {
-  "slot": {
+  "user": {
     "properties": {
         "login": {
             "type": "completion",
@@ -98,6 +99,27 @@ curl -XPUT "$1/users/user/_mapping" -d'
 }'
 
 curl -XPOST "$1/users/user/dummyfghi" -d'
+{
+    "login": ""
+}'
+
+curl -XPUT "$1/groups"
+
+curl -XPUT "$1/groups/group/_mapping" -d'
+{
+  "user": {
+    "properties": {
+        "login": {
+            "type": "completion",
+            "index_analyzer": "simple",
+            "search_analyzer": "simple",
+            "payloads": "false"
+        }
+    }
+  }
+}'
+
+curl -XPOST "$1/groups/group/dummyzuio" -d'
 {
     "login": ""
 }'

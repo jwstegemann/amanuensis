@@ -24,7 +24,8 @@ object QueryActor {
   case class DeleteSlotName(slotName: String, sourceStoryId: String, targetStoryId: String)
   case class SuggestTags(text: String)
   case class SuggestSlots(text: String)
-
+  case class SuggestUsers(text: String)
+  case class SuggestGroups(text: String)  
 }
 
 /**
@@ -54,6 +55,8 @@ class QueryActor extends Actor with ActorLogging with Failable {
 
     case SuggestTags(text: String) => server.suggestTags(text) pipeTo sender
     case SuggestSlots(text: String) => server.suggestSlots(text) pipeTo sender
+    case SuggestUsers(text: String) => server.suggestUsers(text) pipeTo sender
+    case SuggestGroups(text: String) => server.suggestGroups(text) pipeTo sender
   }
 
 }

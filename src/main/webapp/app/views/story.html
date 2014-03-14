@@ -230,7 +230,7 @@
     <div class="one-line">
       <selectbox class="select-mode" ng-model="mode" options="modes" value-selected="changeMode(value)"></selectbox>     
       <typeahead style="height: 37px" ng-model="userToShare" input-class="start-focus share-login" 
-        placeholder="please enter a name" source="suggestSlots($query)" ng-show="mode === 'user' || mode === 'group'">
+        placeholder="please enter a name" source="suggestUsersOrGroups($query)" ng-show="mode === 'user' || mode === 'group'">
       </typeahead>
       <div ng-show="mode === 'public'" class="everybody"></div>
       <selectbox ng-model="rightToShare" options="userRights"></selectbox>  

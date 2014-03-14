@@ -490,7 +490,7 @@ angular.module('amanuensisApp')
  * Controller for Share-Dialog
  */
 angular.module('amanuensisApp')
-  .controller('ShareModalCtrl', function ($scope,$rootScope,$location,utilService,shareService) {
+  .controller('ShareModalCtrl', function ($scope,$rootScope,$location,utilService,shareService,$http) {
 
     $scope.userRights = [
         {label: 'read', value: 'canRead'},
@@ -577,5 +577,16 @@ angular.module('amanuensisApp')
         }
         $scope.rightsToShare = undefined;
     }
+
+    //TODO: create a service for all suggests
+    $scope.suggestUsersOrGroups = function(query) {
+        return ($http.get('/query/suggest/' + $scope.mode + 's/' + query).then(function(result) {
+            result.data = result.data.suggest[0].options.map(function(value) {
+                return value.text
+            });
+            return result;
+        }));
+    }
+
 
 }); 

@@ -51,7 +51,13 @@ trait QueryHttpService extends HttpService with SprayJsonSupport {
             } ~
             path("slots" / Segment) { text: String =>
               complete((queryActor ? SuggestSlots(text)).mapTo[SuggestResult])
-            }
+            } ~
+            path("users" / Segment) { text: String =>
+              complete((queryActor ? SuggestUsers(text)).mapTo[SuggestResult])
+            } ~
+            path("groups" / Segment) { text: String =>
+              complete((queryActor ? SuggestGroups(text)).mapTo[SuggestResult])
+            }                        
           }
         }
       }
