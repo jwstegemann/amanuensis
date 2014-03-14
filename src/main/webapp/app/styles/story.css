@@ -440,6 +440,15 @@ table.shares {
   margin: 0;
 }
 
+table.shares tr {
+  cursor: pointer;
+}
+
+table.shares td.icon {
+  width: 2%;
+  padding-right: 0.3em;
+}
+
 table.shares td.login {
   width: 25%;
 }

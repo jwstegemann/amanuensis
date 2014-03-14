@@ -42,7 +42,12 @@ object AccessActor {
     MATCH (s:Story {id: {storyId}})
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(:User {login: {login}})
     MATCH (s)<-[r:canRead|:canWrite|:canGrant]-(u:User)
-    RETURN u.login,u.name,type(r)
+    RETURN u.login,u.name,type(r),
+       (CASE
+        WHEN u.login = 'public' THEN 'public'
+        WHEN u:Group THEN 'group'
+        ELSE 'user' 
+      END) as content
   """
   
   val shareReadOnlyQueryString = """

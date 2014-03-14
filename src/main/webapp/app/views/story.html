@@ -211,6 +211,9 @@
     <div id="share-list" class="share-list" scrollbar>
       <table class="shares">
         <tr ng-repeat="share in shares | orderBy:'login'" ng-click="editUser(share.login, share.access)" on-finish-render="#share-list">
+          <td class="icon">
+            <i class="fa" ng-class="{'fa-user': share.level === 'user', 'fa-group': share.level === 'group', 'fa-globe': share.level === 'public'}"></i>
+          </td>
           <td class="login">
             {{share.login}}
           </td>

@@ -20,7 +20,7 @@ case class StoryId(id: String)
 case class StoryIndex(id : Option[String], title : String, content : String, created: String, createdBy: String, 
   tags: Seq[String], canRead: Seq[String])
 
-case class StoryAccess(login: String, name: String, access: String)
+case class StoryAccess(login: String, name: String, access: String, level: String)
 
 
 object StoryProtocol extends DefaultJsonProtocol {
@@ -32,5 +32,5 @@ object StoryProtocol extends DefaultJsonProtocol {
   implicit val storyContextJsonFormat = jsonFormat3(StoryContext.apply)
   implicit val storyIdJsonFormat = jsonFormat1(StoryId.apply)
   implicit val storyIndexJsonFormat = jsonFormat7(StoryIndex.apply)
-  implicit val storyAccessJsonFormat = jsonFormat3(StoryAccess.apply)
+  implicit val storyAccessJsonFormat = jsonFormat4(StoryAccess.apply)
 }
