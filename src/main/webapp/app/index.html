@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="styles/tags.css">    
     <link rel="stylesheet" href="styles/typeahead.css">    
     <link rel="stylesheet" href="styles/selectbox.css">    
+    <link rel="stylesheet" href="styles/user.css">    
     <!-- endbuild -->
   </head>
   <body ng-app="amanuensisApp" ng-controller="CabCtrl" ng-cloak>
@@ -90,6 +91,7 @@
 
       <li class="cab-right" id="user-menu"><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}</a>
         <ul>
+          <li ng-click="changePassword()"><i class="fa fa-cog fa-fw"></i>&nbsp;change password</li>
           <li ng-click="logout()"><i class="fa fa-power-off fa-fw"></i>&nbsp;log me out</li>
         </ul>
       </li>
@@ -130,6 +132,20 @@
       </div>
     </div>
 
+    <div class="md-modal md-effect-3" id="usersettings-modal" ng-controller="UserSettingsCtrl">
+      <div class="md-content">
+        <h3>Change Your Password&nbsp;<i style="float: right; margin-top: 2px;" class="fa fa-times action" ng-click="cancel()"></i></h3>
+        <div>
+          <input id="old-pw-input" class="start-focus" type="password" ng-model="oldPwd" 
+            on-enter="goToNewPassword()" placeholder="Your old password"></input>
+          <input id="new-pw1-input" type="password" ng-model="newPwd" 
+            on-enter="goToRepeatPassword()" placeholder="Your new password"></input>
+          <input id="new-pw2-input" type="password" ng-model="repeatPwd" 
+            on-enter="change()" placeholder="repeat the new password"></input>
+          <i class="fa fa-check fa-2x on-button action on-right opacity-hover" ng-click="change()"></i>
+        </div>
+      </div>
+    </div>
 
     <!-- #                         -->
     <!-- # Messages                --> 
@@ -192,6 +208,7 @@
         <script src="scripts/services/shareService.js"></script>       
         <script src="scripts/filters/rightsFilter.js"></script>                
         <script src="scripts/directives/onFinishRender.js"></script>
+        <script src="scripts/controllers/userSettings.js"></script>
         <!-- endbuild -->
 </body>
 </html>

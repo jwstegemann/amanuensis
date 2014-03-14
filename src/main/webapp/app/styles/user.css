@@ -1,0 +1,11 @@
+#usersettings-modal {
+  width: 32em;
+}
+
+#usersettings-modal input {
+  margin-top: 1em;
+}
+
+#usersettings-modal #old-pw-input {
+  margin-top: 0.25em;
+}

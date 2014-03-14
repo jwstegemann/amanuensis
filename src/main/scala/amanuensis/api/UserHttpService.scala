@@ -14,7 +14,7 @@ import spray.httpx.SprayJsonSupport
 
 import scala.concurrent.future
 
-import amanuensis.domain.{UserContext, LoginRequest, UserContextProtocol}
+import amanuensis.domain.{UserContext, LoginRequest, UserContextProtocol, ChangePasswordRequest, UserLogin}
 
 import StatusCodes._
 
@@ -76,4 +76,17 @@ trait UserHttpService extends HttpService with SprayJsonSupport  { self: ActorLo
     }
   }
 
+  def innerUserRoute(userContext: UserContext) = {
+    pathPrefix("user") {
+      path("changePwd") {
+        post {
+          entity(as[ChangePasswordRequest]) { request =>
+            dynamic {
+              complete((userActor ? ChangePassword(userContext.login, request.oldPwd, request.newPwd)).mapTo[UserLogin])
+            }
+          }              
+        }
+      } 
+    }
+  }
 }

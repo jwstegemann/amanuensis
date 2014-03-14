@@ -22,8 +22,8 @@
     left: 0;
     width: 100%;
     min-width: 1200px;
-    height: 40px;
-    font-size: 12px;
+    height: 36px;
+    font-size: 10px;
 }
 
 .cab-main a {
@@ -118,4 +118,5 @@ i.on-cab {
 
 #user-menu {
     min-width: 10em;
+    font-size: 12px;
 }

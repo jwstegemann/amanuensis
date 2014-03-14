@@ -10,9 +10,14 @@ object UserRights extends Enumeration {
 
 case class UserContext(login: String, name: String, permissions: Seq[String])
 
+case class ChangePasswordRequest(oldPwd: String, newPwd: String)
+
+case class UserLogin(login: String)
 case class LoginRequest(username: String, password: String)
 
 object UserContextProtocol extends DefaultJsonProtocol {
   implicit val userContextJsonFormat = jsonFormat3(UserContext.apply)
   implicit val LoginRequestJsonFormat = jsonFormat2(LoginRequest.apply)
+  implicit val userLoginFormat = jsonFormat1(UserLogin.apply)
+  implicit val changePasswordRequestFormat = jsonFormat2(ChangePasswordRequest.apply)
 }

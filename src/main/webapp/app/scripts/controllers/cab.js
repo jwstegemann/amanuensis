@@ -111,4 +111,8 @@ angular.module('amanuensisApp')
         $location.url('/story/' + $rootScope.targetStack.storyId);
     }    
 
+    $scope.changePassword = function() {
+        $scope.$broadcast('changePassword');
+    }
+
 });
