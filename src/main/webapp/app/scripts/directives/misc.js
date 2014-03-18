@@ -83,8 +83,19 @@ angular.module('amanuensisApp')
   })
   .directive("markdown", function ($rootScope) {
 
+    var markdownRenderer = new marked.Renderer();
+
+    markdownRenderer.link = function (href, title, text) {
+      if (href.indexOf('/attachment/') == 0) {
+        return '<a href="' + href+ '" class="attachment">' + text + '</a>';
+      }
+      else {
+        return '<a href="' + href+ '" class="link">' + text + '</a>';
+      }
+    } 
+
     marked.setOptions({
-      renderer: new marked.Renderer(),
+      renderer: markdownRenderer,
       gfm: true,
       tables: true,
       breaks: true,
@@ -94,12 +105,6 @@ angular.module('amanuensisApp')
       smartypants: false
     });
 
-    var markdownRenderer = new marked.Renderer();
-
-    markdownRenderer.link = function (href, title, text) {
-      return '<a href="' + href+ '" class="link">' + text + '</a>';
-    }    
-
     return {
       restrict: 'A',
       scope: true,
@@ -107,8 +112,14 @@ angular.module('amanuensisApp')
 
         scope.$on('updateView', function(event, data) {
           if (data.markdown) {
-            element.html(marked(data.markdown, {renderer: markdownRenderer}));
+            element.html(marked(data.markdown, {}));
+    
+            element.load(function() {
+              console.log("******* callback *********");
+            });
+
           }
+
 
         });
 
@@ -117,20 +128,13 @@ angular.module('amanuensisApp')
   })
   .directive("storyPreview", function () {
 
-    //FixMe: put this into a service
-    var markdownRenderer = new marked.Renderer();
-
-    markdownRenderer.link = function (href, title, text) {
-      return '<a href="' + href+ '" class="link">' + text + '</a>';
-    }    
-
     return {
       restrict: 'A',
       scope: false,
       link: function (scope, element, attrs) {
 
         scope.$watch("storyInfo.content", function() {
-          element.html(marked(scope.storyInfo.content, {renderer: markdownRenderer}));
+          element.html(marked(scope.storyInfo.content, {}));
         });
 
       }

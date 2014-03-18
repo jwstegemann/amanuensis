@@ -531,7 +531,7 @@
 			"file": "src/main/webapp/app/scripts/controllers/userSettings.js",
 			"settings":
 			{
-				"buffer_size": 1087,
+				"buffer_size": 1732,
 				"line_ending": "Unix"
 			}
 		},
@@ -540,6 +540,22 @@
 			"settings":
 			{
 				"buffer_size": 3322,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/index.html",
+			"settings":
+			{
+				"buffer_size": 10803,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/scripts/controllers/story.js",
+			"settings":
+			{
+				"buffer_size": 18765,
 				"line_ending": "Unix"
 			}
 		}
@@ -680,6 +696,7 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/userSettings.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/user.css",
@@ -704,7 +721,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/slot.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/findpaths.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/onFinishRender.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/AccessHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/filters/rightsFilter.js",
@@ -818,6 +834,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app",
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/",
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles",
@@ -843,6 +860,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"broad",
+			"$http.",
 			"mapTo[Unit]",
 			"QueryRequest",
 			"user-m",
@@ -968,9 +987,7 @@
 			" i",
 			"font",
 			"with-space",
-			"$on('addStoryToSlot'",
-			"z-index",
-			"tab"
+			"$on('addStoryToSlot'"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -999,7 +1016,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1035,15 +1052,15 @@
 					"file": "src/main/webapp/app/scripts/controllers/userSettings.js",
 					"settings":
 					{
-						"buffer_size": 1087,
+						"buffer_size": 1732,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								428,
-								428
+								865,
+								865
 							]
 						],
 						"settings":
@@ -1082,6 +1099,62 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 1254.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/main/webapp/app/index.html",
+					"settings":
+					{
+						"buffer_size": 10803,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5104,
+								5104
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1233.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/main/webapp/app/scripts/controllers/story.js",
+					"settings":
+					{
+						"buffer_size": 18765,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2990,
+								2990
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 831.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1147,6 +1220,14 @@
 		"selected_items":
 		[
 			[
+				"story.js",
+				"src/main/webapp/app/scripts/controllers/story.js"
+			],
+			[
+				"index",
+				"src/main/webapp/app/index.html"
+			],
+			[
 				"userac",
 				"src/main/scala/amanuensis/core/UserActor.scala"
 			],
@@ -1171,10 +1252,6 @@
 				"src/main/scala/amanuensis/core/StoryActor.scala"
 			],
 			[
-				"story.js",
-				"src/main/webapp/app/scripts/controllers/story.js"
-			],
-			[
 				"index.html",
 				"src/main/webapp/app/index.html"
 			],
@@ -1185,10 +1262,6 @@
 			[
 				"cab.css",
 				"src/main/webapp/app/styles/cab.css"
-			],
-			[
-				"index",
-				"src/main/webapp/app/index.html"
 			],
 			[
 				"storya",

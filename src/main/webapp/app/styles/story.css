@@ -172,7 +172,7 @@ div.story-view a, li.story-info a {
   font-weight: 400;
 }
 
-div.story-view a:before, li.story-info a:before{
+div.story-view a.attachment:before, li.story-info a.attachment:before{
   font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
