@@ -85,7 +85,7 @@ div.content {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   flex: 1 1;
-  overflow: hidden;  
+  overflow: hidden;
 }
 
 div.container.story.shifted-right div.content {
@@ -207,14 +207,20 @@ div.story-view td, div.story-view th, li.story-info td, li.story-info th {
   margin: 0;
 }
 
-li.story-info img {
+li.story-info div.scale-down {
   height: auto;
+  width: auto;
   transform: scale(0.3);
     -webkit-transform: scale(0.3);
     -moz-transform: scale(0.3);
   transform-origin: 0 0;
     -webkit-transform-origin: 0 0;
     -moz-transform-origin: 0 0;
+}
+
+div.scale-down img {
+  width: 100%;
+  height: auto;
 }
 
 /*

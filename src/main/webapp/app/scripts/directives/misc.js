@@ -60,24 +60,27 @@ angular.module('amanuensisApp')
           //theme: 'light-thin'
         });
 
-          
-        //console.log("attr: " + attr.refreshOnChange);
+        var sl = elem.find('.mCSB_container')[0];
 
-        if (attr.refreshOnChange) {
+        addResizeListener(sl, function(e) {
+            console.log("resized " + elem.attr('id'));
+            elem.mCustomScrollbar('update');
+        });
+
+          
+/*        if (attr.refreshOnChange) {
           var updateTimeout
 
-//          scope.watchCollection(attr.refreshOnChange, function(newNames, oldNames) {
           scope.$watch(attr.refreshOnChange, function() {
-//            console.log("should I?");
             if (!updateTimeout) {
               updateTimeout = setTimeout(function() {
-//                console.log("update scrollbar... on " + elem.context.className);
                 elem.mCustomScrollbar('update');
                 updateTimeout = undefined;
               }, 250);
             }
           });
         }
+*/    
       }
     } 
   })
@@ -85,14 +88,18 @@ angular.module('amanuensisApp')
 
     var markdownRenderer = new marked.Renderer();
 
-    markdownRenderer.link = function (href, title, text) {
+    markdownRenderer.link = function(href, title, text) {
       if (href.indexOf('/attachment/') == 0) {
         return '<a href="' + href+ '" class="attachment">' + text + '</a>';
       }
       else {
         return '<a href="' + href+ '" class="link">' + text + '</a>';
       }
-    } 
+    }
+
+    markdownRenderer.image = function(href, title, text) {
+      return '<div class="scaleDown"><img src="' + href + '" alt="' + text + '"></img></div>';
+    }
 
     marked.setOptions({
       renderer: markdownRenderer,
@@ -113,11 +120,6 @@ angular.module('amanuensisApp')
         scope.$on('updateView', function(event, data) {
           if (data.markdown) {
             element.html(marked(data.markdown, {}));
-    
-            element.load(function() {
-              console.log("******* callback *********");
-            });
-
           }
 
 
@@ -132,7 +134,7 @@ angular.module('amanuensisApp')
       restrict: 'A',
       scope: false,
       link: function (scope, element, attrs) {
-
+        
         scope.$watch("storyInfo.content", function() {
           element.html(marked(scope.storyInfo.content, {}));
         });

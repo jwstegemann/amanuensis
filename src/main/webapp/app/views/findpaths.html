@@ -15,7 +15,7 @@
 
     <ul ng-show="result.length" class="resultList">
 
-      <li class="resultListItem" ng-repeat="storyResult in result" on-finish-render="#graph-query-results">
+      <li class="resultListItem" ng-repeat="storyResult in result">
         <a href="#/story/{{storyResult.id}}"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;{{storyResult.title}}</a>
         <p class="origin">created by {{storyResult.createdBy}} on {{storyResult.created.substr(0,10)}}</p>
         <p class="content">{{storyResult.content}}...</p>

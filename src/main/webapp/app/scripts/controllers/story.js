@@ -246,6 +246,7 @@ angular.module('amanuensisApp')
 
             // emit signal
             $scope.$broadcast('selectSlot',{
+                inbound: inbound,
                 storyId: $scope.context.story.id,
                 storyTitle: $scope.context.story.title,
                 slotName: slotName
@@ -402,7 +403,8 @@ angular.module('amanuensisApp')
 
     function updateScrollbar() {
         setTimeout(function() {
-          $("#story-content").height($("#story-content").outerHeight());
+        //FIXME: dringend!!!
+//          $("#story-content").height($("#story-content").outerHeight());
           $("#story-content").mCustomScrollbar('update');
         }, 100);
     }

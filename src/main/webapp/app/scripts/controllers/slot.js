@@ -17,7 +17,7 @@ angular.module('amanuensisApp')
         }, function(successData) {
             if (successData.length > 4) $scope.storyListViewMode = "all"
             else if (successData.length == 1) $scope.storyListViewMode = "single"
-            else $scope.storyListViewMode = "few"
+            else $scope.storyListViewMode = "few"                
         });
 
     }
@@ -54,7 +54,9 @@ angular.module('amanuensisApp')
     }
 
     $scope.$on("selectSlot", function(event, params) {
-        $scope.reload(params.storyId, params.storyTitle, params.slotName);
+        if (params.inbound === $scope.inbound) {
+            $scope.reload(params.storyId, params.storyTitle, params.slotName);
+        }
     });
 
   });
