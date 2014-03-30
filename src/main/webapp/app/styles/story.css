@@ -78,6 +78,7 @@ div.content {
   font-weight: 300;
   color: #fff;
   font-size: 1.2em;
+/*  height: 600px !important; */
   padding: 1.0em 15%;
   width: 100%;
   max-width: 100%;
@@ -85,6 +86,7 @@ div.content {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   flex: 1 1;
+    -moz-flex: 1 1;
   overflow: hidden;
 }
 
@@ -96,12 +98,11 @@ div.container.story.shifted-left div.content {
   padding: 1.8em 0.6em;
 }
 
+
 #story-content .mCSB_scrollTools .mCSB_draggerContainer{
   position:absolute;
   top:0;
-  left:0;
-  bottom:0;
-  right:0; 
+  right:10; 
   margin-top: 0px;
   margin-bottom: 5px;
   height:auto;
@@ -131,7 +132,6 @@ textarea.story-content:focus {
 div.story-view {
   margin-top: -10px;
   padding-top: 0px;
-  overflow: hidden;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;  

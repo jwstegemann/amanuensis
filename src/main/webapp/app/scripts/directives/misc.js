@@ -62,14 +62,25 @@ angular.module('amanuensisApp')
 
         var sl = elem.find('.mCSB_container')[0];
 
+        var updateTimeout;
+
         addResizeListener(sl, function(e) {
             console.log("resized " + elem.attr('id'));
-            elem.mCustomScrollbar('update');
+            updateTimeout = setTimeout(function() {
+                //adjust the height to flexbox before updating scrollbar!
+                //FIXME: check if flexbox?
+                if (elem.attr('id') === 'story-content') {
+                  elem.height(elem.outerHeight());
+                }
+                elem.mCustomScrollbar('update');
+                console.log("adjusted scrollbar for " + elem.attr('id'));
+                updateTimeout = undefined;
+              }, 100);            
         });
 
           
 /*        if (attr.refreshOnChange) {
-          var updateTimeout
+          
 
           scope.$watch(attr.refreshOnChange, function() {
             if (!updateTimeout) {
