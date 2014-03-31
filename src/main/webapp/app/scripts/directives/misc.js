@@ -38,20 +38,30 @@ angular.module('amanuensisApp')
       });  
     };
   })
+  .directive('fillVertical', function() {
+    return function(scope, elem, attrs) {
+      $(window).resize(function(){
+        elem.height($(window).height() - elem.offset().top - 0);
+        console.log("filled element " + elem.attr('id') + ":" + elem.height() );       
+      });
+
+      elem.height($(window).height() - elem.offset().top - 0);
+    };
+  })  
   .directive('scrollbar', function() {
     return {
       restrict: 'A',
       scope: false,
       link: function(scope, elem, attr) {
         elem.mCustomScrollbar({
-          autoHideScrollbar: true,
+          autoHideScrollbar: false,
           horizontalScroll: false,
           mouseWheel: true,
           scrollButtons:{
             enable: false
           },
           advanced:{
-            updateOnBrowserResize: true,
+            updateOnBrowserResize: false,
             updateOnContentResize: false,
             autoExpandHorizontalScroll: false,
             autoScrollOnFocus: false,
@@ -67,11 +77,6 @@ angular.module('amanuensisApp')
         addResizeListener(sl, function(e) {
             console.log("resized " + elem.attr('id'));
             updateTimeout = setTimeout(function() {
-                //adjust the height to flexbox before updating scrollbar!
-                //FIXME: check if flexbox?
-                if (elem.attr('id') === 'story-content') {
-                  elem.height(elem.outerHeight());
-                }
                 elem.mCustomScrollbar('update');
                 console.log("adjusted scrollbar for " + elem.attr('id'));
                 updateTimeout = undefined;

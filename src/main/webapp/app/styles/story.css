@@ -9,7 +9,6 @@ div.story-header {
   margin-top: 40px;
   background: rgba(0,0,0,0.05);
   padding: 1.8em 15%;
-  flex: auto auto ;
   overflow: visible;
 }
 
@@ -78,33 +77,30 @@ div.content {
   font-weight: 300;
   color: #fff;
   font-size: 1.2em;
-/*  height: 600px !important; */
-  padding: 1.0em 15%;
+  padding: 0 15%;
   width: 100%;
   max-width: 100%;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-  flex: 1 1;
-    -moz-flex: 1 1;
   overflow: hidden;
 }
 
-div.container.story.shifted-right div.content {
-  padding: 1.8em 0.6em;
+div.container.story.shifted-right div.content, div.container.story.shifted-left div.content  {
+  padding: 0 0;
 }
 
-div.container.story.shifted-left div.content {
-  padding: 1.8em 0.6em;
+div.container.story.shifted-right div.story-view, div.container.story.shifted-left div.story-view {
+  padding-right: 10px;
 }
 
 
 #story-content .mCSB_scrollTools .mCSB_draggerContainer{
   position:absolute;
   top:0;
-  right:10; 
-  margin-top: 0px;
-  margin-bottom: 5px;
+  right:0; 
+  margin-top: 10px;
+  margin-bottom: 10px;
   height:auto;
 }
 
@@ -134,7 +130,7 @@ div.story-view {
   padding-top: 0px;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    box-sizing: border-box;  
+    box-sizing: border-box;
 }
 
 div.story-view h1, li.story-info h1 {
