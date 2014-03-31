@@ -69,11 +69,11 @@
               </auto-complete>
             </tags-input>
         </div>
-				<div id="story-content" class="content" scrollbar fill-vertical>
-				  <!-- <textarea ng-show="editMode" id="story-content-editor" class="story-content" ng-model="context.story.content" 
+				<div id="story-content" class="content" scrollbar fill-vertical margin='0'>
+				  <textarea ng-show="editMode" id="story-content-editor" class="story-content" ng-model="context.story.content" 
             placeholder="... that still has to be written." 
-            uploadable>
-          </textarea> -->
+            uploadable fill-vertical margin='20'>
+          </textarea>
           <div id="story-view" ng-hide="editMode" ng-dblclick="showContentEditor()" class="story-view" markdown>
           y 
           </div>

@@ -41,11 +41,11 @@ angular.module('amanuensisApp')
   .directive('fillVertical', function() {
     return function(scope, elem, attrs) {
       $(window).resize(function(){
-        elem.height($(window).height() - elem.offset().top - 0);
-        console.log("filled element " + elem.attr('id') + ":" + elem.height() );       
+        elem.height($(window).height() - elem.offset().top - attrs.margin);
+        //console.log("filled element " + elem.attr('id') + ":" + elem.height() );       
       });
 
-      elem.height($(window).height() - elem.offset().top - 0);
+      elem.height($(window).height() - elem.offset().top - attrs.margin);
     };
   })  
   .directive('scrollbar', function() {
@@ -75,10 +75,10 @@ angular.module('amanuensisApp')
         var updateTimeout;
 
         addResizeListener(sl, function(e) {
-            console.log("resized " + elem.attr('id'));
+//            console.log("resized " + elem.attr('id'));
             updateTimeout = setTimeout(function() {
                 elem.mCustomScrollbar('update');
-                console.log("adjusted scrollbar for " + elem.attr('id'));
+//                console.log("adjusted scrollbar for " + elem.attr('id'));
                 updateTimeout = undefined;
               }, 100);            
         });
