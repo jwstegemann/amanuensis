@@ -43,17 +43,39 @@ Buildpack: heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-bui
 
 ---
 
-3. Create a User in Neo4J
 
+3. Create Index and Define Mappings in ElasticSearch
+
+    curl/elasticsearch/init <url>
+
+---
+
+4. Create public Group in Neo4J
+
+    create (u:User {
+        login:"public", 
+        pwd:"public",
+        name:"everybody",
+        permissions:[]
+    })   
+
+---
+
+5. Create a User in Neo4J
+
+    match (g:User {login: "public"})
     create (u:User {
         login:"<usernam>", 
         pwd:"<sha-password-hash>",
         name:"<name>",
         permissions:[]
-    })
+    })-[:canGrant]->(g)
 
----
 
-4. Create Index and Define Mappings in ElasticSearch
+6. Add User to Index
 
-    curl/elasticsearch/init <url>
+    curl -XPOST "http://localhost:9200/users/user/<username>" -d'
+    {
+        "login": "<username>"
+    }'
+    

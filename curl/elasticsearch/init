@@ -2,6 +2,8 @@
 
 curl -XDELETE "$1/stories"
 curl -XDELETE "$1/slots"
+curl -XDELETE "$1/groups"
+curl -XDELETE "$1/users"
 
 curl -XPUT "$1/stories"
 curl -XPUT "$1/slots"
