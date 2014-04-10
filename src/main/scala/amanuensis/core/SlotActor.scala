@@ -46,8 +46,7 @@ object SlotActor {
     WHERE (n)<-[:canWrite|:canGrant*1..5]-(u)
     MATCH (m:Story {id: {story}})
     WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
-    MERGE (n)-[r:Slot]->(m) 
-    SET r.name={slot}
+    CREATE (n)-[r:Slot {name: {slot}}]->(m)
     RETURN n.id
   """
 
@@ -70,7 +69,7 @@ object SlotActor {
     OPTIONAL MATCH (n)<-[:canWrite]-(y:User)
     OPTIONAL MATCH (n)<-[:canGrant]-(z:User)
     WITH n,u,collect(x) as readers, collect(y) as writers, collect(z) as granters    
-    MERGE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy}})
+    CREATE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy}})
     WITH m,u,readers,writers,granters
     FOREACH (reader IN readers |
       MERGE (m)<-[:canRead]-(reader))
