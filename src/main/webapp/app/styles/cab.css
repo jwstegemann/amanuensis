@@ -53,6 +53,18 @@
     padding: 0 15px;
     letter-spacing: 1px;
     font-weight: bold;
+    margin-top: -0.25em;
+}
+
+.cab-main > li > a.text {
+    font-weight: normal;
+    margin-top: -0.2em;
+    font-size: 1.2em;
+}
+
+.cab-main > li > a.user {
+    margin-top: -0.1em;
+    font-weight: normal;
 }
 
 .cab-main > li > ul {
