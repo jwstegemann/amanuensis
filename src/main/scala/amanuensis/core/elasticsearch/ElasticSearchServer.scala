@@ -144,11 +144,16 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
 
     val queryObject = JsObject(
       ("query", JsObject(
-        ("multi_match", JsObject(
-          ("query", JsString(queryRequest.query)),
-          ("fields", JsArray(JsString("title"),JsString("content"),JsString("tags"))),
-          ("type", JsString("phrase_prefix")),
-          ("max_expansions", JsString("10"))
+        ("filtered", JsObject(
+          ("query", JsObject(
+            ("multi_match", JsObject(
+              ("query", JsString(queryRequest.query)),
+              ("fields", JsArray(JsString("title"),JsString("content"),JsString("tags"))),
+              ("type", JsString("phrase_prefix")),
+              ("max_expansions", JsString("10"))
+            ))
+          )),
+          ("filter", userFilter)
         ))
       )),
       ("from", JsNumber(queryRequest.page * 25)),
@@ -174,8 +179,8 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
         ))
       )),
       ("filter", JsObject(
-        ("and", JsArray(userFilter :: tagFilter :: dateFilter :: Nil))
-      ))    
+        ("and", JsArray(tagFilter :: dateFilter :: Nil))
+      ))          
     )
 
     log.debug("ElasticSearch-Query-Request: {}", queryObject)
