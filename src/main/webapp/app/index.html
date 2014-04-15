@@ -61,13 +61,13 @@
 
       <!-- selecting a story for slot-->
       <li ng-show="selectMode" ng-click="select()"><a><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
-      <li ng-show="stack" ng-click="goToStack()"><a><i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{stack.storyTitle}}&nbsp;<i class="fa fa-link fa-fw fa-lg on-cab"></i>&nbsp;{{stack.slotName}}</a></li>        
+      <li ng-show="stack" ng-click="goToStack()"><a class="text"><i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{stack.storyTitle}}&nbsp;<i class="fa fa-link fa-fw fa-lg on-cab"></i>&nbsp;{{stack.slotName}}</a></li>        
       <li ng-show="selectMode" ng-click="cancel()"><a><i class="fa fa-times fa-fw fa-2x on-cab"></i></a></li>
 
       <!-- selecting a story for graph-search -->
       <li ng-show="targetMode" ng-click="selectTarget()"><a><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
       <li ng-show="targetMode" ng-click="goToTargetStack()">
-        <a>
+        <a class="text">
           <i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;
           {{targetStack.source.title}}&nbsp;
           <i class="fa fa-code-fork fa-fw fa-lg on-cab"></i>
@@ -87,9 +87,11 @@
       <li ng-show="appState < 128" ng-click="watchStory()"><a><i class="fa fa-star-o fa-fw fa-2x on-cab"></i></a></li>
 
       <!-- create a new story on it's own -->
-      <li ng-hide="selectMode" ng-show="appState === 128"><a href="#/story"><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="!selectMode && !targetMode && appState === 128">
+        <a href="#/story"><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a>
+      </li>
 
-      <li class="cab-right" id="user-menu"><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}</a>
+      <li class="cab-right" id="user-menu"><a class="user"><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}</a>
         <ul>
           <li ng-click="changePassword()"><i class="fa fa-cog fa-fw"></i>&nbsp;change password</li>
           <li ng-click="logout()"><i class="fa fa-power-off fa-fw"></i>&nbsp;log me out</li>
