@@ -37,6 +37,10 @@ div.md-overlay {
 	transition: all 0.3s;
 }
 
+.md-error {
+  z-index: 50001;
+}
+
 div.md-overlay.md-show {
 	opacity: 1;
 	visibility: visible;

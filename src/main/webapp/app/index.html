@@ -87,7 +87,7 @@
       <li ng-show="appState < 128" ng-click="watchStory()"><a><i class="fa fa-star-o fa-fw fa-2x on-cab"></i></a></li>
 
       <!-- create a new story on it's own -->
-      <li ng-show="appState === 128"><a href="#/story"><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-hide="selectMode" ng-show="appState === 128"><a href="#/story"><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
 
       <li class="cab-right" id="user-menu"><a><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}</a>
         <ul>

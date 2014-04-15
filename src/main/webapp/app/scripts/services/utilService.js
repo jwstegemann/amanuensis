@@ -28,33 +28,35 @@ angular.module('amanuensisApp')
 
     }
 
-    return {
-
-      showModalElement: function(modal)  {
+    function showModalElement(modal)  {
+      if (!modal.hasClass('md-show')) {
         showOverlay();
         modal.addClass('md-show')
         setTimeout(function(){
           modal.find('.start-focus').focus();
         }, 120);
-      },
+      }
+    }
 
-      hideModalElement: function(modal) {
+    function hideModalElement(modal) {
+      if (modal.hasClass('md-show')) {
         modal.removeClass('md-show');
         hideOverlay();
-      },
+      }
+    }
+
+    return {
+
+      showModalElement: showModalElement,
+
+      hideModalElement: hideModalElement,
 
       showModal: function(modalId)  {
-            showOverlay();
-            var modal =  $(modalId);        
-            modal.addClass('md-show')
-            setTimeout(function(){
-              modal.find('.start-focus').focus();
-            }, 120);
+        showModalElement($(modalId));
       },
 
       hideModal: function(modalId) {
-            $(modalId).removeClass('md-show');
-            hideOverlay();
+        hideModalElement($(modalId));
       } 
 
     };
