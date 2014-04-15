@@ -33,7 +33,7 @@ object UserActor {
   """
 
   val retrieveUserWithoutPasswordString = """
-    MATCH (u:User {login: {login}, pwd: {pwd}})-[:canRead|:canWrite|:canGrant*1..5]->(g:User)
+    MATCH (u:User {login: {login}})-[:canRead|:canWrite|:canGrant*1..5]->(g:User)
     RETURN u.login as login, u.name as name, collect(g.login)+u.login as permissions LIMIT 1
   """
 
