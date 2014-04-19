@@ -276,6 +276,27 @@ angular.module('amanuensisApp')
           return true;
         }
 
+        // upload file by menu
+        scope.$on('addAttachment', function() {
+          var attachmentInput = $("#attachment");
+
+          attachmentInput.change(function(){
+            for (var i = 0, numFiles = this.files.length; i < numFiles; i++) {            
+              var file = this.files[i];
+              //console.log('uploading file ' + file);
+
+              if (scope.isUploadPossible()) {
+                var isImage = isAnImage(file.type)
+                scope.insertProgressText(isImage);
+                scope.uploadFile(file, isImage);
+              }
+            }
+
+          });          
+
+          attachmentInput.click();
+        });
+
         //add event listeners
         editor.addEventListener('paste', function(e) {
             scope.onPaste(e);
@@ -295,6 +316,9 @@ angular.module('amanuensisApp')
         }, false);        
 
 
-      }
+      },
+      controller: ["$scope","$attrs","$element", function($scope, $attrs, $element) {
+        
+      }]
     }
   });

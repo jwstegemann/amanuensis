@@ -115,4 +115,12 @@ angular.module('amanuensisApp')
         $scope.$broadcast('changePassword');
     }
 
+    $scope.reloadStory = function() {
+        $scope.$broadcast('reloadStory');
+    }
+
+    $scope.addAttachment = function() {
+        $scope.$broadcast('addAttachment');
+    }
+
 });

@@ -75,6 +75,10 @@ angular.module('amanuensisApp')
         $scope.slotFilterLeft = undefined;
     }
 
+    $scope.$on('reloadStory', function() {
+        $scope.reload();
+    });
+
     $scope.$on('saveStory', function() {
         if (
             angular.isUndefined($scope.context.story.title) ||
