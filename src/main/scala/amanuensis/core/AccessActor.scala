@@ -39,8 +39,8 @@ object AccessActor {
    */
 
   val retrieveAccessQueryString = """
-    MATCH (s:Story {id: {storyId}})
-    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(:User {login: {login}})
+    MATCH (s:Story {id: {storyId}}), (l:User {login: {login}})
+    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(l)
     MATCH (s)<-[r:canRead|:canWrite|:canGrant]-(u:User)
     RETURN u.login,u.name,type(r),
        (CASE
@@ -51,8 +51,8 @@ object AccessActor {
   """
   
   val shareReadOnlyQueryString = """
-    MATCH (s:Story {id: {storyId}})
-    WHERE (s)<-[:canGrant*1..5]-(:User {login: {login}}) 
+    MATCH (s:Story {id: {storyId}}), (l:User {login: {login}})
+    WHERE (s)<-[:canGrant*1..5]-(l) 
     MATCH (u:User {login: {userId}})
     OPTIONAL MATCH (s)<-[r:canWrite | :canGrant]-(u)
     DELETE (r)
@@ -61,8 +61,8 @@ object AccessActor {
   """
 
   val shareReadWriteQueryString = """
-    MATCH (s:Story {id: {storyId}})
-    WHERE (s)<-[:canGrant*1..5]-(:User {login: {login}}) 
+    MATCH (s:Story {id: {storyId}}), (l:User {login: {login}})
+    WHERE (s)<-[:canGrant*1..5]-(l) 
     MATCH (u:User {login: {userId}})
     OPTIONAL MATCH (s)<-[r:canRead | :canGrant]-(u)
     DELETE (r)
@@ -71,8 +71,8 @@ object AccessActor {
   """
 
   val shareReadWriteGrantQueryString = """
-    MATCH (s:Story {id: {storyId}})
-    WHERE (s)<-[:canGrant*1..5]-(:User {login: {login}}) 
+    MATCH (s:Story {id: {storyId}}), (l:User {login: {login}})
+    WHERE (s)<-[:canGrant*1..5]-(l) 
     MATCH (u:User {login: {userId}})
     OPTIONAL MATCH (s)<-[r:canRead | :canWrite]-(u)
     DELETE (r)
@@ -82,8 +82,8 @@ object AccessActor {
 
 
   val unshareQueryString = """
-    MATCH (s:Story {id: {storyId}})
-    WHERE (s)<-[:canGrant*1..5]-(:User {login: {login}}) 
+    MATCH (s:Story {id: {storyId}}), (l:User {login: {login}})
+    WHERE (s)<-[:canGrant*1..5]-(l) 
     MATCH (u:User {login: {userId}})
     MATCH (s)<-[r:canRead | :canWrite | :canGrant]-(u)
     DELETE r
