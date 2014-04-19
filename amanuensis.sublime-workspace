@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"hid",
+				"hideModalElement"
+			],
+			[
+				"md-",
+				"md-modal"
+			],
+			[
+				"showMo",
+				"showModalElement"
+			],
+			[
 				"font-",
 				"font-size"
 			],
@@ -502,54 +514,19 @@
 			[
 				"Logger",
 				"LoggerFactory"
-			],
-			[
-				"StaticS",
-				"staticService"
-			],
-			[
-				"UserPass",
-				"userPass"
-			],
-			[
-				"Mongo",
-				"MongoUserContext"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/main/scala/amanuensis/core/StoryActor.scala",
-			"settings":
-			{
-				"buffer_size": 6234,
-				"line_ending": "Unix"
-			}
-		},
-		{
+			"contents": "'use strict';\n\n\nangular.module('amanuensisApp')\n  .factory('utilService', function () {\n\n    var overlay = $('#md-overlay');\n\n    var counter = 0;\n\n    function showOverlay() {\n      console.log('+++ show Overlay, counter before: ' + counter);\n      if (counter++ === 0) {\n            overlay.addClass('md-show');   \n      }\n      console.log('+++ show Overlay, counter after: ' + counter);\n    }\n\n    function hideOverlay() {\n      console.log('--- hide Overlay, counter before: ' + counter);\n\n      if (--counter <= 0) {\n            overlay.removeClass('md-show');\n            counter = 0;\n      }\n\n      console.log('--- hide Overlay, counter after: ' + counter);\n\n    }\n\n    function showModalElement(modal)  {\n      if (!modal.hasClass('md-show')) {\n        showOverlay();\n        modal.addClass('md-show')\n        setTimeout(function(){\n          modal.find('.start-focus').focus();\n        }, 120);\n      }\n    }\n\n    function hideModalElement(modal) {\n      if (modal.hasClass('md-show')) {\n        modal.removeClass('md-show');\n        hideOverlay();\n      }\n    }\n\n    return {\n\n      showModalElement: showModalElement,\n\n      hideModalElement: hideModalElement,\n\n      showModal: function(modalId)  {\n        showModalElement($(modalId));\n      },\n\n      hideModal: function(modalId) {\n        hideModalElement($(modalId));\n      } \n\n    };\n  });\n",
 			"file": "src/main/webapp/app/scripts/services/utilService.js",
+			"file_size": 1359,
+			"file_write_time": 1397580643000000,
 			"settings":
 			{
-				"buffer_size": 949,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 20 files for \"showModalElement(\"\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js:\n   30  \n   31                            $scope.$apply();\n   32:                           utilService.showModalElement($element);\n   33                          });\n   34  \n\n1 match in 1 file\n\n\nSearching 20 files for \"showModal(\"\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/graph.js:\n   33      $scope.askForTagName = function() {\n   34          $scope.title = 'Please enter a tag-name...';\n   35:         utilService.showModal('#tag-name-modal');\n   36      };\n   37  \n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js:\n   49       */\n   50      $scope.$on('event:auth-loginRequired', function() {\n   51:         utilService.showModal('#login-modal');  \n   52      });\n   53  \n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js:\n  124       */\n  125      $scope.$on('deleteStory', function() {\n  126:         utilService.showModal('#confirm-delete-modal');    \n  127      });\n  128  \n  ...\n  145       */\n  146      $scope.$on('watchStory', function() {\n  147:         utilService.showModal('#watch-modal');    \n  148      });\n  149  \n  ...\n  457          $scope.create = param.create;\n  458  \n  459:         utilService.showModal('#slot-name-modal');\n  460      });\n  461  \n  ...\n  523      $scope.reloadShares = function() {\n  524          $scope.shares = shareService.listShares({storyId: $scope.storyId}, function(successData) {\n  525:             utilService.showModal('#share-modal');\n  526          });\n  527      }\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/userSettings.js:\n   44       */\n   45      $scope.$on('changePassword', function() {\n   46:         utilService.showModal('#usersettings-modal');  \n   47      });\n   48  \n\n7 matches across 4 files\n",
-			"settings":
-			{
-				"buffer_size": 1963,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "src/main/webapp/app/index.html",
-			"settings":
-			{
-				"buffer_size": 10906,
+				"buffer_size": 1359,
 				"line_ending": "Unix"
 			}
 		},
@@ -557,15 +534,23 @@
 			"file": "src/main/webapp/app/styles/modals.css",
 			"settings":
 			{
-				"buffer_size": 3409,
+				"buffer_size": 3307,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/app/views/story.html",
+			"file": "src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
 			"settings":
 			{
-				"buffer_size": 12117,
+				"buffer_size": 9283,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/index.html",
+			"settings":
+			{
+				"buffer_size": 10888,
 				"line_ending": "Unix"
 			}
 		},
@@ -573,23 +558,23 @@
 			"file": "src/main/webapp/app/styles/cab.css",
 			"settings":
 			{
-				"buffer_size": 2176,
+				"buffer_size": 2151,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/app/scripts/directives/errorDialog.js",
+			"file": "src/main/scala/amanuensis/api/security/StatelessCookieAuthenticator.scala",
 			"settings":
 			{
-				"buffer_size": 1882,
+				"buffer_size": 3410,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/app/scripts/directives/misc.js",
+			"file": "src/main/scala/amanuensis/core/UserActor.scala",
 			"settings":
 			{
-				"buffer_size": 8729,
+				"buffer_size": 3310,
 				"line_ending": "Unix"
 			}
 		}
@@ -730,19 +715,23 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/font-awesome/src/3.2.1/icons/index.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utilService.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/shelljs/global.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/font-awesome/src/3.2.1/icons/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/layout.css",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/init",
 		"/home/tiberius/scala/projects/amanuensis/README.md",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
@@ -787,15 +776,12 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/graph.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/query.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/security/StatelessCookieAuthenticator.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utilService.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
 		"/home/tiberius/scala/projects/amanuensis/build.sbt",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/graphService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/test/spec/services/graphservice.js",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/insert",
 		"/home/tiberius/scala/projects/amanuensis/curl/slot/create",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Converters.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ng-tags-input/ng-tags-input.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/tags.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/modals.css",
@@ -856,8 +842,7 @@
 		"/home/tiberius/scala/projects/amanuensis-web/Gruntfile.js",
 		"/home/tiberius/scala/projects/amanuensis-web/app/scripts/app.js",
 		"/home/tiberius/scala/projects/heroku-buildpack-nodejs-grunt/README.md",
-		"/home/tiberius/scala/projects/heroku-buildpack-nodejs-grunt/bin/detect",
-		"/home/tiberius/scala/projects/heroku-buildpack-nodejs-grunt/bin/test"
+		"/home/tiberius/scala/projects/heroku-buildpack-nodejs-grunt/bin/detect"
 	],
 	"find":
 	{
@@ -865,7 +850,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts",
@@ -895,6 +880,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"#share-modal",
 			">y",
 			"showModal(",
 			"showModalElement(",
@@ -1021,8 +1007,7 @@
 			"substrin",
 			"timeout",
 			"z-index",
-			"error",
-			"$locat"
+			"error"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1051,239 +1036,29 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/main/scala/amanuensis/core/StoryActor.scala",
-					"settings":
-					{
-						"buffer_size": 6234,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2049,
-								2049
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 495.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "src/main/webapp/app/scripts/services/utilService.js",
 					"settings":
 					{
-						"buffer_size": 949,
+						"buffer_size": 1359,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								437,
-								437
+								1306,
+								1306
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"settings":
-					{
-						"buffer_size": 1963,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										243,
-										260
-									],
-									[
-										597,
-										607
-									],
-									[
-										846,
-										856
-									],
-									[
-										1082,
-										1092
-									],
-									[
-										1242,
-										1252
-									],
-									[
-										1382,
-										1392
-									],
-									[
-										1625,
-										1635
-									],
-									[
-										1878,
-										1888
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								335,
-								335
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"output_tag": 2,
-							"result_base_dir": "",
-							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 165.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/main/webapp/app/index.html",
-					"settings":
-					{
-						"buffer_size": 10906,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6147,
-								6147
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1826.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/main/webapp/app/styles/modals.css",
-					"settings":
-					{
-						"buffer_size": 3409,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								28,
-								28
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/main/webapp/app/views/story.html",
-					"settings":
-					{
-						"buffer_size": 12117,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3945,
-								3945
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 553.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/main/webapp/app/styles/cab.css",
-					"settings":
-					{
-						"buffer_size": 2176,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								962,
-								962
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -1293,57 +1068,167 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "src/main/webapp/app/scripts/directives/errorDialog.js",
+					"buffer": 1,
+					"file": "src/main/webapp/app/styles/modals.css",
 					"settings":
 					{
-						"buffer_size": 1882,
+						"buffer_size": 3307,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								783,
-								783
+								809,
+								809
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 90.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "src/main/webapp/app/scripts/directives/misc.js",
+					"buffer": 2,
+					"file": "src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
 					"settings":
 					{
-						"buffer_size": 8729,
+						"buffer_size": 9283,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1671,
-								1671
+								5063,
+								5063
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/Scala/Scala.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 540.0,
+						"translation.y": 2025.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/main/webapp/app/index.html",
+					"settings":
+					{
+						"buffer_size": 10888,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4980,
+								4980
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 810.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/main/webapp/app/styles/cab.css",
+					"settings":
+					{
+						"buffer_size": 2151,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								536,
+								536
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 495.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/main/scala/amanuensis/api/security/StatelessCookieAuthenticator.scala",
+					"settings":
+					{
+						"buffer_size": 3410,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2810,
+								2810
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1047.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/main/scala/amanuensis/core/UserActor.scala",
+					"settings":
+					{
+						"buffer_size": 3310,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								979,
+								979
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1392,7 +1277,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 250.0
+		"height": 293.0
 	},
 	"output.sbt_error":
 	{
@@ -1409,12 +1294,40 @@
 		"selected_items":
 		[
 			[
-				"misc",
-				"src/main/webapp/app/scripts/directives/misc.js"
+				"user",
+				"src/main/scala/amanuensis/core/UserActor.scala"
+			],
+			[
+				"cab.css",
+				"src/main/webapp/app/styles/cab.css"
+			],
+			[
+				"index.",
+				"src/main/webapp/app/index.html"
+			],
+			[
+				"modals",
+				"src/main/webapp/app/styles/modals.css"
+			],
+			[
+				"utils",
+				"src/main/webapp/app/scripts/services/utilService.js"
 			],
 			[
 				"error",
 				"src/main/webapp/app/scripts/directives/errorDialog.js"
+			],
+			[
+				"story.js",
+				"src/main/webapp/app/scripts/controllers/story.js"
+			],
+			[
+				"global",
+				"src/main/webapp/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/shelljs/global.js"
+			],
+			[
+				"misc",
+				"src/main/webapp/app/scripts/directives/misc.js"
 			],
 			[
 				"cab",
@@ -1425,20 +1338,12 @@
 				"src/main/webapp/app/views/story.html"
 			],
 			[
-				"modals",
-				"src/main/webapp/app/styles/modals.css"
-			],
-			[
 				"index",
 				"src/main/webapp/app/index.html"
 			],
 			[
 				"iindex.html",
 				"src/main/webapp/app/bower_components/font-awesome/src/3.2.1/icons/index.html"
-			],
-			[
-				"utils",
-				"src/main/webapp/app/scripts/services/utilService.js"
 			],
 			[
 				"elast",
@@ -1455,10 +1360,6 @@
 			[
 				"layout",
 				"src/main/webapp/app/styles/layout.css"
-			],
-			[
-				"cab.css",
-				"src/main/webapp/app/styles/cab.css"
 			],
 			[
 				"slot",
@@ -1491,10 +1392,6 @@
 			[
 				"mis",
 				"src/main/webapp/app/scripts/directives/misc.js"
-			],
-			[
-				"story.js",
-				"src/main/webapp/app/scripts/controllers/story.js"
 			],
 			[
 				"userac",
@@ -1571,10 +1468,6 @@
 			[
 				"acces",
 				"src/main/scala/amanuensis/core/AccessActor.scala"
-			],
-			[
-				"index.",
-				"src/main/webapp/app/index.html"
 			],
 			[
 				"main.",
@@ -1695,10 +1588,6 @@
 			[
 				"fail",
 				"src/main/scala/amanuensis/core/util/Failable.scala"
-			],
-			[
-				"user",
-				"src/main/scala/amanuensis/domain/UserContext.scala"
 			],
 			[
 				"query.js",
@@ -1915,10 +1804,6 @@
 			[
 				"grunt",
 				"src/main/webapp/Gruntfile.js"
-			],
-			[
-				"roots",
-				"src/main/scala/amanuensis/api/RootServiceActor.scala"
 			]
 		],
 		"width": 0.0
