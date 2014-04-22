@@ -93,6 +93,7 @@ object StoryNeoProtocol extends Neo4JJsonProtocol {
   implicit val storyInfoNeo4JFormat = jsonCaseClassArrayFormat(StoryInfo)
   implicit val storyIdNeo4JFormat = jsonCaseClassArrayFormat(StoryId)
   implicit val storyAccessNeo4JFormat = jsonCaseClassArrayFormat(StoryAccess)
+  implicit val storyRightsNeo4JFormat = jsonCaseClassArrayFormat(StoryRights)
 }
 
 /**

@@ -13,7 +13,7 @@ import amanuensis.core.util.Failable
 
 import amanuensis.core.neo4j._
 
-import amanuensis.domain.{StoryInfo, StoryId}
+import amanuensis.domain.{StoryInfo, StoryId, StoryRights}
 
 
 object SlotActor {
@@ -81,7 +81,7 @@ object SlotActor {
     FOREACH (tagname IN {tags} |
       MERGE (t:Tag {name: tagname})
       MERGE (m)-[:is]->(t:Tag))
-    RETURN m.id
+    RETURN extract(x in (readers + writers + granters) | x.login)
   """
 }
 
@@ -158,7 +158,7 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
 
     val id = Neo4JId.generateId
 
-    server.one[StoryId](createAndAddQueryString, 
+    server.one[StoryRights](createAndAddQueryString, 
       ("toStory" -> toStory),
       ("slot" -> slotName), 
       ("id" -> id),
@@ -169,12 +169,12 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
       ("tags" -> story.tags),
       ("login" -> login)   
     ) map {
-        case Some(s) => {
-          indexActor ! Index(story.copy(id = Some(id)), login :: Nil)
+        case Some(rights: StoryRights) => {
+          indexActor ! Index(story.copy(id = Some(id)), rights.canRead)
           indexActor ! IndexSlotName(slotName, toStory, id)
           StoryInfo(id, story.title, story.created, None)
         }
-        case None => throw NotFoundException(Message(s"could not create new story in slot $slotName",`ERROR`) :: Nil)
+        case _ => throw NotFoundException(Message(s"could not create new story in slot $slotName",`ERROR`) :: Nil)
       }
   }
 

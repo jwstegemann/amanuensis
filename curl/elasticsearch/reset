@@ -1,0 +1,86 @@
+#! /bin/bash
+
+curl -XDELETE "$1/stories"
+curl -XDELETE "$1/slots"
+#curl -XDELETE "$1/groups"
+#curl -XDELETE "$1/users"
+
+curl -XPUT "$1/stories"
+curl -XPUT "$1/slots"
+
+curl -XPUT "$1/stories/story/_mapping" -d'
+{
+  "story": {
+    "properties": {
+      "id": {          
+        "type": "string",
+        "store": "no",
+        "index": "no"
+      },        
+      "title": {          
+        "type": "string",
+        "store": "no",
+        "analyzer": "german",
+        "boost": 2.0
+      },
+      "content": {
+        "type": "string",
+        "store": "no",
+        "analyzer": "german"
+      },
+      "created": {
+        "type": "date",
+        "format": "date_time",
+        "store": "no",
+        "index": "analyzed"
+      },
+      "createdBy": {
+        "type": "string",
+        "store": "no",
+        "index": "no"
+      },
+      "tags" : { 
+        "type": "multi_field",
+        "fields": {
+            "tags": {
+                "type": "string", 
+                "analyzer" : "keyword" 
+            },
+            "suggest": {
+                "type": "completion",
+                "index_analyzer": "simple",
+                "search_analyzer": "simple",
+                "payloads": "false"
+            }
+        }
+      }
+    }
+  }
+}'
+
+
+curl -XPUT "$1/slots/slot/_mapping" -d'
+{
+  "slot": {
+    "properties": {
+        "name": {
+            "type": "completion",
+            "index_analyzer": "simple",
+            "search_analyzer": "simple",
+            "payloads": "false"
+        }
+    }
+  }
+}'
+
+curl -XPOST "$1/stories/story/dummyxyz" -d'
+{
+    "id": "dummyxyz",
+    "tags": [""]
+}'
+
+curl -XPOST "$1/slots/slot/dummyabcde" -d'
+{
+    "name": ""
+}'
+
