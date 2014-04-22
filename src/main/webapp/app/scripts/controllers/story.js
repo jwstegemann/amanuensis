@@ -433,6 +433,35 @@ angular.module('amanuensisApp')
     }    
 
     /*
+     * prohibit navigation when dirty
+     */
+
+    $scope.parser = document.createElement('a');
+
+    $scope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
+        if (newUrl === $scope.newUrl) {
+            $scope.newUrl = undefined;
+        }
+        else if ($scope.storyForm.$dirty && newUrl.match(/^[^\?]+/)[0] !== oldUrl.match(/^[^\?]+/)[0]) {
+            event.preventDefault(); // This prevents the navigation from happening
+            $scope.newUrl = newUrl;
+            utilService.showModal('#confirm-leave-modal');
+        }
+    });
+
+    $scope.leaveStoryConfirmed = function() {
+        console.log("going to: " + $scope.newUrl);
+        $location.url($location.url($scope.newUrl).hash());
+        //$rootScope.$apply();
+        utilService.hideModal('#confirm-leave-modal');        
+    }
+
+    $scope.cancelConfirmLeave = function() {
+        $scope.newUrl = undefined;
+        utilService.hideModal('#confirm-leave-modal');    
+    }
+
+    /*
      * resize scrollbar for content on window-resize-event
      */
     $(window).resize(updateScrollbar);
