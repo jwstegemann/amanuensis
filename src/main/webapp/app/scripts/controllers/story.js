@@ -92,6 +92,7 @@ angular.module('amanuensisApp')
             // save existing story
         	if (angular.isDefined($scope.context.story.id)) {
         		storyService.update($scope.context.story, function(successData) {
+                    $scope.storyForm.$setPristine();
                     growl.addSuccessMessage($scope.context.story.title + ' has been saved.');
                 });
         	}
@@ -103,6 +104,7 @@ angular.module('amanuensisApp')
                         fromStoryId : $routeParams.fromStoryId,
                         slotName: $routeParams.slotName
                     }, $scope.context.story, function(successData) {
+                        $scope.storyForm.$setPristine();
                         $scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id).replace();
                         growl.addSuccessMessage($scope.context.story.title + ' has been created in Slot ' + $routeParams.slotName + ' at Story ' + $routeParams.fromStoryTitle);
@@ -114,6 +116,7 @@ angular.module('amanuensisApp')
                 // on its own
                 else {
             		storyService.create($scope.context.story, function(successData) {
+                        $scope.storyForm.$setPristine();
             			$scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id).replace();
                         growl.addSuccessMessage($scope.context.story.title + ' has been created.');
