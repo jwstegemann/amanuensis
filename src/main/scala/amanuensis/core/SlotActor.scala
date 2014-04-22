@@ -66,8 +66,11 @@ object SlotActor {
     MATCH (n:Story {id: {toStory}})
       WHERE (n)<-[:canWrite|:canGrant*1..5]-(u)
     OPTIONAL MATCH (n)<-[:canRead]-(x:User)
+      WHERE x.login <> {login}
     OPTIONAL MATCH (n)<-[:canWrite]-(y:User)
+      WHERE y.login <> {login}
     OPTIONAL MATCH (n)<-[:canGrant]-(z:User)
+      WHERE z.login <> {login}
     WITH n,u,collect(x) as readers, collect(y) as writers, collect(z) as granters    
     CREATE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy}})
     WITH m,u,readers,writers,granters
