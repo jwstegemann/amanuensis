@@ -138,7 +138,7 @@ angular.module('amanuensisApp', [
           if (rejection.status !== 401) {
             if (rejection.status === 404) {
               console.log("NotFound-Error communicating with the backend: " + angular.toJson(rejection));
-              $rootScope.$broadcast('error',{errorMessage: 'The object you wanted to work with could not be found.'});
+              $rootScope.$broadcast('error',{errorMessage: 'I am sorry, but you are not allowed to do this.'});
             }
             else if (rejection.status === 412) {
               console.log("Validation-Error communicating with the backend: " + angular.toJson(rejection));
