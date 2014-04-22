@@ -368,13 +368,14 @@ angular.module('amanuensisApp')
      */
 
     $scope.showContentEditor = function() {
-        $rootScope.editMode = true;
+        if (!$rootScope.selectMode && !$rootScope.targetMode) {
+            $rootScope.editMode = true;
 
-        setTimeout(function() {
-            $('#story-content-editor').focus();
-            updateScrollbar();
-        }, 200);        
-
+            setTimeout(function() {
+                $('#story-content-editor').focus();
+                updateScrollbar();
+            }, 200);        
+        }
     }
 
     $scope.$on('doneEditing', function() {
