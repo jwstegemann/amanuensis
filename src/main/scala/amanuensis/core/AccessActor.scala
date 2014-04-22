@@ -19,6 +19,7 @@ import amanuensis.domain._
 import spray.httpx.SprayJsonSupport
 
 import scala.concurrent.Future
+import scala.util.{Try, Success, Failure}
 import amanuensis.core.elasticsearch._
 import amanuensis.domain.UserRights._
 
@@ -118,23 +119,27 @@ class AccessActor extends Actor with ActorLogging with Failable with UsingParams
     case RetrieveAccess(storyId, login) => retrieveAccess(storyId, login) pipeTo sender
     
     case Share(storyId, userId, UserRights.canRead, login) => {
-      chmod(shareReadOnlyQueryString, storyId, userId, login) pipeTo sender
-      elastic_server.changeReadAccess(storyId, userId, true)
+      chmod(shareReadOnlyQueryString, storyId, userId, login).andThen {
+         case Success(_) => elastic_server.changeReadAccess(storyId, userId, true)
+      } pipeTo sender
     }
 
     case Share(storyId, userId, UserRights.canWrite, login) => {
-      chmod(shareReadWriteQueryString, storyId, userId, login) pipeTo sender
-      elastic_server.changeReadAccess(storyId, userId, true)
+      chmod(shareReadWriteQueryString, storyId, userId, login).andThen {
+         case Success(_) => elastic_server.changeReadAccess(storyId, userId, true)
+      } pipeTo sender
     }
 
     case Share(storyId, userId, UserRights.canGrant, login) => {
-      chmod(shareReadWriteGrantQueryString, storyId, userId, login) pipeTo sender
-      elastic_server.changeReadAccess(storyId, userId, true)
+      chmod(shareReadWriteGrantQueryString, storyId, userId, login).andThen {
+         case Success(_) => elastic_server.changeReadAccess(storyId, userId, true)
+      } pipeTo sender
     }
 
     case Unshare(storyId, userId, login) => {
-      chmod(unshareQueryString, storyId, userId, login) pipeTo sender
-      elastic_server.changeReadAccess(storyId, userId, false)
+      chmod(unshareQueryString, storyId, userId, login).andThen {
+         case Success(_) => elastic_server.changeReadAccess(storyId, userId, false)
+      } pipeTo sender
     }
   }
 
