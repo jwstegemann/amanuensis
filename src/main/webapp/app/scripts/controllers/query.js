@@ -70,7 +70,34 @@ angular.module('amanuensisApp')
     }
 
     $scope.doSearch = function() {
-      $scope.searchStories($scope.mainSearch);
+      if (angular.isDefined($scope.mainSearch) && $scope.mainSearch.length > 0) {
+        $scope.searchStories();
+      }
+    }
+
+    $scope.searchToDos = function() {
+      // TODO
+      console.log('searching ToDos');
+    }
+
+    $scope.searchFavourites = function() {
+      // TODO
+      console.log('searching Favs');
+    }
+
+    $scope.searchMyLatest = function() {
+      // TODO
+      console.log('searching my latest');
+    }
+
+    $scope.searchOthersLatest = function() {
+      // TODO
+      console.log('searching others latest');
+    }
+
+    $scope.searchNotifications = function() {
+      console.log('searching Notifications');
+      $scope.searchStories('@' + $scope.userContext.name);
     }
 
   });
