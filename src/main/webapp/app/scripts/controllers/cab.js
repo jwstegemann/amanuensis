@@ -123,4 +123,7 @@ angular.module('amanuensisApp')
         $scope.$broadcast('addAttachment');
     }
 
+    $scope.goHome = function() {
+        $location.url('/query');
+    }
 });
