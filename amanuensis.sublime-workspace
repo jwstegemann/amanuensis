@@ -520,18 +520,18 @@
 	"buffers":
 	[
 		{
-			"file": "src/main/webapp/app/index.html",
+			"file": "src/main/scala/amanuensis/core/SlotActor.scala",
 			"settings":
 			{
-				"buffer_size": 11242,
+				"buffer_size": 6107,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/app/scripts/controllers/cab.js",
+			"file": "src/main/webapp/app/scripts/controllers/query.js",
 			"settings":
 			{
-				"buffer_size": 3072,
+				"buffer_size": 1782,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,23 +539,7 @@
 			"file": "src/main/webapp/app/scripts/controllers/story.js",
 			"settings":
 			{
-				"buffer_size": 18907,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/directives/misc.js",
-			"settings":
-			{
-				"buffer_size": 9498,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/directives/selectbox.js",
-			"settings":
-			{
-				"buffer_size": 5317,
+				"buffer_size": 20140,
 				"line_ending": "Unix"
 			}
 		},
@@ -563,7 +547,55 @@
 			"file": "src/main/webapp/app/views/story.html",
 			"settings":
 			{
-				"buffer_size": 12192,
+				"buffer_size": 12739,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/core/AccessActor.scala",
+			"settings":
+			{
+				"buffer_size": 4681,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/core/StoryActor.scala",
+			"settings":
+			{
+				"buffer_size": 6342,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/styles/main.css",
+			"settings":
+			{
+				"buffer_size": 2784,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/views/query.html",
+			"settings":
+			{
+				"buffer_size": 3335,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/scripts/directives/typeahead.js",
+			"settings":
+			{
+				"buffer_size": 7751,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 1505,
 				"line_ending": "Unix"
 			}
 		}
@@ -704,23 +736,29 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/neo4j/test.cypher",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/reset",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/AccessActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/selectbox.js",
+		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/reset",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/security/StatelessCookieAuthenticator.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utilService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/UserActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/shelljs/global.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/font-awesome/src/3.2.1/icons/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/layout.css",
@@ -728,7 +766,6 @@
 		"/home/tiberius/scala/projects/amanuensis/README.md",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/slot.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/onFinishRender.js",
@@ -736,17 +773,13 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/UserHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/userSettings.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/user.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/UserContext.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/QueryHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/GraphActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/AccessHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/filters/rightsFilter.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/font-awesome/css/font-awesome.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/selectbox.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/selectbox.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/typeahead.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/selectbox.css",
@@ -830,8 +863,7 @@
 		"/home/tiberius/scala/projects/amanuensis-web/app/scripts/services/queryService.js",
 		"/home/tiberius/scala/projects/amanuensis-web/app/scripts/services/storyService.js",
 		"/home/tiberius/scala/projects/amanuensis-web/Gruntfile.js",
-		"/home/tiberius/scala/projects/amanuensis-web/app/scripts/app.js",
-		"/home/tiberius/scala/projects/heroku-buildpack-nodejs-grunt/README.md"
+		"/home/tiberius/scala/projects/amanuensis-web/app/scripts/app.js"
 	],
 	"find":
 	{
@@ -839,7 +871,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
@@ -870,6 +902,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"storyForm",
+			"newUrl",
+			"editMode",
+			"retrieveStoryQueryString",
+			"\\n      ",
 			"Index(",
 			"canRead",
 			"#share-modal",
@@ -992,12 +1029,7 @@
 			"defaults",
 			"php",
 			"directive",
-			"story-padding",
-			"Actor",
-			"Index",
-			"storyRoute",
-			"substrin",
-			"timeout"
+			"story-padding"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1005,6 +1037,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"\\n",
 			"remove(storyInfo",
 			"selectboxremove(storyInfo,$event)",
 			"selectbox",
@@ -1026,61 +1059,61 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 9,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/main/webapp/app/index.html",
+					"file": "src/main/scala/amanuensis/core/SlotActor.scala",
 					"settings":
 					{
-						"buffer_size": 11242,
+						"buffer_size": 6107,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4786,
-								4786
+								2218,
+								2218
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/Scala/Scala.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 778.0,
+						"translation.y": 585.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/main/webapp/app/scripts/controllers/cab.js",
+					"file": "src/main/webapp/app/scripts/controllers/query.js",
 					"settings":
 					{
-						"buffer_size": 3072,
+						"buffer_size": 1782,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2912,
-								2912
+								1199,
+								1199
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1288.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1090,15 +1123,15 @@
 					"file": "src/main/webapp/app/scripts/controllers/story.js",
 					"settings":
 					{
-						"buffer_size": 18907,
+						"buffer_size": 20140,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2556,
-								2556
+								726,
+								726
 							]
 						],
 						"settings":
@@ -1108,81 +1141,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2295.0,
+						"translation.y": 126.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "src/main/webapp/app/scripts/directives/misc.js",
-					"settings":
-					{
-						"buffer_size": 9498,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8419,
-								8419
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3763.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/main/webapp/app/scripts/directives/selectbox.js",
-					"settings":
-					{
-						"buffer_size": 5317,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1503,
-								1503
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 45.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "src/main/webapp/app/views/story.html",
 					"settings":
 					{
-						"buffer_size": 12192,
+						"buffer_size": 12739,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4006,
-								4006
+								9008,
+								9008
 							]
 						],
 						"settings":
@@ -1192,7 +1169,175 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 765.0,
+						"translation.y": 2383.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/main/scala/amanuensis/core/AccessActor.scala",
+					"settings":
+					{
+						"buffer_size": 4681,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4088,
+								4088
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1620.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/main/scala/amanuensis/core/StoryActor.scala",
+					"settings":
+					{
+						"buffer_size": 6342,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4572,
+								4572
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1665.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/main/webapp/app/styles/main.css",
+					"settings":
+					{
+						"buffer_size": 2784,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								56,
+								56
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/main/webapp/app/views/query.html",
+					"settings":
+					{
+						"buffer_size": 3335,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1874,
+								1874
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 135.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/main/webapp/app/scripts/directives/typeahead.js",
+					"settings":
+					{
+						"buffer_size": 7751,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2830,
+								2830
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 186.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "README.md",
+					"settings":
+					{
+						"buffer_size": 1505,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1295,
+								1295
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 540.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1241,7 +1386,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 192.0
+		"height": 213.0
 	},
 	"output.sbt_error":
 	{
@@ -1258,16 +1403,76 @@
 		"selected_items":
 		[
 			[
+				"read",
+				"README.md"
+			],
+			[
 				"story.html",
 				"src/main/webapp/app/views/story.html"
 			],
 			[
-				"misc",
-				"src/main/webapp/app/scripts/directives/misc.js"
+				"query.html",
+				"src/main/webapp/app/views/query.html"
+			],
+			[
+				"main",
+				"src/main/webapp/app/styles/main.css"
+			],
+			[
+				"storyhtt",
+				"src/main/scala/amanuensis/api/StoryHttpService.scala"
+			],
+			[
+				"storyac",
+				"src/main/scala/amanuensis/core/StoryActor.scala"
+			],
+			[
+				"accessac",
+				"src/main/scala/amanuensis/core/AccessActor.scala"
 			],
 			[
 				"story.js",
 				"src/main/webapp/app/scripts/controllers/story.js"
+			],
+			[
+				"query.js",
+				"src/main/webapp/app/scripts/controllers/query.js"
+			],
+			[
+				"slotac",
+				"src/main/scala/amanuensis/core/SlotActor.scala"
+			],
+			[
+				"story",
+				"src/main/webapp/app/scripts/controllers/story.js"
+			],
+			[
+				"elastic",
+				"src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala"
+			],
+			[
+				"access",
+				"src/main/scala/amanuensis/core/AccessActor.scala"
+			],
+			[
+				"app",
+				"src/main/webapp/app/scripts/app.js"
+			],
+			[
+				"storya",
+				"src/main/scala/amanuensis/core/StoryActor.scala"
+			],
+			[
+				"querya",
+				"src/main/scala/amanuensis/core/QueryActor.scala"
+			],
+			[
+				"slotactor",
+				"src/main/scala/amanuensis/core/SlotActor.scala"
+			],
+			[
+				"misc",
+				"src/main/webapp/app/scripts/directives/misc.js"
 			],
 			[
 				"cab",
@@ -1284,14 +1489,6 @@
 			[
 				"elas",
 				"src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala"
-			],
-			[
-				"slotac",
-				"src/main/scala/amanuensis/core/SlotActor.scala"
-			],
-			[
-				"story",
-				"src/main/scala/amanuensis/core/StoryActor.scala"
 			],
 			[
 				"user",
@@ -1350,10 +1547,6 @@
 				"src/main/webapp/app/scripts/directives/onFinishRender.js"
 			],
 			[
-				"main",
-				"src/main/webapp/app/styles/main.css"
-			],
-			[
 				"slot.j",
 				"src/main/webapp/app/scripts/controllers/slot.js"
 			],
@@ -1398,16 +1591,8 @@
 				"src/main/webapp/app/scripts/controllers/cab.js"
 			],
 			[
-				"storya",
-				"src/main/scala/amanuensis/core/StoryActor.scala"
-			],
-			[
 				"story.sc",
 				"src/main/scala/amanuensis/domain/Story.scala"
-			],
-			[
-				"access",
-				"src/main/scala/amanuensis/core/AccessActor.scala"
 			],
 			[
 				"ini",
@@ -1478,10 +1663,6 @@
 				"src/main/webapp/app/views/story.html"
 			],
 			[
-				"querya",
-				"src/main/scala/amanuensis/core/QueryActor.scala"
-			],
-			[
 				"sharese",
 				"src/main/webapp/app/scripts/services/shareService.js"
 			],
@@ -1494,20 +1675,12 @@
 				"src/main/webapp/app/scripts/controllers/login.js"
 			],
 			[
-				"app",
-				"src/main/webapp/app/scripts/app.js"
-			],
-			[
 				"inde",
 				"src/main/webapp/app/index.html"
 			],
 			[
 				"story.",
 				"src/main/scala/amanuensis/domain/Story.scala"
-			],
-			[
-				"storyhtt",
-				"src/main/scala/amanuensis/api/StoryHttpService.scala"
 			],
 			[
 				"acce",
@@ -1524,10 +1697,6 @@
 			[
 				"core",
 				"src/main/scala/amanuensis/core/Core.scala"
-			],
-			[
-				"storyac",
-				"src/main/scala/amanuensis/core/StoryActor.scala"
 			],
 			[
 				"roo",
@@ -1552,10 +1721,6 @@
 			[
 				"fail",
 				"src/main/scala/amanuensis/core/util/Failable.scala"
-			],
-			[
-				"query.js",
-				"src/main/webapp/app/scripts/controllers/query.js"
 			],
 			[
 				"init",
@@ -1604,10 +1769,6 @@
 			[
 				"stateless",
 				"src/main/scala/amanuensis/api/security/StatelessCookieAuthenticator.scala"
-			],
-			[
-				"query.html",
-				"src/main/webapp/app/views/query.html"
 			],
 			[
 				"story.ht",
@@ -1752,22 +1913,6 @@
 			[
 				"rootser",
 				"src/main/scala/amanuensis/api/RootServiceActor.scala"
-			],
-			[
-				"attach",
-				"src/main/scala/amanuensis/api/AttachmentService.scala"
-			],
-			[
-				"misc.js",
-				"src/main/webapp/app/scripts/directives/misc.js"
-			],
-			[
-				"storys",
-				"src/main/scala/amanuensis/api/StoryHttpService.scala"
-			],
-			[
-				"grunt",
-				"src/main/webapp/Gruntfile.js"
 			]
 		],
 		"width": 0.0

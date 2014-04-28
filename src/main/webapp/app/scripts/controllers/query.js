@@ -10,6 +10,8 @@ angular.module('amanuensisApp')
     $scope.pages = 0;
     $scope.lastQuery = undefined;
 
+    $scope.mainSearch = undefined;
+
     $scope.searchStories = function(queryString, terms, fromDate) {
       $scope.lastQuery = {
         query: queryString,
@@ -65,6 +67,10 @@ angular.module('amanuensisApp')
     $scope.previousPage = function() {
       $scope.page--;
       $scope.searchStories($scope.lastQuery.query, $scope.lastQuery.terms);
+    }
+
+    $scope.doSearch = function() {
+      $scope.searchStories($scope.mainSearch);
     }
 
   });

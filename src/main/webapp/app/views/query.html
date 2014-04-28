@@ -29,6 +29,14 @@
 </div>
 
 <div id="query-results" class="query-results container" scrollbar>
+
+  <div class="main-search" ng-hide="result">
+    <img class="logo" src="images/colibri_blau.png"></img><br/>
+    <span class="welcome-msg">Welcome to Colibri...</span><br/>
+    <input class="main-search-input" type="text" ng-model="mainSearch" placeholder="What are you looking for?" on-enter="doSearch()"></input>
+    <i class="fa fa-search fa-fw fa-2x action opacity-hover" ng-click="doSearch()"></i>
+  </div>
+
   <h2 ng-show="result" class="resultHeader">
     <i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Results for "{{queryString}}"
     <span ng-show="terms"> with Tag <span ng-repeat="term in terms"><i class="fa fa-tag"></i>{{term}}</span></span>
