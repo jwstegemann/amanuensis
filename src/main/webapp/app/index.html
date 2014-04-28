@@ -78,17 +78,18 @@
       <li ng-show="targetMode" ng-click="cancelTarget()"><a><i class="fa fa-times fa-fw fa-2x on-cab"></i></a></li>
 
       <!-- story-editing -->
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode" ng-click="createStoryInSlot()"><a><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="createStoryInSlot()"><a><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
       <li ng-show="appState < 128 && !selectMode && !targetMode" ng-click="saveStory()"><a><i class="fa fa-save fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode" ng-click="deleteStory()"><a><i class="fa fa-trash-o fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 4 && !editMode && !selectMode && !targetMode" ng-click="createSlot()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="deleteStory()"><a><i class="fa fa-trash-o fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 4 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="createSlot()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
       <!-- editing stories in a slot -->
-      <li ng-show="appState === 4 && !editMode && !selectMode && !targetMode" ng-click="addStory()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState === 4 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="addStory()"><a><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
       <!-- share a story -->
       <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode" ng-click="shareStory()"><a><i class="fa fa-random fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode" ng-click="watchStory()"><a><i class="fa fa-star-o fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128" ng-click="reloadStory()"><a><i class="fa fa-refresh fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && editMode" ng-click="addAttachment()"><a><i class="fa fa-paperclip fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && !storyFlags.likes && storyFlags.saved" ng-click="likeStory()"><a><i class="fa fa-star-o fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.likes && storyFlags.saved" ng-click="unlikeStory()"><a><i class="fa fa-star fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128 && storyFlags.saved" ng-click="reloadStory()"><a><i class="fa fa-refresh fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128 && editMode && storyFlags.saved" ng-click="addAttachment()"><a><i class="fa fa-paperclip fa-fw fa-2x on-cab"></i></a></li>
 
       <!-- create a new story on it's own -->
       <li ng-show="!selectMode && !targetMode && appState === 128">
@@ -215,6 +216,7 @@
         <script src="scripts/filters/rightsFilter.js"></script>                
         <script src="scripts/directives/onFinishRender.js"></script>
         <script src="scripts/controllers/userSettings.js"></script>
+        <script src="scripts/services/favourService.js"></script>        
         <!-- endbuild -->
 </body>
 </html>

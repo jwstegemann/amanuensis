@@ -54,15 +54,23 @@ object StoryActor {
   """
 
   val retrieveOutSlotQueryString = """
-    MATCH (s:Story)-[r:Slot]->(), (u:User {login: {login}})
+    MATCH (s:Story {id: {id}})-[r:Slot]->(), (u:User {login: {login}})
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
-      AND s.id={id} RETURN DISTINCT r.name as name LIMIT 250
+    RETURN DISTINCT r.name as name LIMIT 250
   """
 
   val retrieveInSlotQueryString = """
-    MATCH (s:Story)<-[r:Slot]-(), (u:User {login: {login}})
+    MATCH (s:Story {id: {id}})<-[r:Slot]-(), (u:User {login: {login}})
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u) 
-      AND s.id={id} RETURN DISTINCT r.name as name LIMIT 250
+    RETURN DISTINCT r.name as name LIMIT 250
+  """
+
+  val retrieveFlagsQueryString = """
+    MATCH (s:Story {id: {id}}), (u:User {login: {login}})
+    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    OPTIONAL MATCH (s)<-[l:likes]-(u)
+    OPTIONAL MATCH (s)<-[w:canWrite|:canGrant*1..5]-(u)
+    RETURN count(w) as canWrite, count(l) as likes
   """
 
   val removeStoryQueryString = """
@@ -94,6 +102,7 @@ object StoryNeoProtocol extends Neo4JJsonProtocol {
   implicit val storyIdNeo4JFormat = jsonCaseClassArrayFormat(StoryId)
   implicit val storyAccessNeo4JFormat = jsonCaseClassArrayFormat(StoryAccess)
   implicit val storyRightsNeo4JFormat = jsonCaseClassArrayFormat(StoryRights)
+  implicit val storyFlagsNeo4JFormat = jsonCaseClassArrayFormat(StoryFlags)
 }
 
 /**
@@ -163,8 +172,14 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
         ("login" -> login)) 
       outSlots <- server.list[Slot](retrieveOutSlotQueryString, 
         ("id" -> storyId),
-        ("login" -> login)) 
-    } yield StoryContext(story,inSlots,outSlots)
+        ("login" -> login))
+      flags <- server.one[StoryFlags](retrieveFlagsQueryString, 
+        ("id" -> storyId),
+        ("login" -> login)) map {
+          case Some(f) => f
+          case None => throw NotFoundException(Message(s"not able to read flags for story with id '$storyId'",`ERROR`) :: Nil)
+        }  
+    } yield StoryContext(story,inSlots,outSlots,flags)
 
   }
 

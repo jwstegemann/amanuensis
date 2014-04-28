@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,$rootScope,$location,$window,utilService,growl,queryService,$http) {
+  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,favourService,$rootScope,$location,$window,utilService,growl,queryService,$http) {
 
     function hasSlot(name, slots) {
         var i = slots.length;
@@ -27,6 +27,8 @@ angular.module('amanuensisApp')
                 });
                 updateScrollbar();
                 $rootScope.editMode = false;
+                $rootScope.storyFlags = successData.flags;
+                $rootScope.storyFlags.saved = 1;
 
                 //open up slot and story-list by queryParameter
                 var slotToOpen = $location.search()['openSlot']
@@ -68,6 +70,12 @@ angular.module('amanuensisApp')
             $rootScope.appState = 1;
 
             $rootScope.editMode = true;
+
+            $rootScope.storyFlags = {
+                canWrite: 1, 
+                likes: 0, 
+                saved: 0
+            };
         }
 
         $scope.storyFilter = {};
@@ -108,6 +116,7 @@ angular.module('amanuensisApp')
                         $scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id).replace();
                         growl.addSuccessMessage($scope.context.story.title + ' has been created in Slot ' + $routeParams.slotName + ' at Story ' + $routeParams.fromStoryTitle);
+                        $rootScopy.storyFlags.saved = 1;
                     });
 
                     $rootScope.stack = undefined;
@@ -120,6 +129,7 @@ angular.module('amanuensisApp')
             			$scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id).replace();
                         growl.addSuccessMessage($scope.context.story.title + ' has been created.');
+                        $rootScopy.storyFlags.saved = 1;                        
             		});
                 }
         	}
@@ -148,15 +158,31 @@ angular.module('amanuensisApp')
     }
 
     /*
-     * Watch a Story for being changed by others
+     * Like & Unlike Stories
      */
-    $scope.$on('watchStory', function() {
-        utilService.showModal('#watch-modal');    
+    $scope.$on('likeStory', function() {
+        if (angular.isUndefined($scope.context.story.id)) {
+            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot like an unsaved story.'});
+        }      
+        else {  
+        favourService.like({storyId: $scope.context.story.id}, null, function(successData) {
+                growl.addSuccessMessage('You do like ' + $scope.context.story.title + ', now.');
+                $rootScope.storyFlags.likes = 1;
+            });
+        }
     });
 
-    $scope.cancelWatch = function() {
-        utilService.hideModal('#watch-modal');    
-    }
+    $scope.$on('unlikeStory', function() {
+        if (angular.isUndefined($scope.context.story.id)) {
+            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot unlike an unsaved story.'});
+        }      
+        else {  
+        favourService.unlike({storyId: $scope.context.story.id}, null, function(successData) {
+                growl.addSuccessMessage('You do not like ' + $scope.context.story.title + ' anymore.');
+                $rootScope.storyFlags.likes = 0;
+            });
+        }
+    });
 
     /*
      * Share a Story with other users
@@ -371,7 +397,7 @@ angular.module('amanuensisApp')
      */
 
     $scope.showContentEditor = function() {
-        if (!$rootScope.selectMode && !$rootScope.targetMode) {
+        if ($scope.context.flags.canWrite && !$rootScope.selectMode && !$rootScope.targetMode) {
             $rootScope.editMode = true;
 
             setTimeout(function() {

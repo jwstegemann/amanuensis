@@ -40,7 +40,8 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Ama
   with StaticHttpService 
   with AttachmentHttpService 
   with GraphHttpService
-  with AccessHttpService {
+  with AccessHttpService 
+  with FavourHttpService {
 
   import UserContextProtocol._
 
@@ -58,9 +59,10 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Ama
       storyRoute(userContext) ~
       queryRoute(userContext) ~
       attachmentRoute ~
-      graphRoute(userContext) ~
+      favourRoute(userContext) ~
       accessRoute(userContext) ~
-      innerUserRoute(userContext)
+      innerUserRoute(userContext) ~
+      graphRoute(userContext)
   } 
 
   val dummyUser = UserContext("dummy", "Dummy", Nil)
