@@ -75,12 +75,15 @@
       </li>
     </ul>
 
-  <p class="pagination" ng-show="result && pages > 1">
-    <span class="pagination-nav" ng-show="page > 0" ng-click="previousPage()">
-      <i class="fa fa-angle-double-left"></i>&nbsp;previous
-    </span>&nbsp;&nbsp;
-    <span>page&nbsp;{{page+1}}&nbsp;of&nbsp;{{pages}}</span>&nbsp;&nbsp;
-    <span class="pagination-nav" ng-hide="(page+1) === pages" ng-click="nextPage()">next&nbsp;<i class="fa fa-angle-double-right"></i></span>
-  </p>  
+  <div ng-show="result && pages > 1">
+    <hr class="seperator" />
+    <p class="pagination" >
+      <span class="pagination-nav" ng-show="page > 0" ng-click="previousPage()">
+        <i class="fa fa-angle-double-left"></i>&nbsp;previous
+      </span>
+      <span>page&nbsp;{{page+1}}&nbsp;of&nbsp;{{pages}}</span>&nbsp;&nbsp;
+      <span class="pagination-nav" ng-hide="(page+1) === pages" ng-click="nextPage()">next&nbsp;<i class="fa fa-angle-double-right"></i></span>
+    </p>
+  </div>
 
 </div>

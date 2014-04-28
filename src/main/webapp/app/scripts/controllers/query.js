@@ -71,7 +71,7 @@ angular.module('amanuensisApp')
 
     $scope.doSearch = function() {
       if (angular.isDefined($scope.mainSearch) && $scope.mainSearch.length > 0) {
-        $scope.searchStories();
+        $scope.searchStories($scope.mainSearch);
       }
     }
 

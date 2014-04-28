@@ -126,3 +126,10 @@ p.stats {
   color: white;
   font-weight: 300;
 }
+
+.seperator {
+  width: 20%;
+  margin-top: 3em;
+  border: 0;
+  border-top: 1px solid white;
+}
