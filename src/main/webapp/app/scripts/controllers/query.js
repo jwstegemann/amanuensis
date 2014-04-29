@@ -9,10 +9,26 @@ angular.module('amanuensisApp')
     $scope.page = 0;
     $scope.pages = 0;
     $scope.lastQuery = undefined;
+    $scope.lastMethod = undefined;
 
     $scope.mainSearch = undefined;
 
+    $scope.title = undefined;
+
     $scope.searchStories = function(method, queryString, terms, fromDate) {
+      if (method === queryService.query) {
+        $scope.title = "Result of Search for " + queryString;
+      }
+      else if (method === queryService.myLatest) {
+        $scope.title = "My latest Activities" + queryString;
+      }
+      else if (method === queryService.othersLatest) {
+        $scope.title = "Latest Activites of other users" + queryString;
+      }
+      else if (method === queryService.toDos) {
+        $scope.title = "My ToDos" + queryString;
+      }
+
       $scope.lastMethod = method;
       $scope.lastQuery = {
         query: queryString,
@@ -95,7 +111,7 @@ angular.module('amanuensisApp')
 
     $scope.searchNotifications = function() {
       console.log('searching Notifications');
-      $scope.searchStories('@' + $scope.userContext.name);
+      $scope.searchStories(queryService.query, '@' + $scope.userContext.name);
     }
 
   });

@@ -59,7 +59,7 @@
   </div>
 
   <h2 ng-show="result" class="resultHeader">
-    <i class="fa fa-bars fa-lg on-slot"></i>&nbsp;Results for "{{queryString}}"
+    <i class="fa fa-bars fa-lg on-slot"></i>&nbsp;{{title}}
     <span ng-show="terms"> with Tag <span ng-repeat="term in terms"><i class="fa fa-tag"></i>{{term}}</span></span>
     <span ng-show="lastQuery.fromDate"> since {{lastQuery.fromDate.substr(0,10)}}</span></span>
   </h2>
