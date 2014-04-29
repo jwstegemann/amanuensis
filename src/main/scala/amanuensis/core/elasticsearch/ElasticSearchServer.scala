@@ -135,7 +135,7 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
     val dateFilter: JsObject = queryRequest.fromDate match {
         case Some(fromDate) => JsObject(
           ("range", JsObject(
-            ("created", JsObject (
+            ("modified", JsObject (
               ("gte", JsString(fromDate))
             ))
           )))
@@ -166,7 +166,7 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
         )),
         ("dates", JsObject(
           ("range", JsObject(
-            ("field", JsString("created")),
+            ("field", JsString("modified")),
             ("ranges", JsArray(
               JsObject(("from", JsString(today.toString()))),
               JsObject(("from", JsString(yesterday.toString()))),
@@ -271,6 +271,168 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
 
     log.debug("ElasticSearch-AddReadAccess-Request: {} @ {}", queryObject, storyId)
     pipelineRaw(Post(myUrl, queryObject))
+  }
+
+
+def handleQuery(queryField: JsField, sortField: JsField, queryRequest: QueryRequest, groups: Seq[String], login: String): Future[QueryResult] = {
+    val today = DateTime.now.withTimeAtStartOfDay
+    val aYearAgo = today minus Years.ONE
+    val aMonthAgo = today minus Months.ONE
+    val twoWeeksAgo = today minus Weeks.TWO
+    val aWeekAgo = today minus Weeks.ONE
+    val yesterday = today minus Days.ONE
+
+    //ToDo: make constants for query-json-objects to improve performance
+
+    //FIXME: terms or term-query-filter
+    val userFilter: JsObject = JsObject(
+      ("terms", JsObject(
+        ("canRead", groups.toJson)
+      )))
+
+    val tagFilter: JsObject = queryRequest.tags match {
+        case (first :: rest) => JsObject(
+          ("terms", JsObject(
+            ("tags", (first :: rest).toJson)
+          )))
+        case _ => JsObject()
+      }
+
+    val dateFilter: JsObject = queryRequest.fromDate match {
+        case Some(fromDate) => JsObject(
+          ("range", JsObject(
+            ("modified", JsObject (
+              ("gte", JsString(fromDate))
+            ))
+          )))
+        case None => JsObject()
+      }
+
+    val queryObject = JsObject(
+      ("query", JsObject(
+        ("filtered", JsObject(
+          queryField,
+          ("filter", userFilter)
+        ))
+      )),
+      sortField,
+      ("from", JsNumber(queryRequest.page * 25)),
+      ("size", JsNumber(25)),
+      ("facets", JsObject(
+        ("tags", JsObject(
+          ("terms", JsObject(
+            ("field", JsString("tags"))
+          ))
+        )),
+        ("dates", JsObject(
+          ("range", JsObject(
+            ("field", JsString("modified")),
+            ("ranges", JsArray(
+              JsObject(("from", JsString(today.toString()))),
+              JsObject(("from", JsString(yesterday.toString()))),
+              JsObject(("from", JsString(aWeekAgo.toString()))),
+              JsObject(("from", JsString(twoWeeksAgo.toString()))),
+              JsObject(("from", JsString(aMonthAgo.toString()))),
+              JsObject(("from", JsString(aYearAgo.toString())))
+            ))
+          ))
+        ))
+      )),
+      ("filter", JsObject(
+        ("and", JsArray(tagFilter :: dateFilter :: Nil))
+      ))          
+    )
+
+    log.debug("ElasticSearch-Query-Request: {}", queryObject)
+    pipeline(Get(searchUrl, queryObject)) recover {
+      case x => throw ElasticSearchException(s"Error retrieving response from ElasticSearch-server: $x")
+    }
+  }
+
+
+  def mylatest(queryRequest: QueryRequest, groups: Seq[String], login: String): Future[QueryResult] = {
+    val lookBackTo = DateTime.now.withTimeAtStartOfDay minus Months.ONE
+
+    val queryField = 
+      ("query", JsObject(
+        ("bool", JsObject(
+          ("must", JsArray(
+            JsObject(("range", JsObject(
+              ("modified", JsObject (
+                ("gte", JsString(lookBackTo.toString()))
+              ))
+            ))),
+            JsObject(("term", JsObject(
+              ("modifiedBy", JsString(login))
+            )))
+                    
+          ))
+        ))
+      ))
+
+    val sortField = 
+      ("sort", JsArray(
+        JsObject(("modified", JsString("desc")))
+      ))
+
+    handleQuery(queryField, sortField, queryRequest, groups, login)
+  }
+
+  def otherslatest(queryRequest: QueryRequest, groups: Seq[String], login: String): Future[QueryResult] = {
+    val lookBackTo = DateTime.now.withTimeAtStartOfDay minus Weeks.ONE
+
+    val queryField = 
+      ("query", JsObject(
+        ("bool", JsObject(
+          ("must", JsObject(
+            ("range", JsObject(
+              ("modified", JsObject (
+                ("gte", JsString(lookBackTo.toString()))
+              ))
+            ))            
+          )),
+          ("must_not", JsObject(
+            ("term", JsObject(
+              ("modifiedBy", JsString(login))
+            ))            
+          ))
+        ))
+      ))
+
+    val sortField = 
+      ("sort", JsArray(
+        JsObject(("modified", JsString("desc")))
+      ))
+
+    handleQuery(queryField, sortField, queryRequest, groups, login)
+  }
+
+  def todos(queryRequest: QueryRequest, groups: Seq[String], login: String): Future[QueryResult] = {
+    val startFrom = DateTime.now.withTimeAtStartOfDay minus Days.FIVE
+
+    val queryField = 
+      ("query", JsObject(
+        ("bool", JsObject(
+          ("must", JsArray(
+            JsObject(("range", JsObject(
+              ("modified", JsObject (
+                ("gte", JsString(startFrom.toString()))
+              ))
+            ))),
+            JsObject(("term", JsObject(
+              ("dueTo", JsString(login))
+            )))
+                    
+          ))
+        ))
+      ))
+
+    val sortField = 
+      ("sort", JsArray(
+        JsObject(("due", JsString("asc")))
+      ))
+
+    handleQuery(queryField, sortField, queryRequest, groups, login)
   }
 }
 

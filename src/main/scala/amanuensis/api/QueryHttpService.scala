@@ -33,7 +33,7 @@ trait QueryHttpService extends HttpService with SprayJsonSupport {
 
   def queryRoute(userContext: UserContext) =
     pathPrefix("query") {
-      pathEnd {
+      path("fulltext") {
         entity(as[QueryRequest]) { queryRequest: QueryRequest =>
           post {
             dynamic {
@@ -43,6 +43,36 @@ trait QueryHttpService extends HttpService with SprayJsonSupport {
           }
         }
       } ~
+      path("todos") {
+        entity(as[QueryRequest]) { queryRequest: QueryRequest =>
+          post {
+            dynamic {
+              //FixMe: we do not need a Message-Type Fulltext here...
+              complete((queryActor ? ToDos(queryRequest, userContext.permissions, userContext.login)).mapTo[QueryResult])
+            }
+          }
+        }
+      }~
+      path("mylatest") {
+        entity(as[QueryRequest]) { queryRequest: QueryRequest =>
+          post {
+            dynamic {
+              //FixMe: we do not need a Message-Type Fulltext here...
+              complete((queryActor ? MyLatest(queryRequest, userContext.permissions, userContext.login)).mapTo[QueryResult])
+            }
+          }
+        }
+      } ~
+      path("otherslatest") {
+        entity(as[QueryRequest]) { queryRequest: QueryRequest =>
+          post {
+            dynamic {
+              //FixMe: we do not need a Message-Type Fulltext here...
+              complete((queryActor ? OthersLatest(queryRequest, userContext.permissions, userContext.login)).mapTo[QueryResult])
+            }
+          }
+        }
+      } ~    
       pathPrefix("suggest") {
         get {
           dynamic {

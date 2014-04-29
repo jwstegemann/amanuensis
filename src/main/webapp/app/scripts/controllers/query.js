@@ -12,7 +12,8 @@ angular.module('amanuensisApp')
 
     $scope.mainSearch = undefined;
 
-    $scope.searchStories = function(queryString, terms, fromDate) {
+    $scope.searchStories = function(method, queryString, terms, fromDate) {
+      $scope.lastMethod = method;
       $scope.lastQuery = {
         query: queryString,
         tags: terms ? terms : [],
@@ -23,7 +24,7 @@ angular.module('amanuensisApp')
         $scope.lastQuery.fromDate = fromDate;
       }
 
-      $scope.result = queryService.query($scope.lastQuery, function(successData) {
+      $scope.result = method($scope.lastQuery, function(successData) {
         $scope.queryString = queryString;
         $scope.terms = terms;
 
@@ -33,15 +34,15 @@ angular.module('amanuensisApp')
     }
 
     $scope.searchWithFilter = function(term) {
-      $scope.searchStories($scope.queryString, [term]);
+      $scope.searchStories($scope.lastMethod, $scope.queryString, [term]);
     }
 
     $scope.searchWithDate = function(fromDate) {
-      $scope.searchStories($scope.queryString, [], fromDate);
+      $scope.searchStories($scope.lastMethod, $scope.queryString, [], fromDate);
     }
 
     if (angular.isDefined($routeParams.queryString)) {
-      $scope.searchStories($routeParams.queryString);
+      $scope.searchStories(queryService.query, $routeParams.queryString);
     }
 
     setTimeout(function() {
@@ -49,7 +50,7 @@ angular.module('amanuensisApp')
     }, 50);
 
     $scope.$on('search', function(event, params) {
-      $scope.searchStories(params.cabQueryString);
+      $scope.searchStories(queryService.query, params.cabQueryString);
     });
 
     $scope.calcPages = function() {
@@ -61,23 +62,22 @@ angular.module('amanuensisApp')
 
     $scope.nextPage = function() {
       $scope.page++;
-      $scope.searchStories($scope.lastQuery.query, $scope.lastQuery.terms);
+      $scope.searchStories($scope.lastMethod, $scope.lastQuery.query, $scope.lastQuery.terms);
     }
 
     $scope.previousPage = function() {
       $scope.page--;
-      $scope.searchStories($scope.lastQuery.query, $scope.lastQuery.terms);
+      $scope.searchStories($scope.lastMethod, $scope.lastQuery.query, $scope.lastQuery.terms);
     }
 
     $scope.doSearch = function() {
       if (angular.isDefined($scope.mainSearch) && $scope.mainSearch.length > 0) {
-        $scope.searchStories($scope.mainSearch);
+        $scope.searchStories(queryService.query, $scope.mainSearch);
       }
     }
 
     $scope.searchToDos = function() {
-      // TODO
-      console.log('searching ToDos');
+      $scope.searchStories(queryService.toDos, '');
     }
 
     $scope.searchFavourites = function() {
@@ -86,13 +86,11 @@ angular.module('amanuensisApp')
     }
 
     $scope.searchMyLatest = function() {
-      // TODO
-      console.log('searching my latest');
+      $scope.searchStories(queryService.myLatest, '');
     }
 
     $scope.searchOthersLatest = function() {
-      // TODO
-      console.log('searching others latest');
+      $scope.searchStories(queryService.othersLatest, '');
     }
 
     $scope.searchNotifications = function() {

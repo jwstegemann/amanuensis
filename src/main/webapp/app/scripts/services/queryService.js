@@ -4,9 +4,24 @@ angular.module('amanuensisApp')
   .factory('queryService', function($resource, $q) {
 
     // Public API here
-    return $resource('/query', {}, {
+    return $resource('/query/fulltext', {}, {
       query: {
         method: 'POST',
+        isArray: false
+      },
+      myLatest: {
+        method: 'POST',
+        url: '/query/mylatest',
+        isArray: false
+      },
+      othersLatest: {
+        method: 'POST',
+        url: '/query/otherslatest',
+        isArray: false
+      },
+      toDos: {
+        method: 'POST',
+        url: '/query/todos',
         isArray: false
       },
       suggestTags: {
