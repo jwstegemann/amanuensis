@@ -57,6 +57,8 @@ angular.module('amanuensisApp')
         			content: undefined,
                     created: "not yet",
                     createdBy: "who knows",
+                    modified: "not yet",
+                    modifiedBy: "who knows",
                     tags: []
         		},
         		inSlots: [],

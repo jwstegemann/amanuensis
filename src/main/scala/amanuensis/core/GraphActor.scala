@@ -19,6 +19,7 @@ import amanuensis.domain._
 object GraphActor {
 
   case class FindPaths(sourceStoryId: String, targetStoryId: String, tagName: String, page: Int, login: String)
+  case class FindFavourites(page: Int, login: String)
 
   val pathQueryString = """
     MATCH (s:Story {id: {source}})
@@ -28,6 +29,12 @@ object GraphActor {
     MATCH (m)-[:is]->(:Tag {name: {tagName}})
     WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(:User {login: {login}})
     RETURN m.id, m.title, m.content, m.created, m.createdBy SKIP {skip} LIMIT 25
+  """
+
+  val favouritesQueryString = """
+    MATCH (u:User {login: {login}})-[:likes]->(s:Story)
+    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    RETURN s.id, s.title, s.content, s.created, s.createdBy SKIP {skip} LIMIT 25
   """
 }
 
@@ -56,6 +63,7 @@ class GraphActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
 
   def receive = {
     case FindPaths(sourceStoryId, targetStoryId, tagName, page, login) => findPaths(sourceStoryId, targetStoryId, tagName, page, login) pipeTo sender
+    case FindFavourites(page, login) => findFavourites(page, login) pipeTo sender
   }
 
   def findPaths(sourceStoryId: String, targetStoryId: String, tagName: String, page: Int, login: String) = {
@@ -67,5 +75,12 @@ class GraphActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
       ("login" -> login)
     )
   }
+
+  def findFavourites(page: Int, login: String) = {
+    server.list[StoryNode](favouritesQueryString,
+      ("skip" -> (page*25)),
+      ("login" -> login)
+    )
+  }  
 
 }

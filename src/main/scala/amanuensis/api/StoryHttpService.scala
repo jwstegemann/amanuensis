@@ -53,7 +53,11 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
             entity(as[Story]) { story =>
               dynamic {
  //               log.debug(s"request: update story $storyId with $story")
-                complete((storyActor ? Update(storyId, story, userContext.login)) map { value => StatusCodes.OK })
+               val storyWithMeta = story.copy(
+                  modified = DateTime.now.toString,
+                  modifiedBy = userContext.login                
+                )
+                complete((storyActor ? Update(storyId, storyWithMeta, userContext.login)) map { value => StatusCodes.OK })
               }
             }
           } ~
@@ -76,7 +80,12 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
               entity(as[Story]) { story =>
                 dynamic {
   //                log.debug(s"request: creating new story $story in slot $slotName at story $storyId")
-                  val storyWithMeta = story.copy(created = DateTime.now.toString, createdBy = userContext.name)
+                  val storyWithMeta = story.copy(
+                    created = DateTime.now.toString, 
+                    createdBy = userContext.login, 
+                    modified = DateTime.now.toString,
+                    modifiedBy = userContext.login
+                  )
                   complete((slotActor ? CreateAndAdd(storyId, slotName, storyWithMeta, userContext.login)).mapTo[StoryInfo])
                 }
               }              
@@ -108,7 +117,12 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
           entity(as[Story]) { story =>
             dynamic {
    //           log.debug(s"request: creating new story with $story")
-              val storyWithMeta = story.copy(created = DateTime.now.toString, createdBy = userContext.name)
+              val storyWithMeta = story.copy(
+                created = DateTime.now.toString, 
+                createdBy = userContext.login,
+                modified = DateTime.now.toString,
+                modifiedBy = userContext.login                
+              )
               complete((storyActor ? Create(storyWithMeta, userContext.login)).mapTo[StoryInfo])
   //            complete(s"creating new story with $story")
             }

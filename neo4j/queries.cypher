@@ -38,3 +38,12 @@ match p=(start:Story {id: "52f101192fcd935400587fd5"})-[:Slot*1..10]-(ziel:Story
 match (start:Story {id: "52f101192fcd935400587fd5"})-[:Slot*1..10]-(middle:Story)-[:Slot*1..10]-(ziel:Story {id: "52f101442fcd935600587fd7"})
 match (middle)-[:is]->(t:Tag {name: "offen"})
 return middle
+
+---
+
+update for modified, etc.
+
+
+match (s:Story) 
+match (u:User {u.name=s.createdBy})
+set s.modified = s.created, s.modifiedBy=u.login, s.createdBy=u.login

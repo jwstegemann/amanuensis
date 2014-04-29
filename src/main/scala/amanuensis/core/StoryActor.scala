@@ -38,7 +38,7 @@ object StoryActor {
   //TODO: use merge when creating stories
   val createQueryString = """
     MATCH (u:User {login: {login}})
-    CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy} })<-[:canGrant]-(u)
+    CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy}, modified: {modified}, modifiedBy: {modifiedBy}})<-[:canGrant]-(u)
     WITH s
     FOREACH (tagname IN {tags} |
       MERGE (t:Tag {name: tagname})
@@ -50,7 +50,8 @@ object StoryActor {
     MATCH (s:Story {id: {id}}), (u:User {login: {login}})
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     OPTIONAL MATCH (s)-[:is]->(t:Tag)
-    RETURN s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy, collect(t.name) as tags
+    RETURN s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy,
+      s.modified as modified, s.modifiedBy as modifiedBy, s.due as due, s.dueTo as dueTo, collect(t.name) as tags
   """
 
   val retrieveOutSlotQueryString = """
@@ -86,7 +87,7 @@ object StoryActor {
     MATCH (s:Story {id: {id}}), (u:User {login: {login}})
     WHERE (s)<-[:canWrite|:canGrant*1..5]-(u)
     OPTIONAL MATCH (s)-[r:is]->(:Tag) DELETE r
-    SET s.title={title}, s.content={content}
+    SET s.title={title}, s.content={content}, s.modified={modified}, s.modifiedBy={modifiedBy}
     FOREACH (tagname IN {tags} |
       MERGE (t:Tag {name: tagname})
       MERGE (s)-[:is]->(t:Tag))
@@ -149,11 +150,13 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
       ("content" -> story.content),
       ("created" -> story.created),
       ("createdBy" -> story.createdBy),
+      ("modified" -> story.modified),
+      ("modifiedBy" -> story.modifiedBy),      
       ("tags" -> story.tags),
       ("login" -> login)
     ) map { nothing =>
         indexActor ! Index(story.copy(id = Some(id)), login :: Nil)
-        StoryInfo(id, story.title, story.created, None) 
+        StoryInfo(id, story.title, story.created, story.modified, story.due, None) 
       }
   }
 
@@ -194,6 +197,8 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
       ("id" -> storyId),
       ("title" -> story.title), 
       ("content" -> story.content),
+      ("modified" -> story.modified),
+      ("modifiedBy" -> story.modifiedBy),        
       ("tags" -> story.tags),
       ("login" -> login)
     ) map {

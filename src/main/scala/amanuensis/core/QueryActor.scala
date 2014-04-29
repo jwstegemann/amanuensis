@@ -47,7 +47,7 @@ class QueryActor extends Actor with ActorLogging with Failable {
   def receive = {
     case Fulltext(queryRequest: QueryRequest, groups: Seq[String]) => server.query(queryRequest, groups) pipeTo sender
     case Index(story: Story, canRead: Seq[String]) => server.index(StoryIndex(story.id, story.title, story.content, story.created, story.createdBy, 
-      story.tags, canRead))
+      story.modified, story.modifiedBy, story.due, story.dueTo, story.tags, canRead))
     case UpdateIndex(story: Story) => server.update(story) // pipeTo sender    
     case DeleteFromIndex(storyId: String) => server.delete(storyId) // pipeTo sender
     case IndexSlotName(slotName: String, sourceStoryId: String, targetStoryId: String) => server.indexSlotName(slotName, sourceStoryId, targetStoryId)

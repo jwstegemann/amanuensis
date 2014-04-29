@@ -6,8 +6,8 @@
         <a><i class="fa fa-tag"></i>{{term.term}} ({{term.count}})</a>
       </li>
     </ul>
-    <h3 ng-show="result"class="filterHeader"><i class="fa fa-filter fa-lg on-slot"></i>&nbsp;Filter Dates:</h3>
-    <ul ng-show="result" class="tag-list">
+    <h3 ng-show="result && result.facets.dates"class="filterHeader"><i class="fa fa-filter fa-lg on-slot"></i>&nbsp;Filter Dates:</h3>
+    <ul ng-show="result && result.facets.dates" class="tag-list">
       <li ng-click="searchWithDate(result.facets.dates.ranges[0].from_str)">
         <a><i class="fa fa-calendar"></i>today ({{result.facets.dates.ranges[0].count}})</a>
       </li>

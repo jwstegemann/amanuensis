@@ -39,6 +39,15 @@ trait GraphHttpService extends HttpService with SprayJsonSupport {
             }
           }
         }
-      }
+      } ~
+      path("favourites") {
+        parameter("page".as[Int] ? 0) { page =>
+          get {
+            dynamic {
+              complete((graphActor ? FindFavourites(page, userContext.login)).mapTo[Seq[StoryNode]])
+            }
+          }
+        }
+      }      
     }
 }

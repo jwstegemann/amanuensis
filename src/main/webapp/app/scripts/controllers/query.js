@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('QueryCtrl', function ($scope,$routeParams,queryService,$rootScope) {
+  .controller('QueryCtrl', function ($scope,$routeParams,queryService,$rootScope,graphService) {
 
     $rootScope.appState = 128;
     $scope.result = undefined;

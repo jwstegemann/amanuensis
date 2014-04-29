@@ -8,6 +8,12 @@ angular.module('amanuensisApp')
       query: {
         method: 'GET',
         isArray: true
-      }});
+      },
+      favourites: {
+        method: 'GET',
+        url: '/graph/favourites?page=:page',
+        isArray: true,
+      }
+    });
 
   });
