@@ -14,6 +14,7 @@ import amanuensis.core.util.Failable
 import amanuensis.core.neo4j._
 
 import amanuensis.domain._
+import amanuensis.core.elasticsearch.{QueryResult, Hits, Facets, Hit, Tags, Dates}
 
 
 object GraphActor {
@@ -34,7 +35,7 @@ object GraphActor {
   val favouritesQueryString = """
     MATCH (u:User {login: {login}})-[:likes]->(s:Story)
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
-    RETURN s.id, s.title, s.content, s.created, s.createdBy SKIP {skip} LIMIT 25
+    RETURN s.id, s.title, s.content, s.created, s.createdBy, s.modified, s.modifiedBy, "xxx", "xxx", [] SKIP {skip} LIMIT 25
   """
 }
 
@@ -50,6 +51,7 @@ class GraphActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
 
   import GraphActor._
   import GraphNeoProtocol._
+  import StoryNeoProtocol._
 
   implicit def executionContext = context.dispatcher
   implicit val system = context.system
@@ -77,10 +79,18 @@ class GraphActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
   }
 
   def findFavourites(page: Int, login: String) = {
-    server.list[StoryNode](favouritesQueryString,
+    server.list[Story](favouritesQueryString,
       ("skip" -> (page*25)),
       ("login" -> login)
-    )
+    ) map { list =>
+      QueryResult(
+        0,
+        Hits(-1, 0.0, list map { story =>
+            Hit(story.id.getOrElse("unknown"), 0.0, story)
+          }),
+        Facets(Tags(0, Nil), Dates(Nil))
+      )      
+    }
   }  
 
 }

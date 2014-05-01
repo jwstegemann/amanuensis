@@ -28,6 +28,9 @@ angular.module('amanuensisApp')
       else if (method === queryService.toDos) {
         $scope.title = "My ToDos" + queryString;
       }
+      else if (method === queryService.favourites) {
+        $scope.title = "My Favourites";
+      }      
 
       $scope.lastMethod = method;
       $scope.lastQuery = {
@@ -72,7 +75,12 @@ angular.module('amanuensisApp')
     $scope.calcPages = function() {
       if (angular.isUndefined($scope.result)) return 0;
       else {
-        return Math.floor($scope.result.hits.total / 25) + 1
+        if ($scope.result.hits.total === -1 ) {
+          return -1
+        } 
+        else {
+          return Math.floor($scope.result.hits.total / 25) + 1
+        }
       }
     }
 
@@ -96,11 +104,6 @@ angular.module('amanuensisApp')
       $scope.searchStories(queryService.toDos, '');
     }
 
-    $scope.searchFavourites = function() {
-      // TODO
-      console.log('searching Favs');
-    }
-
     $scope.searchMyLatest = function() {
       $scope.searchStories(queryService.myLatest, '');
     }
@@ -110,8 +113,11 @@ angular.module('amanuensisApp')
     }
 
     $scope.searchNotifications = function() {
-      console.log('searching Notifications');
       $scope.searchStories(queryService.query, '@' + $scope.userContext.name);
+    }
+
+    $scope.searchFavourites = function() {
+      $scope.searchStories(queryService.favourites, null);
     }
 
   });

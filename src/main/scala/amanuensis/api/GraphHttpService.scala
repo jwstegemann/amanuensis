@@ -15,6 +15,7 @@ import scala.concurrent.future
 
 import amanuensis.core.GraphActor._
 import amanuensis.domain._
+import amanuensis.core.elasticsearch._
 
 import StatusCode._
 
@@ -44,7 +45,8 @@ trait GraphHttpService extends HttpService with SprayJsonSupport {
         parameter("page".as[Int] ? 0) { page =>
           get {
             dynamic {
-              complete((graphActor ? FindFavourites(page, userContext.login)).mapTo[Seq[StoryNode]])
+              import ElasticSearchProtocol._
+              complete((graphActor ? FindFavourites(page, userContext.login)).mapTo[QueryResult])
             }
           }
         }

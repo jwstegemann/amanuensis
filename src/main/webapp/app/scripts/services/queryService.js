@@ -24,6 +24,12 @@ angular.module('amanuensisApp')
         url: '/query/todos',
         isArray: false
       },
+      favourites: {
+        method: 'GET',
+        url: '/graph/favourites',
+        params: {page: '@page'},
+        isArray: false
+      },
       suggestTags: {
         url: '/query/suggest/tags/:text',
         method: 'GET',

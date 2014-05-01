@@ -1,13 +1,15 @@
 <div id="query-sidebar" class="query-sidebar container shadow-right" scrollbar>
-    <h3 ng-show="result && result.facets.tags.terms.length"class="filterHeader">
+    <h3 ng-show="result && pages > 0 && result.facets.tags.terms.length"class="filterHeader">
       <i class="fa fa-filter fa-lg on-slot"></i>&nbsp;Filter Tags:</h3>
-    <ul ng-show="result && result.facets.tags.terms.length" class="tag-list">
+    <ul ng-show="result && pages > 0 && result.facets.tags.terms.length" class="tag-list">
       <li ng-repeat="term in result.facets.tags.terms" ng-click="searchWithFilter(term.term)">
         <a><i class="fa fa-tag"></i>{{term.term}} ({{term.count}})</a>
       </li>
     </ul>
-    <h3 ng-show="result && result.facets.dates"class="filterHeader"><i class="fa fa-filter fa-lg on-slot"></i>&nbsp;Filter Dates:</h3>
-    <ul ng-show="result && result.facets.dates" class="tag-list">
+    <h3 ng-show="result && pages > 0 &&  result.facets.dates"class="filterHeader">
+      <i class="fa fa-filter fa-lg on-slot"></i>&nbsp;Filter Dates:
+    </h3>
+    <ul ng-show="result && pages > 0 &&  result.facets.dates" class="tag-list">
       <li ng-click="searchWithDate(result.facets.dates.ranges[0].from_str)">
         <a><i class="fa fa-calendar"></i>today ({{result.facets.dates.ranges[0].count}})</a>
       </li>
@@ -64,7 +66,9 @@
     <span ng-show="lastQuery.fromDate"> since {{lastQuery.fromDate.substr(0,10)}}</span></span>
   </h2>
 
-  <p ng-show="result" class="stats">found {{result.hits.total}} stories in {{result.took}} ms.</p>
+  <p ng-show="result && pages >= 0" class="stats">found {{result.hits.total}} stories in {{result.took}} ms.</p>
+
+  <p ng-show="result && pages === -1 && result.hits.length === 0" class="stats">You have not marked any story as favourite, yet.</p>
 
     <ul ng-show="result" class="resultList">
 
