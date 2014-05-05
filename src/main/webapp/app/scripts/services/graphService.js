@@ -13,7 +13,12 @@ angular.module('amanuensisApp')
         method: 'GET',
         url: '/graph/favourites?page=:page',
         isArray: true,
-      }
+      },
+      toDos: {
+        method: 'GET',
+        url: '/graph/todos?page=:page',
+        isArray: true,
+      }      
     });
 
   });

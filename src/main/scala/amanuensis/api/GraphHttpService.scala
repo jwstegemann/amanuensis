@@ -50,6 +50,16 @@ trait GraphHttpService extends HttpService with SprayJsonSupport {
             }
           }
         }
-      }      
+      } ~
+      path("todos") {
+        parameter("page".as[Int] ? 0) { page =>
+          get {
+            dynamic {
+              import ElasticSearchProtocol._
+              complete((graphActor ? FindToDos(page, userContext.login)).mapTo[QueryResult])
+            }
+          }
+        }
+      }     
     }
 }

@@ -21,6 +21,7 @@ object GraphActor {
 
   case class FindPaths(sourceStoryId: String, targetStoryId: String, tagName: String, page: Int, login: String)
   case class FindFavourites(page: Int, login: String)
+  case class FindToDos(page: Int, login: String)
 
   val pathQueryString = """
     MATCH (s:Story {id: {source}})
@@ -28,14 +29,22 @@ object GraphActor {
     MATCH (s)-[:Slot*1..5]-(m:Story)-[:Slot*1..5]-(t)
     WITH distinct m
     MATCH (m)-[:is]->(:Tag {name: {tagName}})
-    WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(:User {login: {login}})
+      WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(:User {login: {login}})
     RETURN m.id, m.title, m.content, m.created, m.createdBy SKIP {skip} LIMIT 25
   """
 
   val favouritesQueryString = """
     MATCH (u:User {login: {login}})-[:likes]->(s:Story)
+      WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    RETURN s.id, s.title, s.content, s.created, s.createdBy, s.modified, s.modifiedBy, null, [] 
+    ORDER BY s.modified DESC SKIP {skip} LIMIT 25
+  """
+
+  val toDosQueryString = """
+    MATCH (u:User {login: {login}})-[d:due]->(s:Story)
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
-    RETURN s.id, s.title, s.content, s.created, s.createdBy, s.modified, s.modifiedBy, "xxx", "xxx", [] SKIP {skip} LIMIT 25
+    RETURN s.id, s.title, s.content, s.created, s.createdBy, s.modified, s.modifiedBy, d.date, [] 
+    ORDER BY d.date SKIP {skip} LIMIT 25
   """
 }
 
@@ -66,6 +75,7 @@ class GraphActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
   def receive = {
     case FindPaths(sourceStoryId, targetStoryId, tagName, page, login) => findPaths(sourceStoryId, targetStoryId, tagName, page, login) pipeTo sender
     case FindFavourites(page, login) => findFavourites(page, login) pipeTo sender
+    case FindToDos(page, login) => findToDos(page, login) pipeTo sender
   }
 
   def findPaths(sourceStoryId: String, targetStoryId: String, tagName: String, page: Int, login: String) = {
@@ -92,5 +102,20 @@ class GraphActor extends Actor with ActorLogging with Failable with Neo4JJsonPro
       )      
     }
   }  
+
+  def findToDos(page: Int, login: String) = {
+    server.list[Story](toDosQueryString,
+      ("skip" -> (page*25)),
+      ("login" -> login)
+    ) map { list =>
+      QueryResult(
+        0,
+        Hits(-1, 0.0, list map { story =>
+            Hit(story.id.getOrElse("unknown"), 0.0, story)
+          }),
+        Facets(Tags(0, Nil), Dates(Nil))
+      )      
+    }
+  } 
 
 }

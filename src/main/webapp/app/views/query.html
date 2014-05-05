@@ -77,7 +77,7 @@
         <p class="origin">
           <span><i class="fa fa-file-text-o"></i> {{storyResult._source.created.substr(0,10)}} by {{storyResult._source.createdBy}}</span>
           <span> | <i class="fa fa-pencil"></i> {{storyResult._source.modified.substr(0,10)}} by {{storyResult._source.modifiedBy}}</span>
-          <span ng-show="context.story.due && context.story.dueTo"> | <i class="fa fa-bell"></i> {{storyResult._source.due.substr(0,10)}} by {{storyResult._source.dueTo}}</span>
+          <span ng-show="storyResult._source.due"> | <i class="fa fa-bell"></i> {{storyResult._source.due.substr(0,10)}}</span>
         </p>
         <p class="content">{{storyResult._source.content}}...</p>
       </li>

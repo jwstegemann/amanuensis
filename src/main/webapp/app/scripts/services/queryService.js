@@ -20,8 +20,9 @@ angular.module('amanuensisApp')
         isArray: false
       },
       toDos: {
-        method: 'POST',
-        url: '/query/todos',
+        method: 'GET',
+        url: '/graph/todos',
+        params: {page: '@page'},
         isArray: false
       },
       favourites: {

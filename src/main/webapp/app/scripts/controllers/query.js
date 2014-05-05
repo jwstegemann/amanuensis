@@ -26,7 +26,7 @@ angular.module('amanuensisApp')
         $scope.title = "Latest Activites of other users" + queryString;
       }
       else if (method === queryService.toDos) {
-        $scope.title = "My ToDos" + queryString;
+        $scope.title = "My ToDos";
       }
       else if (method === queryService.favourites) {
         $scope.title = "My Favourites";
@@ -101,7 +101,7 @@ angular.module('amanuensisApp')
     }
 
     $scope.searchToDos = function() {
-      $scope.searchStories(queryService.toDos, '');
+      $scope.searchStories(queryService.toDos, null);
     }
 
     $scope.searchMyLatest = function() {
