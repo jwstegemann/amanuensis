@@ -407,33 +407,6 @@ def handleQuery(queryField: JsField, sortField: JsField, queryRequest: QueryRequ
     handleQuery(queryField, sortField, queryRequest, groups, login)
   }
 
-  def todos(queryRequest: QueryRequest, groups: Seq[String], login: String): Future[QueryResult] = {
-    val startFrom = DateTime.now.withTimeAtStartOfDay minus Days.FIVE
-
-    val queryField = 
-      ("query", JsObject(
-        ("bool", JsObject(
-          ("must", JsArray(
-            JsObject(("range", JsObject(
-              ("modified", JsObject (
-                ("gte", JsString(startFrom.toString()))
-              ))
-            ))),
-            JsObject(("term", JsObject(
-              ("dueTo", JsString(login))
-            )))
-                    
-          ))
-        ))
-      ))
-
-    val sortField = 
-      ("sort", JsArray(
-        JsObject(("due", JsString("asc")))
-      ))
-
-    handleQuery(queryField, sortField, queryRequest, groups, login)
-  }
 }
 
 

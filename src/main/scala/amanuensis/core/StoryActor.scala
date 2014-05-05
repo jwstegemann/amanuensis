@@ -49,9 +49,10 @@ object StoryActor {
   val retrieveStoryQueryString = """
     MATCH (s:Story {id: {id}}), (u:User {login: {login}})
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    OPTIONAL MATCH (s)<-[d:due]-(u)
     OPTIONAL MATCH (s)-[:is]->(t:Tag)
     RETURN s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy,
-      s.modified as modified, s.modifiedBy as modifiedBy, s.due as due, s.dueTo as dueTo, collect(t.name) as tags
+      s.modified as modified, s.modifiedBy as modifiedBy, d.date as due, collect(t.name) as tags
   """
 
   val retrieveOutSlotQueryString = """
@@ -156,7 +157,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
       ("login" -> login)
     ) map { nothing =>
         indexActor ! Index(story.copy(id = Some(id)), login :: Nil)
-        StoryInfo(id, story.title, story.created, story.modified, story.due, None) 
+        StoryInfo(id, story.title, story.created, story.modified, None) 
       }
   }
 

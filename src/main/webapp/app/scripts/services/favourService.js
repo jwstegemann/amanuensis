@@ -10,7 +10,15 @@ angular.module('amanuensisApp')
       },
       unlike: {
         method: 'DELETE'
-      }
+      },
+      due: {
+        url: '/due/:storyId?date=:date',
+        method: 'POST'
+      },
+      undue: {
+        url: '/due/:storyId',
+        method: 'DELETE'
+      }      
     });
 
   });

@@ -86,6 +86,17 @@ trait Neo4JRestFormats { this: StandardFormats with CollectionFormats =>
       }
     }
   }
+  
+  def jsonCaseClassArrayFormat[A: JFo, B: JFo, C: JFo, D: JFo, E: JFo, F: JFo, G: JFo, H: JFo, I: JFo, T <: Product](construct: (A, B, C, D, E, F, G, H, I) => T) = {
+    new RootJsonFormat[T] {
+      def write(t: T) = serializationError("row is not to be written")
+      def read(value: JsValue) = value match {
+        case JsArray(a :: b :: c :: d :: e :: f :: g :: h :: i :: Nil) => construct(a.convertTo[A], b.convertTo[B], c.convertTo[C], d.convertTo[D], 
+          e.convertTo[E], f.convertTo[F], g.convertTo[G], h.convertTo[H], i.convertTo[I])
+        case x => deserializationError("Expected case class as JsArray")
+      }
+    }
+  } 
 
   def jsonCaseClassArrayFormat[A: JFo, B: JFo, C: JFo, D: JFo, E: JFo, F: JFo, G: JFo, H: JFo, I: JFo, J: JFo, T <: Product](construct: (A, B, C, D, E, F, G, H, I, J) => T) = {
     new RootJsonFormat[T] {

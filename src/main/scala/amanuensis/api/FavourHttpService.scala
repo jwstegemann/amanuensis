@@ -46,6 +46,19 @@ trait FavourHttpService extends HttpService with SprayJsonSupport {
           complete((favourActor ? Unlike(storyId, userContext.login)) map { value => StatusCodes.OK })
         }
       }
-    } 
-
+    } ~ 
+    path("due" / Segment) { storyId: String =>
+      post {
+        parameter("date".as[String] ? "") { date =>
+          dynamic {
+            complete((favourActor ? Due(storyId, date, userContext.login)) map { value => StatusCodes.OK })
+          }
+        }
+      } ~
+      delete {
+        dynamic {
+          complete((favourActor ? Undue(storyId, userContext.login)) map { value => StatusCodes.OK })
+        }
+      }
+    }    
 }

@@ -37,7 +37,7 @@ object SlotActor {
         WHEN weight < 5 THEN m.content
         ELSE null 
       END) as content
-    RETURN m.id, m.title, m.created, m.modified, m.due, content LIMIT 250
+    RETURN m.id, m.title, m.created, m.modified, content LIMIT 250
   """
 
   val addQueryString = """
@@ -177,7 +177,7 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
         case Some(rights: StoryRights) => {
           indexActor ! Index(story.copy(id = Some(id)), rights.canRead :+ login)
           indexActor ! IndexSlotName(slotName, toStory, id)
-          StoryInfo(id, story.title, story.created, story.modified, story.due, None)
+          StoryInfo(id, story.title, story.created, story.modified, None)
         }
         case _ => throw NotFoundException(Message(s"could not create new story in slot $slotName",`ERROR`) :: Nil)
       }

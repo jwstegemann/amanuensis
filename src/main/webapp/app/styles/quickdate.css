@@ -1,0 +1,92 @@
+.quickdate {
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: 1em;
+}
+.quickdate input,
+.quickdate select {
+  font-size: 13px;
+}
+.quickdate-button {
+  display: inline;
+  text-decoration: none;
+  color: #74818e !important;
+}
+.quickdate-button:hover {
+  text-decoration: underline;
+}
+.quickdate-button:hover i {
+  text-decoration: none;
+}
+.quickdate-button i {
+  padding-right: 4px;
+}
+.quickdate-popup {
+  color: #fff;
+  font-size: 15px;
+  background-color: #566473;
+  border-radius: 3px;
+}
+.quickdate-action-link:visited,
+.quickdate-action-link:hover {
+  color: #fff;
+}
+.quickdate-next-month i {
+  padding-left: 10px;
+}
+.quickdate-prev-month i {
+  padding-right: 10px;
+}
+table.quickdate-calendar {
+  border: solid 1px #74818e;
+  background-color: transparent;
+}
+table.quickdate-calendar th,
+table.quickdate-calendar td {
+  border-right: 1px solid #74818e;
+  border-bottom: 1px solid #74818e;
+}
+table.quickdate-calendar td:hover {
+  background: rgba(0,0,0,0.1);
+}
+table.quickdate-calendar td.other-month {
+  background-color: transparent;
+  color: #808080;
+}
+table.quickdate-calendar td.other-month:hover {
+  background-color: transparent;
+}
+table.quickdate-calendar td.disabled-date {
+  background-color: inherit;
+  color: #fff;
+}
+table.quickdate-calendar td.disabled-date:hover {
+  background: transparent;
+  cursor: default;
+}
+table.quickdate-calendar td.selected {
+  font-weight: 400;
+  color: #fff;
+}
+table.quickdate-calendar td.is-today {
+  color: #fff;
+}
+table.quickdate-calendar td.is-today.disabled-date {
+  color: #929292;
+  font-weight: normal;
+}
+
+.quickdate-clear {
+  display: inline;
+  padding: 5px 5px;
+  color: #fff !important;
+  text-align: center;
+  font-weight: 400;
+}
+
+.quickdate-clear:hover {
+  text-decoration: underline;
+}
+
+.quickdate-clear:hover {
+}

@@ -28,6 +28,8 @@ object FavourActor {
    */
   case class Like(storyId: String, login: String)
   case class Unlike(storyId: String, login: String)
+  case class Due(storyId: String, date: String, login: String)
+  case class Undue(storyId: String, login: String)  
 
   /*
    * query-string for neo4j
@@ -46,8 +48,23 @@ object FavourActor {
     DELETE l
     RETURN s.id
   """
-}
 
+  val dueQueryString = """
+    MATCH (s:Story {id: {id}}), (u:User {login: {login}})
+    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    MERGE (s)<-[d:due]-(u)
+    SET d.date = {date}
+    RETURN s.id
+  """
+  
+  val undueQueryString = """
+    MATCH (s:Story {id: {id}}), (u:User {login: {login}})
+    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    MATCH (s)<-[l:due]-(u)
+    DELETE l
+    RETURN s.id
+  """
+}
 
 /**
  * Registers the users. Replies with
@@ -71,6 +88,8 @@ class FavourActor extends Actor with ActorLogging with Failable with UsingParams
   def receive = {
     case Like(storyId, login) => like(storyId, login) pipeTo sender
     case Unlike(storyId, login) => unlike(storyId, login) pipeTo sender
+    case Due(storyId, date, login) => due(storyId, date, login) pipeTo sender
+    case Undue(storyId, login) => undue(storyId, login) pipeTo sender
   }
 
   def like(storyId: String, login: String) = {
@@ -94,5 +113,28 @@ class FavourActor extends Actor with ActorLogging with Failable with UsingParams
         case None => throw NotFoundException(Message(s"story with id '$storyId' could not be unliked",`ERROR`) :: Nil)
       }    
   }
+
+  def due(storyId: String, date: String, login: String) = {
+
+    server.one[StoryId](dueQueryString, 
+      ("id" -> storyId),
+      ("login" -> login),
+      ("date" -> date)
+    ) map {
+        case Some(s) => s
+        case None => throw NotFoundException(Message(s"story with id '$storyId' could not be dued",`ERROR`) :: Nil)
+      }    
+  }
+
+  def undue(storyId: String, login: String) = {
+
+    server.one[StoryId](undueQueryString, 
+      ("id" -> storyId),
+      ("login" -> login)
+    ) map {
+        case Some(s) => s
+        case None => throw NotFoundException(Message(s"story with id '$storyId' could not be undued",`ERROR`) :: Nil)
+      }    
+  }  
 
 }

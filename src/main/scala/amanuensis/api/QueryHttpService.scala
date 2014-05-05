@@ -43,16 +43,6 @@ trait QueryHttpService extends HttpService with SprayJsonSupport {
           }
         }
       } ~
-      path("todos") {
-        entity(as[QueryRequest]) { queryRequest: QueryRequest =>
-          post {
-            dynamic {
-              //FixMe: we do not need a Message-Type Fulltext here...
-              complete((queryActor ? ToDos(queryRequest, userContext.permissions, userContext.login)).mapTo[QueryResult])
-            }
-          }
-        }
-      }~
       path("mylatest") {
         entity(as[QueryRequest]) { queryRequest: QueryRequest =>
           post {

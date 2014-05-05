@@ -97,7 +97,8 @@ angular.module('amanuensisApp', [
   'chieffancypants.loadingBar',
   'ngTagsInput',
   'typeahead',
-  'selectbox'
+  'selectbox',
+  'ngQuickDate'
 ]).config(function ($routeProvider) {
     $routeProvider
       .when('/story/:storyId?', {
@@ -158,6 +159,14 @@ angular.module('amanuensisApp', [
       };
     }]);
 
+  }).config(function(ngQuickDateDefaultsProvider) {
+    // Configure with icons from font-awesome
+    return ngQuickDateDefaultsProvider.set({
+      closeButtonHtml: "<i class='fa fa-times'></i>",
+      buttonIconHtml: "<i class='fa fa-calendar'></i>",
+      nextLinkHtml: "<i class='fa fa-chevron-right'></i>",
+      prevLinkHtml: "<i class='fa fa-chevron-left'></i>"
+    })
   }).run(function ($rootScope, $location) {
     //init mode and stack
     $rootScope.selectMode = false;

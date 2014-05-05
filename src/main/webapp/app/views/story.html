@@ -64,7 +64,9 @@
             <div class="meta">
               <span><i class="fa fa-file-text-o"></i> {{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span>
               <span> | <i class="fa fa-pencil"></i> {{context.story.modified.substr(0,10)}} by {{context.story.modifiedBy}}</span>
-              <span ng-show="context.story.due && context.story.dueTo"> | <i class="fa fa-bell"></i> {{context.story.due.substr(0,10)}} by {{context.story.dueTo}}</span>
+              | <quick-datepicker ng-model="context.story.due" date-format="yyyy-MM-dd" placeholder="not set" on-change="updateDue()"
+                  hover-text="set date for ToDo" icon-class="fa fa-bell" disable-timepicker="true" default-time="00:00:00">
+                </quick-datepicker>
             </div>
           </h1>
             <tags-input ng-model="context.story.tags" max-length="50" allowed-tags-pattern="^[\w\-üäöÜÄÖß$!\?]*$">

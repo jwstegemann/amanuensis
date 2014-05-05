@@ -12,9 +12,8 @@ case class Story(
   created: String,
   createdBy: String, 
   modified: String,
-  modifiedBy: String, 
-  due: Option[String], 
-  dueTo: Option[String],
+  modifiedBy: String,
+  due: Option[String],
   tags: Seq[String])  {
 
 	def check() = {
@@ -22,7 +21,7 @@ case class Story(
 	}
 }
 
-case class StoryInfo(id : String, title : String, created: String, modified: String, due: Option[String], content: Option[String])
+case class StoryInfo(id : String, title : String, created: String, modified: String, content: Option[String])
 
 case class StoryContext(story: Story, inSlots: Seq[Slot], outSlots: Seq[Slot], flags: StoryFlags)
 
@@ -31,7 +30,7 @@ case class StoryId(id: String)
 case class StoryFlags(canWrite: Int, likes: Int)
 
 case class StoryIndex(id : Option[String], title : String, content : String, created: String, createdBy: String, 
-  modified: String, modifiedBy: String, due: Option[String], dueTo: Option[String],
+  modified: String, modifiedBy: String,
   tags: Seq[String], canRead: Seq[String])
 
 case class StoryAccess(login: String, name: String, access: String, level: String)
@@ -43,10 +42,10 @@ object StoryProtocol extends DefaultJsonProtocol {
 	import SlotProtocol._
 
   // JSON-Serialization
-  implicit val storyJsonFormat = jsonFormat10(Story.apply)
-  implicit val storyInfoJsonFormat = jsonFormat6(StoryInfo.apply)
+  implicit val storyJsonFormat = jsonFormat9(Story.apply)
+  implicit val storyInfoJsonFormat = jsonFormat5(StoryInfo.apply)
   implicit val storyIdJsonFormat = jsonFormat1(StoryId.apply)
-  implicit val storyIndexJsonFormat = jsonFormat11(StoryIndex.apply)
+  implicit val storyIndexJsonFormat = jsonFormat9(StoryIndex.apply)
   implicit val storyAccessJsonFormat = jsonFormat4(StoryAccess.apply)
   implicit val storyRightsJsonFormat = jsonFormat1(StoryRights.apply)  
   implicit val storyFlagsJsonFormat = jsonFormat2(StoryFlags.apply)    

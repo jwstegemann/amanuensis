@@ -187,6 +187,23 @@ angular.module('amanuensisApp')
     });
 
     /*
+     * Update due
+     */
+
+    $scope.updateDue = function() {
+        if (angular.isUndefined($scope.context.story.due) || $scope.context.story.due === null) {
+            favourService.undue({storyId: $scope.context.story.id}, null, function(successData) {
+                    growl.addSuccessMessage('You have removed ' + $scope.context.story.title + ' from your ToDo-list.');
+                });
+        }
+        else {
+            favourService.due({storyId: $scope.context.story.id, date: $scope.context.story.due.toJSON()}, null, function(successData) {
+                    growl.addSuccessMessage('You have added ' + $scope.context.story.title + ' to your ToDo-list.');
+                });
+        }
+    }
+
+    /*
      * Share a Story with other users
      */
     $scope.$on('shareStory', function() {
