@@ -54,7 +54,7 @@ angular.module('amanuensisApp')
       scope: false,
       link: function(scope, elem, attr) {
         elem.mCustomScrollbar({
-          autoHideScrollbar: false,
+          autoHideScrollbar: true,
           horizontalScroll: false,
           mouseWheel: true,
           scrollButtons:{

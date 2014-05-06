@@ -46,6 +46,8 @@ angular.module('amanuensisApp')
                 ) {
                     $scope.selectSlot(slotToOpen, inbound);
                 }
+
+                $scope.storyForm.$setPristine();
             });
         } 
         else {
@@ -78,6 +80,8 @@ angular.module('amanuensisApp')
                 likes: 0, 
                 saved: 0
             };
+
+            $scope.storyForm.$setPristine();
         }
 
         $scope.storyFilter = {};
@@ -484,16 +488,16 @@ angular.module('amanuensisApp')
      * prohibit navigation when dirty
      */
 
-    $scope.parser = document.createElement('a');
-
+//    $scope.parser = document.createElement('a');
     $scope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
         if (newUrl === $scope.newUrl) {
             $scope.newUrl = undefined;
         }
-        else if ($scope.storyForm.$dirty && newUrl.match(/^[^\?]+/)[0] !== oldUrl.match(/^[^\?]+/)[0]) {
-            event.preventDefault(); // This prevents the navigation from happening
-            $scope.newUrl = newUrl;
-            utilService.showModal('#confirm-leave-modal');
+        else if (($scope.storyForm.title.$dirty || $scope.storyForm.tags.$dirty || $scope.storyForm.content.$dirty) 
+            && newUrl.match(/^[^\?]+/)[0] !== oldUrl.match(/^[^\?]+/)[0]) {
+                event.preventDefault(); // This prevents the navigation from happening
+                $scope.newUrl = newUrl;
+                utilService.showModal('#confirm-leave-modal');
         }
     });
 

@@ -7,7 +7,7 @@
   <div id="stories-left" class="container stories stories-left shadow-right" ng-controller="SlotCtrl" ng-init="inbound=true" scrollbar>
 		<div class="story-list-title">
       <i class="fa fa-bars fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
-      <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title"></input>
+      <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
     </div>
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
@@ -36,7 +36,7 @@
   <div id="slots-left" class="container slots slots-left shadow-right" scrollbar>
     <div class="slot-list-title">
       <i class="fa on-slot" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i>
-      <input class="slot-filter" type="text" placeholder="Inbound" ng-model="slotFilterLeft"></input>
+      <input class="slot-filter" type="text" placeholder="Inbound" ng-model="slotFilterLeft" tabindex="-1"></input>
     </div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.inSlots | filter:slotFilterLeft | orderBy:'name'" 
@@ -58,24 +58,26 @@
       <div class="inner">
 				<div class="story-header">
 					<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
-          <input id="story-title-input" class="story-title" type="text" ng-model="context.story.title"
+          <input id="story-title-input" name="title" class="story-title" type="text" ng-model="context.story.title"
             placeholder="A Story..."></input>
 				  <h1>
             <div class="meta">
               <span><i class="fa fa-file-text-o"></i> {{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span>
               <span> | <i class="fa fa-pencil"></i> {{context.story.modified.substr(0,10)}} by {{context.story.modifiedBy}}</span>
-              | <quick-datepicker ng-model="context.story.due" date-format="yyyy-MM-dd" placeholder="not set" on-change="updateDue()"
-                  hover-text="set date for ToDo" icon-class="fa fa-bell" disable-timepicker="true" default-time="00:00:00">
+              | <quick-datepicker ng-model="context.story.due" date-format="yyyy-MM-dd" placeholder="not set" 
+                  on-change="updateDue()"hover-text="set date for ToDo" icon-class="fa fa-bell" disable-timepicker="true" 
+                  default-time="12:00:00">
                 </quick-datepicker>
             </div>
           </h1>
-            <tags-input ng-model="context.story.tags" max-length="50" allowed-tags-pattern="^[\w\-üäöÜÄÖß$!\?]*$">
+            <tags-input name="tags" ng-model="context.story.tags" max-length="50" allowed-tags-pattern="^[\w\-üäöÜÄÖß$!\?]*$">
               <auto-complete class="autocomplete-master" source="suggestTags($query)" debounceDelay="250" maxResultsToShow="20">
               </auto-complete>
             </tags-input>
         </div>
 				<div id="story-content" class="content" scrollbar fill-vertical margin='0'>
-				  <textarea ng-show="editMode" id="story-content-editor" class="story-content" ng-model="context.story.content" 
+				  <textarea name="content" ng-show="editMode" id="story-content-editor" 
+            class="story-content" ng-model="context.story.content" 
             placeholder="... that still has to be written." 
             uploadable fill-vertical margin='20'>
           </textarea>
@@ -98,7 +100,7 @@
   <div id="stories-right" class="container stories stories-right shadow-left "ng-controller="SlotCtrl"  ng-init="inbound=false" scrollbar>
 		<div class="story-list-title">
       <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
-      <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title"></input>
+      <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
     </div>
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
@@ -156,7 +158,7 @@
   <div id="slots-right" class="container slots slots-right shadow-left" scrollbar>
     <div class="slot-list-title">
       <i class="fa on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i>
-      <input class="slot-filter" type="text" placeholder="Outbound" ng-model="slotFilterRight"></input>
+      <input class="slot-filter" type="text" placeholder="Outbound" ng-model="slotFilterRight" tabindex="-1"></input>
     </div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.outSlots | filter:slotFilterRight | orderBy:'name'" 

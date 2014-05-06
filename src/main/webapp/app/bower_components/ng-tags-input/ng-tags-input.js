@@ -224,12 +224,14 @@ tagsInput.directive('tagsInput', ["$timeout","$document","tagsInputConfig", func
 
                         if (scope.tryAdd()) {
                             scope.$apply();
+                            ngModelCtrl.$dirty=true;
                         }
                         e.preventDefault();
                     }
                     else if (key === KEYS.backspace && this.value.length === 0) {
                         if (scope.tryRemoveLast()) {
                             scope.$apply();
+                            ngModelCtrl.$dirty=true;
 
                             e.preventDefault();
                         }

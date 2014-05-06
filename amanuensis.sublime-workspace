@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"an",
+				"angular"
+			],
+			[
 				"font",
 				"font-weight"
 			],
@@ -510,44 +514,32 @@
 			[
 				"with",
 				"withAccessTime"
-			],
-			[
-				"sess",
-				"sessionTimeout"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/main/webapp/app/index.html",
+			"file": "src/main/scala/amanuensis/core/GraphActor.scala",
 			"settings":
 			{
-				"buffer_size": 12978,
+				"buffer_size": 3609,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/app/views/story.html",
+			"file": "src/main/scala/amanuensis/api/GraphHttpService.scala",
 			"settings":
 			{
-				"buffer_size": 13419,
+				"buffer_size": 1860,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/app/styles/quickdate.css",
+			"file": "src/main/webapp/app/scripts/services/graphService.js",
 			"settings":
 			{
-				"buffer_size": 1785,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/app.js",
-			"settings":
-			{
-				"buffer_size": 7253,
+				"buffer_size": 535,
 				"line_ending": "Unix"
 			}
 		},
@@ -555,23 +547,23 @@
 			"file": "src/main/webapp/app/views/query.html",
 			"settings":
 			{
-				"buffer_size": 5010,
+				"buffer_size": 4960,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/.tmp/styles/modals.css",
+			"file": "src/main/webapp/app/scripts/controllers/query.js",
 			"settings":
 			{
-				"buffer_size": 2998,
+				"buffer_size": 3471,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/app/styles/tags.css",
+			"file": "src/main/webapp/app/scripts/services/queryService.js",
 			"settings":
 			{
-				"buffer_size": 2402,
+				"buffer_size": 1083,
 				"line_ending": "Unix"
 			}
 		},
@@ -579,34 +571,33 @@
 			"file": "src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js",
 			"settings":
 			{
-				"buffer_size": 14791,
+				"buffer_size": 14505,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.css",
+			"file": "src/main/webapp/app/scripts/controllers/story.js",
 			"settings":
 			{
-				"buffer_size": 1566,
+				"buffer_size": 22209,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/scala/amanuensis/api/StoryHttpService.scala",
+			"contents": "Searching 40 files for \"pristine\"\n\n0 matches across 0 files\n\n\nSearching 21 files for \"pristine\"\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js:\n  103          	if (angular.isDefined($scope.context.story.id)) {\n  104          		storyService.update($scope.context.story, function(successData) {\n  105:                     $scope.storyForm.$setPristine();\n  106                      growl.addSuccessMessage($scope.context.story.title + ' has been saved.');\n  107                  });\n  ...\n  115                          slotName: $routeParams.slotName\n  116                      }, $scope.context.story, function(successData) {\n  117:                         $scope.storyForm.$setPristine();\n  118                          $scope.context.story.id = successData.id;\n  119                          $location.url(\"/story/\" + $scope.context.story.id).replace();\n  ...\n  128                  else {\n  129              		storyService.create($scope.context.story, function(successData) {\n  130:                         $scope.storyForm.$setPristine();\n  131              			$scope.context.story.id = successData.id;\n  132                          $location.url(\"/story/\" + $scope.context.story.id).replace();\n  ...\n  194          if (angular.isUndefined($scope.context.story.due) || $scope.context.story.due === null) {\n  195              favourService.undue({storyId: $scope.context.story.id}, null, function(successData) {\n  196:                     $scope.storyForm.$setPristine();\n  197                      growl.addSuccessMessage('You have removed ' + $scope.context.story.title + ' from your ToDo-list.');\n  198                  });\n  ...\n  200          else {\n  201              favourService.due({storyId: $scope.context.story.id, date: $scope.context.story.due.toJSON()}, null, function(successData) {\n  202:                     $scope.storyForm.$setPristine();\n  203                      growl.addSuccessMessage('You have added ' + $scope.context.story.title + ' to your ToDo-list.');\n  204                  });\n\n5 matches in 1 file\n",
 			"settings":
 			{
-				"buffer_size": 4863,
-				"line_ending": "Unix"
+				"buffer_size": 2079,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
 			}
 		},
 		{
-			"contents": "package amanuensis.core\n\nimport akka.actor.{Actor, ActorLogging}\nimport akka.pattern._\n\nimport amanuensis.api.exceptions._\n\nimport amanuensis.domain.Message\nimport amanuensis.domain.Severities._\n\nimport amanuensis.domain.Story\nimport amanuensis.core.util.Failable\n\nimport amanuensis.core.neo4j._\nimport amanuensis.core.util.StringUtils\n\nimport amanuensis.domain._\n\nimport spray.httpx.SprayJsonSupport\n\nimport scala.concurrent.Future\n\n\nobject StoryActor {\n\n  /*\n   * messages to be used with this actor\n   */\n  case class Create(story: Story, login: String)  \n  case class Retrieve(storyId: String, login: String)\n  case class Update(storyId: String, story: Story, login: String)\n  case class Delete(storyId: String, login: String)\n\n  /*\n   * query-string for neo4j\n   */\n  //TODO: use one param of story-object\n  //TODO: use merge when creating stories\n  val createQueryString = \"\"\"\n    MATCH (u:User {login: {login}})\n    CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy}, modified: {modified}, modifiedBy: {modifiedBy}})<-[:canGrant]-(u)\n    WITH s\n    FOREACH (tagname IN {tags} |\n      MERGE (t:Tag {name: tagname})\n      MERGE (s)-[:is]->(t:Tag))\n    RETURN s.id\n  \"\"\"\n  \n  val retrieveStoryQueryString = \"\"\"\n    MATCH (s:Story {id: {id}}), (u:User {login: {login}})\n    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)\n    OPTIONAL MATCH (s)-[:is]->(t:Tag)\n    RETURN s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy,\n      s.modified as modified, s.modifiedBy as modifiedBy, s.due as due, s.dueTo as dueTo, collect(t.name) as tags\n  \"\"\"\n\n  val retrieveOutSlotQueryString = \"\"\"\n    MATCH (s:Story {id: {id}})-[r:Slot]->(), (u:User {login: {login}})\n    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)\n    RETURN DISTINCT r.name as name LIMIT 250\n  \"\"\"\n\n  val retrieveInSlotQueryString = \"\"\"\n    MATCH (s:Story {id: {id}})<-[r:Slot]-(), (u:User {login: {login}})\n    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u) \n    RETURN DISTINCT r.name as name LIMIT 250\n  \"\"\"\n\n  val retrieveFlagsQueryString = \"\"\"\n    MATCH (s:Story {id: {id}}), (u:User {login: {login}})\n    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)\n    OPTIONAL MATCH (s)<-[l:likes]-(u)\n    OPTIONAL MATCH (s)<-[w:canWrite|:canGrant*1..5]-(u)\n    RETURN count(w) as canWrite, count(l) as likes\n  \"\"\"\n\n  val removeStoryQueryString = \"\"\"\n    MATCH (s:Story {id: {id}}), (u:User {login: {login}})\n    WHERE (s)<-[:canWrite|:canGrant*1..5]-(u)\n    WITH s.id as id, s\n    OPTIONAL MATCH s-[r]-() \n    DELETE r,s\n    RETURN id\n  \"\"\"\n\n  val updateStoryQueryString = \"\"\"\n    MATCH (s:Story {id: {id}}), (u:User {login: {login}})\n    WHERE (s)<-[:canWrite|:canGrant*1..5]-(u)\n    OPTIONAL MATCH (s)-[r:is]->(:Tag) DELETE r\n    SET s.title={title}, s.content={content}, s.modified={modified}, s.modifiedBy={modifiedBy}, s.due={due}, s.dueTo\n    FOREACH (tagname IN {tags} |\n      MERGE (t:Tag {name: tagname})\n      MERGE (s)-[:is]->(t:Tag))\n    RETURN s.id\n  \"\"\"\n}\n\n\nobject StoryNeoProtocol extends Neo4JJsonProtocol {\n  implicit val storyNeo4JFormat = jsonCaseClassArrayFormat(Story)\n  implicit val slotNeo4JFormat = jsonCaseClassArrayFormat(Slot)\n  implicit val storyInfoNeo4JFormat = jsonCaseClassArrayFormat(StoryInfo)\n  implicit val storyIdNeo4JFormat = jsonCaseClassArrayFormat(StoryId)\n  implicit val storyAccessNeo4JFormat = jsonCaseClassArrayFormat(StoryAccess)\n  implicit val storyRightsNeo4JFormat = jsonCaseClassArrayFormat(StoryRights)\n  implicit val storyFlagsNeo4JFormat = jsonCaseClassArrayFormat(StoryFlags)\n}\n\n/**\n * Registers the users. Replies with\n */\nclass StoryActor extends Actor with ActorLogging with Failable with UsingParams with Neo4JJsonProtocol {\n\n  import StoryActor._\n  import StoryNeoProtocol._\n\n  implicit def executionContext = context.dispatcher\n  //ToDo: is this necessary?\n  implicit val system = context.system\n  def actorRefFactory = system\n\n  final val server = CypherServer.default\n\n  private val indexActor = actorRefFactory.actorSelection(\"/user/query\")\n\n	override def preStart =  {\n    log.info(s\"StoryActor started at: {}\", self.path)\n  }\n\n  def receive = {\n    case Create(story, login) => create(story, login) pipeTo sender\n    case Retrieve(storyId, login) => retrieve(storyId, login) pipeTo sender\n    case Update(storyId, story, login) => update(storyId, story, login) pipeTo sender\n    case Delete(storyId, login) => delete(storyId, login) pipeTo sender\n\n  }\n\n  def create(story: Story, login: String) = {\n\n    import QueryActor.Index\n\n    if (story.id.nonEmpty) failWith(ValidationException(Message(\"A new story must not have an id.\",`ERROR`) :: Nil))\n    story.check\n\n    val id = Neo4JId.generateId\n\n    server.execute(createQueryString, \n      (\"id\" -> id), \n      (\"title\" -> story.title), \n      (\"content\" -> story.content),\n      (\"created\" -> story.created),\n      (\"createdBy\" -> story.createdBy),\n      (\"modified\" -> story.modified),\n      (\"modifiedBy\" -> story.modifiedBy),      \n      (\"tags\" -> story.tags),\n      (\"login\" -> login)\n    ) map { nothing =>\n        indexActor ! Index(story.copy(id = Some(id)), login :: Nil)\n        StoryInfo(id, story.title, story.created, story.modified, story.due, None) \n      }\n  }\n\n  def retrieve(storyId: String, login: String) = {\n\n    for {\n      story <- server.one[Story](retrieveStoryQueryString, \n        (\"id\" -> storyId), \n        (\"login\" -> login)) map {\n          case Some(s) => s\n          case None => throw NotFoundException(Message(s\"story with id '$storyId' could not be found\",`ERROR`) :: Nil)\n        }\n      //FIXME: allow simple strings here as a result!\n      inSlots <- server.list[Slot](retrieveInSlotQueryString, \n        (\"id\" -> storyId),\n        (\"login\" -> login)) \n      outSlots <- server.list[Slot](retrieveOutSlotQueryString, \n        (\"id\" -> storyId),\n        (\"login\" -> login))\n      flags <- server.one[StoryFlags](retrieveFlagsQueryString, \n        (\"id\" -> storyId),\n        (\"login\" -> login)) map {\n          case Some(f) => f\n          case None => throw NotFoundException(Message(s\"not able to read flags for story with id '$storyId'\",`ERROR`) :: Nil)\n        }  \n    } yield StoryContext(story,inSlots,outSlots,flags)\n\n  }\n\n  def update(storyId: String, story: Story, login: String) = {\n\n    import QueryActor.UpdateIndex\n\n    if (storyId != story.id.getOrElse(\"\")) failWith(ValidationException(Message(\"You cannot save story with id $story.id at id $storyId.\",`ERROR`) :: Nil))\n    story.check()\n\n  	server.one[StoryId](updateStoryQueryString, \n      (\"id\" -> storyId),\n      (\"title\" -> story.title), \n      (\"content\" -> story.content),\n      (\"modified\" -> story.modified),\n      (\"modifiedBy\" -> story.modifiedBy),        \n      (\"tags\" -> story.tags),\n      (\"login\" -> login)\n    ) map {\n        case Some(s) => indexActor ! UpdateIndex(story)\n        case None => throw NotFoundException(Message(s\"story with id '$storyId' could not be updated\",`ERROR`) :: Nil)\n      }    \n  }\n\n  def delete(storyId: String, login: String) = {\n\n    import QueryActor.DeleteFromIndex\n\n    server.one[StoryId](removeStoryQueryString, \n      (\"id\" -> storyId),\n      (\"login\" -> login)\n    ) map {\n        case Some(s) => indexActor ! DeleteFromIndex(storyId)\n        case None => throw NotFoundException(Message(s\"story with id '$storyId' could not be deleted\",`ERROR`) :: Nil)\n      }    \n  }\n\n}",
-			"file": "src/main/scala/amanuensis/core/StoryActor.scala",
-			"file_size": 7396,
-			"file_write_time": 1398777421000000,
+			"file": "src/main/webapp/app/views/story.html",
 			"settings":
 			{
-				"buffer_size": 7418,
+				"buffer_size": 13263,
 				"line_ending": "Unix"
 			}
 		}
@@ -730,7 +721,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 449.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -747,38 +738,44 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/QueryHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/FavourActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/FavourHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JRestFormats.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/favourService.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/Gruntfile.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/quickdate.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/modals.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/tags.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/.bower.json",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/GraphHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/queryService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/query.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchDomain.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/GraphHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/GraphActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/storyService.js",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/update_damod.sh",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/init",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JRestFormats.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/neo4j/queries.cypher",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/graphService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/findpaths.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/FavourActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/FavourHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/Gruntfile.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/favourService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/Boot.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/Core.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
@@ -827,10 +824,8 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Converters.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ng-tags-input/ng-tags-input.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/tags.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/modals.css",
 		"/home/tiberius/scala/projects/amanuensis/curl/query/suggest",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/slotService.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/tags.css",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/suggest",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/node_modules/karma/node_modules/log4js/examples/example-connect-logger.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Graph.scala",
@@ -870,11 +865,7 @@
 		"/home/tiberius/scala/projects/amanuensis/curl/story/create",
 		"/home/tiberius/scala/projects/amanuensis/curl/story/update",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/index",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JId.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-loading-bar/build/loading-bar.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/buttons.css",
-		"/home/tiberius/scala/projects/amanuensis/curl/user/login",
-		"/home/tiberius/scala/projects/amanuensis/src/test/scala/amanuensis/api/UserApiSpec.scala"
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JId.scala"
 	],
 	"find":
 	{
@@ -882,9 +873,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
+			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts",
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts",
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app",
@@ -913,6 +905,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"pristine",
+			"ngModelCtrl",
+			"input",
+			"save",
+			"parse",
+			"defaultTime",
+			"setViewValue",
+			"select",
+			"defaultTime",
+			"time",
+			"dateInput",
+			"favourS",
+			"todo",
+			"due",
 			"hoverText",
 			"getDay",
 			"GraphProtocol",
@@ -1026,21 +1032,7 @@
 			"stories",
 			"StoryInfo",
 			"background",
-			"story-padding",
-			"bottom",
-			"auto",
-			"http://fonts.googleapis.com/css",
-			"http:",
-			"progressText",
-			"'{filename}'",
-			"editor.context",
-			"elem",
-			"z-index",
-			"spinner",
-			"loading",
-			"showContenView",
-			"editMode",
-			"downloadFieldName"
+			"story-padding"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1070,107 +1062,79 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 6,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/main/webapp/app/index.html",
+					"file": "src/main/scala/amanuensis/core/GraphActor.scala",
 					"settings":
 					{
-						"buffer_size": 12978,
+						"buffer_size": 3609,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6364,
-								6364
+								1589,
+								1589
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/Scala/Scala.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1183.0,
+						"translation.y": 472.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/main/webapp/app/views/story.html",
+					"file": "src/main/scala/amanuensis/api/GraphHttpService.scala",
 					"settings":
 					{
-						"buffer_size": 13419,
+						"buffer_size": 1860,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3249,
-								3249
+								1575,
+								1575
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/Scala/Scala.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 645.0,
+						"translation.y": 405.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "src/main/webapp/app/styles/quickdate.css",
+					"file": "src/main/webapp/app/scripts/services/graphService.js",
 					"settings":
 					{
-						"buffer_size": 1785,
+						"buffer_size": 535,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1754,
-								1754
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 767.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/main/webapp/app/scripts/app.js",
-					"settings":
-					{
-						"buffer_size": 7253,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6624,
-								6624
+								535,
+								535
 							]
 						],
 						"settings":
@@ -1180,25 +1144,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2043.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "src/main/webapp/app/views/query.html",
 					"settings":
 					{
-						"buffer_size": 5010,
+						"buffer_size": 4960,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								4277,
+								4277
 							]
 						],
 						"settings":
@@ -1208,45 +1172,73 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 284.0,
+						"translation.y": 810.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "src/main/webapp/.tmp/styles/modals.css",
+					"buffer": 4,
+					"file": "src/main/webapp/app/scripts/controllers/query.js",
 					"settings":
 					{
-						"buffer_size": 2998,
+						"buffer_size": 3471,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								913,
+								913
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 396.0,
+						"translation.y": 62.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/main/webapp/app/scripts/services/queryService.js",
+					"settings":
+					{
+						"buffer_size": 1083,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								496,
+								496
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 180.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 6,
-					"file": "src/main/webapp/app/styles/tags.css",
+					"file": "src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js",
 					"settings":
 					{
-						"buffer_size": 2402,
+						"buffer_size": 14505,
 						"regions":
 						{
 						},
@@ -1259,124 +1251,128 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 4,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1303.0,
+						"translation.y": 821.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js",
+					"file": "src/main/webapp/app/scripts/controllers/story.js",
 					"settings":
 					{
-						"buffer_size": 14791,
+						"buffer_size": 22209,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12856,
-								12856
+								7699,
+								7699
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 88.0,
-						"translation.y": 4461.0,
+						"translation.x": 0.0,
+						"translation.y": 2451.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 8,
-					"file": "src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.css",
 					"settings":
 					{
-						"buffer_size": 1566,
+						"buffer_size": 2079,
 						"regions":
 						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										385,
+										393
+									],
+									[
+										722,
+										730
+									],
+									[
+										1075,
+										1083
+									],
+									[
+										1508,
+										1516
+									],
+									[
+										1895,
+										1903
+									]
+								],
+								"scope": ""
+							}
 						},
 						"selection":
 						[
 							[
-								1435,
-								1435
+								1894,
+								1894
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"detect_indentation": false,
+							"output_tag": 2,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 748.0,
+						"translation.y": 60.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 9,
-					"file": "src/main/scala/amanuensis/api/StoryHttpService.scala",
+					"file": "src/main/webapp/app/views/story.html",
 					"settings":
 					{
-						"buffer_size": 4863,
+						"buffer_size": 13263,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1676,
-								1676
+								3635,
+								3635
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 645.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "src/main/scala/amanuensis/core/StoryActor.scala",
-					"settings":
-					{
-						"buffer_size": 7418,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2917,
-								2917
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 838.0,
+						"translation.y": 630.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1425,11 +1421,11 @@
 	},
 	"output.sbt":
 	{
-		"height": 271.0
+		"height": 350.0
 	},
 	"output.sbt_error":
 	{
-		"height": 180.0
+		"height": 183.0
 	},
 	"replace":
 	{
@@ -1442,8 +1438,84 @@
 		"selected_items":
 		[
 			[
+				"story.html",
+				"src/main/webapp/app/views/story.html"
+			],
+			[
+				"story.js",
+				"src/main/webapp/app/scripts/controllers/story.js"
+			],
+			[
+				"ngqui",
+				"src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js"
+			],
+			[
+				"querys",
+				"src/main/webapp/app/scripts/services/queryService.js"
+			],
+			[
+				"query.js",
+				"src/main/webapp/app/scripts/controllers/query.js"
+			],
+			[
+				"query.html",
+				"src/main/webapp/app/views/query.html"
+			],
+			[
+				"graphse",
+				"src/main/webapp/app/scripts/services/graphService.js"
+			],
+			[
+				"graphh",
+				"src/main/scala/amanuensis/api/GraphHttpService.scala"
+			],
+			[
+				"graph",
+				"src/main/scala/amanuensis/core/GraphActor.scala"
+			],
+			[
+				"favourhtr",
+				"src/main/scala/amanuensis/api/FavourHttpService.scala"
+			],
+			[
+				"gruntfile",
+				"src/main/webapp/Gruntfile.js"
+			],
+			[
+				"ng-qu",
+				"src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js"
+			],
+			[
 				"storyac",
 				"src/main/scala/amanuensis/core/StoryActor.scala"
+			],
+			[
+				"story",
+				"src/main/webapp/app/scripts/controllers/story.js"
+			],
+			[
+				"favour",
+				"src/main/scala/amanuensis/api/FavourHttpService.scala"
+			],
+			[
+				"queryac",
+				"src/main/scala/amanuensis/core/QueryActor.scala"
+			],
+			[
+				"queryhttp",
+				"src/main/scala/amanuensis/api/QueryHttpService.scala"
+			],
+			[
+				"storyhttp",
+				"src/main/scala/amanuensis/api/StoryHttpService.scala"
+			],
+			[
+				"graphhttp",
+				"src/main/scala/amanuensis/api/GraphHttpService.scala"
+			],
+			[
+				"slotactor",
+				"src/main/scala/amanuensis/core/SlotActor.scala"
 			],
 			[
 				"storyhttps",
@@ -1458,16 +1530,8 @@
 				"src/main/webapp/.tmp/styles/modals.css"
 			],
 			[
-				"query.html",
-				"src/main/webapp/app/views/query.html"
-			],
-			[
 				"app.",
 				"src/main/webapp/app/scripts/app.js"
-			],
-			[
-				"story.html",
-				"src/main/webapp/app/views/story.html"
 			],
 			[
 				"index",
@@ -1498,20 +1562,8 @@
 				"src/main/scala/amanuensis/core/elasticsearch/ElasticSearchDomain.scala"
 			],
 			[
-				"querys",
-				"src/main/webapp/app/scripts/services/queryService.js"
-			],
-			[
-				"query.js",
-				"src/main/webapp/app/scripts/controllers/query.js"
-			],
-			[
 				"elas",
 				"src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala"
-			],
-			[
-				"queryhttp",
-				"src/main/scala/amanuensis/api/QueryHttpService.scala"
 			],
 			[
 				"querya",
@@ -1528,18 +1580,6 @@
 			[
 				"cab.js",
 				"src/main/webapp/app/scripts/controllers/cab.js"
-			],
-			[
-				"story",
-				"src/main/scala/amanuensis/domain/Story.scala"
-			],
-			[
-				"storyhttp",
-				"src/main/scala/amanuensis/api/StoryHttpService.scala"
-			],
-			[
-				"story.js",
-				"src/main/webapp/app/scripts/controllers/story.js"
 			],
 			[
 				"elastics",
@@ -1560,14 +1600,6 @@
 			[
 				"findpa",
 				"src/main/webapp/app/views/findpaths.html"
-			],
-			[
-				"graph",
-				"src/main/scala/amanuensis/core/GraphActor.scala"
-			],
-			[
-				"queryac",
-				"src/main/scala/amanuensis/core/QueryActor.scala"
 			],
 			[
 				"index.html",
@@ -1644,10 +1676,6 @@
 			[
 				"storya",
 				"src/main/scala/amanuensis/core/StoryActor.scala"
-			],
-			[
-				"slotactor",
-				"src/main/scala/amanuensis/core/SlotActor.scala"
 			],
 			[
 				"misc",
@@ -1882,10 +1910,6 @@
 				"src/main/webapp/app/views/query.html"
 			],
 			[
-				"graphh",
-				"src/main/scala/amanuensis/api/GraphHttpService.scala"
-			],
-			[
 				"main.cs",
 				"src/main/webapp/app/styles/main.css"
 			],
@@ -1924,34 +1948,6 @@
 			[
 				"utilser",
 				"src/main/webapp/app/scripts/services/utilService.js"
-			],
-			[
-				"indexactor",
-				"src/main/webapp/node_modules/karma/node_modules/log4js/examples/example-connect-logger.js"
-			],
-			[
-				"modals.",
-				"src/main/webapp/app/styles/modals.css"
-			],
-			[
-				"util",
-				"src/main/webapp/app/scripts/services/utilService.js"
-			],
-			[
-				"story.j",
-				"src/main/webapp/app/scripts/controllers/story.js"
-			],
-			[
-				"graph.js",
-				"src/main/webapp/app/scripts/controllers/graph.js"
-			],
-			[
-				"graphser",
-				"src/main/webapp/app/scripts/services/graphService.js"
-			],
-			[
-				"login.",
-				"src/main/webapp/app/scripts/controllers/login.js"
 			]
 		],
 		"width": 0.0
