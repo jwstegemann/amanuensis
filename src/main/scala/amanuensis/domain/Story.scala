@@ -27,7 +27,9 @@ case class StoryContext(story: Story, inSlots: Seq[Slot], outSlots: Seq[Slot], f
 
 case class StoryId(id: String)
 
-case class StoryFlags(canWrite: Int, likes: Int)
+case class StoryUpdateResult(id: String, updated: Int)
+
+case class StoryFlags(canWrite: Int, stars: Int)
 
 case class StoryIndex(id : Option[String], title : String, content : String, created: String, createdBy: String, 
   modified: String, modifiedBy: String,
@@ -50,4 +52,5 @@ object StoryProtocol extends DefaultJsonProtocol {
   implicit val storyRightsJsonFormat = jsonFormat1(StoryRights.apply)  
   implicit val storyFlagsJsonFormat = jsonFormat2(StoryFlags.apply)    
   implicit val storyContextJsonFormat = jsonFormat4(StoryContext.apply)
+  implicit val storyUpdateResultJsonFormat = jsonFormat2(StoryUpdateResult.apply)
 }

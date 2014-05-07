@@ -34,7 +34,7 @@ object GraphActor {
   """
 
   val favouritesQueryString = """
-    MATCH (u:User {login: {login}})-[:likes]->(s:Story)
+    MATCH (u:User {login: {login}})-[:stars]->(s:Story)
       WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     RETURN s.id, s.title, s.content, s.created, s.createdBy, s.modified, s.modifiedBy, null, [] 
     ORDER BY s.modified DESC SKIP {skip} LIMIT 25

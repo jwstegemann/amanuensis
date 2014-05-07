@@ -571,7 +571,7 @@
 			"file": "src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js",
 			"settings":
 			{
-				"buffer_size": 14505,
+				"buffer_size": 14533,
 				"line_ending": "Unix"
 			}
 		},
@@ -579,7 +579,7 @@
 			"file": "src/main/webapp/app/scripts/controllers/story.js",
 			"settings":
 			{
-				"buffer_size": 22209,
+				"buffer_size": 22406,
 				"line_ending": "Unix"
 			}
 		},
@@ -597,7 +597,39 @@
 			"file": "src/main/webapp/app/views/story.html",
 			"settings":
 			{
-				"buffer_size": 13263,
+				"buffer_size": 13391,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/bower_components/ng-tags-input/ng-tags-input.js",
+			"settings":
+			{
+				"buffer_size": 23940,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/bower_components/ng-tags-input/bower.json",
+			"settings":
+			{
+				"buffer_size": 313,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/index.html",
+			"settings":
+			{
+				"buffer_size": 12974,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/scripts/directives/misc.js",
+			"settings":
+			{
+				"buffer_size": 9497,
 				"line_ending": "Unix"
 			}
 		}
@@ -721,7 +753,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 575.0
+		"width": 467.0
 	},
 	"console":
 	{
@@ -738,6 +770,7 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/QueryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
@@ -752,7 +785,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/Gruntfile.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/quickdate.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
@@ -873,7 +905,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts",
@@ -905,6 +937,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"setPris",
+			"tabindex=\"0\"",
+			"tabindex='0'",
+			"tryAdd",
+			"changed",
+			"tag-added",
+			"ng-tags-input",
+			"ngModelCtrl",
+			"form",
 			"pristine",
 			"ngModelCtrl",
 			"input",
@@ -1023,16 +1064,7 @@
 			"$location.url",
 			"this",
 			"InternalServerErrorException",
-			"cursor",
-			"class",
-			"Timeout",
-			"height",
-			"retrieveQue",
-			"selectSlot",
-			"stories",
-			"StoryInfo",
-			"background",
-			"story-padding"
+			"cursor"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1040,6 +1072,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"tabindex=\"-1\"",
+			"tabindex='-1'",
 			"\\n",
 			"remove(storyInfo",
 			"selectboxremove(storyInfo,$event)",
@@ -1062,7 +1096,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 10,
 			"sheets":
 			[
 				{
@@ -1238,15 +1272,15 @@
 					"file": "src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js",
 					"settings":
 					{
-						"buffer_size": 14505,
+						"buffer_size": 14533,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2301,
-								2301
+								12805,
+								12805
 							]
 						],
 						"settings":
@@ -1255,8 +1289,8 @@
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 821.0,
+						"translation.x": 2063.0,
+						"translation.y": 4486.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1266,15 +1300,15 @@
 					"file": "src/main/webapp/app/scripts/controllers/story.js",
 					"settings":
 					{
-						"buffer_size": 22209,
+						"buffer_size": 22406,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7699,
-								7699
+								2857,
+								2857
 							]
 						],
 						"settings":
@@ -1284,7 +1318,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2451.0,
+						"translation.y": 456.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1354,20 +1388,132 @@
 					"file": "src/main/webapp/app/views/story.html",
 					"settings":
 					{
-						"buffer_size": 13263,
+						"buffer_size": 13391,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3635,
-								3635
+								5405,
+								5405
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 720.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/main/webapp/app/bower_components/ng-tags-input/ng-tags-input.js",
+					"settings":
+					{
+						"buffer_size": 23940,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9358,
+								9358
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3381.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "src/main/webapp/app/bower_components/ng-tags-input/bower.json",
+					"settings":
+					{
+						"buffer_size": 313,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								199,
+								199
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "src/main/webapp/app/index.html",
+					"settings":
+					{
+						"buffer_size": 12974,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12640,
+								12640
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2952.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "src/main/webapp/app/scripts/directives/misc.js",
+					"settings":
+					{
+						"buffer_size": 9497,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1671,
+								1671
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -1437,6 +1583,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"index",
+				"src/main/webapp/app/index.html"
+			],
 			[
 				"story.html",
 				"src/main/webapp/app/views/story.html"
@@ -1532,10 +1682,6 @@
 			[
 				"app.",
 				"src/main/webapp/app/scripts/app.js"
-			],
-			[
-				"index",
-				"src/main/webapp/app/index.html"
 			],
 			[
 				"inde",

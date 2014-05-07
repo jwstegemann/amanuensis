@@ -57,7 +57,7 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
                   modified = DateTime.now.toString,
                   modifiedBy = userContext.login                
                 )
-                complete((storyActor ? Update(storyId, storyWithMeta, userContext.login)) map { value => StatusCodes.OK })
+                complete((storyActor ? Update(storyId, storyWithMeta, story.modified, userContext.login)) map { value => StatusCodes.OK })
               }
             }
           } ~

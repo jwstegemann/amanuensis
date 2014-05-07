@@ -55,12 +55,12 @@ angular.module('amanuensisApp')
         $scope.$broadcast('shareStory');   
     }
 
-    $scope.likeStory = function() {
-        $scope.$broadcast('likeStory'); 
+    $scope.starStory = function() {
+        $scope.$broadcast('starStory'); 
     }
 
-    $scope.unlikeStory = function() {
-        $scope.$broadcast('unlikeStory');   
+    $scope.unstarStory = function() {
+        $scope.$broadcast('unstarStory');   
     }
 
     $scope.getUserContext = function() {

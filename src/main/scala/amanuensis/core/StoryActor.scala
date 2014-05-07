@@ -28,7 +28,7 @@ object StoryActor {
    */
   case class Create(story: Story, login: String)  
   case class Retrieve(storyId: String, login: String)
-  case class Update(storyId: String, story: Story, login: String)
+  case class Update(storyId: String, story: Story, verson: String, login: String)
   case class Delete(storyId: String, login: String)
 
   /*
@@ -70,9 +70,9 @@ object StoryActor {
   val retrieveFlagsQueryString = """
     MATCH (s:Story {id: {id}}), (u:User {login: {login}})
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
-    OPTIONAL MATCH (s)<-[l:likes]-(u)
+    OPTIONAL MATCH (s)<-[l:stars]-(u)
     OPTIONAL MATCH (s)<-[w:canWrite|:canGrant*1..5]-(u)
-    RETURN count(w) as canWrite, count(l) as likes
+    RETURN count(w) as canWrite, count(l) as stars
   """
 
   val removeStoryQueryString = """
@@ -86,13 +86,22 @@ object StoryActor {
 
   val updateStoryQueryString = """
     MATCH (s:Story {id: {id}}), (u:User {login: {login}})
-    WHERE (s)<-[:canWrite|:canGrant*1..5]-(u)
-    OPTIONAL MATCH (s)-[r:is]->(:Tag) DELETE r
-    SET s.title={title}, s.content={content}, s.modified={modified}, s.modifiedBy={modifiedBy}
-    FOREACH (tagname IN {tags} |
-      MERGE (t:Tag {name: tagname})
-      MERGE (s)-[:is]->(t:Tag))
-    RETURN s.id
+      WHERE (s)<-[:canWrite|:canGrant*1..5]-(u)
+    OPTIONAL MATCH(s)-[r:is]->(:Tag)
+    WITH s, collect(r) as oldTags
+    OPTIONAL MATCH (m) WHERE s=m AND s.modified={version}
+    WITH s.id as id, oldTags, collect(m) as updates
+    FOREACH(x in updates |
+      SET x.title={title}, x.content={content}, x.modified={modified}, x.modifiedBy={modifiedBy}
+      FOREACH (oldTag IN oldTags |
+      DELETE oldTag
+      )
+      FOREACH (tagname IN {tags} |
+        MERGE (t:Tag {name: tagname})
+        MERGE (x)-[:is]->(t:Tag)
+      )
+    )
+    RETURN id, length(updates)
   """
 }
 
@@ -105,6 +114,8 @@ object StoryNeoProtocol extends Neo4JJsonProtocol {
   implicit val storyAccessNeo4JFormat = jsonCaseClassArrayFormat(StoryAccess)
   implicit val storyRightsNeo4JFormat = jsonCaseClassArrayFormat(StoryRights)
   implicit val storyFlagsNeo4JFormat = jsonCaseClassArrayFormat(StoryFlags)
+  implicit val storyUpdateResultNeo4JFormat = jsonCaseClassArrayFormat(StoryUpdateResult)
+  
 }
 
 /**
@@ -131,7 +142,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
   def receive = {
     case Create(story, login) => create(story, login) pipeTo sender
     case Retrieve(storyId, login) => retrieve(storyId, login) pipeTo sender
-    case Update(storyId, story, login) => update(storyId, story, login) pipeTo sender
+    case Update(storyId, story, version, login) => update(storyId, story, version, login) pipeTo sender
     case Delete(storyId, login) => delete(storyId, login) pipeTo sender
 
   }
@@ -187,23 +198,31 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
 
   }
 
-  def update(storyId: String, story: Story, login: String) = {
+  def update(storyId: String, story: Story, version: String, login: String) = {
 
     import QueryActor.UpdateIndex
 
     if (storyId != story.id.getOrElse("")) failWith(ValidationException(Message("You cannot save story with id $story.id at id $storyId.",`ERROR`) :: Nil))
     story.check()
 
-  	server.one[StoryId](updateStoryQueryString, 
+  	server.one[StoryUpdateResult](updateStoryQueryString, 
       ("id" -> storyId),
       ("title" -> story.title), 
       ("content" -> story.content),
       ("modified" -> story.modified),
       ("modifiedBy" -> story.modifiedBy),        
       ("tags" -> story.tags),
+      ("version" -> version),
       ("login" -> login)
     ) map {
-        case Some(s) => indexActor ! UpdateIndex(story)
+        case Some(s) => {
+          if (s.updated == 1) {
+            indexActor ! UpdateIndex(story)  
+          }
+          else {
+            throw OptimisticLockException(Message(s"story with id '$storyId' could not be updated",`ERROR`) :: Nil)  
+          }
+        }
         case None => throw NotFoundException(Message(s"story with id '$storyId' could not be updated",`ERROR`) :: Nil)
       }    
   }

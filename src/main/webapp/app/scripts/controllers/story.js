@@ -48,6 +48,9 @@ angular.module('amanuensisApp')
                 }
 
                 $scope.storyForm.$setPristine();
+            }, function(errorData) {
+                // goto query-page when it is not possible to load the story!
+                $location.url('/query').replace();                
             });
         } 
         else {
@@ -77,7 +80,7 @@ angular.module('amanuensisApp')
 
             $rootScope.storyFlags = {
                 canWrite: 1, 
-                likes: 0, 
+                stars: 0, 
                 saved: 0
             };
 
@@ -164,28 +167,28 @@ angular.module('amanuensisApp')
     }
 
     /*
-     * Like & Unlike Stories
+     * Star & Unstar Stories
      */
-    $scope.$on('likeStory', function() {
+    $scope.$on('starStory', function() {
         if (angular.isUndefined($scope.context.story.id)) {
-            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot like an unsaved story.'});
+            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot star an unsaved story.'});
         }      
         else {  
-        favourService.like({storyId: $scope.context.story.id}, null, function(successData) {
-                growl.addSuccessMessage('You do like ' + $scope.context.story.title + ', now.');
-                $rootScope.storyFlags.likes = 1;
+        favourService.star({storyId: $scope.context.story.id}, null, function(successData) {
+                growl.addSuccessMessage('You just starred ' + $scope.context.story.title);
+                $rootScope.storyFlags.stars = 1;
             });
         }
     });
 
-    $scope.$on('unlikeStory', function() {
+    $scope.$on('unstarStory', function() {
         if (angular.isUndefined($scope.context.story.id)) {
-            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot unlike an unsaved story.'});
+            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot unstar an unsaved story.'});
         }      
         else {  
-        favourService.unlike({storyId: $scope.context.story.id}, null, function(successData) {
-                growl.addSuccessMessage('You do not like ' + $scope.context.story.title + ' anymore.');
-                $rootScope.storyFlags.likes = 0;
+        favourService.unstar({storyId: $scope.context.story.id}, null, function(successData) {
+                growl.addSuccessMessage('You have removed your star from ' + $scope.context.story.title);
+                $rootScope.storyFlags.stars = 0;
             });
         }
     });

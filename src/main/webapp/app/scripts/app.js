@@ -141,6 +141,10 @@ angular.module('amanuensisApp', [
               console.log("NotFound-Error communicating with the backend: " + angular.toJson(rejection));
               $rootScope.$broadcast('error',{errorMessage: 'I am sorry, but you are not allowed to do this.'});
             }
+            else if (rejection.status === 423) {
+              console.log("OptimisticLock-Info communicating with the backend: " + angular.toJson(rejection));
+              $rootScope.$broadcast('error',{errorMessage: 'I am sorry, but somebody else has edited this object since your last update. Please reload the story.'});
+            }
             else if (rejection.status === 412) {
               console.log("Validation-Error communicating with the backend: " + angular.toJson(rejection));
               $rootScope.$broadcast('error',{errorMessage: rejection.data[0].text});

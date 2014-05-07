@@ -117,7 +117,7 @@ module.exports = function (grunt) {
         changeOrigin: false
       },
       {
-        context: '/like',
+        context: '/star',
         host: 'localhost',
         port: 8080,
         https: false,

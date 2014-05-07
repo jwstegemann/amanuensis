@@ -4,11 +4,11 @@ angular.module('amanuensisApp')
   .factory('favourService', function ($resource) {
 
     // Public API here
-    return $resource('/like/:storyId', {}, {
-      like: {
+    return $resource('/star/:storyId', {}, {
+      star: {
         method: 'POST'
       },
-      unlike: {
+      unstar: {
         method: 'DELETE'
       },
       due: {

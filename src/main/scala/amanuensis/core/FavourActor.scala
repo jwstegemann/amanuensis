@@ -26,25 +26,25 @@ object FavourActor {
   /*
    * messages to be used with this actor
    */
-  case class Like(storyId: String, login: String)
-  case class Unlike(storyId: String, login: String)
+  case class Star(storyId: String, login: String)
+  case class Unstar(storyId: String, login: String)
   case class Due(storyId: String, date: String, login: String)
   case class Undue(storyId: String, login: String)  
 
   /*
    * query-string for neo4j
    */
-  val likeQueryString = """
+  val starQueryString = """
     MATCH (s:Story {id: {id}}), (u:User {login: {login}})
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
-    MERGE (s)<-[:likes]-(u)
+    MERGE (s)<-[:stars]-(u)
     RETURN s.id
   """
   
-  val unlikeQueryString = """
+  val unstarQueryString = """
     MATCH (s:Story {id: {id}}), (u:User {login: {login}})
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
-    MATCH (s)<-[l:likes]-(u)
+    MATCH (s)<-[l:stars]-(u)
     DELETE l
     RETURN s.id
   """
@@ -86,31 +86,31 @@ class FavourActor extends Actor with ActorLogging with Failable with UsingParams
   }
 
   def receive = {
-    case Like(storyId, login) => like(storyId, login) pipeTo sender
-    case Unlike(storyId, login) => unlike(storyId, login) pipeTo sender
+    case Star(storyId, login) => star(storyId, login) pipeTo sender
+    case Unstar(storyId, login) => unstar(storyId, login) pipeTo sender
     case Due(storyId, date, login) => due(storyId, date, login) pipeTo sender
     case Undue(storyId, login) => undue(storyId, login) pipeTo sender
   }
 
-  def like(storyId: String, login: String) = {
+  def star(storyId: String, login: String) = {
 
-  	server.one[StoryId](likeQueryString, 
+  	server.one[StoryId](starQueryString, 
       ("id" -> storyId),
       ("login" -> login)
     ) map {
         case Some(s) => s
-        case None => throw NotFoundException(Message(s"story with id '$storyId' could not be liked",`ERROR`) :: Nil)
+        case None => throw NotFoundException(Message(s"story with id '$storyId' could not be starred",`ERROR`) :: Nil)
       }    
   }
 
-  def unlike(storyId: String, login: String) = {
+  def unstar(storyId: String, login: String) = {
 
-    server.one[StoryId](unlikeQueryString, 
+    server.one[StoryId](unstarQueryString, 
       ("id" -> storyId),
       ("login" -> login)
     ) map {
         case Some(s) => s
-        case None => throw NotFoundException(Message(s"story with id '$storyId' could not be unliked",`ERROR`) :: Nil)
+        case None => throw NotFoundException(Message(s"story with id '$storyId' could not be unstarred",`ERROR`) :: Nil)
       }    
   }
 

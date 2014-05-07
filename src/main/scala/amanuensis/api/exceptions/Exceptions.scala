@@ -34,6 +34,9 @@ case class NotFoundException(val messages: List[Message]) extends Exception
 
 case class ValidationException(val messages: List[Message]) extends Exception
 
+case class OptimisticLockException(val messages: List[Message]) extends Exception
+
+
 trait AmanuensisExceptionHandler { this: Actor with ActorLogging with HttpService with SprayJsonSupport =>
 
   implicit val amanuensisExceptionHandler = ExceptionHandler {
@@ -42,6 +45,7 @@ trait AmanuensisExceptionHandler { this: Actor with ActorLogging with HttpServic
         complete(InternalServerError, messages)
       }
       case NotFoundException(message) => complete(NotFound, message)
+      case OptimisticLockException(message) => complete(Locked, message)
       case ValidationException(messages) => complete(PreconditionFailed, messages)
       case Neo4JException(message) => {
         log.error(s"Neo4J-error: $message")

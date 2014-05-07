@@ -35,15 +35,15 @@ trait FavourHttpService extends HttpService with SprayJsonSupport {
 
 
   def favourRoute(userContext: UserContext) =
-    path("like" / Segment) { storyId: String =>
+    path("star" / Segment) { storyId: String =>
       post {
         dynamic {
-          complete((favourActor ? Like(storyId, userContext.login)) map { value => StatusCodes.OK })
+          complete((favourActor ? Star(storyId, userContext.login)) map { value => StatusCodes.OK })
         }
       } ~
       delete {
         dynamic {
-          complete((favourActor ? Unlike(storyId, userContext.login)) map { value => StatusCodes.OK })
+          complete((favourActor ? Unstar(storyId, userContext.login)) map { value => StatusCodes.OK })
         }
       }
     } ~ 
