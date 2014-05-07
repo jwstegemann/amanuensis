@@ -76,11 +76,9 @@
             </tags-input>
         </div>
 				<div id="story-content" class="content" scrollbar fill-vertical margin='0'>
-				  <textarea name="content" ng-show="editMode" id="story-content-editor" 
-            class="story-content" ng-model="context.story.content" 
-            placeholder="... that still has to be written." 
-            uploadable fill-vertical margin='20'>
-          </textarea>
+				  <markdown-editor name="content" ng-show="editMode" textarea-id="story-content-editor" 
+            textarea-class="story-content" ng-model="context.story.content">
+          </markdown-editor>
           <div id="story-view" ng-hide="editMode" ng-dblclick="showContentEditor()" class="story-view" markdown>
             &nbsp;
           </div>

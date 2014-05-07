@@ -127,6 +127,12 @@ angular.module('amanuensisApp')
         $scope.$broadcast('addAttachment');
     }
 
+    $scope.controlText = function(signal, event) {
+        event.stopPropagation();
+        event.preventDefault();
+        $scope.$broadcast('markdown_' + signal);
+    }
+
     $scope.goHome = function() {
         $location.url('/query');
     }

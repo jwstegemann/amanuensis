@@ -55,6 +55,12 @@
     font-weight: bold;
 }
 
+.cab-main > li > div {
+    padding: 0 15px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
 .cab-main > li > a.text {
     font-weight: normal;
     margin-top: -0.2em;
