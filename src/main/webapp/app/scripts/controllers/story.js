@@ -105,7 +105,7 @@ angular.module('amanuensisApp')
             angular.isUndefined($scope.context.story.content) ||
             $scope.context.story.content.length < 3
         ) {
-            $rootScope.$broadcast('error',{errorMessage: 'Sorry, but you story must have a title and a content. Please enter one...'});
+            $rootScope.$broadcast('error',{errorMessage: 'Sorry, but your story must have a title and a content. Please enter one...'});
         }
         else {
             // save existing story

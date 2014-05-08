@@ -179,7 +179,7 @@ angular.module('amanuensisApp')
 
           formData.append('file', file, filename);
 
-          $http.post('/attachment/' + scope.$parent.context.story.id, formData, {
+          $http.post('/attachment/' + scope.$parent.$parent.context.story.id, formData, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
           }).success(function(data) {
@@ -213,6 +213,11 @@ angular.module('amanuensisApp')
             .replace(/^(\n*)/, "");
         }
 
+        function insertAtCaret(previous, appended) {
+          var position = elem[0].selectionStart;
+          return previous.substr(0,position) + '\n\n' + appended + '\n' + previous.substr(position);
+        }
+
         function isAnImage(contentType) {
           if (contentType === 'image/jpeg'
             || contentType === 'image/png'
@@ -228,11 +233,12 @@ angular.module('amanuensisApp')
 
         scope.insertProgressText = function(isImage) {
               lastValue = '[Uploading file...]()'
-              scope.ngModel = appendInItsOwnLine(scope.ngModel, imagePrefix(isImage) + lastValue);
+              //scope.ngModel = appendInItsOwnLine(scope.ngModel, imagePrefix(isImage) + lastValue);
+              scope.ngModel = insertAtCaret(scope.ngModel, imagePrefix(isImage) + lastValue);
         }
 
         scope.isUploadPossible = function() {
-          if (angular.isDefined(scope.$parent.context.story.id) && scope.$parent.context.story.id !== "") {
+          if (angular.isDefined(scope.$parent.$parent.context.story.id) && scope.$parent.$parent.context.story.id !== "") {
             return true;
           }
           else {
