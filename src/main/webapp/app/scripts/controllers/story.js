@@ -424,7 +424,8 @@ angular.module('amanuensisApp')
      * Preview and Editor
      */
 
-    $scope.showContentEditor = function() {
+//    $scope.showContentEditor = function() {
+    $scope.$on('startEditing', function() {
         if ($scope.context.flags.canWrite && !$rootScope.selectMode && !$rootScope.targetMode) {
             $rootScope.editMode = true;
 
@@ -433,7 +434,7 @@ angular.module('amanuensisApp')
                 updateScrollbar();
             }, 200);        
         }
-    }
+    });
 
     $scope.$on('doneEditing', function() {
         $scope.$broadcast('updateView', {

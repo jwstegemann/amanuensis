@@ -89,6 +89,10 @@ angular.module('amanuensisApp')
         }
     }
 
+    $scope.startEditing = function() {
+        $scope.$broadcast('startEditing');        
+    }  
+
     $scope.doneEditing = function() {
         $scope.$broadcast('doneEditing');        
     }    

@@ -62,6 +62,7 @@
       <li ng-click="goHome()"><a title="return to your workplace"><i class="fa fa-home fa-fw fa-2x on-cab"></i></a></li>
 
       <li ng-show="appState < 128 && editMode" ng-click="doneEditing()"><a title="return to view mode"><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
+      <li ng-show="appState < 128 && !editMode && storyFlags.canWrite" ng-click="startEditing()"><a title="return to view mode"><i class="fa fa-pencil fa-fw fa-2x on-cab"></i></a>></li>
 
       <!-- selecting a story for slot-->
       <li ng-show="selectMode" ng-click="select()"><a title="add this story to the slot"><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
@@ -95,7 +96,7 @@
 
       <li ng-show="appState < 128 && editMode" ng-click="controlText('bold',$event)"><a title="make text bold"><i class="fa fa-bold fa-fw fa-2x on-cab"></i></a></li>
       <li ng-show="appState < 128 && editMode" ng-click="controlText('italic',$event)"><a title="make text italic"><i class="fa fa-italic fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && editMode" ng-click="controlText('link',$event)"><a title="make text a link"><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>      
+      <li ng-show="appState < 128 && editMode" ng-click="controlText('link',$event)"><a title="make text a link"><i class="fa fa-external-link fa-fw fa-2x on-cab"></i></a></li>      
       <li ng-show="appState < 128 && editMode" ng-click="controlText('header',$event)"><a title="make current line a header"><i class="fa fa-text-height fa-fw fa-2x on-cab"></i></a></li>
       <li ng-show="appState < 128 && editMode" ng-click="controlText('list-ul',$event)"><a title="make line a list"><i class="fa fa-list-ul fa-fw fa-2x on-cab"></i></a></li>  
 
