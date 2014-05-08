@@ -29,7 +29,7 @@ angular.module('amanuensisApp')
         $scope.title = "My ToDos";
       }
       else if (method === queryService.favourites) {
-        $scope.title = "My Favourites";
+        $scope.title = "My Starred Stories";
       }      
 
       $scope.lastMethod = method;

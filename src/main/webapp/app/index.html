@@ -89,8 +89,8 @@
       <li ng-show="appState === 4 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="addStory()"><a title="add an existing story to the actual open slot"><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
       <!-- share a story -->
       <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode" ng-click="shareStory()"><a title="share a story with other users"><i class="fa fa-random fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && !storyFlags.stars && storyFlags.saved" ng-click="starStory()"><a title="add this story to your favourites"><i class="fa fa-star-o fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.stars && storyFlags.saved" ng-click="unstarStory()"><a title="remove this story from your favourites"><i class="fa fa-star fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && !storyFlags.stars && storyFlags.saved" ng-click="starStory()"><a title="star this story"><i class="fa fa-star-o fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.stars && storyFlags.saved" ng-click="unstarStory()"><a title="unstar this story"><i class="fa fa-star fa-fw fa-2x on-cab"></i></a></li>
       <li ng-show="appState < 128 && storyFlags.saved" ng-click="reloadStory()"><a title="reload this story"><i class="fa fa-refresh fa-fw fa-2x on-cab"></i></a></li>
       <li ng-show="appState < 128 && editMode && storyFlags.saved" ng-click="addAttachment()"><a title="upload an attachment to this story"><i class="fa fa-paperclip fa-fw fa-2x on-cab"></i></a></li>
 

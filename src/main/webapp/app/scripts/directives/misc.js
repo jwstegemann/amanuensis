@@ -298,6 +298,9 @@ angular.module('amanuensisApp')
               }
             }
 
+            this.value = '';
+            this.files = [];
+
           });          
 
           attachmentInput.click();
