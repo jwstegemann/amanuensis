@@ -84,7 +84,9 @@ angular.module('amanuensisApp')
                 saved: 0
             };
 
-            $scope.storyForm.$setPristine();
+            if (angular.isDefined($scope.storyForm)) {
+                $scope.storyForm.$setPristine();
+            }
         }
 
         $scope.storyFilter = {};
