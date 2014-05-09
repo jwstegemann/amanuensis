@@ -40,7 +40,7 @@ angular.module('amanuensisApp')
 
             }
 
-            function prependMarkdownLine(format) {
+            function prependMarkdownLine(formatFunction) {
                 $scope.textarea = $element.find('textarea')[0];
 
                 var selectionStart = $scope.textarea.selectionStart;
@@ -48,12 +48,11 @@ angular.module('amanuensisApp')
                 var lines = $scope.value.split("\n");
 
                 var lineNumber = $scope.value.substr(0,$scope.textarea.selectionStart).split("\n").length - 1;
-                var currentLine = lines[lineNumber];  
 
                 var pre = lines.slice(0,lineNumber).join('\n');
-                var post = lines.slice(lineNumber).join('\n');
+                var post = lines.slice(lineNumber + 1).join('\n');
 
-                $scope.value = pre + '\n' + format + post;
+                $scope.value = pre + '\n' + formatFunction(lines[lineNumber]) + '\n' + post;
 
                 $timeout(function() {
                     $scope.textarea.setSelectionRange(selectionStart, selectionStart);
@@ -73,11 +72,31 @@ angular.module('amanuensisApp')
             });
 
             $scope.$on('markdown_header', function() {
-                prependMarkdownLine('#');
+                prependMarkdownLine(function(line) {
+                    var startHashes = 0;
+                    while (line.charAt(startHashes) === '#') {
+                        startHashes++;
+                    }
+
+                    if (startHashes < 4) {
+                        return '#' + line;
+                    }
+                    else {
+                        return line.substr(startHashes);
+                    }
+
+                });
             });
 
             $scope.$on('markdown_list-ul', function() {
-                prependMarkdownLine('* ');
+                prependMarkdownLine(function(line) {
+                    if (line.substr(0,2) !== '* ') {
+                        return '* ' + line;
+                    }
+                    else {
+                        return line;
+                    }
+                });
             });            
 
         }],
