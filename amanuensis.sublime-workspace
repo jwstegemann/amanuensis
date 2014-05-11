@@ -4,16 +4,16 @@
 		"selected_items":
 		[
 			[
+				"lin",
+				"line"
+			],
+			[
 				"insert",
 				"insertAtCaret"
 			],
 			[
 				"sele",
 				"selectionStart"
-			],
-			[
-				"lin",
-				"lineNumber"
 			],
 			[
 				"te",
@@ -547,7 +547,7 @@
 			"file": "src/main/webapp/app/views/query.html",
 			"settings":
 			{
-				"buffer_size": 4983,
+				"buffer_size": 5035,
 				"line_ending": "Unix"
 			}
 		},
@@ -566,6 +566,22 @@
 			"settings":
 			{
 				"buffer_size": 3476,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/scripts/directives/markdownEditor.js",
+			"settings":
+			{
+				"buffer_size": 3631,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/styles/query.css",
+			"settings":
+			{
+				"buffer_size": 2072,
 				"line_ending": "Unix"
 			}
 		}
@@ -689,7 +705,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 449.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -841,7 +857,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app",
@@ -880,6 +896,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"wel",
 			"favour",
 			"editMode",
 			"pencil",
@@ -1006,8 +1023,7 @@
 			"tags",
 			"tag",
 			"markdown",
-			"trigger",
-			"tags"
+			"trigger"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1039,7 +1055,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 7,
 			"sheets":
 			[
 				{
@@ -1110,8 +1126,8 @@
 						"selection":
 						[
 							[
-								7935,
-								7935
+								7260,
+								7260
 							]
 						],
 						"settings":
@@ -1121,7 +1137,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3510.0,
+						"translation.y": 3072.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1131,15 +1147,15 @@
 					"file": "src/main/webapp/app/views/query.html",
 					"settings":
 					{
-						"buffer_size": 4983,
+						"buffer_size": 5035,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1844,
-								1844
+								2920,
+								2920
 							]
 						],
 						"settings":
@@ -1149,7 +1165,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 568.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1301,6 +1317,62 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/main/webapp/app/scripts/directives/markdownEditor.js",
+					"settings":
+					{
+						"buffer_size": 3631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3088,
+								3088
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 670.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/main/webapp/app/styles/query.css",
+					"settings":
+					{
+						"buffer_size": 2072,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1938,
+								1938
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1408.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
 				}
 			]
 		}
@@ -1362,6 +1434,18 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"query.css",
+				"src/main/webapp/app/styles/query.css"
+			],
+			[
+				"quer",
+				"src/main/webapp/app/views/query.html"
+			],
+			[
+				"markdow",
+				"src/main/webapp/app/scripts/directives/markdownEditor.js"
+			],
 			[
 				"query.html",
 				"src/main/webapp/app/views/query.html"
@@ -1589,10 +1673,6 @@
 			[
 				"rootse",
 				"src/main/scala/amanuensis/api/RootServiceActor.scala"
-			],
-			[
-				"query.css",
-				"src/main/webapp/app/styles/query.css"
 			],
 			[
 				"modals.css",
@@ -1851,10 +1931,6 @@
 				"src/main/webapp/app/views/story.html"
 			],
 			[
-				"quer",
-				"src/main/webapp/app/views/query.html"
-			],
-			[
 				"main.cs",
 				"src/main/webapp/app/styles/main.css"
 			],
@@ -1869,10 +1945,6 @@
 			[
 				"utils.sc",
 				"src/main/scala/amanuensis/core/util/Converters.scala"
-			],
-			[
-				"slotser",
-				"src/main/webapp/app/scripts/services/slotService.js"
 			]
 		],
 		"width": 0.0
