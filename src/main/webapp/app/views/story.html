@@ -75,15 +75,32 @@
               </auto-complete>
             </tags-input>
         </div>
-				<div id="story-content" class="content" scrollbar fill-vertical margin='0'>
+
+<!--				<div id="story-content" class="content" scrollbar>
 				  <markdown-editor name="content" ng-show="editMode" textarea-id="story-content-editor" 
-            textarea-class="story-content" ng-model="context.story.content">
+            textarea-class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">
           </markdown-editor>
           <div id="story-view" ng-hide="editMode" ng-dblclick="showContentEditor()" class="story-view" markdown>
             &nbsp;
           </div>
           <input type="file" id="attachment" style="display:none"></input>
-				</div>       
+				</div> 
+
+-->
+
+        <div id="story-content" class="content" scrollbar fill-vertical margin="10">
+          <markdown-editor name="content" ng-show="editMode" textarea-id="story-content-editor" 
+            textarea-class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">
+          </markdown-editor>
+          <div id="story-view" ng-hide="editMode" ng-dblclick="showContentEditor()" class="story-view" markdown>
+            &nbsp;
+          </div>
+          <input type="file" id="attachment" style="display:none"></input>
+        </div> 
+
+
+
+
       </div>
     </ng-form>
 </div >

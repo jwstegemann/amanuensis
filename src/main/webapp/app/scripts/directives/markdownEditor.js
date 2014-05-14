@@ -12,7 +12,7 @@ angular.module('amanuensisApp')
             textareaId: '@'
         },
         template: ' \
-            <div> \
+            <div class="markdown-editor-wrapper"> \
                 <textarea id="{{textareaId}}" placeholder="{{placeholder}}" class="{{textareaClass}}" ng-model="value" \
                     uploadable fill-vertical margin="20"> \
                 </textarea> \

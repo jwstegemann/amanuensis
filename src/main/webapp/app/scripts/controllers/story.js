@@ -67,7 +67,12 @@ angular.module('amanuensisApp')
                     tags: []
         		},
         		inSlots: [],
-        		outSlots: []
+        		outSlots: [],
+                flags: {
+                    canWrite: 1,
+                    stars: 0,
+                    saved: 0
+                }
         	};
 
             setTimeout(function() {

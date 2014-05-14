@@ -94,6 +94,14 @@ div.container.story.shifted-right div.story-view, div.container.story.shifted-le
   padding-right: 10px;
 }
 
+.markdown-editor-wrapper {
+  margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;  
+  overflow: hidden;
+}
 
 #story-content .mCSB_scrollTools .mCSB_draggerContainer{
   position:absolute;

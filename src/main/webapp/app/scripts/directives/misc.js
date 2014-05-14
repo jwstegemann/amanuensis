@@ -40,14 +40,19 @@ angular.module('amanuensisApp')
   })
   .directive('fillVertical', function() {
     return function(scope, elem, attrs) {
-      $(window).resize(function(){
+      var adjustSize = function(){
         elem.height($(window).height() - elem.offset().top - attrs.margin);
-        //console.log("filled element " + elem.attr('id') + ":" + elem.height() );       
-      });
+//        console.log("filled element " + elem.attr('id') + ":" + elem.height() );       
+      };
 
-      elem.height($(window).height() - elem.offset().top - attrs.margin);
+      $(window).resize(adjustSize);
+
+      setTimeout(function() {
+        adjustSize();
+      }, 100);      
+
     };
-  })  
+  })
   .directive('scrollbar', function() {
     return {
       restrict: 'A',
