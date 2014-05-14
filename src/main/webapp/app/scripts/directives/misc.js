@@ -114,7 +114,7 @@ angular.module('amanuensisApp')
     }
 
     markdownRenderer.image = function(href, title, text) {
-      return '<div class="scaleDown"><img src="' + href + '" alt="' + text + '"></img></div>';
+      return '<div class="scale-down"><img src="' + href + '" alt="' + text + '"></img></div>';
     }
 
     marked.setOptions({

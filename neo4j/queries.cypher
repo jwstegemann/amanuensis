@@ -45,5 +45,5 @@ update for modified, etc.
 
 
 match (s:Story) 
-match (u:User {u.name=s.createdBy})
+match (u:User {name: s.createdBy})
 set s.modified = s.created, s.modifiedBy=u.login, s.createdBy=u.login

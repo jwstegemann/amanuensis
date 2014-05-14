@@ -5,9 +5,9 @@ curl -XPOST "$1/stories/story/$2/_update" -d '{
 }'
 
 curl -XPOST "$1/stories/story/$2/_update" -d '{
-    "script" : "ctx._source.modifiedBy = \"juergen\""
+    "script" : "ctx._source.modifiedBy = \"isabel\""
 }'
 
 curl -XPOST "$1/stories/story/$2/_update" -d '{
-    "script" : "ctx._source.createdBy = \"juergen\""
+    "script" : "ctx._source.createdBy = \"isabel\""
 }'
