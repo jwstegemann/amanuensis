@@ -217,7 +217,7 @@ li.story-info div.scale-down {
 }
 
 div.scale-down img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
 }
 

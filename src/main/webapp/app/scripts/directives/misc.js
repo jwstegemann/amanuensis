@@ -83,7 +83,7 @@ angular.module('amanuensisApp')
 //            console.log("resized " + elem.attr('id'));
             updateTimeout = setTimeout(function() {
                 elem.mCustomScrollbar('update');
-//                console.log("adjusted scrollbar for " + elem.attr('id'));
+               console.log("adjusted scrollbar for " + elem.attr('id'));
                 updateTimeout = undefined;
               }, 100);            
         });

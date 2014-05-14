@@ -22,8 +22,8 @@ function fireEvent(element, type, data, options){
 };
     
 function addResizeListener(element, fn){
-    var resize = 'onresize' in element;
-    if (!resize && !element._resizeSensor) {
+    var resize = 'onresize' in element && element.onresize !== null;
+    if ((!resize || resize === null) && !element._resizeSensor) {
         var sensor = element._resizeSensor = document.createElement('div');
             sensor.className = 'resize-sensor';
             sensor.innerHTML = '<div class="resize-overflow"><div></div></div><div class="resize-underflow"><div></div></div>';
