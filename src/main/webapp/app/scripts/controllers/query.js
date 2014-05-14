@@ -113,7 +113,7 @@ angular.module('amanuensisApp')
     }
 
     $scope.searchNotifications = function() {
-      $scope.searchStories(queryService.query, '@' + $scope.userContext.name);
+      $scope.searchStories(queryService.query, '@' + $scope.userContext.login);
     }
 
     $scope.searchFavourites = function() {

@@ -25,7 +25,7 @@ typeahead.directive('selectbox', ["$timeout", function($timeout) {
         },
         template: ' \
             <div class="selectbox"> \
-                <div class="value"><span class="value"><i ng-show=\"committed.icon\" class=\"fa fa-fw on-selectbox {{committed.icon}}\"></i>{{committed.label}}</span><i class="fa fa-caret-down handler" ng-click="toggleOptions()"></i></div> \
+                <div ng-click="toggleOptions()" class="value"><span class="value"><i ng-show=\"committed.icon\" class=\"fa fa-fw on-selectbox {{committed.icon}}\"></i>{{committed.label}}</span><i class="fa fa-caret-down handler"></i></div> \
                 <div class=\"options\" ng-show=\"optionsVisible\"> \
                     <ul class=\"option-list\"> \
                         <li class=\"option-item {{item.css}}\" ng-repeat=\"item in optionsList\" \

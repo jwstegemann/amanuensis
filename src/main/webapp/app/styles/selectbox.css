@@ -9,8 +9,8 @@ div.selectbox {
   display: inline-block; 
 }
 
-div.selectbox > span.value {
-
+div.value {
+  cursor: pointer;
 }
 
 div.selectbox i.handler {
