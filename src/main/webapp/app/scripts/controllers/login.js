@@ -3,7 +3,7 @@
 angular.module('amanuensisApp')
   .controller('LoginDialogCtrl', function ($scope, $rootScope, $http, $location, authService, utilService) {
 
-    var welcomeMessage = 'Welcome to Amanuensis. Please login...';
+    var welcomeMessage = 'Welcome to Colibri. Please login...';
     var errorMessage = 'Something is wrong. Please try again...';
 
 
@@ -15,11 +15,11 @@ angular.module('amanuensisApp')
     }
 
     $scope.doLogin = function() {
-      if(!(($location.host() === 'localhost' || $location.host() === '0.0.0.0') && $location.port() === 9000)) {
+      /*if(!(($location.host() === 'localhost' || $location.host() === '0.0.0.0') && $location.port() === 9000)) {
         if ($location.protocol() !== 'https') {
             $rootScope.$broadcast('error',{errorMessage: 'Please use https in your URL to make sure, that nobody gets to know your credentials.'});
         }
-      }
+      } */
 
       //do not buffer failed login-tries
       var config = {method: 'POST', url: '/user/login', ignoreAuthModule: true, data: {
@@ -30,12 +30,15 @@ angular.module('amanuensisApp')
       $http(config).
         success(function(data, status, headers, config) {
           $rootScope.userContext = data;
+          $('#login-modal-content').removeClass('error');
+          $scope.welcome = welcomeMessage;
           
           $scope.reset();
           authService.loginConfirmed();
         }).
         error(function(data, status, headers, config) {
           $scope.welcome = errorMessage;
+          $('#login-modal-content').addClass('error');
           $('#loginInput').focus();
         });
     }

@@ -138,7 +138,7 @@
     <div id="md-overlay" class="md-overlay"></div> <!-- the overlay element -->
 
     <div class="md-modal md-effect-3" id="login-modal" ng-controller="LoginDialogCtrl">
-      <div class="md-content">
+      <div id="login-modal-content" class="md-content">
         <h3>{{welcome}}&nbsp;<i style="float: right; margin-top: 2px;" class="fa fa-lock action"></i></h3>
         <div>
           <input id="loginInput" class="start-focus" type="text" ng-model="login" on-enter="goToPassword()" placeholder="Your Login"></input>
