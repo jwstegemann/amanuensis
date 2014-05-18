@@ -519,78 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/main/webapp/app/scripts/directives/misc.js",
-			"settings":
-			{
-				"buffer_size": 9922,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/styles/story.css",
-			"settings":
-			{
-				"buffer_size": 8885,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/views/story.html",
-			"settings":
-			{
-				"buffer_size": 13935,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/directives/markdownEditor.js",
-			"settings":
-			{
-				"buffer_size": 3663,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/controllers/login.js",
-			"settings":
-			{
-				"buffer_size": 2673,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/app.js",
-			"settings":
-			{
-				"buffer_size": 7643,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/index.html",
-			"settings":
-			{
-				"buffer_size": 14068,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/bower_components/angular-elastic/elastic.js",
-			"settings":
-			{
-				"buffer_size": 6956,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/controllers/story.js",
-			"settings":
-			{
-				"buffer_size": 22842,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -711,7 +639,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 449.0
+		"width": 467.0
 	},
 	"console":
 	{
@@ -728,23 +656,26 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/scala/projects/amanuensis/neo4j/queries.cypher",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/query.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/markdownEditor.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/query.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/markdownEditor.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-elastic/elastic.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
+		"/home/tiberius/scala/projects/amanuensis/neo4j/queries.cypher",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/query.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/query.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/selectbox.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/selectbox.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/update_damod.sh",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
@@ -772,7 +703,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/.bower.json",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchDomain.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/storyService.js",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/init",
@@ -783,7 +713,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/typeahead.js",
 		"/home/tiberius/scala/projects/amanuensis/README.md",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/typeahead.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/AccessActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/neo4j/test.cypher",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/reset",
@@ -854,8 +783,7 @@
 		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/SublimeSBT.sublime-settings",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/StringUtils.scala",
 		"/home/tiberius/scala/projects/amanuensis/curl/story/create",
-		"/home/tiberius/scala/projects/amanuensis/curl/story/update",
-		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/index"
+		"/home/tiberius/scala/projects/amanuensis/curl/story/update"
 	],
 	"find":
 	{
@@ -904,6 +832,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"color",
 			"https",
 			"elastic",
 			"timeout",
@@ -1030,8 +959,7 @@
 			"right",
 			"link",
 			"slot-nam",
-			"value",
-			"delay"
+			"value"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1063,261 +991,8 @@
 	"groups":
 	[
 		{
-			"selected": 4,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/main/webapp/app/scripts/directives/misc.js",
-					"settings":
-					{
-						"buffer_size": 9922,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2408,
-								2408
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 673.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/main/webapp/app/styles/story.css",
-					"settings":
-					{
-						"buffer_size": 8885,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3955,
-								3955
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2941.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/main/webapp/app/views/story.html",
-					"settings":
-					{
-						"buffer_size": 13935,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4744,
-								4744
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 950.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/main/webapp/app/scripts/directives/markdownEditor.js",
-					"settings":
-					{
-						"buffer_size": 3663,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								573,
-								573
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/main/webapp/app/scripts/controllers/login.js",
-					"settings":
-					{
-						"buffer_size": 2673,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								798,
-								798
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/main/webapp/app/scripts/app.js",
-					"settings":
-					{
-						"buffer_size": 7643,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								992,
-								992
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 272.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/main/webapp/app/index.html",
-					"settings":
-					{
-						"buffer_size": 14068,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								12527,
-								12527
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3108.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "src/main/webapp/app/bower_components/angular-elastic/elastic.js",
-					"settings":
-					{
-						"buffer_size": 6956,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "src/main/webapp/app/scripts/controllers/story.js",
-					"settings":
-					{
-						"buffer_size": 22842,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2779,
-								2779
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 665.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1379,6 +1054,18 @@
 		"selected_items":
 		[
 			[
+				"cab.css",
+				"src/main/webapp/app/styles/cab.css"
+			],
+			[
+				"main",
+				"src/main/webapp/app/styles/main.css"
+			],
+			[
+				"modal.css",
+				"src/main/webapp/app/styles/modals.css"
+			],
+			[
 				"login.js",
 				"src/main/webapp/app/scripts/controllers/login.js"
 			],
@@ -1405,10 +1092,6 @@
 			[
 				"story.html",
 				"src/main/webapp/app/views/story.html"
-			],
-			[
-				"main",
-				"src/main/webapp/app/styles/main.css"
 			],
 			[
 				"selec",
@@ -1441,10 +1124,6 @@
 			[
 				"misc",
 				"src/main/webapp/app/scripts/directives/misc.js"
-			],
-			[
-				"cab.css",
-				"src/main/webapp/app/styles/cab.css"
 			],
 			[
 				"cab.js",
@@ -1549,10 +1228,6 @@
 			[
 				"tags.css",
 				"src/main/webapp/app/styles/tags.css"
-			],
-			[
-				"modal.css",
-				"src/main/webapp/.tmp/styles/modals.css"
 			],
 			[
 				"app.",

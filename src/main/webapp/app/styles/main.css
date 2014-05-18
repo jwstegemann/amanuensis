@@ -21,6 +21,14 @@ body {
   }
 }
 
+@media screen and (max-width: 1024px) {
+  body {
+    font-size: 10px;
+  }
+}
+
+
+
 a, a:link, a:visited, a:active, a:hover {
   color: inherit;
 }
@@ -46,10 +54,10 @@ a, a:link, a:visited, a:active, a:hover {
  */
 
 .alert {
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 1em;
+  margin-bottom: 1.250em;
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: 0.188em;
 }
 
 .alert h4 {
@@ -67,17 +75,17 @@ a, a:link, a:visited, a:active, a:hover {
 }
 
 .alert > p + p {
-  margin-top: 5px;
+  margin-top: 0.313em;
 }
 
 .alert-dismissable {
-  padding-right: 35px;
+  padding-right: 2.1em;
 }
 
 .alert-dismissable .close {
   position: relative;
   top: -2px;
-  right: -21px;
+  right: -1.313em;
   color: inherit;
 }
 
@@ -139,7 +147,7 @@ a, a:link, a:visited, a:active, a:hover {
 
 .close {
   float: right;
-  font-size: 21px;
+  font-size: 1.313em;
   font-weight: bold;
   line-height: 1;
   color: #000000;
@@ -170,11 +178,11 @@ button.close {
  */
 
 #login-modal > div.md-content {
-  width: 450px;
+  width: 28.125em;
 }
 
 #passwordInput {
-  margin-top: 16px;
+  margin-top: 1em;
 }
 
 #loading-bar .bar {
@@ -191,8 +199,8 @@ p.pagination {
 p.pagination span.pagination-nav {
   cursor: pointer;
   font-weight: 400;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 0.625em;
+  margin-right: 0.625em;
 }
 
 /*
