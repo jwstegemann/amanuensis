@@ -6,7 +6,7 @@ div.story-header {
   display: block;
   color: #fff;
   font-family: 'Lato', Arial, sans-serif;
-  margin-top: 40px;
+  margin-top: 2.5em;
   background: rgba(0,0,0,0.05);
   padding: 1.8em 15%;
   overflow: visible;
@@ -57,13 +57,13 @@ input.story-title {
 }
 
 div.story-icon {
-  width: 64px;
-  height: 88px;
-  margin: 0px ;
+  width: 4em;
+  height: 5.5em;
+  margin: 0;
   float: left;
   text-align: center;
   vertical-align: middle;
-  margin-right: 20px;
+  margin-right: 1.250em;
 }
  
 
@@ -91,7 +91,7 @@ div.container.story.shifted-right div.content, div.container.story.shifted-left 
 }
 
 div.container.story.shifted-right div.story-view, div.container.story.shifted-left div.story-view {
-  padding-right: 10px;
+  padding-right: 0.625em;
 }
 
 .markdown-editor-wrapper {
@@ -107,8 +107,8 @@ div.container.story.shifted-right div.story-view, div.container.story.shifted-le
   position:absolute;
   top:0;
   right:0; 
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0.625em;
+  margin-bottom: 0.625em;
   height:auto;
 }
 
@@ -121,9 +121,9 @@ textarea.story-content {
   background: transparent;
   border: none;
   width: 100%;
-  height: 400px;
+  height: 25em;
   font-size: 1.0em;
-  padding: 10px;
+  padding: 0.625em;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -134,8 +134,8 @@ textarea.story-content:focus {
 }
 
 div.story-view {
-  margin-top: -10px;
-  padding-top: 0px;
+  margin-top: -0.625em;
+  padding-top: 0;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -183,7 +183,7 @@ div.story-view a.attachment:before, li.story-info a.attachment:before{
   display: inline-block;
   text-decoration: inherit;  
   content: "\f0c6";
-  margin-right: 5px;
+  margin-right: 0.313em;
 }
 
 div.story-view a.link:before, li.story-info a.link:before {
@@ -193,7 +193,7 @@ div.story-view a.link:before, li.story-info a.link:before {
   display: inline-block;
   text-decoration: inherit;  
   content: "\f14c";
-  margin-right: 5px;
+  margin-right: 0.313em;
 }
 
 div.story-view img {
@@ -226,15 +226,15 @@ div.scale-down img {
  */
 
 div.shadow-right {
-  -webkit-box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
-     -moz-box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
-          box-shadow: 3px 0 4px 0 rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0.188em 0 0.250em 0 rgba(0,0,0,0.4);
+     -moz-box-shadow: 0.188em 0 0.250em 0 rgba(0,0,0,0.4);
+          box-shadow: 0.188em 0 0.250em 0 rgba(0,0,0,0.4);
 }
 
 div.shadow-left {
-  -webkit-box-shadow: -3px 0 4px 0 rgba(0,0,0,0.4);
-     -moz-box-shadow: -3px 0 4px 0 rgba(0,0,0,0.4);
-          box-shadow: -3px 0 4px 0 rgba(0,0,0,0.4);}
+  -webkit-box-shadow: -0.188em 0 0.250em 0 rgba(0,0,0,0.4);
+     -moz-box-shadow: -0.188em 0 0.250em 0 rgba(0,0,0,0.4);
+          box-shadow: -0.188em 0 0.250em 0 rgba(0,0,0,0.4);}
 
 /*
  * Slot-List
@@ -249,11 +249,11 @@ div.slots {
 
 div.slot-list-title {
   width: 100%;
-  padding: 15px;
+  padding: 0.8em;
   font-family: 'Lato', Arial, sans-serif;
   color: #E3D091;
-  font-size: 1.5em;
-  margin-top: 40px;
+  font-size: 1em;
+  margin-top: 2.5em;
   font-weight: 300; 
   background: rgba(0,0,0,0.05);
   word-wrap: break-word;  
@@ -267,7 +267,7 @@ input.slot-filter {
   font-family: 'Lato', Arial, sans-serif;
   color: #E3D091;
   width: 6em;
-  font-size: 1.1em;
+  font-size: 1.5em;
   font-weight: 300; 
   background: transparent;
   border: none;
@@ -295,7 +295,7 @@ li.slot-name {
   display: block;
   float: left;
   border-top: 1px solid #866F22;
-  padding: 15px;
+  padding: 0.6em;
   font-family: 'Lato', Arial, sans-serif;
   color: #E3D091;
   font-size: 1.25em;
@@ -313,7 +313,7 @@ li.slot-name:hover {
 }
 
 i.on-slot {
-  margin-right: 10px;
+  margin-right: 0.625em;
 }
 
 
@@ -328,11 +328,11 @@ div.stories {
 
 div.story-list-title {
   width: 100%;
-  padding: 15px;
+  padding: 0.8em;
   font-family: 'Lato', Arial, sans-serif;
   color: #DABDB0;
-  font-size: 1.1em;
-  margin-top: 40px;
+  font-size: 1em;
+  margin-top: 2.5em;
   font-weight: 300; 
   background: rgba(0,0,0,0.05);
   word-wrap: break-word;  
@@ -369,7 +369,7 @@ input.story-filter::-moz-placeholder {
 ul.story-list {
     width: 100%;
     list-style: none;
-    padding: 0px;
+    padding: 0;
     margin: 0;
 }
 
@@ -378,7 +378,7 @@ li.story-info {
   display: block;
   float: left;
   border-top: 1px solid #6D5245;
-  padding: 15px;
+  padding: 0.6em;
   font-family: 'Lato', Arial, sans-serif;
   color: #DABDB0;
   font-size: 1.0em;
@@ -416,7 +416,7 @@ li.story-info p {
 li.story-info p.single-story {
   font-size: 1.0em;
   width: 100%;
-  padding: 0px;
+  padding: 0;
   margin: 0;
   word-wrap:break-word;
 }
@@ -433,8 +433,8 @@ li.story-info p.single-story {
 }
 
 #share-modal > div.md-content > div {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 1.250em;
+  padding-right: 1.250em;
 }
 
 
@@ -472,7 +472,7 @@ table.shares td.unshare {
 
 td.unshare > i {
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 0.625em;
 }
 
 

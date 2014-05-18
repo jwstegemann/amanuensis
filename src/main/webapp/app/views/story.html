@@ -6,7 +6,7 @@
 	<!-- inbound Story-List	-->
   <div id="stories-left" class="container stories stories-left shadow-right" ng-controller="SlotCtrl" ng-init="inbound=true" scrollbar>
 		<div class="story-list-title">
-      <i class="fa fa-bars fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
+      <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
     </div>
 		<ul class="story-list" ng-switch on="storyListViewMode">
@@ -35,7 +35,7 @@
 	<!-- inbound Slot-List	-->
   <div id="slots-left" class="container slots slots-left shadow-right" scrollbar>
     <div class="slot-list-title">
-      <i class="fa on-slot" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i>
+      <i class="fa on-slot fa-lg" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i>
       <input class="slot-filter" type="text" placeholder="Inbound" ng-model="slotFilterLeft" tabindex="-1"></input>
     </div>
     <ul class="slot-list">
@@ -172,7 +172,7 @@
 	<!-- outbound Slot-List	-->
   <div id="slots-right" class="container slots slots-right shadow-left" scrollbar>
     <div class="slot-list-title">
-      <i class="fa on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i>
+      <i class="fa fa-lg on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i>
       <input class="slot-filter" type="text" placeholder="Outbound" ng-model="slotFilterRight" tabindex="-1"></input>
     </div>
     <ul class="slot-list">

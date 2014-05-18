@@ -1,10 +1,10 @@
 .md-modal {
 	position: fixed;
-	margin-top: -40px;
+	margin-top: -2.5em;
 	top: 50%;
 	left: 50%;
-	max-width: 630px;
-	min-width: 320px;
+	max-width: 39em;
+	min-width: 20em;
 	height: auto;
 	z-index: 20000;
 	visibility: hidden;
@@ -51,7 +51,7 @@ div.md-overlay.md-show {
 	color: #fff;
 	background: #34495e;
 	position: relative;
-	border-radius: 3px;
+	border-radius: 0.188em;
 	margin: 0 auto;
 }
 
@@ -67,7 +67,7 @@ div.md-overlay.md-show {
 	font-weight: 400;
 	opacity: 0.8;
 	background: rgba(0,0,0,0.1);
-	border-radius: 3px 3px 0 0;
+	border-radius: 0.188em 0.188em 0 0;
 }
 
 .md-content h3 i {
@@ -75,7 +75,7 @@ div.md-overlay.md-show {
 }
 
 .md-content > div {
-	padding: 15px 40px 30px;
+	padding: 0.938em 2.5em 1.875em;
 	margin: 0;
 	font-weight: 300;
 	font-size: 1.15em;
@@ -83,16 +83,16 @@ div.md-overlay.md-show {
 
 .md-content > div p {
 	margin: 0;
-	padding: 10px 0;
+	padding: 0.625em 0;
 }
 
 .md-content > div ul {
 	margin: 0;
-	padding: 0 0 30px 20px;
+	padding: 0 0 1.875em 1.250em;
 }
 
 .md-content > div ul li {
-	padding: 5px 0;
+	padding: 0.313em 0;
 }
 
 .md-content input {
@@ -106,7 +106,7 @@ div.md-overlay.md-show {
   background: transparent;
   border: none;
   border-bottom: 1px solid white;
-  width: 300px;
+  width: 18.75em;
 }
 
 .md-content div.confirmation-message {
@@ -115,12 +115,12 @@ div.md-overlay.md-show {
   line-height: 1.2;
   font-weight: 300;
   margin: 0;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
+  padding-left: 1.250em;
+  padding-right: 1.250em;
+  padding-bottom: 1.250em;
   background: transparent;
   border: none;
-  width: 400px;
+  width: 25em;
   min-height: 2.4em;
   vertical-align: middle;
 }
@@ -133,7 +133,7 @@ div.md-overlay.md-show {
   margin: 0;
   background: transparent;
   border: none;
-  width: 400px;
+  width: 25em;
   min-height: 2.4em;
   vertical-align: middle;
 }
@@ -141,13 +141,13 @@ div.md-overlay.md-show {
 .md-content div.error-icon {
 	float:left; 
 	vertical-align: middle;
-	padding: 15px;
+	padding: 0.938em;
 }
 
 .md-content div.confirmation-icon {
 	float:right; 
 	vertical-align: middle;
-	padding: 20px;
+	padding: 1.250em;
 }
 
 .md-content div.confirmation-icon > i {
@@ -187,7 +187,7 @@ div.md-overlay.md-show {
 
 i.on-right {
 	float: right;
-	margin-top: 20px;
+	margin-top: 1.250em;
 }
 
 i.confirmation {
