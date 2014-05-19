@@ -25,7 +25,7 @@ angular.module('amanuensisApp')
                 $scope.$broadcast('updateView', {
                     markdown: successData.story.content
                 });
-                updateScrollbar();
+                $scope.updateScrollbar();
                 $rootScope.editMode = false;
                 $rootScope.storyFlags = successData.flags;
                 $rootScope.storyFlags.saved = 1;
@@ -117,6 +117,7 @@ angular.module('amanuensisApp')
         	if (angular.isDefined($scope.context.story.id)) {
         		storyService.update($scope.context.story, function(successData) {
                     $scope.storyForm.$setPristine();
+                    $scope.reload();
                     growl.addSuccessMessage($scope.context.story.title + ' has been saved.');
                 });
         	}
@@ -436,7 +437,7 @@ angular.module('amanuensisApp')
 
             setTimeout(function() {
                 $('#story-content-editor').focus();
-                updateScrollbar();
+                $scope.updateScrollbar();
             }, 200);        
         }
     });
@@ -446,7 +447,7 @@ angular.module('amanuensisApp')
             markdown: $scope.context.story.content
         });
         $rootScope.editMode = false;
-        updateScrollbar();
+        $scope.updateScrollbar();
     });
 
 
@@ -469,7 +470,7 @@ angular.module('amanuensisApp')
         $location.url('/graph/findpaths');
     });
 
-    function updateScrollbar() {
+    $scope.updateScrollbar = function() {
         setTimeout(function() {
         //FIXME: dringend!!!
 //          $("#story-content").height($("#story-content").outerHeight());
@@ -527,7 +528,7 @@ angular.module('amanuensisApp')
     /*
      * resize scrollbar for content on window-resize-event
      */
-    $(window).resize(updateScrollbar);
+    $(window).resize($scope.updateScrollbar);
 
     // reset filter
     $scope.storyFilter = {};

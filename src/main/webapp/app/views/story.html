@@ -87,11 +87,11 @@
 
 -->
 
-        <div id="story-content" class="content" scrollbar fill-vertical margin="10">
+        <div id="story-content" class="content" scrollbar fill-vertical margin="10" ng-click="updateScrollbar()">
           <markdown-editor name="content" ng-show="editMode" textarea-id="story-content-editor" 
             textarea-class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">
           </markdown-editor>
-          <div id="story-view" ng-hide="editMode" ng-dblclick="showContentEditor()" class="story-view" markdown>
+          <div id="story-view" ng-hide="editMode" class="story-view" markdown>
             &nbsp;
           </div>
           <input type="file" id="attachment" style="display:none"></input>
