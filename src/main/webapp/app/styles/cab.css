@@ -81,7 +81,7 @@
 
 .cab-main > li:hover ul {
     display: block;
-    border-radius: 0 0 0.188em 0.188em;
+    border-radius: 0 0 3px 3px;
 }
 
 .cab-main > li > ul > li {

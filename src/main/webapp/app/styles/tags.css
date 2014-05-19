@@ -5,7 +5,7 @@
 }
 .ngTagsInput {
     position: relative;
-    margin-top: 8px;
+    margin-top: 0.5em;
 }
 
 .ngTagsInput:active {
@@ -38,9 +38,9 @@ div.ngTagsInput li.tag-item {
     list-style-type: none;
     display: inline-block;
     margin: 0;
-    margin-right: 5px;
-    margin-top: 5px;
-    padding: 2px;
+    margin-right: 0.313em;
+    margin-top: 0.313em;
+    padding: 0.125em;
     float: left;
 }
 
@@ -51,7 +51,7 @@ li.tag-item > span::before {
     display: inline-block;
     text-decoration: inherit;      
     content: "\f02b";
-    margin: 0px 4px;
+    margin: 0px 0.250em;
 }
 
 li.tag-item > span {
@@ -66,6 +66,7 @@ li.tag-item > button.ng-binding {
     background-color: transparent;
     color: #fff;
     padding: 0;
+    margin: 0.125em;
     cursor: pointer;    
 }
 
@@ -78,8 +79,8 @@ div.ngTagsInput input.tag-input {
     float: left;
     color: #fff;
     font-weight: 300;
-    margin-top: 0.5em;
-    width: 150px !important;
+    margin-top: 0.6em;
+    width: 9.375em !important;
 }
 
 /*
@@ -87,9 +88,9 @@ div.ngTagsInput input.tag-input {
  */
 
 .ngTagsInput .autocomplete {
-    margin-top: 5px;
+    margin-top: 0.313em;
     position: absolute;
-    padding: 5px 0;
+    padding: 0.313em 0;
     background-color: #566473;
     width: 100%;
     z-index: 999;
@@ -103,10 +104,10 @@ div.ngTagsInput input.tag-input {
 }
 
 .ngTagsInput .autocomplete .suggestion-item {
-    padding: 3px 16px;
+    padding: 0.188em 1em;
     font-family: 'Lato', Arial, sans-serif;
     font-size: 1.0em;
-    line-height: 20px;
+    line-height: 1.25em;
     cursor: pointer;
     text-align: left;
     white-space: nowrap;

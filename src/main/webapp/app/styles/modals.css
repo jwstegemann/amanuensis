@@ -51,7 +51,7 @@ div.md-overlay.md-show {
 	color: #fff;
 	background: #34495e;
 	position: relative;
-	border-radius: 0.188em;
+	border-radius: 3px;
 	margin: 0 auto;
 }
 
@@ -67,7 +67,7 @@ div.md-overlay.md-show {
 	font-weight: 400;
 	opacity: 0.8;
 	background: rgba(0,0,0,0.1);
-	border-radius: 0.188em 0.188em 0 0;
+	border-radius: 3px 3px 0 0;
 }
 
 .md-content h3 i {
@@ -106,7 +106,7 @@ div.md-overlay.md-show {
   background: transparent;
   border: none;
   border-bottom: 1px solid white;
-  width: 18.75em;
+  width: 13.4em;
 }
 
 .md-content div.confirmation-message {
@@ -187,7 +187,7 @@ div.md-overlay.md-show {
 
 i.on-right {
 	float: right;
-	margin-top: 1.250em;
+	margin-top: 0.8em;
 }
 
 i.confirmation {

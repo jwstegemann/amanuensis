@@ -1,7 +1,7 @@
 
 div.query-sidebar {
   width: 20%;
-  min-width: 200px;
+  min-width: 12.5em;
   float: left;
   padding: 1.0em;
   padding-top: 2.4em;
@@ -15,7 +15,7 @@ div.query-sidebar {
 div.query-results {
   width: 80%;
   left: 20%;
-  min-width: 200px;
+  min-width: 12.5em;
   float: left;
   padding: 2.4em 2.0em; 
   -moz-box-sizing: border-box;
@@ -43,7 +43,7 @@ h2.resultHeader span i {
 }
 
 ul.resultList {
-  padding-left: 20px;
+  padding-left: 1.25em;
   list-style: none;
   text-transform: none;  
   font-size: 1.0em;
@@ -65,11 +65,11 @@ ul.tag-list a {
 }
 
 ul.tag-list i {
-  margin-right: 5px;
+  margin-right: 0.313em;
 }
 
 li.resultListItem {
-  margin-bottom: 30px;
+  margin-bottom: 1.875em;
 }
 
 li.resultListItem > a {
@@ -79,20 +79,20 @@ li.resultListItem > a {
 }
 
 li.resultListItem > p.origin {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0.313em;
+  margin-bottom: 0.313em;
   font-size: 0.8em;
 }
 
 li.resultListItem > p.content {
-  margin-top: 5px;
+  margin-top: 0.313em;
   font-size: 1.0em;
   color: #ffffff;
 }
 
 p.stats {
   padding-left: 1.0em;
-  margin-bottom: 25px;
+  margin-bottom: 1.563em;
 }
 
 .main-search {

@@ -3,7 +3,7 @@
  */
 
 div.typeahead {
-  width: 400px;
+  width: 25em;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -15,11 +15,11 @@ div.typeahead > input.typeahead-input {
 }
 
 div.typeahead > div.suggestions {
-  margin-top: 5px;
+  margin-top: 0.313em;
   position: absolute;
-  padding: 5px 0;
+  padding: 0.313em 0;
   background-color: #566473;
-  width: 400px;
+  width: 25em;
   z-index: 10000;
   border-radius: 3px;
 }
@@ -31,7 +31,7 @@ div.suggestions .suggestion-list {
 }
 
 div.suggestions .suggestion-item {
-  padding: 3px 16px;
+  padding: 0.188em 1em;
   font-family: 'Lato', Arial, sans-serif;
   font-size: 1.0em;
   line-height: 1.4em;

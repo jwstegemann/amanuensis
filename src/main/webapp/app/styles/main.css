@@ -15,9 +15,9 @@ body {
   overflow: hidden;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
   body {
-    font-size: 12px;
+    font-size: 0.750em;
   }
 }
 
@@ -57,7 +57,7 @@ a, a:link, a:visited, a:active, a:hover {
   padding: 1em;
   margin-bottom: 1.250em;
   border: 1px solid transparent;
-  border-radius: 0.188em;
+  border-radius: 3px;
 }
 
 .alert h4 {
@@ -84,7 +84,7 @@ a, a:link, a:visited, a:active, a:hover {
 
 .alert-dismissable .close {
   position: relative;
-  top: -2px;
+  top: -0.125em;
   right: -1.313em;
   color: inherit;
 }
@@ -177,8 +177,8 @@ button.close {
  * Login
  */
 
-#login-modal > div.md-content {
-  width: 28.125em;
+#login-modal {
+  width: 32em;
 }
 
 #passwordInput {

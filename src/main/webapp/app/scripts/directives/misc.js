@@ -65,12 +65,13 @@ angular.module('amanuensisApp')
           scrollButtons:{
             enable: false
           },
+          contentTouchScroll: true,
           advanced:{
             updateOnBrowserResize: false,
             updateOnContentResize: false,
             autoExpandHorizontalScroll: false,
             autoScrollOnFocus: false,
-            normalizeMouseWheelDelta: false,
+            normalizeMouseWheelDelta: false
           }
           //theme: 'light-thin'
         });

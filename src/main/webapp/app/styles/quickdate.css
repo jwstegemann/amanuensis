@@ -5,7 +5,7 @@
 }
 .quickdate input,
 .quickdate select {
-  font-size: 13px;
+  font-size: 10.188em;
 }
 .quickdate-button {
   display: inline;
@@ -19,11 +19,11 @@
   text-decoration: none;
 }
 .quickdate-button i {
-  padding-right: 4px;
+  padding-right: 0.250em;
 }
 .quickdate-popup {
   color: #fff;
-  font-size: 15px;
+  font-size: 1em;
   background-color: #566473;
   border-radius: 3px;
 }
@@ -32,10 +32,10 @@
   color: #fff;
 }
 .quickdate-next-month i {
-  padding-left: 10px;
+  padding-left: 0.625em;
 }
 .quickdate-prev-month i {
-  padding-right: 10px;
+  padding-right: 0.625em;
 }
 table.quickdate-calendar {
   border: solid 1px #74818e;
@@ -78,7 +78,7 @@ table.quickdate-calendar td.is-today.disabled-date {
 
 .quickdate-clear {
   display: inline;
-  padding: 5px 5px;
+  padding: 0.313em;
   color: #fff !important;
   text-align: center;
   font-weight: 400;

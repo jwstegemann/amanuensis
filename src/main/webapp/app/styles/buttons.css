@@ -3,13 +3,13 @@
  */
 
 .button-bar {
-  margin-top: 20px;
-  padding: 20px 15%;
+  margin-top: 1.25em;
+  padding: 1.25em 15%;
   background: rgba(0,0,0,0.05);
 }
 
 .button {
-  margin-left: 10px;
+  margin-left: 0.625em;
   background-color: #326151;
   border: 1px solid rgba(0,0,0,0.05);
   display: inline-block;
@@ -18,12 +18,12 @@
   font-family: 'Lato', Arial, sans-serif;
   font-size: 1.0em;
   font-style: normal;
-  line-height: 40px;
+  line-height: 2.5em;
   text-decoration: none;
   text-align: center;
   vertical-align: middle;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
   -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.4);
     -moz-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.4);
     box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.4);
@@ -41,7 +41,7 @@
 /* This button was generated using CSSButtonGenerator.com */
 
 .on-button {
-  margin-left: 10px;
+  margin-left: 0.625em;
 }
 
 i.action {

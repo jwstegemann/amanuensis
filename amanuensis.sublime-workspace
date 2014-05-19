@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"no",
+				"nowrap"
+			],
+			[
 				"adjust",
 				"adjustSize"
 			],
@@ -510,15 +514,35 @@
 			[
 				"BS",
 				"BSONLong"
-			],
-			[
-				"entit",
-				"entityConverter"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "src/main/webapp/app/styles/story.css",
+			"settings":
+			{
+				"buffer_size": 8964,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/views/story.html",
+			"settings":
+			{
+				"buffer_size": 13939,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/styles/modals.css",
+			"settings":
+			{
+				"buffer_size": 3356,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -639,7 +663,7 @@
 				"Package Control: List Packages"
 			]
 		],
-		"width": 467.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -656,6 +680,8 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js",
@@ -664,10 +690,8 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/markdownEditor.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-elastic/elastic.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
 		"/home/tiberius/scala/projects/amanuensis/neo4j/queries.cypher",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/query.js",
@@ -832,6 +856,32 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"px",
+			"5px",
+			"px",
+			"20px",
+			"10px",
+			"4px",
+			"3px",
+			"40px",
+			"2.5em",
+			"10.313em",
+			"px",
+			"4px",
+			"3px",
+			"px",
+			"5px",
+			"20px",
+			"10px",
+			"40px",
+			"px",
+			"20px",
+			"10px",
+			"30px",
+			"3px",
+			"font-size",
+			"top",
+			"px",
 			"color",
 			"https",
 			"elastic",
@@ -933,33 +983,7 @@
 			"user",
 			"typeahead",
 			"suggest",
-			"mCSB",
-			"This should not have",
-			"fa-fa-",
-			"hover",
-			":canRead]",
-			":canWrite]",
-			":can",
-			"reject",
-			"  val pathQueryString = \"\"\"\n    MATCH (u:User {login: {login}})\n    MATCH (s:Story {id: {source}})<-[:canRead]-(u)\n    MATCH (t:Story {id: {target}})<-[:canWrite]-(u)\n    MATCH (s)-[:Slot*1..10]-(m:Story)-[:Slot*1..10]-(t)\n    WITH distinct m\n    MATCH (u)-[:canRead]->(m)-[:is]->(:Tag {name: {tagName}})\n    RETURN m.id, m.title, m.content, m.created, m.createdBy SKIP {skip} LIMIT 25\n  \"\"\"\n",
-			"server",
-			"fa-times",
-			"match",
-			"searc",
-			"distinct",
-			"showModalElement(",
-			"apply(",
-			"askForSlot",
-			"create",
-			"stack",
-			"targetSta",
-			"$scope.activeSlot",
-			"$slotFilter",
-			"$storyFilter",
-			"right",
-			"link",
-			"slot-nam",
-			"value"
+			"mCSB"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -967,6 +991,23 @@
 		"regex": false,
 		"replace_history":
 		[
+			"0.313em",
+			"1.250em",
+			"0.625em",
+			"0.250em",
+			"0.188em",
+			"2.5em",
+			"1.313em",
+			"0.250em",
+			"0.181em",
+			"0.313em",
+			"1.250em",
+			"0.625em",
+			"2.5em",
+			"1.250em",
+			"0.625em",
+			"1.875em",
+			"0.188em",
 			"tabindex=\"-1\"",
 			"tabindex='-1'",
 			"\\n",
@@ -991,8 +1032,93 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/main/webapp/app/styles/story.css",
+					"settings":
+					{
+						"buffer_size": 8964,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7041,
+								7041
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5248.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/main/webapp/app/views/story.html",
+					"settings":
+					{
+						"buffer_size": 13939,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9303,
+								9303
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2295.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/main/webapp/app/styles/modals.css",
+					"settings":
+					{
+						"buffer_size": 3356,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3356,
+								3356
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2572.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1054,8 +1180,28 @@
 		"selected_items":
 		[
 			[
+				"modals.css",
+				"src/main/webapp/app/styles/modals.css"
+			],
+			[
+				"story.html",
+				"src/main/webapp/app/views/story.html"
+			],
+			[
+				"story.css",
+				"src/main/webapp/app/styles/story.css"
+			],
+			[
+				"index.html",
+				"src/main/webapp/app/index.html"
+			],
+			[
 				"cab.css",
 				"src/main/webapp/app/styles/cab.css"
+			],
+			[
+				"main.css",
+				"src/main/webapp/app/styles/main.css"
 			],
 			[
 				"main",
@@ -1074,24 +1220,12 @@
 				"src/main/webapp/app/scripts/controllers/story.js"
 			],
 			[
-				"index.html",
-				"src/main/webapp/app/index.html"
-			],
-			[
 				"app.js",
 				"src/main/webapp/app/scripts/app.js"
 			],
 			[
-				"story.css",
-				"src/main/webapp/app/styles/story.css"
-			],
-			[
 				"markdow",
 				"src/main/webapp/app/scripts/directives/markdownEditor.js"
-			],
-			[
-				"story.html",
-				"src/main/webapp/app/views/story.html"
 			],
 			[
 				"selec",
@@ -1310,10 +1444,6 @@
 				"src/main/scala/amanuensis/api/RootServiceActor.scala"
 			],
 			[
-				"modals.css",
-				"src/main/webapp/app/styles/modals.css"
-			],
-			[
 				"type",
 				"src/main/webapp/app/styles/typeahead.css"
 			],
@@ -1484,10 +1614,6 @@
 			[
 				"sharese",
 				"src/main/webapp/app/scripts/services/shareService.js"
-			],
-			[
-				"main.css",
-				"src/main/webapp/app/styles/main.css"
 			],
 			[
 				"story.",
