@@ -35,8 +35,7 @@
 	<!-- inbound Slot-List	-->
   <div id="slots-left" class="container slots slots-left shadow-right" scrollbar>
     <div class="slot-list-title">
-      <i class="fa on-slot fa-lg" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i>
-      <input class="slot-filter" type="text" placeholder="Inbound" ng-model="slotFilterLeft" tabindex="-1"></input>
+      <i class="fa on-slot fa-lg" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i>&nbsp;<input class="slot-filter" type="text" placeholder="In" ng-model="slotFilterLeft" tabindex="-1"></input>
     </div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.inSlots | filter:slotFilterLeft | orderBy:'name'" 
@@ -172,8 +171,7 @@
 	<!-- outbound Slot-List	-->
   <div id="slots-right" class="container slots slots-right shadow-left" scrollbar>
     <div class="slot-list-title">
-      <i class="fa fa-lg on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i>
-      <input class="slot-filter" type="text" placeholder="Outbound" ng-model="slotFilterRight" tabindex="-1"></input>
+      <i class="fa fa-lg on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i>&nbsp;<input class="slot-filter" type="text" placeholder="Out" ng-model="slotFilterRight" tabindex="-1"></input>
     </div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.outSlots | filter:slotFilterRight | orderBy:'name'" 
