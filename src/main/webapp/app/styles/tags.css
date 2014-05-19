@@ -66,7 +66,7 @@ li.tag-item > button.ng-binding {
     background-color: transparent;
     color: #fff;
     padding: 0;
-    margin: 0.125em;
+    margin: 0 0.125em;
     cursor: pointer;    
 }
 
