@@ -14,7 +14,7 @@ angular.module('amanuensisApp')
         template: ' \
             <div class="markdown-editor-wrapper"> \
                 <textarea id="{{textareaId}}" placeholder="{{placeholder}}" class="{{textareaClass}}" ng-model="value" \
-                    uploadable margin="20"> \
+                    uploadable fill-vertical margin="20"> \
                 </textarea> \
             </div> \
             ',

@@ -116,13 +116,14 @@ textarea.story-content {
   color: #fff;
   line-height: 1.3;
   margin: 0;
+  margin-top: 0.313em;
   font-weight: 300;
   background: transparent;
   border: none;
   width: 100%;
   height: 25em;
   font-size: 1.0em;
-  padding: 0.625em;
+  padding: 0.313em;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;

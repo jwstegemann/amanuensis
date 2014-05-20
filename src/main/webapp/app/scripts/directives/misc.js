@@ -39,6 +39,7 @@ angular.module('amanuensisApp')
     };
   })
   .directive('fillVertical', function() {
+
     return function(scope, elem, attrs) {
       var adjustSize = function(){
         elem.height($(window).height() - elem.offset().top - attrs.margin);
@@ -52,59 +53,6 @@ angular.module('amanuensisApp')
       }, 100);      
 
     };
-  })
-  .directive('scrollbar', function() {
-    return {
-      restrict: 'A',
-      scope: false,
-      link: function(scope, elem, attr) {
-        elem.mCustomScrollbar({
-          autoHideScrollbar: true,
-          horizontalScroll: false,
-          mouseWheel: true,
-          scrollButtons:{
-            enable: false
-          },
-          contentTouchScroll: true,
-          advanced:{
-            updateOnBrowserResize: false,
-            updateOnContentResize: false,
-            autoExpandHorizontalScroll: false,
-            autoScrollOnFocus: false,
-            normalizeMouseWheelDelta: false
-          }
-          //theme: 'light-thin'
-        });
-
-        var sl = elem.find('.mCSB_container')[0];
-
-        var updateTimeout;
-
-        addResizeListener(sl, function(e) {
-//            console.log("resized " + elem.attr('id'));
-            updateTimeout = setTimeout(function() {
-                elem.mCustomScrollbar('update');
-               console.log("adjusted scrollbar for " + elem.attr('id'));
-                updateTimeout = undefined;
-              }, 100);            
-        });
-
-          
-/*        if (attr.refreshOnChange) {
-          
-
-          scope.$watch(attr.refreshOnChange, function() {
-            if (!updateTimeout) {
-              updateTimeout = setTimeout(function() {
-                elem.mCustomScrollbar('update');
-                updateTimeout = undefined;
-              }, 250);
-            }
-          });
-        }
-*/    
-      }
-    } 
   })
   .directive("markdown", function ($rootScope) {
 

@@ -8,7 +8,6 @@ angular.module('amanuensisApp')
         if ($scope.$last === true) {
           $timeout(function() {
 //            console.log("updating scrollbar@");
-            $($attr.onFinishRender).mCustomScrollbar('update');
           });
         }
       }
