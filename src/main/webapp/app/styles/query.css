@@ -1,10 +1,12 @@
 
 div.query-sidebar {
+  position: fixed;
+  top:2.5em;
   width: 20%;
   min-width: 12.5em;
   float: left;
   padding: 1.0em;
-  padding-top: 2.4em;
+  padding-top: 0.25em;
   -moz-box-sizing: border-box;
   box-sizing: border-box;  
   overflow: hidden;
@@ -13,25 +15,27 @@ div.query-sidebar {
 }
 
 div.query-results {
+  position: fixed;
+  top: 2.5em;
   width: 80%;
   left: 20%;
   min-width: 12.5em;
   float: left;
-  padding: 2.4em 2.0em; 
+  padding: 0.25em 2.0em; 
   -moz-box-sizing: border-box;
   box-sizing: border-box;  
   overflow: hidden;
 }
 
 h3.filterHeader {
-  margin-top: 2.2em;
+  margin-top: 1.5em;
   font-size: 1.2em;
   font-weight: 300;
 }
 
 h2.resultHeader {
   margin: 0px;
-  margin-top: 1em;
+  margin-top: 0.75m;
   margin-bottom: 0.8em;
   font-size: 2em;
   font-weight: 300;

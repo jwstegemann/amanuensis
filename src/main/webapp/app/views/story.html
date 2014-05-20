@@ -4,7 +4,7 @@
 
 <div id="left-container" class="container left-container" ng-class="{'show-slots': inSlots, 'show-stories': inStories}">
 	<!-- inbound Story-List	-->
-  <div id="stories-left" class="container stories stories-left shadow-right" ng-controller="SlotCtrl" ng-init="inbound=true" scrollbar>
+  <div id="stories-left" class="container stories stories-left shadow-right vertical-scrollable" ng-controller="SlotCtrl" ng-init="inbound=true">
 		<div class="story-list-title">
       <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
@@ -33,7 +33,7 @@
 		</ul>  	
   </div>
 	<!-- inbound Slot-List	-->
-  <div id="slots-left" class="container slots slots-left shadow-right" scrollbar>
+  <div id="slots-left" class="container slots slots-left shadow-right vertical-scrollable">
     <div class="slot-list-title">
       <i class="fa on-slot fa-lg" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i>&nbsp;<input class="slot-filter" type="text" placeholder="In" ng-model="slotFilterLeft" tabindex="-1"></input>
     </div>
@@ -51,7 +51,8 @@
 <!-- # The Story itself           --> 
 <!-- #                            -->
 
-<div id="story-container" class="container story" ng-class="{'shifted-right': inStories, 'shifted-left': outStories}"> 
+<div id="story-container" class="container story vertical-scrollable thick-scroll" 
+  ng-class="{'shifted-right': inStories, 'shifted-left': outStories}"> 
 
     <ng-form name="storyForm">
       <div class="inner">
@@ -87,7 +88,7 @@
 
 -->
 
-        <div id="story-content" class="content" scrollbar fill-vertical margin="10" ng-click="updateScrollbar()">
+        <div id="story-content" class="content" margin="10">
           <markdown-editor name="content" ng-show="editMode" textarea-id="story-content-editor" 
             textarea-class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">
           </markdown-editor>
@@ -169,7 +170,7 @@
 		</ul>  	
   </div>
 	<!-- outbound Slot-List	-->
-  <div id="slots-right" class="container slots slots-right shadow-left" scrollbar>
+  <div id="slots-right" class="container slots slots-right shadow-left vertical-scrollable">
     <div class="slot-list-title">
       <i class="fa fa-lg on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i>&nbsp;<input class="slot-filter" type="text" placeholder="Out" ng-model="slotFilterRight" tabindex="-1"></input>
     </div>
@@ -240,7 +241,7 @@
   <div class="md-content">
     <h3>You are already sharing this story with...&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
     </h3>
-    <div id="share-list" class="share-list" scrollbar>
+    <div id="share-list" class="share-list vertical-scrollable">
       <table class="shares">
         <tr ng-repeat="share in shares | orderBy:'login'" ng-click="editUser(share.login, share.access)">
           <td class="icon">
