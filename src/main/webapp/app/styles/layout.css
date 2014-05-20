@@ -1,6 +1,6 @@
 div.container {
   position: absolute;
-  height: 100%;
+  height: calc(100% - 1.2em);
   top: 0;
   margin: 0;
   padding: 0;
@@ -15,6 +15,7 @@ div.container.left-container {
   z-index: 2;
   left: -45%;
   position: fixed;
+  margin-top: 2.5em;
 
   -webkit-transition:all linear  0.15s;
     transition:all linear 0.15s;
@@ -55,7 +56,8 @@ div.container.right-container {
   width: 45%;
   z-index: 2;
   left: 100%;
-  position: fixed;   
+  position: fixed; 
+  margin-top: 2.5em;
 
   -webkit-transition:all linear  0.15s;
     transition:all linear 0.15s;         
@@ -91,10 +93,10 @@ div.container.stories-right {
  * Story
  */ 
 div.container.story {
-  position: absolute;
   width: 100%;
   max-width: 100%;
   position: fixed;
+  margin-top: 2.5em;
 
   left: 0;
   z-index: 0;

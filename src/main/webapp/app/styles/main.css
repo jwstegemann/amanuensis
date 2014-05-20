@@ -223,3 +223,25 @@ p.pagination span.pagination-nav {
     overflow: hidden;
     z-index: -1;
 }
+
+/*
+ * scrollbar
+ */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 0.4em;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #858585;
+}
+
+.vertical-scrollable {
+  overflow-x: hidden; 
+  overflow-y: auto !important;
+}

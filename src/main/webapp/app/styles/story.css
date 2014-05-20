@@ -6,18 +6,17 @@ div.story-header {
   display: block;
   color: #fff;
   font-family: 'Lato', Arial, sans-serif;
-  margin-top: 2.5em;
   background: rgba(0,0,0,0.05);
-  padding: 1.8em 15%;
+  padding: 0.9em 15%;
   overflow: visible;
 }
 
 div.container.story.shifted-right div.story-header {
-  padding: 1.8em 0.6em;
+  padding: 0.9em 0.6em;
 }
 
 div.container.story.shifted-left div.story-header {
-  padding: 1.8em 0.6em;
+  padding: 0.9em 0.6em;
 }
 
 div.story-header a {
@@ -136,6 +135,8 @@ textarea.story-content:focus {
 div.story-view {
   margin-top: -0.625em;
   padding-top: 0;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -253,10 +254,10 @@ div.slot-list-title {
   font-family: 'Lato', Arial, sans-serif;
   color: #E3D091;
   font-size: 1em;
-  margin-top: 2.5em;
   font-weight: 300; 
   background: rgba(0,0,0,0.05);
-  word-wrap: break-word;  
+  word-wrap: break-word;
+  white-space: nowrap;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;    
@@ -332,10 +333,10 @@ div.story-list-title {
   font-family: 'Lato', Arial, sans-serif;
   color: #DABDB0;
   font-size: 1em;
-  margin-top: 2.5em;
   font-weight: 300; 
   background: rgba(0,0,0,0.05);
-  word-wrap: break-word;  
+  word-wrap: break-word;
+  white-space: nowrap;
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;    

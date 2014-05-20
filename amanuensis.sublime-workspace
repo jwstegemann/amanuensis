@@ -520,10 +520,42 @@
 	"buffers":
 	[
 		{
-			"file": "src/main/webapp/app/styles/story.css",
+			"file": "src/main/webapp/app/styles/tags.css",
 			"settings":
 			{
-				"buffer_size": 8964,
+				"buffer_size": 2458,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/styles/main.css",
+			"settings":
+			{
+				"buffer_size": 3017,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/styles/layout.css",
+			"settings":
+			{
+				"buffer_size": 1907,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/index.html",
+			"settings":
+			{
+				"buffer_size": 14181,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/webapp/app/scripts/controllers/story.js",
+			"settings":
+			{
+				"buffer_size": 22916,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,15 +563,15 @@
 			"file": "src/main/webapp/app/views/story.html",
 			"settings":
 			{
-				"buffer_size": 13939,
+				"buffer_size": 13922,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/app/styles/modals.css",
+			"file": "src/main/webapp/app/styles/story.css",
 			"settings":
 			{
-				"buffer_size": 3356,
+				"buffer_size": 9011,
 				"line_ending": "Unix"
 			}
 		}
@@ -680,14 +712,22 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/typeahead.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/tags.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/selectbox.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/buttons.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/quickdate.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/quickdate.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/markdownEditor.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-elastic/elastic.js",
@@ -698,16 +738,13 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/query.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/selectbox.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/selectbox.css",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/update_damod.sh",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/exceptions/Exceptions.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/FavourHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/Gruntfile.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/FavourActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/favourService.js",
@@ -721,9 +758,7 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/QueryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JRestFormats.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/quickdate.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/modals.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/tags.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/.bower.json",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css",
@@ -736,7 +771,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/Core.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/typeahead.js",
 		"/home/tiberius/scala/projects/amanuensis/README.md",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/typeahead.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/AccessActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/neo4j/test.cypher",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/reset",
@@ -805,9 +839,7 @@
 		"/home/tiberius/scala/projects/amanuensis/project/plugins.sbt",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/query.css",
 		"/home/tiberius/.config/sublime-text-2/Packages/SublimeSBT/SublimeSBT.sublime-settings",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/StringUtils.scala",
-		"/home/tiberius/scala/projects/amanuensis/curl/story/create",
-		"/home/tiberius/scala/projects/amanuensis/curl/story/update"
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/StringUtils.scala"
 	],
 	"find":
 	{
@@ -815,9 +847,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
+			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles",
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app",
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts",
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app",
@@ -856,6 +889,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"updateScr",
+			"updateScroll",
+			"updateScroo",
+			"updateScrollbar()",
+			"update",
+			"show",
+			"border-radius",
+			"border-ra",
+			"border-r",
+			"margin",
 			"px",
 			"5px",
 			"px",
@@ -973,17 +1016,7 @@
 			"remove(storyInfo.id,$index,$event)",
 			"refresh-on-change",
 			"consol",
-			"console.lo",
-			"$scope.value",
-			"$scope.icon",
-			"$scope.label",
-			"reset",
-			"$watch('",
-			"$watch",
-			"user",
-			"typeahead",
-			"suggest",
-			"mCSB"
+			"console.lo"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1032,23 +1065,51 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 6,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/main/webapp/app/styles/story.css",
+					"file": "src/main/webapp/app/styles/tags.css",
 					"settings":
 					{
-						"buffer_size": 8964,
+						"buffer_size": 2458,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7041,
-								7041
+								1591,
+								1591
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 643.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/main/webapp/app/styles/main.css",
+					"settings":
+					{
+						"buffer_size": 3017,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								347,
+								347
 							]
 						],
 						"settings":
@@ -1058,25 +1119,53 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5248.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "src/main/webapp/app/views/story.html",
+					"buffer": 2,
+					"file": "src/main/webapp/app/styles/layout.css",
 					"settings":
 					{
-						"buffer_size": 13939,
+						"buffer_size": 1907,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9303,
-								9303
+								1377,
+								1377
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1170.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/main/webapp/app/index.html",
+					"settings":
+					{
+						"buffer_size": 14181,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								602,
+								602
 							]
 						],
 						"settings":
@@ -1086,25 +1175,81 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2295.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "src/main/webapp/app/styles/modals.css",
+					"buffer": 4,
+					"file": "src/main/webapp/app/scripts/controllers/story.js",
 					"settings":
 					{
-						"buffer_size": 3356,
+						"buffer_size": 22916,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3356,
-								3356
+								18177,
+								18177
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7605.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/main/webapp/app/views/story.html",
+					"settings":
+					{
+						"buffer_size": 13922,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4762,
+								4762
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 900.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/main/webapp/app/styles/story.css",
+					"settings":
+					{
+						"buffer_size": 9011,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2495,
+								2495
 							]
 						],
 						"settings":
@@ -1114,7 +1259,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2572.0,
+						"translation.y": 1620.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1180,32 +1325,72 @@
 		"selected_items":
 		[
 			[
-				"modals.css",
-				"src/main/webapp/app/styles/modals.css"
+				"story.css",
+				"src/main/webapp/app/styles/story.css"
+			],
+			[
+				"storyhtt",
+				"src/main/scala/amanuensis/api/StoryHttpService.scala"
+			],
+			[
+				"storyac",
+				"src/main/scala/amanuensis/core/StoryActor.scala"
 			],
 			[
 				"story.html",
 				"src/main/webapp/app/views/story.html"
 			],
 			[
-				"story.css",
-				"src/main/webapp/app/styles/story.css"
+				"story.js",
+				"src/main/webapp/app/scripts/controllers/story.js"
+			],
+			[
+				"inde",
+				"src/main/webapp/app/index.html"
+			],
+			[
+				"layo",
+				"src/main/webapp/app/styles/layout.css"
+			],
+			[
+				"main",
+				"src/main/webapp/app/styles/main.css"
+			],
+			[
+				"tags.css",
+				"src/main/webapp/app/styles/tags.css"
+			],
+			[
+				"tags",
+				"src/main/webapp/app/styles/tags.css"
+			],
+			[
+				"quick",
+				"src/main/webapp/app/styles/quickdate.css"
 			],
 			[
 				"index.html",
 				"src/main/webapp/app/index.html"
 			],
 			[
-				"cab.css",
-				"src/main/webapp/app/styles/cab.css"
-			],
-			[
 				"main.css",
 				"src/main/webapp/app/styles/main.css"
 			],
 			[
-				"main",
-				"src/main/webapp/app/styles/main.css"
+				"quickdate.css",
+				"src/main/webapp/.tmp/styles/quickdate.css"
+			],
+			[
+				"misc",
+				"src/main/webapp/app/scripts/directives/misc.js"
+			],
+			[
+				"modals.css",
+				"src/main/webapp/app/styles/modals.css"
+			],
+			[
+				"cab.css",
+				"src/main/webapp/app/styles/cab.css"
 			],
 			[
 				"modal.css",
@@ -1214,10 +1399,6 @@
 			[
 				"login.js",
 				"src/main/webapp/app/scripts/controllers/login.js"
-			],
-			[
-				"story.js",
-				"src/main/webapp/app/scripts/controllers/story.js"
 			],
 			[
 				"app.js",
@@ -1230,10 +1411,6 @@
 			[
 				"selec",
 				"src/main/webapp/app/styles/selectbox.css"
-			],
-			[
-				"quick",
-				"src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js"
 			],
 			[
 				"query.js",
@@ -1256,20 +1433,12 @@
 				"src/main/webapp/app/views/query.html"
 			],
 			[
-				"misc",
-				"src/main/webapp/app/scripts/directives/misc.js"
-			],
-			[
 				"cab.js",
 				"src/main/webapp/app/scripts/controllers/cab.js"
 			],
 			[
 				"markdo",
 				"src/main/webapp/app/scripts/directives/markdownEditor.js"
-			],
-			[
-				"inde",
-				"src/main/webapp/app/index.html"
 			],
 			[
 				"exce",
@@ -1336,10 +1505,6 @@
 				"src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js"
 			],
 			[
-				"storyac",
-				"src/main/scala/amanuensis/core/StoryActor.scala"
-			],
-			[
 				"queryac",
 				"src/main/scala/amanuensis/core/QueryActor.scala"
 			],
@@ -1358,10 +1523,6 @@
 			[
 				"storyhttps",
 				"src/main/scala/amanuensis/api/StoryHttpService.scala"
-			],
-			[
-				"tags.css",
-				"src/main/webapp/app/styles/tags.css"
 			],
 			[
 				"app.",
@@ -1450,10 +1611,6 @@
 			[
 				"read",
 				"README.md"
-			],
-			[
-				"storyhtt",
-				"src/main/scala/amanuensis/api/StoryHttpService.scala"
 			],
 			[
 				"accessac",
@@ -1678,18 +1835,6 @@
 			[
 				"story.ht",
 				"src/main/webapp/app/views/story.html"
-			],
-			[
-				"main.cs",
-				"src/main/webapp/app/styles/main.css"
-			],
-			[
-				"ela",
-				"src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala"
-			],
-			[
-				"mod",
-				"src/main/webapp/app/styles/modals.css"
 			]
 		],
 		"width": 0.0
