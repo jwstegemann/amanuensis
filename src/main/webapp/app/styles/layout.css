@@ -10,7 +10,7 @@ div.container {
  * Left-Side
  */
 
-div.container.left-container {
+div.left-container {
   width: 45%;
   z-index: 2;
   left: -45%;
@@ -19,16 +19,16 @@ div.container.left-container {
   transition: left 0.25s ease-out;
 }
 
-div.container.left-container.show-slots {
+.left-container.show-slots {
   left: -30%;
   transition: left 0.25s ease-out;
 }
 
-div.container.left-container.show-stories {
+.left-container.show-stories {
   left: 0;
 }
 
-div.container.stories-left {
+.stories-left {
   left: 0;
   width: 67%;
   z-index: 4;
@@ -36,7 +36,7 @@ div.container.stories-left {
   box-sizing: border-box;
 }
 
-div.container.slots-left {
+.slots-left {
   left: 67%;
   width: 33%;
   z-index: 3;
@@ -46,7 +46,7 @@ div.container.slots-left {
  * Right-Side
  */
 
-div.container.right-container {
+div.right-container {
   width: 45%;
   z-index: 2;
   left: 100%;
@@ -55,22 +55,22 @@ div.container.right-container {
   transition: left 0.25s ease-out;
 }
 
-div.container.right-container.show-slots {
+.container.right-container.show-slots {
   left: 85%;
   transition: left 0.25s ease-out;
 }
 
-div.container.right-container.show-stories {
+.container.right-container.show-stories {
   left: 55%;
 }
 
-div.container.slots-right {
+.slots-right {
   left: 0;
   width: 33%;
   z-index: 3;
 }
 
-div.container.stories-right {
+.stories-right {
   left: 33%;
   width: 67%;
   z-index: 4;
@@ -81,7 +81,6 @@ div.container.stories-right {
  */
 
 div.container.story {
-  width: 100%;
   max-width: 100%;
   position: fixed;
   margin-top: 2.5em;
