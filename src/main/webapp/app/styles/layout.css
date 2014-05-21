@@ -16,58 +16,48 @@ div.container.left-container {
   left: -45%;
   position: fixed;
   margin-top: 2.5em;
-
-  -webkit-transition:all linear  0.15s;
-    transition:all linear 0.15s;
+  transition: left 0.25s ease-out;
 }
 
 div.container.left-container.show-slots {
   left: -30%;
-
-  -webkit-transition:all linear  0.25s;
-    transition:all linear 0.25s;
+  transition: left 0.25s ease-out;
 }
 
 div.container.left-container.show-stories {
   left: 0;
 }
 
-
 div.container.stories-left {
   left: 0;
   width: 67%;
   z-index: 4;
   -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;  
+  box-sizing: border-box;
 }
 
 div.container.slots-left {
   left: 67%;
   width: 33%;
-  z-index: 3; 
+  z-index: 3;
 }
 
 /* 
  * Right-Side
  */
- 
+
 div.container.right-container {
   width: 45%;
   z-index: 2;
   left: 100%;
-  position: fixed; 
+  position: fixed;
   margin-top: 2.5em;
-
-  -webkit-transition:all linear  0.15s;
-    transition:all linear 0.15s;         
+  transition: left 0.25s ease-out;
 }
 
 div.container.right-container.show-slots {
   left: 85%;
-
-  -webkit-transition:all linear  0.25s;
-    transition:all linear 0.25s;
+  transition: left 0.25s ease-out;
 }
 
 div.container.right-container.show-stories {
@@ -86,45 +76,42 @@ div.container.stories-right {
   z-index: 4;
 }
 
-
-
-
 /*
  * Story
- */ 
+ */
+
 div.container.story {
   width: 100%;
   max-width: 100%;
   position: fixed;
   margin-top: 2.5em;
-
   left: 0;
   z-index: 0;
-
-  -webkit-transition:all linear  0.25s;
-    transition:all linear 0.25s;        
+  width: 70%;
+  left: 15%;
+  transition: left 0.25s ease-out, width 0.25s linear;
 }
 
 div.container.story.shifted-right {
   left: 45%;
   width: 55%;
+  transition: left 0.25s ease-out, width 0.25s linear;
 }
 
 div.container.story.shifted-left {
   left: 0%;
   width: 55%;
+  transition: left 0.25s ease-out, width 0.25s linear;
 }
 
 div.container.story div.inner {
   position: absolute;
-  height: calc(100% - 1.2em); 
+  height: calc(100% - 1.2em);
   width: 100%;
   min-width: 100%;
   max-width: 100%;
-  padding-left: 1.25em;
-  padding-right: 1.25em;
+  padding: 0;
   margin-top: 0px;
-  -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
