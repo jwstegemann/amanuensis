@@ -85,9 +85,9 @@ angular.module('amanuensisApp', [
       nextLinkHtml: "<i class='fa fa-chevron-right'></i>",
       prevLinkHtml: "<i class='fa fa-chevron-left'></i>"
     })
-  }).config(['msdElasticConfig', function(config) {
+  })/* .config(['msdElasticConfig', function(config) {
     config.append = '\n';
-  }]).run(function ($rootScope, $location) {
+  }])*/.run(function ($rootScope, $location) {
     //init mode and stack
     $rootScope.selectMode = false;
     $rootScope.stack = undefined;
