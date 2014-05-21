@@ -51,11 +51,11 @@
 <!-- # The Story itself           --> 
 <!-- #                            -->
 
-<div id="story-container" class="container story vertical-scrollable thick-scroll" 
+<div id="story-container" class="container story" 
   ng-class="{'shifted-right': inStories, 'shifted-left': outStories}"> 
 
     <ng-form name="storyForm">
-      <div class="inner">
+      <div class="inner vertical-scrollable thick-scroll">
 				<div class="story-header">
 					<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
           <input id="story-title-input" name="title" class="story-title" type="text" ng-model="context.story.title"

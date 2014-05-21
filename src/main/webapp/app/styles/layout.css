@@ -117,7 +117,7 @@ div.container.story.shifted-left {
 
 div.container.story div.inner {
   position: absolute;
-  height: 100%; 
+  height: calc(100% - 1.2em); 
   width: 100%;
   min-width: 100%;
   max-width: 100%;

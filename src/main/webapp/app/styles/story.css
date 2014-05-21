@@ -127,11 +127,12 @@ textarea.story-content {
   -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+  background: rgba(0,0,0,0.05); 
 }
 
-textarea.story-content:focus {
+/*textarea.story-content:focus {
   border: 1px solid #8499af;
-}
+}*/
 
 div.story-view {
   margin-top: -0.625em;

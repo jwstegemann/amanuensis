@@ -11,7 +11,8 @@ angular.module('amanuensisApp', [
   'ngTagsInput',
   'typeahead',
   'selectbox',
-  'ngQuickDate'
+  'ngQuickDate',
+  'monospaced.elastic'
 ]).config(function ($routeProvider) {
     $routeProvider
       .when('/story/:storyId?', {
@@ -84,7 +85,9 @@ angular.module('amanuensisApp', [
       nextLinkHtml: "<i class='fa fa-chevron-right'></i>",
       prevLinkHtml: "<i class='fa fa-chevron-left'></i>"
     })
-  }).run(function ($rootScope, $location) {
+  }).config(['msdElasticConfig', function(config) {
+    config.append = '\n';
+  }]).run(function ($rootScope, $location) {
     //init mode and stack
     $rootScope.selectMode = false;
     $rootScope.stack = undefined;

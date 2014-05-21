@@ -157,7 +157,7 @@ angular.module('amanuensisApp')
         scope.onErrorUploading = function() {
           var text = scope.ngModel.replace(lastValue, "");
           scope.ngModel = text;
-          $rootScope.$broadcast('error',{errorMessage: 'An error occured uploading your file.'});
+          $rootScope.$broadcast('error',{errorMessage: 'I am inconsolable, but an error occured uploading your file.'});
         };
 
         //helper functions
