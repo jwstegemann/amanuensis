@@ -140,4 +140,10 @@ angular.module('amanuensisApp')
     $scope.goHome = function() {
         $location.url('/query');
     }
+
+    $scope.menuElement = $('#cab');
+
+    $scope.toggleMenu = function() {
+        $scope.menuElement.toggleClass('active-menu');
+    }
 });

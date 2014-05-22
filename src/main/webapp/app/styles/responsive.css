@@ -40,9 +40,9 @@
     font-size: 10px;
   }
 
-  li.trigger {
+  /*li.trigger {
     display: none;
-  }
+  }*/
 
   div.left-container {
     width: 200%;
@@ -88,5 +88,155 @@
   .slots-right {
     width: 50%;
   }  
+
+  /*
+   * Query-Page
+   */
+
+  div.query-sidebar {
+    width: 100%;
+    left: -100%;
+  }
+
+  div.query-results {
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  .main-search-input {
+    width: 80%;
+  }
+
+  /*
+   * CAB
+   */
+
+ #responsive-cab {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #5f6f81;
+    list-style: none;
+    text-transform: none;
+    font-weight: 300;
+    font-family: 'Lato', Arial, sans-serif;
+    line-height: 2.5em;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+    z-index: 9000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4em;
+    font-size: 0.625em;    
+  }
+
+  #responsive-cab > li {
+    float: left;
+    display: block;
+    background-color: #fff;
+    min-width: 4em;
+    text-align: center;
+    height: 4em;
+  }  
+
+  #responsive-cab a {
+    display: block;
+    height: 100%;
+    color: #5f6f81;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #responsive-cab > li > a.text {
+    font-weight: normal;
+    font-size: 1.6em;
+    margin-top: 0.2em;
+  }
+
+  #responsive-cab > li.middle {
+    margin-left: 4em;
+    max-width: calc(100% - 20.1em);
+  }
+
+  #responsive-cab > li.cab-right {
+    float: right;
+    border-right: none;
+    border-left: 1px solid #c6d0da;
+  }
+
+  #responsive-cab > li > input {
+    font-family: 'Lato', Arial, sans-serif;
+    color: #333;
+    font-size: 2.0em;
+    line-height: 1.3;
+    margin: 0.2em 0.625em 0px 0.625em;
+    font-weight: 300;
+    background: transparent;
+    border: none;
+    width: 8em;
+    max-width: 8em;
+  }  
+
+.cab-main {
+    z-index: 9000;
+    position: fixed;
+    top: 4.1em;
+    left: 0;
+    width: 100%;
+    min-width: 75em;
+    height: 0;
+    font-size: 0.625em;
+    overflow: visible;
+}
+
+  .cab-main > li.trigger {
+    display: none;
+  }
+
+  #responsive-cab > li.menu-trigger {
+    float: left;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    text-align: center;
+    border: 0;
+  }
+
+  .cab-main > li {
+    display: none;
+    background-color: #fff;
+    width: 100%;
+    border-top: 1px solid #c6d0da;
+    text-align: left;
+    height: auto;
+  }
+
+  .cab-main.active-menu > li {
+    display: block;
+  }
+
+  .cab-main > li.not-in-responsive {
+    display: none;
+  }
+
+  .cab-main a {
+    width: 100%;
+    font-size: 1.5em;
+    margin-bottom: 0.6em;
+  }
+
+  .cab-desc {
+    display: inline;
+    font-size: 1.6em;
+    margin-left: 1em;
+  }
+
+  .cab-main > li:hover {
+    background-color: #ccc;
+  }
 
 }

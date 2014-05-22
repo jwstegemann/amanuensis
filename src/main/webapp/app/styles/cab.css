@@ -35,6 +35,10 @@
     cursor: pointer;
 }
 
+.cab-desc {
+    display: none;
+}
+
 .cab-main > li {
     display: block;
     float: left;
@@ -120,6 +124,13 @@
     position: relative;
     width: 3.75em;
     vertical-align: middle; 
+}
+
+.cab-main li.menu-trigger {
+    position: relative;
+    width: 3.75em;
+    vertical-align: middle; 
+    display: none;
 }
 
 .cab-main li.cab-right {

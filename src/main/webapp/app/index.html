@@ -47,78 +47,234 @@
     <!-- #                         -->
     <!-- # StatusBar               --> 
     <!-- #                         -->
+     <ul id="responsive-cab">
+      <li class="menu-trigger cab-action" ng-click="toggleMenu()">
+        <i class="fa fa-bars fa-2x on-cab"></i>
+      </li>   
 
-     <ul id="cab" class="cab-main" ng-cloak>
-
-      <li ng-show="appState < 128" class="trigger cab-action" ng-click="toggleLeft()">
-        <i class="fa fa-th fa-2x on-cab"></i>
+      <li ng-show="stack" ng-click="goToStack()" class="middle">
+        <a class="text" title="story and slot you are going to add a story to">
+          <i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{stack.storyTitle}}&nbsp;<i class="fa fa-link fa-fw fa-lg on-cab"></i>&nbsp;{{stack.slotName}}
+        </a>
       </li>
 
-      <li ng-show="appState < 128" class="trigger cab-right cab-action" ng-click="toggleRight()">
-        <i class="fa fa-th fa-2x on-cab"></i>
-      </li>         
-
-      <li ng-click="goBack()"><a title="go back"><i class="fa fa-chevron-left fa-fw fa-2x on-cab"></i></a></li>
-
-      <li ng-click="goHome()"><a title="return to your workplace"><i class="fa fa-home fa-fw fa-2x on-cab"></i></a></li>
-
-      <li ng-show="appState < 128 && editMode" ng-click="doneEditing()"><a title="return to view mode"><i class="fa fa-eye fa-fw fa-2x on-cab"></i></a>></li>
-      <li ng-show="appState < 128 && !editMode && storyFlags.canWrite" ng-click="startEditing()"><a title="edit story"><i class="fa fa-pencil fa-fw fa-2x on-cab"></i></a>></li>
-
-      <!-- selecting a story for slot-->
-      <li ng-show="selectMode" ng-click="select()"><a title="add this story to the slot"><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
-      <li ng-show="stack" ng-click="goToStack()"><a class="text" title="story and slot you are going to add a story to"><i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{stack.storyTitle}}&nbsp;<i class="fa fa-link fa-fw fa-lg on-cab"></i>&nbsp;{{stack.slotName}}</a></li>        
-      <li ng-show="selectMode" ng-click="cancel()"><a title="cancel selecting a story"><i class="fa fa-times fa-fw fa-2x on-cab"></i></a></li>
-
-      <!-- selecting a story for graph-search -->
-      <li ng-show="targetMode" ng-click="selectTarget()"><a title="select story for graph-search"><i class="fa fa-check fa-fw fa-2x on-cab"></i></a>></li>
-      <li ng-show="targetMode" ng-click="goToTargetStack()">
+      <li ng-show="targetMode" class="middle" ng-click="goToTargetStack()">
         <a class="text">
           <i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;
           {{targetStack.source.title}}&nbsp;
           <i class="fa fa-code-fork fa-fw fa-lg on-cab"></i>
         </a>
-      </li>        
-      <li ng-show="targetMode" ng-click="cancelTarget()"><a title="cancel graph-search"><i class="fa fa-times fa-fw fa-2x on-cab"></i></a></li>
+      </li> 
+
+      <li class="cab-right">
+        <input id="query-input" ng-model="cabQueryString" placeholder="search for..." on-enter="search()"
+          select-on-focus>
+        </input>
+      </li>      
+
+     </ul>
+
+    <ul id="cab" class="cab-main">
+
+      <li ng-show="appState < 128" class="trigger cab-action not-in-responsive" ng-click="toggleLeft()">
+        <i class="fa fa-th fa-2x on-cab"></i>
+      </li>
+
+      <li ng-show="appState < 128" class="trigger cab-right cab-action not-in-responsive" ng-click="toggleRight()">
+        <i class="fa fa-th fa-2x on-cab"></i>
+      </li>       
+
+      <li ng-click="goBack()" class="not-in-responsive">
+        <a title="go back">
+          <i class="fa fa-chevron-left fa-fw fa-2x on-cab"></i>
+        </a>
+      </li>
+
+      <li ng-click="goHome()">
+        <a title="return to your workplace">
+          <i class="fa fa-home fa-fw fa-2x on-cab"></i><span class="cab-desc">Your Workspace</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && editMode" ng-click="doneEditing()">
+        <a title="return to view mode">
+          <i class="fa fa-eye fa-fw fa-2x on-cab"></i><span class="cab-desc">finish editing</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && !editMode && storyFlags.canWrite" ng-click="startEditing()">
+        <a title="edit story">
+          <i class="fa fa-pencil fa-fw fa-2x on-cab"></i><span class="cab-desc">edit this Story</span>
+        </a>
+      </li>
+
+      <!-- selecting a story for slot-->
+      <li ng-show="selectMode" ng-click="select()">
+        <a title="add this story to the slot">
+          <i class="fa fa-check fa-fw fa-2x on-cab"></i><span class="cab-desc">add this Story to the Slot</span>
+        </a>
+      </li>
+ 
+      <li ng-show="stack" ng-click="goToStack()" class="not-in-responsive">
+        <a class="text" title="story and slot you are going to add a story to">
+          <i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{stack.storyTitle}}&nbsp;<i class="fa fa-link fa-fw fa-lg on-cab"></i>&nbsp;{{stack.slotName}}
+        </a>
+      </li>    
+
+      <li ng-show="selectMode" ng-click="cancel()">
+        <a title="cancel selecting a story">
+          <i class="fa fa-times fa-fw fa-2x on-cab"></i><span class="cab-desc">cancel selecting a Story</span>
+        </a>
+      </li>
+
+      <!-- selecting a story for graph-search -->
+      <li ng-show="targetMode" ng-click="selectTarget()">
+        <a title="select story for graph-search">
+          <i class="fa fa-check fa-fw fa-2x on-cab"></i><span class="cab-desc">select Story for Graph-Search</span>
+        </a>
+      </li>
+
+      <li ng-show="targetMode" ng-click="goToTargetStack()" class="not-in-responsive">
+        <a class="text">
+          <i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;
+          {{targetStack.source.title}}&nbsp;
+          <i class="fa fa-code-fork fa-fw fa-lg on-cab"></i>
+        </a>
+      </li>   
+
+      <li ng-show="targetMode" ng-click="cancelTarget()">
+        <a title="cancel graph-search">
+          <i class="fa fa-times fa-fw fa-2x on-cab"></i><span class="cab-desc">cancel Graph-Search</span>
+        </a>
+      </li>
 
       <!-- story-editing -->
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="createStoryInSlot()"><a title="create a new story and add it to to slot at this one"><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && !selectMode && !targetMode" ng-click="saveStory()"><a title="save this story"><i class="fa fa-save fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="deleteStory()"><a title="delete this story"><i class="fa fa-trash-o fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 4 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="createSlot()"><a title="add an existing story to a slot of this one"><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
-      <!-- editing stories in a slot -->
-      <li ng-show="appState === 4 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="addStory()"><a title="add an existing story to the actual open slot"><i class="fa fa-link fa-fw fa-2x on-cab"></i></a></li>
-      <!-- share a story -->
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode" ng-click="shareStory()"><a title="share a story with other users"><i class="fa fa-random fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && !storyFlags.stars && storyFlags.saved" ng-click="starStory()"><a title="star this story"><i class="fa fa-star-o fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.stars && storyFlags.saved" ng-click="unstarStory()"><a title="unstar this story"><i class="fa fa-star fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && storyFlags.saved" ng-click="reloadStory()"><a title="reload this story"><i class="fa fa-refresh fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && editMode && storyFlags.saved" ng-click="addAttachment()"><a title="upload an attachment to this story"><i class="fa fa-paperclip fa-fw fa-2x on-cab"></i></a></li>
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="createStoryInSlot()">
+        <a title="create a new story and add it to to slot at this one">
+          <i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i><span class="cab-desc">create new Story</span>
+        </a>
+      </li>
 
-      <li ng-show="appState < 128 && editMode" ng-click="controlText('bold',$event)"><a title="make text bold"><i class="fa fa-bold fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && editMode" ng-click="controlText('italic',$event)"><a title="make text italic"><i class="fa fa-italic fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && editMode" ng-click="controlText('link',$event)"><a title="make text a link"><i class="fa fa-external-link fa-fw fa-2x on-cab"></i></a></li>      
-      <li ng-show="appState < 128 && editMode" ng-click="controlText('header',$event)"><a title="make current line a header"><i class="fa fa-text-height fa-fw fa-2x on-cab"></i></a></li>
-      <li ng-show="appState < 128 && editMode" ng-click="controlText('list-ul',$event)"><a title="make line a list"><i class="fa fa-list-ul fa-fw fa-2x on-cab"></i></a></li>  
+      <li ng-show="appState < 128 && !selectMode && !targetMode" ng-click="saveStory()">
+        <a title="save this story">
+          <i class="fa fa-save fa-fw fa-2x on-cab"></i><span class="cab-desc">save Story</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="deleteStory()">
+        <a title="delete this story">
+          <i class="fa fa-trash-o fa-fw fa-2x on-cab"></i><span class="cab-desc">delete Story</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 4 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="createSlot()">
+        <a title="add an existing story to a slot of this one">
+          <i class="fa fa-link fa-fw fa-2x on-cab"></i><span class="cab-desc">add Story to a Slot</span>
+        </a>
+      </li>
+
+      <!-- editing stories in a slot -->
+      <li ng-show="appState === 4 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="addStory()">
+        <a title="add an existing story to the actual open slot">
+          <i class="fa fa-link fa-fw fa-2x on-cab"></i><span class="cab-desc">add Story to open Slot</span>
+        </a>
+      </li>
+
+      <!-- share a story -->
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode" ng-click="shareStory()">
+        <a title="share a story with other users">
+          <i class="fa fa-random fa-fw fa-2x on-cab"></i><span class="cab-desc">share Story with Others</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && !storyFlags.stars && storyFlags.saved" ng-click="starStory()">  <a title="star this story">
+          <i class="fa fa-star-o fa-fw fa-2x on-cab"></i><span class="cab-desc">star this Story</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.stars && storyFlags.saved" 
+        ng-click="unstarStory()">
+        <a title="unstar this story">
+          <i class="fa fa-star fa-fw fa-2x on-cab"></i><span class="cab-desc">unstar this Story</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && storyFlags.saved" ng-click="reloadStory()">
+        <a title="reload this story">
+          <i class="fa fa-refresh fa-fw fa-2x on-cab"></i><span class="cab-desc">reload</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && editMode && storyFlags.saved" ng-click="addAttachment()">
+        <a title="upload an attachment to this story">
+          <i class="fa fa-paperclip fa-fw fa-2x on-cab"></i><span class="cab-desc">add Attachment</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && editMode" ng-click="controlText('bold',$event)">
+        <a title="make text bold">
+          <i class="fa fa-bold fa-fw fa-2x on-cab"></i><span class="cab-desc">make Text bold</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && editMode" ng-click="controlText('italic',$event)">
+        <a title="make text italic">
+          <i class="fa fa-italic fa-fw fa-2x on-cab"></i><span class="cab-desc">make Text italic</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && editMode" ng-click="controlText('link',$event)">
+        <a title="make text a link">
+          <i class="fa fa-external-link fa-fw fa-2x on-cab"></i><span class="cab-desc">make Text a Link</span>
+        </a>
+      </li> 
+
+      <li ng-show="appState < 128 && editMode" ng-click="controlText('header',$event)">
+        <a title="make current line a header">
+          <i class="fa fa-text-height fa-fw fa-2x on-cab"></i><span class="cab-desc">make Line a Header</span>
+        </a>
+      </li>
+
+      <li ng-show="appState < 128 && editMode" ng-click="controlText('list-ul',$event)">
+        <a title="make line a list">
+          <i class="fa fa-list-ul fa-fw fa-2x on-cab"></i><span class="cab-desc">make Line a List</span>
+        </a>
+      </li>  
 
       <!-- create a new story on it's own -->
       <li ng-show="!selectMode && !targetMode && appState === 128">
-        <a href="#/story" title="create a new story"><i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i></a>
+        <a href="#/story" title="create a new story">
+          <i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i><span class="cab-desc">create a new Story</span>
+        </a>
       </li>
 
-      <li class="cab-right" id="user-menu"><a class="user"><i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}</a>
+      <li class="cab-right not-in-responsive" id="user-menu">
+        <a class="user">
+          <i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}
+        </a>
         <ul>
           <li ng-click="changePassword()"><i class="fa fa-cog fa-fw"></i>&nbsp;change password</li>
           <li ng-click="logout()"><i class="fa fa-power-off fa-fw"></i>&nbsp;log me out</li>
         </ul>
       </li>
-      <li class="cab-right">
+
+      <li class="cab-right not-in-responsive">
         <input id="query-input" ng-model="cabQueryString" placeholder="search for..." on-enter="search()"
           select-on-focus>
         </input>
       </li>
-      <li class="cab-right"><a ng-click="search(true)" title="go to the search-page"><i class="fa fa-search fa-fw fa-2x on-cab"></i></a></li>
-      <li class="cab-right" ng-show="appState < 128"><a title="start a new graph-search" ng-click="findPaths()"><i class="fa fa-code-fork fa-fw fa-2x on-cab"></i></a></li>
+
+      <li class="cab-right not-in-responsive">
+        <a ng-click="search(true)" title="go to the search-page">
+          <i class="fa fa-search fa-fw fa-2x on-cab"></i>
+        </a>
+      </li>
+
+      <li class="cab-right" ng-show="appState < 128">
+        <a title="start a new graph-search" ng-click="findPaths()">
+          <i class="fa fa-code-fork fa-fw fa-2x on-cab"></i><span class="cab-desc">start Graph-Search</span>
+        </a>
+      </li>
 
       
            
