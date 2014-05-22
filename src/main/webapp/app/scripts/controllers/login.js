@@ -77,7 +77,7 @@ angular.module('amanuensisApp')
     } 
     else {
       $scope.login = 'dummy';
-      $scope.pwd = 'dummy';
+      $scope.pwd = 'welt07541';
 
       $scope.doLogin();
 

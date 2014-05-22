@@ -63,12 +63,12 @@ div.right-container {
   transition: left 0.25s ease-out;
 }
 
-.container.right-container.show-slots {
+.right-container.show-slots {
   left: 85%;
   transition: left 0.25s ease-out;
 }
 
-.container.right-container.show-stories {
+.right-container.show-stories {
   left: 55%;
 }
 

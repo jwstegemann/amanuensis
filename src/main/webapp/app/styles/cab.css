@@ -151,3 +151,7 @@ i.on-cab {
     min-width: 11em;
     font-size: 1.2em;
 }
+
+#responsive-cab {
+    display: none;
+}

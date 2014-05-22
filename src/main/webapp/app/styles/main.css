@@ -19,23 +19,6 @@ body,html {
   max-width: 100%;
 }
 
-@media screen and (max-width: 1280px) {
-  body {
-    font-size: 0.750em;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  body {
-    font-size: 10px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  body {
-    font-size: 8px;
-  }
-}
 
 a, a:link, a:visited, a:active, a:hover {
   color: inherit;
@@ -248,4 +231,12 @@ p.pagination span.pagination-nav {
 .vertical-scrollable {
   overflow-x: hidden; 
   overflow-y: auto !important;
+}
+
+br.only-responsive {
+  display: none;
+}
+
+.not-in-responsive {
+  display: inline;
 }

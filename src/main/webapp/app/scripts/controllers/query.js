@@ -68,10 +68,6 @@ angular.module('amanuensisApp')
       $scope.searchStories(queryService.query, $routeParams.queryString);
     }
 
-    setTimeout(function() {
-      $('#query-input').focus();
-    }, 50);
-
     $scope.$on('search', function(event, params) {
       $scope.searchStories(queryService.query, params.cabQueryString);
     });

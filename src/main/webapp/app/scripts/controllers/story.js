@@ -381,6 +381,7 @@ angular.module('amanuensisApp')
      * show and hide slots and strories
      */
     $scope.showInSlots = function() {
+        console.log("Bin hier");
         $scope.inSlots = true;
         $scope.outStories = false;
         $scope.activeSlot = undefined;
@@ -424,6 +425,12 @@ angular.module('amanuensisApp')
     $scope.hideOutStories = function() {
         $scope.outStories = false;
     }
+
+
+    $scope.$on('hideInStories', $scope.hideInStories);
+    $scope.$on('hideInSlots', $scope.hideInSlots);
+    $scope.$on('hideOutStories', $scope.hideOutStories);
+    $scope.$on('hideOutSlots', $scope.hideOutSlots);
 
     /*
      * Preview and Editor

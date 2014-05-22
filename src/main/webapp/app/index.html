@@ -300,7 +300,7 @@
         <div>
           <input id="loginInput" class="start-focus" type="text" ng-model="login" on-enter="goToPassword()" placeholder="Your Login"></input>
           <input id="passwordInput" type="password" ng-model="pwd" on-enter="doLogin()" placeholder="Your Password"></input>
-          <i class="fa fa-unlock-alt fa-2x on-button action on-right opacity-hover" ng-click="doLogin()"></i>
+          <i id="unlock-icon" class="fa fa-unlock-alt fa-2x on-button action on-right opacity-hover" ng-click="doLogin()"></i>
         </div>
       </div>
     </div>
@@ -357,6 +357,7 @@
     <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
     <script src="bower_components/ngQuickDate/dist/ng-quick-date.js"></script>
     <script src="bower_components/angular-elastic/elastic.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <!-- endbower -->
     <script src="bower_components/marked/lib/marked.js"></script>
     <!-- endbuild -->

@@ -5,6 +5,7 @@ angular.module('amanuensisApp', [
   'ngSanitize',
   'ngRoute',
   'ngAnimate',
+  'ngTouch',
   'angular-growl',
   'http-auth-interceptor',
   'chieffancypants.loadingBar',

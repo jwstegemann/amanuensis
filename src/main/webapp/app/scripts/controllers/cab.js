@@ -7,16 +7,19 @@ angular.module('amanuensisApp')
 
     $scope.select = function() {
     	$scope.$broadcast('addStoryToSlot');
+        $scope.toggleMenu();
     }
 
     $scope.cancel = function() {
     		//reset stack etc.
     		$rootScope.selectMode = false;
     		$rootScope.stack = undefined;
+        $scope.toggleMenu();            
     }
     
     $scope.goToStack = function() {
         $location.url('/story/' + $rootScope.stack.storyId);
+        $scope.toggleMenu();
     }
 
     $scope.toggleLeft = function() {
@@ -33,34 +36,42 @@ angular.module('amanuensisApp')
 
     $scope.saveStory = function() {
         $scope.$broadcast('saveStory');
+        $scope.toggleMenu();
     }
 
     $scope.deleteStory = function() {
         $scope.$broadcast('deleteStory');
+        $scope.toggleMenu();
     }
 
     $scope.createSlot = function() {
         $scope.$broadcast('createSlot');
+        $scope.toggleMenu();
     }
 
     $scope.addStory = function() {
         $scope.$broadcast('addStory');
+        $scope.toggleMenu();
     }
 
     $scope.createStoryInSlot = function() {
         $scope.$broadcast('createStoryInSlot');   
+        $scope.toggleMenu();
     }
 
     $scope.shareStory = function() {
         $scope.$broadcast('shareStory');   
+        $scope.toggleMenu();
     }
 
     $scope.starStory = function() {
         $scope.$broadcast('starStory'); 
+        $scope.toggleMenu();
     }
 
     $scope.unstarStory = function() {
         $scope.$broadcast('unstarStory');   
+        $scope.toggleMenu();
     }
 
     $scope.getUserContext = function() {
@@ -91,28 +102,34 @@ angular.module('amanuensisApp')
 
     $scope.startEditing = function() {
         $scope.$broadcast('startEditing');        
+        $scope.toggleMenu();
     }  
 
     $scope.doneEditing = function() {
         $scope.$broadcast('doneEditing');        
+        $scope.toggleMenu();
     }    
 
     $scope.logout = function() {
         $scope.$broadcast('logout');        
+        $scope.toggleMenu();
     }  
 
     $scope.findPaths = function() {
         $scope.$broadcast('selectTarget');
+        $scope.toggleMenu();
     }
 
     $scope.selectTarget = function() {
         $scope.$broadcast('findPaths');
+        $scope.toggleMenu();
     }
 
     $scope.cancelTarget = function() {
-            //reset stack etc.
-            $rootScope.targetMode = false;
-            $rootScope.targetStack = undefined;
+        //reset stack etc.
+        $rootScope.targetMode = false;
+        $rootScope.targetStack = undefined;
+        $scope.toggleMenu();
     }
     
     $scope.goToTargetStack = function() {
@@ -121,24 +138,29 @@ angular.module('amanuensisApp')
 
     $scope.changePassword = function() {
         $scope.$broadcast('changePassword');
+        $scope.toggleMenu();
     }
 
     $scope.reloadStory = function() {
         $scope.$broadcast('reloadStory');
+        $scope.toggleMenu();
     }
 
     $scope.addAttachment = function() {
         $scope.$broadcast('addAttachment');
+        $scope.toggleMenu();
     }
 
     $scope.controlText = function(signal, event) {
         event.stopPropagation();
         event.preventDefault();
         $scope.$broadcast('markdown_' + signal);
+        $scope.toggleMenu();
     }
 
     $scope.goHome = function() {
         $location.url('/query');
+        $scope.toggleMenu();
     }
 
     $scope.menuElement = $('#cab');

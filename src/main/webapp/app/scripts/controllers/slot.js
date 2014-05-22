@@ -59,4 +59,20 @@ angular.module('amanuensisApp')
         }
     });
 
+    $scope.hideInStories = function() {
+        $scope.$emit("hideInStories");
+    }
+
+    $scope.hideInSlots = function() {
+        $scope.$emit("hideInSlots");
+    }
+
+    $scope.hideOutStories = function() {
+        $scope.$emit("hideOutStories");
+    }
+
+    $scope.hideOutSlots = function() {
+        $scope.$emit("hideOutSlots");
+    }
+
   });
