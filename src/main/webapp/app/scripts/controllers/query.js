@@ -48,6 +48,10 @@ angular.module('amanuensisApp')
         $scope.terms = terms;
 
         $scope.pages = $scope.calcPages();
+
+        //ios
+        $('#query-sidebar').scrollTop();
+        $('#query-results').scrollTop();
       });   
    
     }

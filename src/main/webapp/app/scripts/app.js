@@ -103,6 +103,19 @@ angular.module('amanuensisApp', [
       }
     }
 
+    var $body = jQuery('body'); 
+
+    //alert('neu 6');
+
+    /* bind events */
+    $(document)
+    .on('focus', 'input', function(e) {
+        $body.addClass('fixfixed');
+    })
+    .on('blur', 'input', function(e) {
+        $body.removeClass('fixfixed');
+    });
+
   });
 
 
