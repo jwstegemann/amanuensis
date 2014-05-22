@@ -338,9 +338,6 @@
 
   .md-content div.confirmation-icon > i {
     font-size: 4em;
-    padding: 0.5em;
-    border: 3px solid rgba(255,255,255,0.25);
-    border-radius: 50% 50%; 
   }
 
   .md-content div.confirmation-message {

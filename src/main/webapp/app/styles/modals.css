@@ -145,13 +145,18 @@ div.md-overlay.md-show {
 }
 
 .md-content div.confirmation-icon {
-	float:right; 
 	vertical-align: middle;
-	padding: 1.250em;
+	padding: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .md-content div.confirmation-icon > i {
-	cursor: pointer;
+  font-size: 2em;
+  padding: 0.5em;
+  border: 3px solid rgba(255,255,255,0.25);
+  border-radius: 50% 50%; 
+  margin-bottom: 1em;
 }
 
 .md-content button {
@@ -189,6 +194,13 @@ i.on-right {
 	float: right;
 	margin-top: 0.8em;
 }
+
+.md-content div.confirmation i {
+    font-size: 1.5em;
+    padding: 0.5em;
+    border: 3px solid rgba(255,255,255,0.25);
+    border-radius: 50% 50%;
+  }
 
 i.confirmation {
 	float: right;
