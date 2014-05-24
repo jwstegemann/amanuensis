@@ -86,6 +86,13 @@ trait UserHttpService extends HttpService with SprayJsonSupport  { self: ActorLo
             }
           }              
         }
+      } ~
+      path("info") {
+        get {
+          dynamic {
+            complete(userContext);
+          }
+        }
       } 
     }
   }
