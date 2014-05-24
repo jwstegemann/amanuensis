@@ -53,7 +53,7 @@
     <!-- #                         -->
     <!-- # StatusBar               --> 
     <!-- #                         -->
-     <ul id="responsive-cab">
+     <ul id="responsive-cab" hm-swipe-down="toggleMenu()">
       <li class="menu-trigger cab-action" ng-click="toggleMenu()">
         <i class="fa fa-bars fa-2x on-cab"></i>
       </li>   
@@ -306,7 +306,9 @@
         <div>
           <input id="loginInput" class="start-focus" type="text" ng-model="login" on-enter="goToPassword()" placeholder="Your Login"></input>
           <input id="passwordInput" type="password" ng-model="pwd" on-enter="doLogin()" placeholder="Your Password"></input>
-          <i id="unlock-icon" class="fa fa-unlock-alt fa-2x on-button action on-right opacity-hover" ng-click="doLogin()"></i>
+          <div class="default-button">
+            <i id="unlock-icon" class="fa fa-unlock-alt fa-2x action opacity-hover" ng-click="doLogin()"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -321,7 +323,9 @@
             on-enter="goToRepeatPassword()" placeholder="Your new password"></input>
           <input id="new-pw2-input" type="password" ng-model="repeatPwd" 
             on-enter="change()" placeholder="repeat the new password"></input>
-          <i class="fa fa-check fa-2x on-button action on-right opacity-hover" ng-click="change()"></i>
+          <div class="default-button">            
+            <i class="fa fa-check fa-2x on-button action default-button opacity-hover" ng-click="change()"></i>
+          </div>
         </div>
       </div>
     </div>

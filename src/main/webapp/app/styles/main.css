@@ -169,7 +169,30 @@ button.close {
  */
 
 #login-modal {
-  width: 32em;
+  width: 28em;
+  text-align: center;
+}
+
+.default-button {
+  margin-top: 2em;
+  text-align: center;  
+  width: 100%;
+}
+
+.default-button > i {
+  font-size: 1.5em;
+  float: none;
+  padding: 0.5em;
+  border: 3px solid rgba(255,255,255,0.25);
+  border-radius: 50% 50%;
+  width: 2em;    
+  height: 2em;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.default-button > i::before {
+  font-size: 2em;
 }
 
 #passwordInput {

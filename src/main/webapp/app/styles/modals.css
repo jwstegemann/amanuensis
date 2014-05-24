@@ -106,14 +106,14 @@ div.md-overlay.md-show {
   background: transparent;
   border: none;
   border-bottom: 1px solid white;
-  width: 13.4em;
+  width: 100%;
 }
 
 .md-content div.confirmation-message {
 	margin-top: 1.4em;
   font-size: 1.2em;
   line-height: 1.2;
-  font-weight: 300;
+  font-weight: 400;
   margin: 0;
   padding-left: 1.250em;
   padding-right: 1.250em;
