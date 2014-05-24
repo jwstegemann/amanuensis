@@ -100,8 +100,17 @@
 
   div.query-sidebar {
     width: 100%;
-    left: -100%;
+    left: -100%;   
     transition: left 0.25s ease-out;    
+  }
+
+  h3.filterHeader {
+    font-size: 1.8em;
+  }
+
+  .tag-list {
+    font-size: 1.4em;
+    line-height: 1.2em;
   }
 
   div.query-results {
