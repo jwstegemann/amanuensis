@@ -204,6 +204,13 @@ button.close {
 }
 
 /*
+ * Search-Modal
+ */
+#search-modal {
+  display: none;
+}
+
+/*
  * Pagination
  */
 p.pagination {

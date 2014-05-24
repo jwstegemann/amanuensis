@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('CabCtrl', function ($scope,$route,$rootScope,$location,$window) {
+  .controller('CabCtrl', function ($scope,$route,$rootScope,$location,$window,utilService) {
 
     $scope.cabQueryString = undefined;
 
@@ -168,4 +168,8 @@ angular.module('amanuensisApp')
     $scope.toggleMenu = function() {
         $scope.menuElement.toggleClass('active-menu');
     }
+
+    $scope.triggerSearch = function() {
+        utilService.showModal('#search-modal');    
+    }    
 });

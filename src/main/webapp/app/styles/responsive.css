@@ -196,8 +196,9 @@
   }
 
   #responsive-cab > li.middle {
-    margin-left: 4em;
-    max-width: calc(100% - 20.1em);
+    position: absolute;
+    left: 4em;
+    right: 4em;
   }
 
   #responsive-cab > li.cab-right {
@@ -244,6 +245,17 @@
     position: absolute;
     top: 0;
     left: 0;
+    height: 100%;
+    text-align: center;
+    border: 0;
+  }
+
+  #responsive-cab > li.search-trigger {
+    float: right;
+    right: 0;
+    display: block;
+    position: absolute;
+    top: 0;
     height: 100%;
     text-align: center;
     border: 0;
@@ -439,6 +451,19 @@
     vertical-align: middle;
     padding: 0em;
     font-size: 3em;
+  }
+
+  #search-modal {
+    display: block;
+  } 
+
+
+  input.main-search-input {
+    display: none;
+  }
+
+  .main-search > i {
+    display: none;    
   }
 
 }
