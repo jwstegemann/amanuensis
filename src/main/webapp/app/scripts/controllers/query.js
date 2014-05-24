@@ -15,9 +15,12 @@ angular.module('amanuensisApp')
 
     $scope.title = undefined;
 
+    $scope.sideBarVisible = false;
+
+
     $scope.searchStories = function(method, queryString, terms, fromDate) {
       if (method === queryService.query) {
-        $scope.title = "Result of Search for " + queryString;
+        $scope.title = queryString;
       }
       else if (method === queryService.myLatest) {
         $scope.title = "My latest Activities" + queryString;
@@ -52,6 +55,8 @@ angular.module('amanuensisApp')
         //ios
         $('#query-sidebar').scrollTop();
         $('#query-results').scrollTop();
+
+        $scope.sideBarVisible = false;
       });   
    
     }
@@ -120,4 +125,7 @@ angular.module('amanuensisApp')
       $scope.searchStories(queryService.favourites, null);
     }
 
+    $scope.toggleSideBar = function() {
+      $scope.sideBarVisible = !$scope.sideBarVisible;
+    }
   });

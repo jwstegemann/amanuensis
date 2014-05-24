@@ -1,4 +1,5 @@
-<div id="query-sidebar" class="query-sidebar container shadow-right vertical-scrollable">
+<div id="query-sidebar" class="query-sidebar container shadow-right vertical-scrollable" ng-class="{'activeSidebar': sideBarVisible}" 
+  hm-swipe-left="toggleSideBar()">
     <h3 ng-show="result && pages > 0 && result.facets.tags.terms.length"class="filterHeader">
       <i class="fa fa-filter fa-lg on-slot"></i>&nbsp;Filter Tags:</h3>
     <ul ng-show="result && pages > 0 && result.facets.tags.terms.length" class="tag-list">
@@ -51,7 +52,8 @@
 
 </div>
 
-<div id="query-results" class="query-results container vertical-scrollable">
+<div id="query-results" class="query-results container vertical-scrollable" ng-class="{'activeSidebar': sideBarVisible}" 
+  hm-swipe-right="toggleSideBar()">
 
   <div class="main-search" ng-hide="result">
     <img class="logo" src="images/colibri_blau.png"></img><br/>

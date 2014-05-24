@@ -40,6 +40,11 @@
     font-size: 12px;
   }
 
+  img.logo {
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+
   /*li.trigger {
     display: none;
   }*/
@@ -96,12 +101,23 @@
   div.query-sidebar {
     width: 100%;
     left: -100%;
+    transition: left 0.25s ease-out;    
   }
 
   div.query-results {
     left: 0;
-    right: 0;
     width: 100%;
+    transition: left 0.25s ease-out;
+  }
+
+  div.query-sidebar.activeSidebar {
+    left: 0;
+    transition: left 0.25s ease-out;
+  }
+
+  div.query-results.activeSidebar {
+    left: 100%;
+    transition: left 0.25s ease-out;
   }
 
   .main-search-input {
