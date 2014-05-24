@@ -442,6 +442,7 @@ angular.module('amanuensisApp')
             $rootScope.editMode = true;
 
             setTimeout(function() {
+                $rootScope.$broadcast('elastic:adjust');
                 $('#story-content-editor').focus();
             }, 200);        
         }

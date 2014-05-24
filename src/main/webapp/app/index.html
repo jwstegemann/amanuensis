@@ -74,7 +74,7 @@
 
      </ul>
 
-    <ul id="cab" class="cab-main">
+    <ul id="cab" class="cab-main" hm-swipe-up="toggleMenu()">
 
       <li ng-show="appState < 128" class="trigger cab-action not-in-responsive" ng-click="toggleLeft()">
         <i class="fa fa-th fa-2x on-cab"></i>
@@ -357,7 +357,7 @@
     <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
     <script src="bower_components/ngQuickDate/dist/ng-quick-date.js"></script>
     <script src="bower_components/angular-elastic/elastic.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-gestures/gestures.js"></script>
     <!-- endbower -->
     <script src="bower_components/marked/lib/marked.js"></script>
     <!-- endbuild -->

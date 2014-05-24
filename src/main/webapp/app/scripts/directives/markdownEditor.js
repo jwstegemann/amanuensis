@@ -13,7 +13,7 @@ angular.module('amanuensisApp')
         },
         template: ' \
             <div class="markdown-editor-wrapper"> \
-                <textarea id="{{textareaId}}" placeholder="{{placeholder}}" class="{{textareaClass}}" ng-model="value" \
+                <textarea name="content" id="{{textareaId}}" placeholder="{{placeholder}}" class="{{textareaClass}}" ng-model="value" \
                     uploadable msd-elastic> \
                 </textarea> \
             </div> \

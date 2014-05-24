@@ -1,39 +1,6 @@
-# bower-angular-touch
+## The MIT License
 
-This repo is for distribution on `bower`. The source for this module is in the
-[main AngularJS repo](https://github.com/angular/angular.js/tree/master/src/ngTouch).
-Please file issues and pull requests against that repo.
-
-## Install
-
-Install with `bower`:
-
-```shell
-bower install angular-touch
-```
-
-Add a `<script>` to your `index.html`:
-
-```html
-<script src="/bower_components/angular-touch/angular-touch.js"></script>
-```
-
-And add `ngTouch` as a dependency for your app:
-
-```javascript
-angular.module('myApp', ['ngTouch']);
-```
-
-## Documentation
-
-Documentation is available on the
-[AngularJS docs site](http://docs.angularjs.org/api/ngTouch).
-
-## License
-
-The MIT License
-
-Copyright (c) 2010-2012 Google, Inc. http://angularjs.org
+Copyright (c) 2012-2013 Patrick Bartsch
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

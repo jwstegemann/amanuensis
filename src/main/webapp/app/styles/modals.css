@@ -123,6 +123,8 @@ div.md-overlay.md-show {
   width: 25em;
   min-height: 2.4em;
   vertical-align: middle;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;  
 }
 
 .md-content div.error-message {

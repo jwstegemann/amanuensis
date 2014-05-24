@@ -37,7 +37,7 @@
  */
 @media screen and (max-width: 800px) {
   body {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   /*li.trigger {
@@ -124,6 +124,14 @@
     height: 7em;
   }
 
+  div.stories {
+    font-size: 1.4em;
+  }
+
+  div.slots {
+    font-size: 1.4em;
+  }
+
   /*
    * CAB
    */
@@ -202,9 +210,12 @@
     left: 0;
     width: 100%;
     min-width: 75em;
-    height: 0;
+    height: auto;
+    max-height: 90%;
     font-size: 0.625em;
-    overflow: visible;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: none;
 }
 
   .cab-main > li.trigger {
@@ -305,10 +316,11 @@
     height: 200%;
     top: -100%;
     left: -100%;
+    touch-event: none;
   }
 
   .md-content h3 {
-    font-size: 1.8em;
+    font-size: 1.5em;
     margin-bottom: 1em
   }
 
@@ -331,7 +343,7 @@
     float: none;
     margin-top: 4em;
     display: block;
-    width: 95%;
+    width: 100%;
     text-align: center;
     padding: 0;
   }
@@ -341,13 +353,18 @@
   }
 
   .md-content div.confirmation-message {
-    font-size: 2.4em;
+    font-size: 1.7em;
     padding: 1em;
-    width: 95%;
+    width: 100%;
+  }
+
+  div.typeahead {
+    width: 100%;
+    max-width: 100%;
   }
 
   .md-content input {
-    font-size: 2em;
+    font-size: 1.7em;
     width: 100%;
   }
 
@@ -394,7 +411,7 @@
   }
 
   .md-content div.error-message {
-    font-size: 2em;
+    font-size: 1.7em;
     width: 95%;
     margin: 0;
     margin-top: 1em;

@@ -5,7 +5,7 @@
 <div id="left-container" class="container left-container" ng-class="{'show-slots': inSlots, 'show-stories': inStories}">
 	<!-- inbound Story-List	-->
   <div id="stories-left" class="container stories stories-left shadow-right vertical-scrollable" ng-controller="SlotCtrl" 
-    ng-init="inbound=true" ng-swipe-left="hideInStories()">
+    ng-init="inbound=true" hm-swipe-left="hideInStories()">
 		<div class="story-list-title">
       <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
@@ -34,7 +34,7 @@
 		</ul>  	
   </div>
 	<!-- inbound Slot-List	-->
-  <div id="slots-left" class="container slots slots-left shadow-right vertical-scrollable" ng-swipe-left="hideInSlots()">
+  <div id="slots-left" class="container slots slots-left shadow-right vertical-scrollable" hm-swipe-left="hideInSlots()">
     <div class="slot-list-title">
       <i class="fa on-slot fa-lg" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i>&nbsp;<input class="slot-filter" type="text" placeholder="In" ng-model="slotFilterLeft" tabindex="-1"></input>
     </div>
@@ -53,7 +53,7 @@
 <!-- #                            -->
 
 <div id="story-container" class="container story" 
-  ng-class="{'shifted-right': inStories, 'shifted-left': outStories}" ng-swipe-right="showInSlots()" ng-swipe-left="showOutSlots()"> 
+  ng-class="{'shifted-right': inStories, 'shifted-left': outStories}" hm-swipe-right="showInSlots()" hm-swipe-left="showOutSlots()"> 
 
     <ng-form name="storyForm">
       <div class="inner vertical-scrollable thick-scroll">
@@ -63,10 +63,12 @@
             placeholder="A Story..."></input>
 				  <h1>
             <div class="meta">
-              <span><i class="fa fa-file-text-o"></i> {{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span>
-              <span>&nbsp;|&nbsp;<i class="fa fa-pencil"></i> {{context.story.modified.substr(0,10)}} by {{context.story.modifiedBy}}</span>
-              <span class="not-in-responsive">|&nbsp;</span><br class="only-responsive" /><quick-datepicker ng-model="context.story.due" date-format="yyyy-MM-dd" placeholder="not set" 
-                  on-change="updateDue()"hover-text="set date for ToDo" icon-class="fa fa-bell" disable-timepicker="true" 
+              <span><i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span>
+              <span class="not-in-responsive">|&nbsp;</span><br class="only-responsive" />
+              <span><i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}} by {{context.story.modifiedBy}}</span>
+              <span class="not-in-responsive">|&nbsp;</span><br class="only-responsive" />
+              <quick-datepicker ng-model="context.story.due" date-format="yyyy-MM-dd" placeholder="not set" 
+                  on-change="updateDue()"hover-text="set date for ToDo" icon-class="fa fa-bell fa-fw" disable-timepicker="true" 
                   default-time="12:00:00">
                 </quick-datepicker>
             </div>
@@ -90,7 +92,7 @@
 -->
 
         <div id="story-content" class="content" margin="10">
-          <markdown-editor name="content" ng-show="editMode" textarea-id="story-content-editor" 
+          <markdown-editor textarea-name="content" ng-show="editMode" textarea-id="story-content-editor" 
             textarea-class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">
           </markdown-editor>
           <div id="story-view" ng-hide="editMode" class="story-view" markdown>
@@ -114,7 +116,7 @@
 <div id="right-container" class="container right-container" ng-class="{'show-slots': outSlots, 'show-stories': outStories}">
 	<!-- outbound Story-List	-->
   <div id="stories-right" class="container stories stories-right shadow-left vertical-scrollable" ng-controller="SlotCtrl"  
-    ng-init="inbound=false" ng-swipe-right="hideOutStories()">
+    ng-init="inbound=false" >
 		<div class="story-list-title">
       <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
@@ -172,7 +174,7 @@
 		</ul>  	
   </div>
 	<!-- outbound Slot-List	-->
-  <div id="slots-right" class="container slots slots-right shadow-left vertical-scrollable" ng-swipe-right="hideOutSlots()">
+  <div id="slots-right" class="container slots slots-right shadow-left vertical-scrollable" hm-swipe-right="hideOutSlots()">
     <div class="slot-list-title">
       <i class="fa fa-lg on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i>&nbsp;<input class="slot-filter" type="text" placeholder="Out" ng-model="slotFilterRight" tabindex="-1"></input>
     </div>

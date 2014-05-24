@@ -5,7 +5,7 @@ angular.module('amanuensisApp', [
   'ngSanitize',
   'ngRoute',
   'ngAnimate',
-  'ngTouch',
+  'angular-gestures',
   'angular-growl',
   'http-auth-interceptor',
   'chieffancypants.loadingBar',
@@ -86,9 +86,9 @@ angular.module('amanuensisApp', [
       nextLinkHtml: "<i class='fa fa-chevron-right'></i>",
       prevLinkHtml: "<i class='fa fa-chevron-left'></i>"
     })
-  })/* .config(['msdElasticConfig', function(config) {
-    config.append = '\n';
-  }])*/.run(function ($rootScope, $location) {
+  }).config(['msdElasticConfig', function(config) {
+    config.append = '\n\n';
+  }]).run(function ($rootScope, $location) {
     //init mode and stack
     $rootScope.selectMode = false;
     $rootScope.stack = undefined;
@@ -107,6 +107,9 @@ angular.module('amanuensisApp', [
     var $body = jQuery('body'); 
 
     //alert('neu 6');
+
+    Hammer.defaults.stop_browser_behavior.touchAction = 'pan-y';
+    Hammer.gestures.Swipe.defaults.swipe_velocity = 0.2;
 
     /* bind events */
     $(document)
