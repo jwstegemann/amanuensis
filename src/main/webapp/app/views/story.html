@@ -60,7 +60,7 @@
 				<div class="story-header">
 					<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
           <input id="story-title-input" name="title" class="story-title" type="text" ng-model="context.story.title"
-            placeholder="A Story..."></input>
+            placeholder="A Story..." ng-disabled="!editMode"></input>
 				  <h1>
             <div class="meta">
               <span><i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span>
@@ -73,24 +73,12 @@
                 </quick-datepicker>
             </div>
           </h1>
-            <tags-input name="tags" ng-model="context.story.tags" max-length="50" allowed-tags-pattern="^[\w\-üäöÜÄÖß$!\?]*$">
+            <tags-input id="tags" ng-class="{'disabled': !editMode}" name="tags" ng-model="context.story.tags" max-length="50"
+              allowed-tags-pattern="^[\w\-üäöÜÄÖß$!\?]*$" max-tags="16">
               <auto-complete class="autocomplete-master" source="suggestTags($query)" debounceDelay="250" maxResultsToShow="20">
               </auto-complete>
             </tags-input>
         </div>
-
-<!--				<div id="story-content" class="content" scrollbar>
-				  <markdown-editor name="content" ng-show="editMode" textarea-id="story-content-editor" 
-            textarea-class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">
-          </markdown-editor>
-          <div id="story-view" ng-hide="editMode" ng-dblclick="showContentEditor()" class="story-view" markdown>
-            &nbsp;
-          </div>
-          <input type="file" id="attachment" style="display:none"></input>
-				</div> 
-
--->
-
         <div id="story-content" class="content" margin="10">
           <markdown-editor textarea-name="content" ng-show="editMode" textarea-id="story-content-editor" 
             textarea-class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">

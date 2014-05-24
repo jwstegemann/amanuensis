@@ -20,6 +20,14 @@
     cursor: text;
 }
 
+#tags.disabled input.tag-input, #tags.disabled button.ng-binding {
+    display: none;
+}
+
+#tags.disabled li.tag-item > span {
+    margin-right: 0.1em;
+}
+
 .ngTagsInput .tags.focused {
     outline: none;
 }
