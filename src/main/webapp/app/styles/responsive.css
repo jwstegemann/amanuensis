@@ -353,7 +353,6 @@
     height: 200%;
     top: -100%;
     left: -100%;
-    touch-event: none;
   }
 
   .md-content h3 {
@@ -463,7 +462,7 @@
   }
 
   #search-modal {
-    display: block;
+    display: none;
   } 
 
 
