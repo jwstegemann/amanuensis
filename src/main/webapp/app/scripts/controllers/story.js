@@ -30,20 +30,19 @@ angular.module('amanuensisApp')
                 $rootScope.storyFlags.saved = 1;
 
                 //open up slot and story-list by queryParameter
-                var slotToOpen = $location.search()['openSlot']
-                var inbound = angular.isDefined($location.search()['inbound'])
+                if (!$windows.matchMedia('(max-width: 800px)').matches) {
+                    var slotToOpen = $location.search()['openSlot']
+                    var inbound = angular.isDefined($location.search()['inbound'])
 
-//                console.log("should open slot: " + slotToOpen);
-//                console.log("  in direction: ") + (inbound)?'inbound':'outbound';
-
-                //check, of slot is available in the given direction
-                if (angular.isDefined(slotToOpen)
-                    && (
-                        (inbound && hasSlot(slotToOpen, successData.inSlots)) 
-                        || (!inbound && hasSlot(slotToOpen, successData.outSlots))
-                    )
-                ) {
-                    $scope.selectSlot(slotToOpen, inbound);
+                    //check, of slot is available in the given direction
+                    if (angular.isDefined(slotToOpen)
+                        && (
+                            (inbound && hasSlot(slotToOpen, successData.inSlots)) 
+                            || (!inbound && hasSlot(slotToOpen, successData.outSlots))
+                        )
+                    ) {
+                        $scope.selectSlot(slotToOpen, inbound);
+                    }
                 }
 
                 $scope.storyForm.$setPristine();

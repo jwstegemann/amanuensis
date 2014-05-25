@@ -261,7 +261,7 @@ p.pagination span.pagination-nav {
 .vertical-scrollable {
   overflow-x: hidden; 
   overflow-y: auto !important;
-  /* asc touch-event: pan-y !important; */
+  touch-event: pan-y !important;
   -webkit-overflow-scrolling: touch;  
 }
 
