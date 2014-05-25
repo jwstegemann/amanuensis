@@ -88,12 +88,9 @@
           </div>
           <input type="file" id="attachment" style="display:none"></input>
         </div> 
-
-
-
-
       </div>
     </ng-form>
+
 </div >
 
 
@@ -133,32 +130,6 @@
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
-
-
-<!--
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
-      <li class="story-info"><i class="fa fa-book on-slot"></i>TestStory</li>
--->
-
 		</ul>  	
   </div>
 	<!-- outbound Slot-List	-->
@@ -231,7 +202,7 @@
 <!-- Modal to share a Story with other users -->
 <div class="md-modal md-effect-3" id="share-modal" ng-controller="ShareModalCtrl">
   <div class="md-content">
-    <h3>You are already sharing this story with...&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
+    <h3>You are sharing this story with...&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
     </h3>
     <div id="share-list" class="share-list vertical-scrollable">
       <table class="shares">
@@ -242,7 +213,7 @@
           <td class="login">
             {{share.login}}
           </td>
-          <td class="name">
+          <td class="name not-in-responsive">
             {{share.name}}
           </td>
           <td class="rights">
@@ -255,12 +226,15 @@
       </table>
     </div>
     <h3>{{title}}</h3>
-    <div class="one-line">
-      <selectbox class="select-mode" ng-model="mode" options="modes" value-selected="changeMode(value)"></selectbox>     
+    <div class="one-line share-new">
+      <selectbox class="select-mode" ng-model="mode" options="modes" value-selected="changeMode(value)"></selectbox>
+      <br class="only-responsive" />   
       <typeahead ng-model="userToShare" input-class="start-focus share-login" 
         placeholder="please enter a name" source="suggestUsersOrGroups($query)" ng-show="mode === 'user' || mode === 'group'">
       </typeahead>
+      <br class="only-responsive" />   
       <div ng-show="mode === 'public'" class="everybody"></div>
+      <br class="only-responsive" />   
       <selectbox ng-model="rightToShare" options="userRights"></selectbox>  
       <div class="confirmation"><i class="fa fa-plus fa-lg on-button action opacity-hover" ng-click="share()"></i></div>  
     </div>
