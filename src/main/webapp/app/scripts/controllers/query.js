@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('QueryCtrl', function ($scope,$routeParams,queryService,$rootScope,graphService,$window) {
+  .controller('QueryCtrl', function ($scope,$routeParams,queryService,$rootScope,graphService,$window,$location) {
 
     $rootScope.appState = 128;
     $scope.result = undefined;
@@ -21,6 +21,7 @@ angular.module('amanuensisApp')
     $scope.searchStories = function(method, queryString, terms, fromDate) {
       if (method === queryService.query) {
         $scope.title = queryString;
+        $location.url('query/' + queryString);
       }
       else if (method === queryService.myLatest) {
         $scope.title = "My latest Activities" + queryString;
@@ -61,7 +62,7 @@ angular.module('amanuensisApp')
         $('#query-results').scrollTop();
 
         $scope.sideBarVisible = false;
-      });   
+      }); 
    
     }
 
