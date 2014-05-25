@@ -99,7 +99,7 @@
 
       <li ng-click="goHome()">
         <a title="return to your workplace">
-          <i class="fa fa-home fa-fw fa-2x on-cab"></i><span class="cab-desc">Your Workspace</span>
+          <i class="fa fa-home fa-fw fa-2x on-cab"></i><span class="cab-desc">My Workplace</span>
         </a>
       </li>
 
@@ -250,7 +250,7 @@
 
       <!-- create a new story on it's own -->
       <li ng-show="!selectMode && !targetMode && appState === 128">
-        <a href="#/story" title="create a new story">
+        <a href="#/story" title="create a new story" ng-click="toggleMenu()">
           <i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i><span class="cab-desc">create a new Story</span>
         </a>
       </li>
@@ -283,7 +283,12 @@
         </a>
       </li>
 
-      
+      <!-- create a new story on it's own -->
+      <li class="only-in-responsive last-menu-item">
+        <a title="log me out" ng-click="logout()">
+          <i class="fa fa-power-off fa-fw fa-2x on-cab"></i><span class="cab-desc">log me out</span>
+        </a>
+      </li>      
            
     </ul>
 

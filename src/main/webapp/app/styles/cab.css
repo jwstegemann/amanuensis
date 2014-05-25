@@ -47,6 +47,10 @@
     text-align: center;
 }
 
+.cab-main > li.only-in-responsive {
+    display: none;
+}
+
 .cab-main > li:hover {
     background: rgba(0,0,1,0.025);
 }

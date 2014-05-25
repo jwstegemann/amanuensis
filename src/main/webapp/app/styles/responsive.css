@@ -231,17 +231,22 @@
 
 .cab-main {
     z-index: 9000;
+    background: transparent;
     position: fixed;
-    top: 4.1em;
-    left: 0;
-    width: 100%;
-    min-width: 75em;
+    top: 4em;
+    left: 5%;
+    width: 90%;
+    min-width: 0;
     height: auto;
     max-height: 90%;
     font-size: 0.625em;
     overflow-y: auto;
     overflow-x: hidden;
     border: none;
+    line-height: 1em;
+    border-left: 1px solid #666460;
+    border-right: 1px solid #666460;    
+    border-radius: 0 0 0.627em 0.627em;
 }
 
   .cab-main > li.trigger {
@@ -256,7 +261,7 @@
     left: 0;
     height: 100%;
     text-align: center;
-    border: 0;
+    border: none;
   }
 
   #responsive-cab > li.search-trigger {
@@ -272,11 +277,16 @@
 
   .cab-main > li {
     display: none;
-    background-color: #fff;
+    background-color: #333230;
+    color: #fff;
     width: 100%;
-    border-top: 1px solid #c6d0da;
+    border-bottom: 1px solid #666460;
     text-align: left;
     height: auto;
+  }
+
+  .cab-main > li.last-menu-item {
+    border-radius: 0 0 0.627em 0.627em;
   }
 
   .cab-main.active-menu > li {
@@ -288,17 +298,23 @@
   }
 
   .cab-main > li > a {
-    width: 100%;
+    color: #fff;
+    width: 90%;
     font-size: 1.6em;
-    margin-bottom: 0.6em;
-    padding: 0.3em;
-    font-weight: 300;
+    padding: 0.6em;
+    font-weight: 400;
+    line-height: 2em;
+    padding-top: 0;
+  }
+
+  .cab-main > li > a > i {
+    font-size: 1.5em;
   }
 
   .cab-desc {
     display: inline;
-    font-size: 1.2em;
-    margin-left: 1em;
+    font-size: 1.3em;
+    margin-left: 0.5em;
   }
 
   .cab-main > li:hover {
