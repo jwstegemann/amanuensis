@@ -25,12 +25,13 @@ angular.module('amanuensisApp')
                 $scope.$broadcast('updateView', {
                     markdown: successData.story.content
                 });
+
                 $rootScope.editMode = false;
                 $rootScope.storyFlags = successData.flags;
                 $rootScope.storyFlags.saved = 1;
 
                 //open up slot and story-list by queryParameter
-                if (!$windows.matchMedia('(max-width: 800px)').matches) {
+                if (!$window.matchMedia('(max-width: 800px)').matches) {
                     var slotToOpen = $location.search()['openSlot']
                     var inbound = angular.isDefined($location.search()['inbound'])
 
@@ -46,6 +47,10 @@ angular.module('amanuensisApp')
                 }
 
                 $scope.storyForm.$setPristine();
+
+                // set window title to loaded story
+                $window.document.title = 'Colibri - ' + $scope.context.story.title;
+
             }, function(errorData) {
                 // goto query-page when it is not possible to load the story!
                 $location.url('/query').replace();                
@@ -90,6 +95,9 @@ angular.module('amanuensisApp')
             if (angular.isDefined($scope.storyForm)) {
                 $scope.storyForm.$setPristine();
             }
+
+            // set window title
+            $window.document.title = 'Colibri - new Story';            
         }
 
         $scope.storyFilter = {};

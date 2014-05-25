@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('QueryCtrl', function ($scope,$routeParams,queryService,$rootScope,graphService) {
+  .controller('QueryCtrl', function ($scope,$routeParams,queryService,$rootScope,graphService,$window) {
 
     $rootScope.appState = 128;
     $scope.result = undefined;
@@ -34,6 +34,10 @@ angular.module('amanuensisApp')
       else if (method === queryService.favourites) {
         $scope.title = "My Starred Stories";
       }      
+
+      // set window title
+      $window.document.title = 'Colibri - ' + $scope.title;
+
 
       $scope.lastMethod = method;
       $scope.lastQuery = {
@@ -71,6 +75,10 @@ angular.module('amanuensisApp')
 
     if (angular.isDefined($routeParams.queryString)) {
       $scope.searchStories(queryService.query, $routeParams.queryString);
+    }
+    else {
+      // set window title to loaded story
+      $window.document.title = 'Colibri';      
     }
 
     $scope.$on('search', function(event, params) {
