@@ -4,7 +4,7 @@ seq(SbtStartScript.startScriptForClassesSettings: _*)
 
 name := "amanuensis"
 
-version := "1.0"
+version := "0.9.1"
 
 scalaVersion := "2.10.3"
 
