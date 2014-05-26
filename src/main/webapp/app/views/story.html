@@ -101,7 +101,7 @@
 <div id="right-container" class="container right-container" ng-class="{'show-slots': outSlots, 'show-stories': outStories}">
 	<!-- outbound Story-List	-->
   <div id="stories-right" class="container stories stories-right shadow-left vertical-scrollable" ng-controller="SlotCtrl"  
-    ng-init="inbound=false" >
+    ng-init="inbound=false" hm-swipe-right="hideOutStories()">
 		<div class="story-list-title">
       <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
