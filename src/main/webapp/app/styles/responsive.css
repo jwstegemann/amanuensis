@@ -181,14 +181,11 @@
 
   #share-modal div.confirmation {
     margin-left: 0;
+    font-size: 0.75em
   }
 
   #share-modal div.share-new {
     font-size: 1.6em;
-  }
-
-  #share-modal div.confirmation {
-    font-size: 0.75em;
   }
 
   #share-modal div.typeahead {
@@ -422,14 +419,14 @@
   }
 
   .md-content div.confirmation {
-    margin-top: 4em;
+    margin-top: 2em;
     display: block;
     width: 100%;
     text-align: center;
   }
 
   .md-content div.confirmation i {
-    font-size: 4em;
+    font-size: 3em;
     margin: 0;
     padding: 0.5em;
     border: 3px solid rgba(255,255,255,0.25);
@@ -486,7 +483,7 @@
 
 
   #unlock-icon {
-    font-size: 3em;
+    font-size: 2em;
     float: none;
     padding: 0.5em;
     border: 3px solid rgba(255,255,255,0.25);
@@ -494,7 +491,7 @@
     width: 2em;    
     height: 2em;
     margin: 0;
-    margin-top: 4em;
+    margin-top: 1.5em;
     text-align: center;
     vertical-align: middle;
   }
