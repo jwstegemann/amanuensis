@@ -76,7 +76,7 @@
     <ul ng-show="result" class="resultList">
 
       <li class="resultListItem" ng-repeat="storyResult in result.hits.hits">
-        <a href="#/story/{{storyResult._source.id}}"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;{{storyResult._source.title}}</a>
+        <a href="#/story/{{storyResult._source.id}}"><i ng-class="storyResult._source.icon" class="fa"></i>&nbsp;&nbsp;{{storyResult._source.title}}</a>
         <p class="origin">
           <span><i class="fa fa-file-text-o"></i> {{storyResult._source.created.substr(0,10)}} by {{storyResult._source.createdBy}}</span>
           <span> | <i class="fa fa-pencil"></i> {{storyResult._source.modified.substr(0,10)}} by {{storyResult._source.modifiedBy}}</span>

@@ -207,3 +207,9 @@ i.on-right {
 i.confirmation {
 	float: right;
 }
+
+div.modal-footer {
+  height: 0.627em;
+  margin: 0;
+  padding: 0;
+}

@@ -11,6 +11,8 @@ angular.module('amanuensisApp')
         return false;
     }
 
+    $scope.icons = icons;
+
     // init StoryContext
     $scope.reload = function() {
         $scope.inSlots = false;
@@ -67,7 +69,8 @@ angular.module('amanuensisApp')
                     createdBy: "who knows",
                     modified: "not yet",
                     modifiedBy: "who knows",
-                    tags: []
+                    tags: [],
+                    icon: "fa-bookmark"
         		},
         		inSlots: [],
         		outSlots: [],
@@ -178,6 +181,24 @@ angular.module('amanuensisApp')
 
     $scope.cancelConfirmDelete = function() {
         utilService.hideModal('#confirm-delete-modal');    
+    }
+
+    /*
+     * Choose icon for the story
+     */
+    $scope.chooseIcon = function() {
+        if ($rootScope.editMode) {
+            utilService.showModal('#choose-icon-modal'); 
+        }
+    }
+
+    $scope.selectIcon = function(icon) {
+        $scope.context.story.icon = icon;
+        utilService.hideModal('#choose-icon-modal');
+    }
+
+    $scope.cancelChooseIcon = function() {
+        utilService.hideModal('#choose-icon-modal');    
     }
 
     /*

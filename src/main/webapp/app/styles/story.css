@@ -56,13 +56,13 @@ input.story-title {
 }
 
 div.story-icon {
-  width: 4em;
+  
   height: 5.5em;
   margin: 0;
   float: left;
   text-align: center;
   vertical-align: middle;
-  margin-right: 1.250em;
+  margin-right: 1em;
 }
  
 
@@ -531,4 +531,21 @@ div.share-list .mCSB_scrollTools .mCSB_draggerContainer{
 
 #share-modal div.confirmation {
   margin-left: 1em;
+}
+
+.icon-list {
+  padding: 0.313em;
+  padding-bottom: 0;
+  max-height: 14em;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.icon-list > i {
+  margin: 0.627em;
+  cursor: pointer;
+}
+
+.inactive {
+  cursor: default;
 }

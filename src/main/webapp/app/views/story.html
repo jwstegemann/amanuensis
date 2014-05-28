@@ -14,21 +14,21 @@
       <div ng-switch-when="few">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
           ng-click="openStory(storyInfo.id, slotName, false)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
           <p story-preview markdown-source="storyInfo.content"></p>
         </li>
       </div>
       <div ng-switch-when="single">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'"
           ng-click="openStory(storyInfo.id, slotName, false)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
         </li>
       </div>
       <div ng-switch-when="all">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
           ng-click="openStory(storyInfo.id, slotName, false)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>        
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>        
         </li>
       </div>
 		</ul>  	
@@ -58,7 +58,9 @@
     <ng-form name="storyForm">
       <div class="inner vertical-scrollable thick-scroll">
 				<div class="story-header">
-					<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
+					<div class="story-icon" ng-click="chooseIcon()" ng-class="{'action': editMode}">
+            <i ng-class="context.story.icon" class="fa fa-5x"></i>
+          </div>
           <input id="story-title-input" name="title" class="story-title" type="text" ng-model="context.story.title"
             placeholder="A Story..." ng-disabled="!editMode"></input>
 				  <h1>
@@ -110,7 +112,7 @@
       <div ng-switch-when="few">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
           ng-click="openStory(storyInfo.id, slotName, true)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
           <p story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
@@ -118,7 +120,7 @@
       <div ng-switch-when="single">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
           ng-click="openStory(storyInfo.id, slotName, true)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
@@ -126,7 +128,7 @@
       <div ng-switch-when="all">
         <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
           ng-click="openStory(storyInfo.id, slotName, true)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
@@ -177,6 +179,17 @@
   </div>
 </div>
 
+<!-- Modal to choose a story-icon -->
+<div class="md-modal md-effect-3" id="choose-icon-modal">
+  <div class="md-content">
+    <h3>Please choose an icon...&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelChooseIcon()"></i></h3>
+    <div class="icon-list">
+      <i ng-repeat="icon in icons" ng-click="selectIcon(icon)" ng-class="icon" class="fa fa-fw fa-lg"></i>
+    </div>
+    <div class="modal-footer"></div>
+  </div>
+</div>
+
 <!-- Modal to confirm leaving a Story -->
 <div class="md-modal md-effect-3" id="confirm-leave-modal">
   <div class="md-content">
@@ -185,17 +198,6 @@
     <div class="confirmation-icon">
       <i class="fa fa-check fa-2x opacity-hover" ng-click="leaveStoryConfirmed()"></i>
     </div>
-  </div>
-</div>
-
-<!-- Modal to watch a Story for changes -->
-<div class="md-modal md-effect-3" id="watch-modal">
-  <div class="md-content">
-    <h3>You are watching this Story now.&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelWatch()"></i></h3>
-    <div class="confirmation-icon">
-      <i class="fa fa-check fa-2x opacity-hover" ng-click="cancelWatch()"></i>
-    </div>
-    <div class="confirmation-message">When someone else modifies this story,<br>we will inform you by email to <br><b>dummy@dummy.org</b></div>
   </div>
 </div>
 

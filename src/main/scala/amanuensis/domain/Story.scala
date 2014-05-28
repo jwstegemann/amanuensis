@@ -14,14 +14,15 @@ case class Story(
   modified: String,
   modifiedBy: String,
   due: Option[String],
-  tags: Seq[String])  {
+  tags: Seq[String],
+  icon: String)  {
 
 	def check() = {
 		//FIXME: Implement checks here
 	}
 }
 
-case class StoryInfo(id : String, title : String, created: String, modified: String, content: Option[String])
+case class StoryInfo(id : String, title : String, created: String, modified: String, content: Option[String], icon: String)
 
 case class StoryContext(story: Story, inSlots: Seq[Slot], outSlots: Seq[Slot], flags: StoryFlags)
 
@@ -44,8 +45,8 @@ object StoryProtocol extends DefaultJsonProtocol {
 	import SlotProtocol._
 
   // JSON-Serialization
-  implicit val storyJsonFormat = jsonFormat9(Story.apply)
-  implicit val storyInfoJsonFormat = jsonFormat5(StoryInfo.apply)
+  implicit val storyJsonFormat = jsonFormat10(Story.apply)
+  implicit val storyInfoJsonFormat = jsonFormat6(StoryInfo.apply)
   implicit val storyIdJsonFormat = jsonFormat1(StoryId.apply)
   implicit val storyIndexJsonFormat = jsonFormat9(StoryIndex.apply)
   implicit val storyAccessJsonFormat = jsonFormat4(StoryAccess.apply)

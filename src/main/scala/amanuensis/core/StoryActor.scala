@@ -38,7 +38,8 @@ object StoryActor {
   //TODO: use merge when creating stories
   val createQueryString = """
     MATCH (u:User {login: {login}})
-    CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, createdBy: {createdBy}, modified: {modified}, modifiedBy: {modifiedBy}})<-[:canGrant]-(u)
+    CREATE (s:Story { id: {id},title: {title},content: {content}, created: {created}, 
+      createdBy: {createdBy}, modified: {modified}, modifiedBy: {modifiedBy}, icon: {icon}})<-[:canGrant]-(u)
     WITH s
     FOREACH (tagname IN {tags} |
       MERGE (t:Tag {name: tagname})
@@ -52,7 +53,7 @@ object StoryActor {
     OPTIONAL MATCH (s)<-[d:due]-(u)
     OPTIONAL MATCH (s)-[:is]->(t:Tag)
     RETURN s.id as id, s.title as title, s.content as content, s.created as created, s.createdBy as createdBy,
-      s.modified as modified, s.modifiedBy as modifiedBy, d.date as due, collect(t.name) as tags
+      s.modified as modified, s.modifiedBy as modifiedBy, d.date as due, collect(t.name) as tags, s.icon as icon
   """
 
   val retrieveOutSlotQueryString = """
@@ -92,7 +93,7 @@ object StoryActor {
     OPTIONAL MATCH (m) WHERE s=m AND s.modified={version}
     WITH s.id as id, oldTags, collect(m) as updates
     FOREACH(x in updates |
-      SET x.title={title}, x.content={content}, x.modified={modified}, x.modifiedBy={modifiedBy}
+      SET x.title={title}, x.content={content}, x.modified={modified}, x.modifiedBy={modifiedBy}, x.icon={icon}
       FOREACH (oldTag IN oldTags |
       DELETE oldTag
       )
@@ -165,10 +166,11 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
       ("modified" -> story.modified),
       ("modifiedBy" -> story.modifiedBy),      
       ("tags" -> story.tags),
+      ("icon" -> story.icon),
       ("login" -> login)
     ) map { nothing =>
         indexActor ! Index(story.copy(id = Some(id)), login :: Nil)
-        StoryInfo(id, story.title, story.created, story.modified, None) 
+        StoryInfo(id, story.title, story.created, story.modified, None, story.icon) 
       }
   }
 
@@ -212,6 +214,7 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
       ("modified" -> story.modified),
       ("modifiedBy" -> story.modifiedBy),        
       ("tags" -> story.tags),
+      ("icon" -> story.icon),
       ("version" -> version),
       ("login" -> login)
     ) map {

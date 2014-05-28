@@ -37,7 +37,7 @@ object SlotActor {
         WHEN weight < 5 THEN m.content
         ELSE null 
       END) as content
-    RETURN m.id, m.title, m.created, m.modified, content LIMIT 250
+    RETURN m.id, m.title, m.created, m.modified, content, m.icon LIMIT 250
   """
 
   val addQueryString = """
@@ -72,7 +72,7 @@ object SlotActor {
     OPTIONAL MATCH (n)<-[:canGrant]-(z:User)
       WHERE z.login <> {login}
     WITH n,u,collect(x) as readers, collect(y) as writers, collect(z) as granters    
-    CREATE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy}, modified: {modified}, modifiedBy: {modifiedBy}})
+    CREATE (n)-[r:Slot {name: {slot}}]->(m:Story {id: {id}, title: {title}, content: {content}, created: {created}, createdBy: {createdBy}, modified: {modified}, modifiedBy: {modifiedBy}, icon: {icon}})
     WITH m,u,readers,writers,granters
     FOREACH (reader IN readers |
       MERGE (m)<-[:canRead]-(reader))
@@ -172,12 +172,13 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
       ("modified" -> story.modified),
       ("modifiedBy" -> story.modifiedBy),      
       ("tags" -> story.tags),
+      ("icon" -> story.icon),
       ("login" -> login)   
     ) map {
         case Some(rights: StoryRights) => {
           indexActor ! Index(story.copy(id = Some(id)), rights.canRead :+ login)
           indexActor ! IndexSlotName(slotName, toStory, id)
-          StoryInfo(id, story.title, story.created, story.modified, None)
+          StoryInfo(id, story.title, story.created, story.modified, None, story.icon)
         }
         case _ => throw NotFoundException(Message(s"could not create new story in slot $slotName",`ERROR`) :: Nil)
       }
