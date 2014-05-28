@@ -166,6 +166,16 @@
     padding-bottom: 0;
   }
 
+  div.story-icon > i {
+    margin-top: 0.25em;
+    font-size: 3em;
+  }
+
+  div.icon-list {
+    max-height: 80%;
+    padding: 0;
+  }
+
   /*
    * share modal
    */

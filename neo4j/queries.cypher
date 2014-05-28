@@ -47,3 +47,9 @@ update for modified, etc.
 match (s:Story) 
 match (u:User {name: s.createdBy})
 set s.modified = s.created, s.modifiedBy=u.login, s.createdBy=u.login
+
+---
+
+update for icon
+
+match (s:Story) set s.icon = "fa-bookmark"
