@@ -1,0 +1,22 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Jens Stegemann <jwstegemann@gmail.com>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Poedit-Language: de\n"
+
+#: app/scripts/controllers/query.js
+msgid "My ToDos"
+msgstr "Meine ToDos"
+
+#: app/views/query.html
+msgid "found {{result.hits.total}} stories in {{result.took}} ms."
+msgstr "{{result.hits.total}} Stories in {{result.took}} ms gefunden."
+

@@ -13,7 +13,8 @@ angular.module('amanuensisApp', [
   'typeahead',
   'selectbox',
   'ngQuickDate',
-  'monospaced.elastic'
+  'monospaced.elastic',
+  'gettext'
 ]).config(function ($routeProvider) {
     $routeProvider
       .when('/story/:storyId?', {
@@ -88,7 +89,11 @@ angular.module('amanuensisApp', [
     })
   }).config(function(msdElasticConfig) {
     msdElasticConfig.append = '\n';
-  }).run(function ($rootScope, $location) {
+  }).run(function ($rootScope, $location, gettextCatalog) {
+    //set language
+    gettextCatalog.currentLanguage = 'de';
+    gettextCatalog.debug = true;
+
     //init mode and stack
     $rootScope.selectMode = false;
     $rootScope.stack = undefined;

@@ -30,20 +30,20 @@ object GraphActor {
     WITH distinct m
     MATCH (m)-[:is]->(:Tag {name: {tagName}})
       WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(:User {login: {login}})
-    RETURN m.id, m.title, m.content, m.created, m.createdBy SKIP {skip} LIMIT 25
+    RETURN m.id, m.title, m.content, m.created, m.createdBy, m.icon SKIP {skip} LIMIT 25
   """
 
   val favouritesQueryString = """
     MATCH (u:User {login: {login}})-[:stars]->(s:Story)
       WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
-    RETURN s.id, s.title, s.content, s.created, s.createdBy, s.modified, s.modifiedBy, null, [] 
+    RETURN s.id, s.title, s.content, s.created, s.createdBy, s.modified, s.modifiedBy, null, [], s.icon
     ORDER BY s.modified DESC SKIP {skip} LIMIT 25
   """
 
   val toDosQueryString = """
     MATCH (u:User {login: {login}})-[d:due]->(s:Story)
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
-    RETURN s.id, s.title, s.content, s.created, s.createdBy, s.modified, s.modifiedBy, d.date, [] 
+    RETURN s.id, s.title, s.content, s.created, s.createdBy, s.modified, s.modifiedBy, d.date, [], s.icon
     ORDER BY d.date SKIP {skip} LIMIT 25
   """
 }

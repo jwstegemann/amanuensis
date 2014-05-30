@@ -4,20 +4,40 @@
 		"selected_items":
 		[
 			[
+				"a",
+				"default"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"border-",
+				"border-radius"
+			],
+			[
+				"te",
+				"text-bottom"
+			],
+			[
+				"text",
+				"text-top"
+			],
+			[
+				"border-bo",
+				"border-bottom"
+			],
+			[
 				"font",
 				"font-size"
 			],
 			[
-				"text",
-				"text-align"
-			],
-			[
 				"font-",
 				"font-weight"
-			],
-			[
-				"te",
-				"text-align"
 			],
 			[
 				"in",
@@ -70,10 +90,6 @@
 			[
 				"an",
 				"angular"
-			],
-			[
-				"margin",
-				"margin-top"
 			],
 			[
 				"text-",
@@ -498,106 +514,33 @@
 			[
 				"sortable",
 				"sortableColumns"
-			],
-			[
-				"Dic",
-				"DictionaryRegistry"
-			],
-			[
-				"dictiona",
-				"dictionaries"
-			],
-			[
-				"curr",
-				"currentTimeMillis"
-			],
-			[
-				"BS",
-				"BSONLong"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/main/webapp/app/styles/main.css",
+			"file": "src/main/webapp/app/scripts/icons.js",
 			"settings":
 			{
-				"buffer_size": 3783,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/styles/modals.css",
-			"settings":
-			{
-				"buffer_size": 3705,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 12871 files for \"md-show\"\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/modals.css:\n   16  }\n   17  \n   18: .md-show {\n   19    display: block;\n   20  }\n   ..\n   37  }\n   38  \n   39: div.md-overlay.md-show {\n   40    opacity: 1;\n   41    visibility: visible;\n   ..\n  178  }\n  179  \n  180: .md-show.md-effect-3 .md-content {\n  181    -webkit-transform: translateY(0);\n  182    transform: translateY(0);\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/responsive.css:\n  324    }\n  325  \n  326:   .md-show.md-effect-3 .md-content {\n  327      -webkit-transform: none;\n  328      transform: none;\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utilService.js:\n   12        //console.log('+++ show Overlay, counter before: ' + counter);\n   13        if (counter++ === 0) {\n   14:             overlay.addClass('md-show');   \n   15        }\n   16  //      console.log('+++ show Overlay, counter after: ' + counter);\n   ..\n   21  \n   22        if (--counter <= 0) {\n   23:             overlay.removeClass('md-show');\n   24              counter = 0;\n   25        }\n   ..\n   30  \n   31      function showModalElement(modal)  {\n   32:       if (!modal.hasClass('md-show')) {\n   33  //        showOverlay();\n   34:         modal.addClass('md-show')\n   35  /*        setTimeout(function(){\n   36            modal.find('.start-focus').focus();\n   ..\n   40  \n   41      function hideModalElement(modal) {\n   42:       if (modal.hasClass('md-show')) {\n   43:         modal.removeClass('md-show');\n   44  //        hideOverlay();\n   45        }\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css:\n   19  }\n   20  \n   21: .md-show {\n   22  	display: block;\n   23  }\n   ..\n   42  }\n   43  \n   44: div.md-overlay.md-show {\n   45  	opacity: 1;\n   46  	visibility: visible;\n   ..\n  185  }\n  186  \n  187: .md-show.md-effect-3 .md-content {\n  188  	-webkit-transform: translateY(0);\n  189  	-moz-transform: translateY(0);\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/responsive.css:\n  332    }\n  333  \n  334:   .md-show.md-effect-3 .md-content {\n  335      -webkit-transform: none;\n  336      -moz-transform: none;\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/dist/app/scripts/15bd0eb7.scripts.js:\n    1: \"use strict\";angular.module(\"amanuensisApp\",[\"ngResource\",\"ngSanitize\",\"ngRoute\",\"ngAnimate\",\"angular-gestures\",\"angular-growl\",\"http-auth-interceptor\",\"chieffancypants.loadingBar\",\"ngTagsInput\",\"typeahead\",\"selectbox\",\"ngQuickDate\",\"monospaced.elastic\"]).config([\"$routeProvider\",function(a){a.when(\"/story/:storyId?\",{templateUrl:\"views/story.html\",controller:\"StoryCtrl\",reloadOnSearch:!1}).when(\"/story/:slotName/:fromStoryId/:fromStoryTitle\",{templateUrl:\"views/story.html\",controller:\"StoryCtrl\",reloadOnSearch:!1}).when(\"/query/:queryString?\",{templateUrl:\"views/query.html\",controller:\"QueryCtrl\"}).when(\"/login\",{templateUrl:\"views/login.html\",controller:\"LoginCtrl\"}).when(\"/graph/findpaths\",{templateUrl:\"views/findpaths.html\",controller:\"FindPathsCtrl\"}).otherwise({redirectTo:\"/query\"})}]).config([\"growlProvider\",function(a){a.onlyUniqueMessages(!1),a.globalTimeToLive(3e3)}]).config([\"$httpProvider\",function(a){a.interceptors.push([\"$q\",\"$rootScope\",function(a,b){return{responseError:function(c){return 401!==c.status&&(404===c.status?(console.log(\"NotFound-Error communicating with the backend: \"+angular.toJson(c)),b.$broadcast(\"error\",{errorMessage:\"I am sorry, but you are not allowed to do this.\"})):423===c.status?(console.log(\"OptimisticLock-Info communicating with the backend: \"+angular.toJson(c)),b.$broadcast(\"error\",{errorMessage:\"I am sorry, but somebody else has edited this object since your last update. Please reload the story.\"})):412===c.status?(console.log(\"Validation-Error communicating with the backend: \"+angular.toJson(c)),b.$broadcast(\"error\",{errorMessage:c.data[0].text})):400===c.status?(console.log(\"Bad-Request-Error communicating with the backend: \"+angular.toJson(c)),b.$broadcast(\"error\",{errorMessage:c.data})):(console.log(\"Fatal-Error communicating with the backend: \"+angular.toJson(c)),b.$broadcast(\"error\",{errorMessage:\"Error communicating with Amanuensis-backend. Please try again or contact your system-administrator.\"}))),a.reject(c)}}}])}]).config([\"ngQuickDateDefaultsProvider\",function(a){return a.set({closeButtonHtml:\"<i class='fa fa-times'></i>\",buttonIconHtml:\"<i class='fa fa-calendar'></i>\",nextLinkHtml:\"<i class='fa fa-chevron-right'></i>\",prevLinkHtml:\"<i class='fa fa-chevron-left'></i>\"})}]).config([\"msdElasticConfig\",function(a){a.append=\"\\n\"}]).run([\"$rootScope\",\"$location\",function(a,b){a.selectMode=!1,a.stack=void 0,a.appState=void 0,a.editMode=!1,a.targetMode=!1,a.targetStack=void 0,(\"localhost\"!==b.host()&&\"0.0.0.0\"!==b.host()||9e3!==b.port())&&\"https\"!==b.protocol()&&a.$broadcast(\"error\",{errorMessage:\"Please use https in your URL to make sure, that nobody gets to know your credentials.\"});var c=jQuery(\"body\");Hammer.defaults.stop_browser_behavior.touchAction=\"pan-y\",Hammer.gestures.Swipe.defaults.swipe_velocity=.2,$(document).on(\"focus\",\"input\",function(){c.addClass(\"fixfixed\")}).on(\"blur\",\"input\",function(){c.removeClass(\"fixfixed\")})}]),angular.module(\"amanuensisApp\").factory(\"storyService\",[\"$resource\",function(a){return a(\"/story/:storyId\",{},{create:{method:\"POST\",url:\"/story\",params:{}},createInSlot:{method:\"POST\",url:\"/story/:fromStoryId/:slotName\",params:{}},update:{method:\"PUT\",params:{storyId:\"@id\"}}})}]),angular.module(\"amanuensisApp\").controller(\"StoryCtrl\",[\"$scope\",\"$routeParams\",\"storyService\",\"slotService\",\"favourService\",\"$rootScope\",\"$location\",\"$window\",\"utilService\",\"growl\",\"queryService\",\"$http\",function(a,b,c,d,e,f,g,h,i,j,k,l){function m(a,b){for(var c=b.length;c--;)if(b[c].name===a)return!0;return!1}a.reload=function(){a.inSlots=!1,a.inStories=!1,a.outSlots=!1,a.outStories=!1,angular.isDefined(b.storyId)?a.context=c.get({storyId:b.storyId},function(b){f.appState=1,a.$broadcast(\"updateView\",{markdown:b.story.content}),f.editMode=!1,f.storyFlags=b.flags,f.storyFlags.saved=1;var c=g.search().openSlot,d=angular.isDefined(g.search().inbound);angular.isDefined(c)&&(d&&m(c,b.inSlots)||!d&&m(c,b.outSlots))&&a.selectSlot(c,d),a.storyForm.$setPristine()},function(){g.url(\"/query\").replace()}):(a.context={story:{id:void 0,title:void 0,content:void 0,created:\"not yet\",createdBy:\"who knows\",modified:\"not yet\",modifiedBy:\"who knows\",tags:[]},inSlots:[],outSlots:[],flags:{canWrite:1,stars:0,saved:0}},setTimeout(function(){$(\"#story-title-input\").focus()},200),f.appState=1,f.editMode=!0,f.storyFlags={canWrite:1,stars:0,saved:0},angular.isDefined(a.storyForm)&&a.storyForm.$setPristine()),a.storyFilter={},a.slotFilterRight=void 0,a.slotFilterLeft=void 0},a.$on(\"reloadStory\",function(){a.reload()}),a.$on(\"saveStory\",function(){angular.isUndefined(a.context.story.title)||a.context.story.title.length<3||angular.isUndefined(a.context.story.content)||a.context.story.content.length<3?f.$broadcast(\"error\",{errorMessage:\"Sorry, but your story must have a title and a content. Please enter one...\"}):angular.isDefined(a.context.story.id)?c.update(a.context.story,function(){a.storyForm.$setPristine(),a.reload(),j.addSuccessMessage(a.context.story.title+\" has been saved.\")}):angular.isDefined(b.slotName)&&angular.isDefined(b.fromStoryId)?(c.createInSlot({fromStoryId:b.fromStoryId,slotName:b.slotName},a.context.story,function(c){a.storyForm.$setPristine(),a.context.story.id=c.id,g.url(\"/story/\"+a.context.story.id).replace(),j.addSuccessMessage(a.context.story.title+\" has been created in Slot \"+b.slotName+\" at Story \"+b.fromStoryTitle),$rootScopy.storyFlags.saved=1}),f.stack=void 0):c.create(a.context.story,function(b){a.storyForm.$setPristine(),a.context.story.id=b.id,g.url(\"/story/\"+a.context.story.id).replace(),j.addSuccessMessage(a.context.story.title+\" has been created.\"),$rootScopy.storyFlags.saved=1})}),a.$on(\"deleteStory\",function(){i.showModal(\"#confirm-delete-modal\")}),a.deleteStoryConfirmed=function(){var d=a.context.story.title;c.delete({storyId:b.storyId},function(){j.addSuccessMessage(d+\" has been deleted.\"),h.history.back(),i.hideModal(\"#confirm-delete-modal\")})},a.cancelConfirmDelete=function(){i.hideModal(\"#confirm-delete-modal\")},a.$on(\"starStory\",function(){angular.isUndefined(a.context.story.id)?f.$broadcast(\"error\",{errorMessage:\"Unfortunately you cannot star an unsaved story.\"}):e.star({storyId:a.context.story.id},null,function(){j.addSuccessMessage(\"You just starred \"+a.context.story.title),f.storyFlags.stars=1})}),a.$on(\"unstarStory\",function(){angular.isUndefined(a.context.story.id)?f.$broadcast(\"error\",{errorMessage:\"Unfortunately you cannot unstar an unsaved story.\"}):e.unstar({storyId:a.context.story.id},null,function(){j.addSuccessMessage(\"You have removed your star from \"+a.context.story.title),f.storyFlags.stars=0})}),a.updateDue=function(){angular.isUndefined(a.context.story.due)||null===a.context.story.due?e.undue({storyId:a.context.story.id},null,function(){j.addSuccessMessage(\"You have removed \"+a.context.story.title+\" from your ToDo-list.\")}):e.due({storyId:a.context.story.id,date:a.context.story.due.toJSON()},null,function(){j.addSuccessMessage(\"You have added \"+a.context.story.title+\" to your ToDo-list.\")})},a.$on(\"shareStory\",function(){angular.isDefined(a.context.story.id)?a.$broadcast(\"openShareStoryModal\",{storyId:a.context.story.id}):f.$broadcast(\"error\",{errorMessage:\"You cannot share a story that has not been saved yet.\"})}),a.$on(\"addStoryToSlot\",function(){angular.isUndefined(a.context.story.id)?f.$broadcast(\"error\",{errorMessage:\"Unfortunately you cannot add an unsaved story to a slot.\"}):a.context.story.id===f.stack.storyId?f.$broadcast(\"error\",{errorMessage:\"Unfortunately it is not possible to link a story to itself.\"}):d.add({toStoryId:f.stack.storyId,slotName:f.stack.slotName,storyId:a.context.story.id},null,function(){f.selectMode=!1,j.addSuccessMessage(a.context.story.title+\" has been linked to \"+f.stack.storyTitle+\" as \"+f.stack.slotName),f.stack=void 0,a.reload()})}),a.$on(\"createSlot\",function(){angular.isDefined(a.context.story.id)?a.$broadcast(\"askForSlotName\",{create:!1,storyId:a.context.story.id,storyTitle:a.context.story.title}):f.$broadcast(\"error\",{errorMessage:\"I am sorry, but you cannot create a new slot on an unsaved story.\"})}),a.$on(\"createStoryInSlot\",function(){angular.isDefined(a.context.story.id)?angular.isDefined(a.activeSlot)&&4===f.appState?(f.stack={storyId:a.context.story.id,storyTitle:a.context.story.title,slotName:a.activeSlot},g.url(\"/story/\"+a.activeSlot+\"/\"+a.context.story.id+\"/\"+a.context.story.title)):a.$broadcast(\"askForSlotName\",{create:!0,storyId:a.context.story.id,storyTitle:a.context.story.title}):f.$broadcast(\"error\",{errorMessage:\"Excuse me, but you cannot create a new story in a slot of an unsaved story.\"})}),a.selectSlot=function(b,c){if(a.activeSlot===b)c?a.hideInStories():a.hideOutStories(),a.activeSlot=void 0,f.appState=2,g.search({});else{var d={openSlot:b};c&&(d.inbound=!0),g.search(d),a.$broadcast(\"selectSlot\",{inbound:c,storyId:a.context.story.id,storyTitle:a.context.story.title,slotName:b}),c?a.showInStories():a.showOutStories(),a.activeSlot=b,f.appState=c?3:4}a.storyFilter={}},a.openStory=function(a,b,c){var d={};c||(d.openSlot=b),g.url(\"/story/\"+a).search(d)},a.$on(\"toggleLeft\",function(){a.inSlots?(a.hideInSlots(),f.appState=1,a.slotFilterLeft=void 0,a.storyFilter={}):angular.isDefined(a.context.story.id)&&(a.showInSlots(),f.appState=2)}),a.$on(\"toggleRight\",function(){a.outSlots?(a.hideOutSlots(),f.appState=1,a.slotFilterRight=void 0,a.storyFilter={}):angular.isDefined(a.context.story.id)&&(a.showOutSlots(),f.appState=2)}),a.showInSlots=function(){console.log(\"Bin hier\"),a.inSlots=!0,a.outStories=!1,a.activeSlot=void 0},a.hideInSlots=function(){a.inSlots=!1,a.inStories=!1},a.showInStories=function(){a.inStories=!0,a.inSlots=!0,a.outStories=!1,a.outSlots=!1},a.hideInStories=function(){a.inStories=!1},a.showOutSlots=function(){a.outSlots=!0,a.inStories=!1,a.activeSlot=void 0},a.hideOutSlots=function(){a.outSlots=!1,a.outStories=!1},a.showOutStories=function(){a.outStories=!0,a.outSlots=!0,a.inStories=!1,a.inSlots=!1},a.hideOutStories=function(){a.outStories=!1},a.$on(\"hideInStories\",a.hideInStories),a.$on(\"hideInSlots\",a.hideInSlots),a.$on(\"hideOutStories\",a.hideOutStories),a.$on(\"hideOutSlots\",a.hideOutSlots),a.$on(\"startEditing\",function(){!a.context.flags.canWrite||f.selectMode||f.targetMode||(f.editMode=!0,setTimeout(function(){f.$broadcast(\"elastic:adjust\"),$(\"#story-content-editor\").focus()},200))}),a.$on(\"doneEditing\",function(){a.$broadcast(\"updateView\",{markdown:a.context.story.content}),f.editMode=!1}),a.$on(\"selectTarget\",function(){f.targetMode=!0,f.targetStack={source:{id:a.context.story.id,title:a.context.story.title},target:{}},g.url(\"/query\")}),a.$on(\"findPaths\",function(){f.targetStack.target.id=a.context.story.id,f.targetStack.target.title=a.context.story.title,g.url(\"/graph/findpaths\")}),a.suggestTags=function(a){return l.get(\"/query/suggest/tags/\"+a).then(function(a){return a.data=a.data.suggest[0].options.map(function(a){return a.text}),a})},a.suggestSlots=function(a){return l.get(\"/query/suggest/slots/\"+a).then(function(a){return a.data=a.data.suggest[0].options.map(function(a){return a.text}),a})},a.$on(\"$locationChangeStart\",function(b,c,d){c===a.newUrl?a.newUrl=void 0:(a.storyForm.title.$dirty||a.storyForm.tags.$dirty||a.storyForm.content.$dirty)&&c.match(/^[^\\?]+/)[0]!==d.match(/^[^\\?]+/)[0]&&(b.preventDefault(),a.newUrl=c,i.showModal(\"#confirm-leave-modal\"))}),a.leaveStoryConfirmed=function(){console.log(\"going to: \"+a.newUrl),g.url(g.url(a.newUrl).hash()),i.hideModal(\"#confirm-leave-modal\")},a.cancelConfirmLeave=function(){a.newUrl=void 0,i.hideModal(\"#confirm-leave-modal\")},a.storyFilter={},a.slotFilterLeft=void 0,a.slotFilterRight=void 0,a.reload()}]),angular.module(\"amanuensisApp\").controller(\"SlotNameModalCtrl\",[\"$scope\",\"$rootScope\",\"$location\",\"utilService\",function(a,b,c,d){a.$on(\"askForSlotName\",function(b,c){a.title=\"Please give the new slot a name...\",a.storyId=c.storyId,a.storyTitle=c.storyTitle,a.create=c.create,d.showModal(\"#slot-name-modal\")}),a.done=function(){a.newSlotName.length>3?(b.stack={storyId:a.storyId,storyTitle:a.storyTitle,slotName:a.newSlotName},a.create?c.url(\"/story/\"+a.newSlotName+\"/\"+a.storyId+\"/\"+a.storyTitle):(b.selectMode=!0,c.url(\"/query\")),d.hideModal(\"#slot-name-modal\")):a.title=\"Too short. Try a longer name for the slot...\"},a.cancel=function(){d.hideModal(\"#slot-name-modal\")}}]),angular.module(\"amanuensisApp\").controller(\"ShareModalCtrl\",[\"$scope\",\"$rootScope\",\"$location\",\"utilService\",\"shareService\",\"$http\",function(a,b,c,d,e,f){a.userRights=[{label:\"read\",value:\"canRead\"},{label:\"read & write\",value:\"canWrite\"},{label:\"read, write & grant\",value:\"canGrant\"}],a.modes=[{label:\"user \",value:\"user\",icon:\"fa-user\"},{label:\"group\",value:\"group\",icon:\"fa-users\"},{label:\"everybody\",value:\"public\",icon:\"fa-globe\"}],a.title=\"Share with somebody else...\",a.$on(\"openShareStoryModal\",function(b,c){a.storyId=c.storyId,a.mode=\"user\",a.userToShare=void 0,a.rightToShare=void 0,a.reloadShares()}),a.reloadShares=function(){a.shares=e.listShares({storyId:a.storyId},function(){d.showModal(\"#share-modal\")})},a.share=function(){angular.isUndefined(a.mode)?a.title=\"Please choose, how to share this story...\":angular.isDefined(a.userToShare)&&a.userToShare.length>3&&angular.isDefined(a.rightToShare)?e.share({storyId:a.storyId,rights:a.rightToShare,user:a.userToShare},{},function(){a.reloadShares(),a.title=\"Share with somebody else...\"}):a.title=\"public\"===a.mode?\"Please choose the rights to grant to everybody else...\":\"Please enter a valid username and the rights to grant...\"},a.unshare=function(b){e.unshare({storyId:a.storyId,user:b},{},function(){console.log(\"done unsharing\"),a.reloadShares()})},a.cancel=function(){d.hideModal(\"#share-modal\")},a.editUser=function(b,c){a.userToShare=b,a.rightToShare=c,a.mode=\"user\"},a.changeMode=function(b){a.userToShare=\"public\"===b?\"public\":void 0,a.rightsToShare=void 0},a.suggestUsersOrGroups=function(b){return f.get(\"/query/suggest/\"+a.mode+\"s/\"+b).then(function(a){return a.data=a.data.suggest[0].options.map(function(a){return a.text}),a})}}]),angular.module(\"amanuensisApp\").factory(\"slotService\",[\"$resource\",function(a){return a(\"/story/:storyId/:slotName\",{},{list:{method:\"GET\",isArray:!0},ćreate:{method:\"POST\"},add:{method:\"PUT\",url:\"/story/:toStoryId/:slotName/:storyId\"},remove:{method:\"DELETE\",url:\"/story/:fromStoryId/:slotName/:storyId\"}})}]),angular.module(\"amanuensisApp\").controller(\"SlotCtrl\",[\"$scope\",\"slotService\",\"$rootScope\",\"$location\",\"$window\",function(a,b,c,d,e){a.storyListViewMode=\"all\",a.reload=function(c,d,e){a.storyId=c,a.storyTitle=d,a.slotName=e,a.stories=b.query({storyId:a.storyId,slotName:a.slotName},function(b){a.storyListViewMode=b.length>4?\"all\":1==b.length?\"single\":\"few\"})},a.$on(\"addStory\",function(){c.selectMode=!0,c.stack={storyId:a.storyId,storyTitle:a.storyTitle,slotName:a.slotName},d.url(\"/query\")}),a.remove=function(c,d){\"undefined\"!=typeof d&&d.stopPropagation(),b.remove({fromStoryId:a.storyId,slotName:a.slotName,storyId:c.id},function(){var b=a.stories.indexOf(c);b>=0&&a.stories.splice(b,1)})},a.goBack=function(){e.history.back()},a.$on(\"selectSlot\",function(b,c){c.inbound===a.inbound&&a.reload(c.storyId,c.storyTitle,c.slotName)}),a.hideInStories=function(){a.$emit(\"hideInStories\")},a.hideInSlots=function(){a.$emit(\"hideInSlots\")},a.hideOutStories=function(){a.$emit(\"hideOutStories\")},a.hideOutSlots=function(){a.$emit(\"hideOutSlots\")}}]),angular.module(\"amanuensisApp\").controller(\"CabCtrl\",[\"$scope\",\"$route\",\"$rootScope\",\"$location\",\"$window\",function(a,b,c,d,e){a.cabQueryString=void 0,a.select=function(){a.$broadcast(\"addStoryToSlot\"),a.toggleMenu()},a.cancel=function(){c.selectMode=!1,c.stack=void 0,a.toggleMenu()},a.goToStack=function(){d.url(\"/story/\"+c.stack.storyId),a.toggleMenu()},a.toggleLeft=function(){a.$broadcast(\"toggleLeft\")},a.toggleRight=function(){a.$broadcast(\"toggleRight\")},a.goBack=function(){e.history.back()},a.saveStory=function(){a.$broadcast(\"saveStory\"),a.toggleMenu()},a.deleteStory=function(){a.$broadcast(\"deleteStory\"),a.toggleMenu()},a.createSlot=function(){a.$broadcast(\"createSlot\"),a.toggleMenu()},a.addStory=function(){a.$broadcast(\"addStory\"),a.toggleMenu()},a.createStoryInSlot=function(){a.$broadcast(\"createStoryInSlot\"),a.toggleMenu()},a.shareStory=function(){a.$broadcast(\"shareStory\"),a.toggleMenu()},a.starStory=function(){a.$broadcast(\"starStory\"),a.toggleMenu()},a.unstarStory=function(){a.$broadcast(\"unstarStory\"),a.toggleMenu()},a.getUserContext=function(){$http({method:\"GET\",url:\"/user/login\"}).success(function(){})},a.resetSearch=function(){a.cabQueryString=void 0},a.search=function(b){angular.isDefined(a.cabQueryString)&&a.cabQueryString.length>0?128===c.appState?a.$broadcast(\"search\",{cabQueryString:a.cabQueryString}):d.url(\"/query/\"+a.cabQueryString):b&&d.url(\"/query\")},a.startEditing=function(){a.$broadcast(\"startEditing\"),a.toggleMenu()},a.doneEditing=function(){a.$broadcast(\"doneEditing\"),a.toggleMenu()},a.logout=function(){a.$broadcast(\"logout\"),a.toggleMenu()},a.findPaths=function(){a.$broadcast(\"selectTarget\"),a.toggleMenu()},a.selectTarget=function(){a.$broadcast(\"findPaths\"),a.toggleMenu()},a.cancelTarget=function(){c.targetMode=!1,c.targetStack=void 0,a.toggleMenu()},a.goToTargetStack=function(){d.url(\"/story/\"+c.targetStack.storyId)},a.changePassword=function(){a.$broadcast(\"changePassword\"),a.toggleMenu()},a.reloadStory=function(){a.$broadcast(\"reloadStory\"),a.toggleMenu()},a.addAttachment=function(){a.$broadcast(\"addAttachment\"),a.toggleMenu()},a.controlText=function(b,c){c.stopPropagation(),c.preventDefault(),a.$broadcast(\"markdown_\"+b),a.toggleMenu()},a.goHome=function(){d.url(\"/query\"),a.toggleMenu()},a.menuElement=$(\"#cab\"),a.toggleMenu=function(){a.menuElement.toggleClass(\"active-menu\")}}]),angular.module(\"amanuensisApp\").controller(\"QueryCtrl\",[\"$scope\",\"$routeParams\",\"queryService\",\"$rootScope\",\"graphService\",function(a,b,c,d){d.appState=128,a.result=void 0,a.page=0,a.pages=0,a.lastQuery=void 0,a.lastMethod=void 0,a.mainSearch=void 0,a.title=void 0,a.searchStories=function(b,d,e,f){b===c.query?a.title=\"Result of Search for \"+d:b===c.myLatest?a.title=\"My latest Activities\"+d:b===c.othersLatest?a.title=\"Latest Activites of other users\"+d:b===c.toDos?a.title=\"My ToDos\":b===c.favourites&&(a.title=\"My Starred Stories\"),a.lastMethod=b,a.lastQuery={query:d,tags:e?e:[],page:a.page},angular.isDefined(f)&&(a.lastQuery.fromDate=f),a.result=b(a.lastQuery,function(){a.queryString=d,a.terms=e,a.pages=a.calcPages(),$(\"#query-sidebar\").scrollTop(),$(\"#query-results\").scrollTop()})},a.searchWithFilter=function(b){a.searchStories(a.lastMethod,a.queryString,[b])},a.searchWithDate=function(b){a.searchStories(a.lastMethod,a.queryString,[],b)},angular.isDefined(b.queryString)&&a.searchStories(c.query,b.queryString),a.$on(\"search\",function(b,d){a.searchStories(c.query,d.cabQueryString)}),a.calcPages=function(){return angular.isUndefined(a.result)?0:-1===a.result.hits.total?-1:Math.floor(a.result.hits.total/25)+1},a.nextPage=function(){a.page++,a.searchStories(a.lastMethod,a.lastQuery.query,a.lastQuery.terms)},a.previousPage=function(){a.page--,a.searchStories(a.lastMethod,a.lastQuery.query,a.lastQuery.terms)},a.doSearch=function(){angular.isDefined(a.mainSearch)&&a.mainSearch.length>0&&a.searchStories(c.query,a.mainSearch)},a.searchToDos=function(){a.searchStories(c.toDos,null)},a.searchMyLatest=function(){a.searchStories(c.myLatest,\"\")},a.searchOthersLatest=function(){a.searchStories(c.othersLatest,\"\")},a.searchNotifications=function(){a.searchStories(c.query,\"@\"+a.userContext.login)},a.searchFavourites=function(){a.searchStories(c.favourites,null)}}]),angular.module(\"amanuensisApp\").factory(\"queryService\",[\"$resource\",\"$q\",function(a,b){return a(\"/query/fulltext\",{},{query:{method:\"POST\",isArray:!1},myLatest:{method:\"POST\",url:\"/query/mylatest\",isArray:!1},othersLatest:{method:\"POST\",url:\"/query/otherslatest\",isArray:!1},toDos:{method:\"GET\",url:\"/graph/todos\",params:{page:\"@page\"},isArray:!1},favourites:{method:\"GET\",url:\"/graph/favourites\",params:{page:\"@page\"},isArray:!1},suggestTags:{url:\"/query/suggest/tags/:text\",method:\"GET\",isArray:!0,transformResponse:function(a){var c=angular.fromJson(a).suggest[0].options.map(function(a){return a.text});return b.when(c)}}})}]),angular.module(\"amanuensisApp\").factory(\"utilService\",function(){function a(){console.log(\"+++ show Overlay, counter before: \"+f),0===f++&&e.addClass(\"md-show\"),console.log(\"+++ show Overlay, counter after: \"+f)}function b(){console.log(\"--- hide Overlay, counter before: \"+f),--f<=0&&(e.removeClass(\"md-show\"),f=0),console.log(\"--- hide Overlay, counter after: \"+f)}function c(b){b.hasClass(\"md-show\")||(a(),b.addClass(\"md-show\"),setTimeout(function(){b.find(\".start-focus\").focus()},120))}function d(a){a.hasClass(\"md-show\")&&(a.removeClass(\"md-show\"),b())}var e=$(\"#md-overlay\"),f=0;return{showModalElement:c,hideModalElement:d,showModal:function(a){c($(a))},hideModal:function(a){d($(a))}}}),angular.module(\"amanuensisApp\").directive(\"onEnter\",function(){return function(a,b,c){function d(){a.$apply(c.onEnter)}a.$eval(c.keys);b.bind(\"keyup\",function(a){13==a.which&&d()})}}).directive(\"onEscape\",function(){return function(a,b,c){function d(){a.$apply(c.onEscape)}a.$eval(c.keys);b.bind(\"keyup\",function(a){27==a.which&&d()})}}).directive(\"selectOnFocus\",function(){return function(a,b){b.on(\"click\",function(){this.select()})}}).directive(\"fillVertical\",function(){return function(a,b,c){var d=function(){b.height($(window).height()-b.offset().top-c.margin)};$(window).resize(d),setTimeout(function(){d()},100)}}).directive(\"markdown\",[\"$rootScope\",function(){var a=new marked.Renderer;return a.link=function(a,b,c){return 0==a.indexOf(\"/attachment/\")?'<a href=\"'+a+'\" class=\"attachment\">'+c+\"</a>\":'<a href=\"'+a+'\" class=\"link\">'+c+\"</a>\"},a.image=function(a,b,c){return'<div class=\"scale-down\"><img src=\"'+a+'\" alt=\"'+c+'\"></img></div>'},marked.setOptions({renderer:a,gfm:!0,tables:!0,breaks:!0,pedantic:!1,sanitize:!0,smartLists:!0,smartypants:!1}),{restrict:\"A\",scope:!0,link:function(a,b){a.$on(\"updateView\",function(a,c){c.markdown&&b.html(marked(c.markdown,{}))})}}}]).directive(\"storyPreview\",function(){return{restrict:\"A\",scope:!1,link:function(a,b){a.$watch(\"storyInfo.content\",function(){b.html(marked(a.storyInfo.content,{}))})}}}).directive(\"uploadable\",[\"$rootScope\",\"$http\",function(a,b){return{restrict:\"A\",scope:{ngModel:\"=\"},link:function(c,d){function e(a,b){var c=d[0].selectionStart;return a.substr(0,c)+\"\\n\\n\"+b+\"\\n\"+a.substr(c)}function f(a){return\"image/jpeg\"===a||\"image/png\"===a||\"image/gif\"===a?!0:!1}function g(a){return a?\"!\":\"\"}var h,i=d.context;c.uploadFile=function(a,d){var e=new FormData,f=\"file-\"+Date.now();a.name&&(f=a.name),e.append(\"file\",a,f),b.post(\"/attachment/\"+c.$parent.$parent.context.story.id,e,{transformRequest:angular.identity,headers:{\"Content-Type\":void 0}}).success(function(a){c.onUploadedFile(a,d,f)}).error(function(){c.onErrorUploading()})},c.onUploadedFile=function(a,b,d){var e=a.filename;if(e){var f=c.ngModel.replace(h,\"[\"+d+\"](\"+e+\")\");c.ngModel=f}},c.onErrorUploading=function(){var b=c.ngModel.replace(h,\"\");c.ngModel=b,a.$broadcast(\"error\",{errorMessage:\"I am inconsolable, but an error occured uploading your file.\"})},c.insertProgressText=function(a){h=\"[Uploading file...]()\",c.ngModel=e(c.ngModel,g(a)+h)},c.isUploadPossible=function(){return angular.isDefined(c.$parent.$parent.context.story.id)&&\"\"!==c.$parent.$parent.context.story.id?!0:(a.$broadcast(\"error\",{errorMessage:\"Sorry, but you cannot upload attachments to an unsaved story.\"}),!1)},c.onPaste=function(a){var b=a.clipboardData;if(\"object\"==typeof b&&null!==b.items)for(var d=0;d<b.items.length;d++){var e=b.items[d],g=e.getAsFile();if(null!==g&&c.isUploadPossible()){var h=f(g.type);c.insertProgressText(h),c.uploadFile(g,h)}}return!0},c.onDrop=function(a){for(var b=0;b<a.dataTransfer.files.length;b++){var d=a.dataTransfer.files[b];if(c.isUploadPossible()){var e=f(d.type);c.insertProgressText(e),c.uploadFile(d,e)}}return!0},c.$on(\"addAttachment\",function(){var a=$(\"#attachment\");a.change(function(){for(var a=0,b=this.files.length;b>a;a++){var d=this.files[a];if(c.isUploadPossible()){var e=f(d.type);c.insertProgressText(e),c.uploadFile(d,e)}}this.value=\"\",this.files=[]}),a.click()}),i.addEventListener(\"paste\",function(a){c.onPaste(a)},!1),i.addEventListener(\"drop\",function(a){a.stopPropagation(),a.preventDefault(),c.onDrop(a)},!1),i.addEventListener(\"dragenter\",function(a){a.stopPropagation(),a.preventDefault()},!1),i.addEventListener(\"dragover\",function(a){a.stopPropagation(),a.preventDefault()},!1)},controller:[\"$scope\",\"$attrs\",\"$element\",function(){}]}}]),angular.module(\"amanuensisApp\").directive(\"errorDialog\",[\"$rootScope\",function(){return{restrict:\"A\",template:'<div class=\"md-modal md-effect-3\" id=\"error-message-modal\"><div class=\"md-content error\"><h3>An error occured: <i style=\"float: right\" class=\"fa fa-times action\" ng-click=\"cancelErrorMessage()\"></i></h3><div class=\"error-icon\"> <i class=\"fa fa-exclamation fa-3x fa-fw\"></i></div><div class=\"error-message\">{{errorMessage}}</div></div></div>',replace:!0,scope:!0,controller:[\"$scope\",\"$element\",\"utilService\",\"$location\",\"$timeout\",function(a,b,c){a.$on(\"error\",function(d,e){a.errorMessage=angular.isDefined(e.errorMessage)?e.errorMessage:\"This should not have happened. Please inform your system-administrator.\",a.$apply(),c.showModalElement(b)}),a.cancelErrorMessage=function(){setTimeout(function(){c.hideModalElement(b)},500)}}]}}]),angular.module(\"amanuensisApp\").controller(\"LoginDialogCtrl\",[\"$scope\",\"$rootScope\",\"$http\",\"$location\",\"authService\",\"utilService\",function(a,b,c,d,e,f){var g=\"Welcome to Colibri. Please login...\",h=\"Something is wrong. Please try again...\";a.reset=function(){a.welcome=g,a.pwd=void 0,a.login=void 0},a.doLogin=function(){var d={method:\"POST\",url:\"/user/login\",ignoreAuthModule:!0,data:{username:a.login,password:a.pwd}};c(d).success(function(c){b.userContext=c,$(\"#login-modal-content\").removeClass(\"error\"),a.welcome=g,a.reset(),e.loginConfirmed()}).error(function(){a.welcome=h,$(\"#login-modal-content\").addClass(\"error\"),$(\"#loginInput\").focus()})},b.goToPassword=function(){$(\"#passwordInput\").focus()},a.$on(\"event:auth-loginRequired\",function(){f.showModal(\"#login-modal\")}),a.$on(\"event:auth-loginConfirmed\",function(){f.hideModal(\"#login-modal\")}),a.$on(\"logout\",function(){var d={method:\"GET\",url:\"/user/logout\"};c(d).success(function(){a.welcome=\"You logged out successfully.\",b.$broadcast(\"event:auth-loginRequired\")})}),a.reset();var i={method:\"GET\",url:\"/user/info\",ignoreAuthModule:!0};c(i).success(function(a){b.userContext=a}).error(function(){b.$broadcast(\"event:auth-loginRequired\")})}]),angular.module(\"amanuensisApp\").controller(\"LoginCtrl\",[\"$scope\",\"$rootScope\",function(a,b){b.appState=1e4}]),angular.module(\"amanuensisApp\").controller(\"FindPathsCtrl\",[\"$scope\",\"graphService\",\"$rootScope\",\"utilService\",function(a,b,c,d){a.searchStories=function(){a.result=b.query({sourceStoryId:a.sourceStory.id,tagName:a.tagName,targetStoryId:a.targetStory.id,page:a.page},function(){})},a.tagNameEntered=function(){a.newTagName.length>3?(a.tagName=a.newTagName,a.searchStories(),d.hideModal(\"#tag-name-modal\"),a.newTagName=void 0):a.title=\"Your input was too short...\"},a.askForTagName=function(){a.title=\"Please enter a tag-name...\",d.showModal(\"#tag-name-modal\")},a.cancelTagName=function(){d.hideModal(\"#tag-name-modal\")},a.nextPage=function(){a.page++,a.searchStories()},a.previousPage=function(){a.page--,a.searchStories()},a.page=0,c.appState=256,angular.isUndefined(c.targetStack)||angular.isUndefined(c.targetStack.source)||angular.isUndefined(c.targetStack.target)?c.$broadcast(\"error\",{errorMessage:\"Please select the stories you want to search between first.\"}):(a.sourceStory=c.targetStack.source,a.targetStory=c.targetStack.target,c.targetMode=!1,a.askForTagName())}]),angular.module(\"amanuensisApp\").controller(\"MyModalCtrl\",[\"$scope\",\"utilService\",function(a){a.$on(\"testMe\",function(){console.log(\"init modal\")})}]),angular.module(\"amanuensisApp\").factory(\"graphService\",[\"$resource\",function(a){return a(\"/graph/findpaths/:sourceStoryId/:tagName/:targetStoryId?page=:page\",{},{query:{method:\"GET\",isArray:!0},favourites:{method:\"GET\",url:\"/graph/favourites?page=:page\",isArray:!0},toDos:{method:\"GET\",url:\"/graph/todos?page=:page\",isArray:!0}})}]);var KEYS={backspace:8,tab:9,enter:13,escape:27,space:32,up:38,down:40,comma:188},typeahead=angular.module(\"typeahead\",[]);typeahead.directive(\"typeahead\",[\"$timeout\",function(a){return{restrict:\"E\",require:\"ngModel\",scope:{value:\"=ngModel\",source:\"&\",inputClass:\"@\",placeholder:\"@\"},template:'             <div class=\"typeahead\">                 <input class=\"typeahead-input {{inputClass}}\" type=\"text\" ng-model=\"value\" ng-change=\"onChange()\" placeholder=\"{{placeholder}}\"></input>                 <div class=\"suggestions\" ng-show=\"suggestionsVisible\">                     <ul class=\"suggestion-list\">                         <li class=\"suggestion-item\" ng-repeat=\"item in suggestionList | limitTo:10\"                             ng-class=\"{selected: $index === selected}\" ng-click=\"commit()\"                            ng-mouseenter=\"select($index)\" ng-bind=\"item\">                         </li>                     </ul>                 </div>             </div>',replace:!0,controller:[\"$scope\",\"$attrs\",\"$element\",function(b){var c,d;b.suggestionList=[],b.suggestionsVisible=!1,b.selected=void 0,b.select=function(a){0>a?a=b.suggestionList.length-1:a>=b.suggestionList.length&&(a=0),b.selected=a},b.selectNext=function(){angular.isDefined(b.selected)?b.select(++b.selected):b.select(0)},b.selectPrev=function(){b.select(--b.selected)},b.commit=function(){angular.isDefined(b.selected)&&b.selected<b.suggestionList.length&&(b.value=b.suggestionList[b.selected]),b.suggestionsVisible=!1},b.reset=function(){b.suggestionList=[],b.suggestionsVisible=!1,b.selected=void 0,a.cancel(c)},b.load=function(e){return e.length<3?(b.reset(),void 0):(a.cancel(c),c=a(function(){self.query=e;var a=b.source({$query:e});d=a,a.then(function(c){a===d&&(b.suggestionList=c.data,b.suggestionList.length>0?b.suggestionsVisible=!0:b.reset())})},250,!1),void 0)},b.onChange=function(){b.load(b.value)},b.handleKey=function(a){var c=!1;b.suggestionsVisible&&(a.which===KEYS.down?(b.selectNext(),c=!0):a.which===KEYS.up?(b.selectPrev(),c=!0):a.which===KEYS.enter?(angular.isDefined(b.selected)&&b.commit(),c=!0):a.which===KEYS.escape&&(b.suggestionsVisible=!1,b.selected=void 0,c=!0)),c&&(a.preventDefault(),a.stopImmediatePropagation(),b.$apply())}}],link:function(a,b){b.find(\"input\").bind(\"keyup\",a.handleKey)}}}]);var KEYS={backspace:8,tab:9,enter:13,escape:27,space:32,up:38,down:40,comma:188},typeahead=angular.module(\"selectbox\",[]);typeahead.directive(\"selectbox\",[\"$timeout\",function(){return{restrict:\"E\",require:\"ngModel\",scope:{value:\"=ngModel\",optionsList:\"=options\",placeholder:\"@\",valueSelected:\"&\"},template:'             <div class=\"selectbox\">                 <div ng-click=\"toggleOptions()\" class=\"value\"><span class=\"value\"><i ng-show=\"committed.icon\" class=\"fa fa-fw on-selectbox {{committed.icon}}\"></i>{{committed.label}}</span><i class=\"fa fa-caret-down handler\"></i></div>                 <div class=\"options\" ng-show=\"optionsVisible\">                     <ul class=\"option-list\">                         <li class=\"option-item {{item.css}}\" ng-repeat=\"item in optionsList\"                             ng-class=\"{selected: $index === selected}\" ng-click=\"commit()\"                            ng-mouseenter=\"select($index)\" >                             <i ng-show=\"item.icon\" class=\"fa fa-fw on-selectbox {{item.icon}}\"></i>{{item.label}}                         </li>                     </ul>                 </div>             </div>',replace:!0,controller:[\"$scope\",\"$attrs\",\"$element\",function(a){a.reset=function(){a.optionsVisible=!1,a.selected=void 0,a.committed={label:a.placeholder||\"please choose...\"}\n    2  },a.select=function(b){0>b?b=a.optionsList.length-1:b>=a.optionsList.length&&(b=0),a.selected=b},a.selectNext=function(){angular.isDefined(a.selected)?a.select(++a.selected):a.select(0)},a.selectPrev=function(){a.select(--a.selected)},a.commit=function(){angular.isDefined(a.selected)&&a.selected<a.optionsList.length&&(a.committed=a.optionsList[a.selected],a.value=a.committed.value,angular.isDefined(a.valueSelected)&&a.valueSelected({value:a.optionsList[a.selected].value})),a.optionsVisible=!1},a.$watch(\"value\",function(b){if(angular.isUndefined(a.committed)||angular.isDefined(a.committed)&&b!==a.committed.value)for(var c=0;c<a.optionsList.length;c++)a.optionsList[c].value===b&&(a.committed=a.optionsList[c])}),a.toggleOptions=function(){a.optionsVisible=!a.optionsVisible},a.handleKey=function(b){var c=!1;a.optionsVisible&&(b.which===KEYS.down?(a.selectNext(),c=!0):b.which===KEYS.up?(a.selectPrev(),c=!0):b.which===KEYS.enter?(angular.isDefined(a.selected)&&a.commit(),c=!0):b.which===KEYS.escape&&(a.optionsVisible=!1,a.selected=void 0,c=!0)),c&&(b.preventDefault(),b.stopImmediatePropagation(),a.$apply())},a.reset()}],link:function(a,b){b.bind(\"keyup\",a.handleKey)}}}]),angular.module(\"amanuensisApp\").factory(\"shareService\",[\"$resource\",function(a){return a(\"/share/:storyId\",{},{share:{method:\"POST\",url:\"/share/:storyId/:rights/:user\",params:{}},unshare:{method:\"DELETE\",url:\"/share/:storyId/:user\",params:{}},listShares:{method:\"GET\",isArray:!0}})}]),angular.module(\"amanuensisApp\").filter(\"userRights\",function(){return function(a){switch(a){case\"canRead\":return\"read\";case\"canWrite\":return\"read & write\";case\"canGrant\":return\"read, write & grant\"}}}),angular.module(\"amanuensisApp\").directive(\"onFinishRender\",[\"$timeout\",function(a){return{restrict:\"A\",link:function(b){b.$last===!0&&a(function(){})}}}]),angular.module(\"amanuensisApp\").controller(\"UserSettingsCtrl\",[\"$scope\",\"$rootScope\",\"$http\",\"utilService\",function(a,b,c,d){a.reset=function(){a.oldPwd=void 0,a.newPwd=void 0,a.repeatPwd=void 0},a.change=function(){angular.isDefined(a.oldPwd)&&a.oldPwd.length>0?angular.isDefined(a.newPwd)&&a.newPwd.length>6?angular.isDefined(a.repeatPwd)&&a.newPwd===a.repeatPwd?c.post(\"/user/changePwd\",{oldPwd:a.oldPwd,newPwd:a.newPwd}).success(function(){d.hideModal(\"#usersettings-modal\")}):b.$broadcast(\"error\",{errorMessage:\"I am inconsolable, but the two entries of your new password do not match.\"}):b.$broadcast(\"error\",{errorMessage:\"Please enter a new password of at least 6 characters.\"}):b.$broadcast(\"error\",{errorMessage:\"Please enter your actual password.\"})},b.goToNewPassword=function(){$(\"#password-new1-input\").focus()},b.goToRepeatPassword=function(){$(\"#password-new2-input\").focus()},a.$on(\"changePassword\",function(){d.showModal(\"#usersettings-modal\")}),a.cancel=function(){d.hideModal(\"#usersettings-modal\")},a.reset()}]),angular.module(\"amanuensisApp\").factory(\"favourService\",[\"$resource\",function(a){return a(\"/star/:storyId\",{},{star:{method:\"POST\"},unstar:{method:\"DELETE\"},due:{url:\"/due/:storyId?date=:date\",method:\"POST\"},undue:{url:\"/due/:storyId\",method:\"DELETE\"}})}]),angular.module(\"amanuensisApp\").directive(\"markdownEditor\",[\"$timeout\",function(a){return{restrict:\"E\",require:\"ngModel\",scope:{value:\"=ngModel\",placeholder:\"@\",textareaClass:\"@\",textareaId:\"@\"},template:'             <div class=\"markdown-editor-wrapper\">                 <textarea name=\"content\" id=\"{{textareaId}}\" placeholder=\"{{placeholder}}\" class=\"{{textareaClass}}\" ng-model=\"value\"                     uploadable msd-elastic>                 </textarea>             </div>             ',replace:!0,controller:[\"$scope\",\"$attrs\",\"$element\",function(b,c,d){function e(c,e){b.textarea=d.find(\"textarea\")[0],b.textarea.focus();var f=b.textarea.selectionStart,g=b.textarea.selectionEnd,h=g-f;b.value=b.value.substr(0,f)+c+b.value.substr(f,h)+e+b.value.substr(g),a(function(){b.textarea.setSelectionRange(f+c.length,g+c.length)},100)}function f(c){b.textarea=d.find(\"textarea\")[0];var e=b.textarea.selectionStart,f=b.value.split(\"\\n\"),g=b.value.substr(0,b.textarea.selectionStart).split(\"\\n\").length-1,h=f.slice(0,g).join(\"\\n\"),i=f.slice(g+1).join(\"\\n\");b.value=h+\"\\n\"+c(f[g])+\"\\n\"+i,a(function(){b.textarea.setSelectionRange(e,e)},100)}b.$on(\"markdown_bold\",function(){e(\"__\",\"__\")}),b.$on(\"markdown_italic\",function(){e(\"_\",\"_\")}),b.$on(\"markdown_link\",function(){e(\"[\",\"]()\")}),b.$on(\"markdown_header\",function(){f(function(a){for(var b=0;\"#\"===a.charAt(b);)b++;return 4>b?\"#\"+a:a.substr(b)})}),b.$on(\"markdown_list-ul\",function(){f(function(a){return\"* \"!==a.substr(0,2)?\"* \"+a:a})})}],link:function(){}}}]);\n\n/home/tiberius/scala/projects/amanuensis/src/main/webapp/dist/app/styles/c5a7e60b.main.css:\n    1: @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);:focus{outline:0}body,html{background:#34495e;font-family:Lato,Arial,sans-serif;color:#fff;font-size:16px;font-weight:300;margin:0;padding:0;overflow:hidden;width:100%;height:100%;max-width:100%}a,a:active,a:hover,a:link,a:visited{color:inherit}.view-container{position:absolute;min-height:20em;width:100%;max-width:100%;height:100%;margin:0;padding:0;left:0;top:0}.one-line{white-space:nowrap}.alert{padding:1em;margin-bottom:1.25em;border:1px solid transparent;border-radius:3px}.alert h4{margin-top:0;color:inherit}.alert .alert-link{font-weight:700}.alert>p,.alert>ul{margin-bottom:0}.alert>p+p{margin-top:.313em}.alert-dismissable{padding-right:2.1em}.alert-dismissable .close{position:relative;top:-.125em;right:-1.313em;color:inherit}.alert-success{color:#11273d;background-color:#e6d8ac;border-color:#c8bb93}.alert-success hr{border-top-color:#c9e2b3}.alert-success .alert-link{color:#2b542c}.alert-info{color:#31708f;background-color:#d9edf7;border-color:#bce8f1}.alert-info hr{border-top-color:#a6e1ec}.alert-info .alert-link{color:#245269}.alert-warning{color:#8a6d3b;background-color:#fcf8e3;border-color:#faebcc}.alert-warning hr{border-top-color:#f7e1b5}.alert-warning .alert-link{color:#66512c}.alert-danger{color:#a94442;background-color:#f2dede;border-color:#ebccd1}.alert-danger hr{border-top-color:#e4b9c0}.alert-danger .alert-link{color:#843534}.close{float:right;font-size:1.313em;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;opacity:.2;filter:alpha(opacity=20)}.close:focus,.close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.5;filter:alpha(opacity=50)}button.close{padding:0;cursor:pointer;background:0 0;border:0;-webkit-appearance:none}#login-modal{width:32em}#passwordInput{margin-top:1em}#loading-bar .bar{background:#29d}p.pagination{text-align:center}p.pagination span.pagination-nav{cursor:pointer;font-weight:400;margin-left:.625em;margin-right:.625em}.resize-sensor,.resize-sensor>div{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:-1}::-webkit-scrollbar-track{background-color:rgba(0,0,0,.4)}::-webkit-scrollbar{-webkit-appearance:none;width:.5em;background-color:transparent}.thick-scroll::-webkit-scrollbar{width:.5em}::-webkit-scrollbar-thumb{background-color:rgba(255,255,255,.25)}.vertical-scrollable{overflow-x:hidden;overflow-y:auto!important;-webkit-overflow-scrolling:touch}br.only-responsive{display:none}.not-in-responsive{display:inline}div.container{position:absolute;top:0;bottom:0;margin:0;padding:0}.fixfixed .cab-main,.fixfixed .left-container,.fixfixed .right-container,.fixfixed div.container.story{position:absolute}div.left-container{width:45%;z-index:2;left:-45%;position:fixed;margin-top:2.5em;transition:left .25s ease-out}.left-container.show-slots{left:-30%;transition:left .25s ease-out}.left-container.show-stories{left:0}.stories-left{left:0;width:67%;z-index:4;-moz-box-sizing:border-box;box-sizing:border-box}.slots-left{left:67%;width:33%;z-index:3}div.right-container{width:45%;z-index:2;left:100%;position:fixed;margin-top:2.5em;transition:left .25s ease-out}.right-container.show-slots{left:85%;transition:left .25s ease-out}.right-container.show-stories{left:55%}.slots-right{left:0;width:33%;z-index:3}.stories-right{left:33%;width:67%;z-index:4}div.container.story{max-width:100%;position:fixed;margin-top:2.5em;z-index:0;width:70%;left:15%;transition:left .25s ease-out,width .25s linear}div.container.story.shifted-right{left:45%;width:55%;transition:left .25s ease-out,width .25s linear}div.container.story.shifted-left{left:0;width:55%;transition:left .25s ease-out,width .25s linear}div.container.story div.inner{position:absolute;top:0;bottom:0;width:100%;min-width:100%;max-width:100%;padding:0;margin-top:0;-moz-box-sizing:border-box;box-sizing:border-box}div.story-header{display:block;color:#fff;font-family:Lato,Arial,sans-serif;background:rgba(0,0,0,.05);padding:.9em;overflow:visible}div.container.story.shifted-left div.story-header,div.container.story.shifted-right div.story-header{padding:.9em .6em}div.story-header a{color:#566473;text-decoration:none;outline:0}div.story-header a:hover{color:#4f7bab}div.story-header h1{font-size:3.2em;line-height:1.3;margin:0;font-weight:300}div.story-header div.meta{display:block;font-size:.3em;color:#74818e;padding:0 0 0em .1em}input.story-title{font-family:Lato,Arial,sans-serif;color:#fff;font-size:3.2em;line-height:1.3;margin:0;font-weight:300;background:0 0;border:0;width:80%}div.story-icon{width:4em;height:5.5em;margin:0;float:left;text-align:center;vertical-align:middle;margin-right:1.25em}div.content{font-family:Lato,Arial,sans-serif;font-weight:300;color:#fff;font-size:1.2em;padding:0 .616em;width:100%;max-width:100%;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden}div.container.story.shifted-left div.content,div.container.story.shifted-right div.content{padding:0}div.container.story.shifted-left div.story-view,div.container.story.shifted-right div.story-view{padding-right:.625em}.markdown-editor-wrapper{margin:0;padding:0;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden}#story-content .mCSB_scrollTools .mCSB_draggerContainer{position:absolute;top:0;right:0;margin-top:.625em;margin-bottom:.625em;height:auto}textarea.story-content{font-family:Lato,Arial,sans-serif;color:#fff;line-height:1.3;margin:0;margin-top:.313em;font-weight:300;border:0;width:100%;height:25em;font-size:1em;padding:.625em;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;background:rgba(0,0,0,.05)}div.story-view{margin-top:-.625em;padding-top:0;padding-left:.6em;padding-right:.6em;padding-bottom:1em;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}div.story-view h1,li.story-info h1{font-size:1.6em;font-weight:300}div.story-view h2,li.story-info h2{font-size:1.4em;font-weight:300}div.story-view h3,div.story-view h4,div.story-view h5,div.story-view h6,li.story-info h3,li.story-info h4,li.story-info h5,li.story-info h6{font-size:1.2em;font-weight:300}div.story-view a,li.story-info a{text-decoration:none;font-weight:400}div.story-view a.attachment:before,li.story-info a.attachment:before{font-family:FontAwesome;font-weight:400;font-style:normal;display:inline-block;text-decoration:inherit;content:\"\\f0c6\";margin-right:.313em}div.story-view a.link:before,li.story-info a.link:before{font-family:FontAwesome;font-weight:400;font-style:normal;display:inline-block;text-decoration:inherit;content:\"\\f14c\";margin-right:.313em}div.story-view img{max-width:100%}div.story-view table,li.story-info table{border-spacing:0;border-collapse:collapse}div.story-view td,div.story-view th,li.story-info td,li.story-info th{border:1px solid #fff;padding:.3em;margin:0}li.story-info div.scale-down{height:auto;width:auto}div.scale-down img{max-width:100%;height:auto}div.shadow-right{border-right:1px solid rgba(0,0,0,.4)}div.shadow-left{border-left:1px solid rgba(0,0,0,.4)}div.slots{background-color:#5E4E18;overflow:hidden;margin:0;padding:0}div.slot-list-title{width:100%;padding:.8em;font-family:Lato,Arial,sans-serif;color:#E3D091;font-size:1em;font-weight:300;background:rgba(0,0,0,.05);word-wrap:break-word;white-space:nowrap;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}input.slot-filter{outline:0;font-family:Lato,Arial,sans-serif;color:#E3D091;width:6em;font-size:1.5em;font-weight:300;background:0 0;border:0;margin:0;padding:0}input.slot-filter::-webkit-input-placeholder{color:#E3D091}input.slot-filter::-moz-placeholder{color:#E3D091}ul.slot-list{width:100%;list-style:none;padding:0;margin:0}li.slot-name{width:100%;display:block;float:left;border-top:1px solid #866F22;padding:.6em;font-family:Lato,Arial,sans-serif;color:#E3D091;font-size:1.25em;margin:0;font-weight:300;cursor:pointer;word-wrap:break-word;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}li.slot-name:hover{background-color:rgba(75,75,75,.5)}i.on-slot{margin-right:.625em}div.stories{background-color:#5E2F18;overflow:hidden}div.story-list-title{width:100%;padding:.8em;font-family:Lato,Arial,sans-serif;color:#DABDB0;font-size:1em;font-weight:300;background:rgba(0,0,0,.05);word-wrap:break-word;white-space:nowrap;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}div.story-list-title i{vertical-align:baseline}input.story-filter{outline:0;width:12em;font-family:Lato,Arial,sans-serif;color:#DABDB0;font-size:1.5em;font-weight:300;background:0 0;border:0;margin:0;padding:0}input.story-filter::-webkit-input-placeholder{color:#DABDB0}input.story-filter::-moz-placeholder{color:#DABDB0}ul.story-list{width:100%;list-style:none;padding:0;margin:0}li.story-info{width:100%;display:block;float:left;border-top:1px solid #6D5245;padding:.6em;font-family:Lato,Arial,sans-serif;color:#DABDB0;font-size:1em;margin:0;font-weight:300;cursor:pointer;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}li.story-info>span.title{font-size:1.25em}li.story-info:hover{background-color:rgba(75,75,75,.25)}li.story-info>.delete-action{float:right;visibility:hidden}li.story-info:hover>.delete-action{visibility:visible}li.story-info p{padding:0;width:100%;word-wrap:break-word}li.story-info p.single-story{font-size:1em;width:100%;padding:0;margin:0;word-wrap:break-word}#share-modal{width:50em;max-width:50em!important}#share-modal>div.md-content>div{padding-left:1.25em;padding-right:1.25em}table.shares{width:100%;padding:0;margin:0}table.shares tr{cursor:pointer}table.shares td.icon{width:2%;padding-right:.3em}table.shares td.login{width:25%}table.shares td.name{width:45%}table.shares td.rights{width:25%}table.shares td.unshare{text-align:right;width:5%}td.unshare>i{cursor:pointer;margin-right:.625em}table.shares tr:nth-child(odd){background-color:rgba(75,75,75,.5)}div.share-list{overflow:hidden;max-height:10em}div.share-list .mCSB_scrollTools .mCSB_draggerContainer{position:absolute;top:0;left:0;bottom:0;right:0;margin-top:0;margin-bottom:0;margin-right:0;height:auto}#share-modal input.share-login{font-size:1em}#share-modal div.typeahead{width:16em;margin-left:1em;margin-right:1em}#share-modal div.typeahead>div.suggestions{width:16em}#share-modal div.everybody{font-size:1em;min-width:16em;margin-left:1em;margin-right:1em;display:inline-block}#share-modal div.selectbox{width:9em;margin-right:1em}#share-modal div.select-mode{width:6em}#share-modal div.confirmation{margin-left:1em}.cab-main,.cab-main ul{margin:0;padding:0;background:#fff;color:#5f6f81;list-style:none;text-transform:none;font-weight:300;font-family:Lato,Arial,sans-serif;line-height:2.5em;border-bottom:1px solid rgba(0,0,0,.4)}.cab-main{z-index:9000;position:fixed;top:0;left:0;width:100%;min-width:75em;height:4em;font-size:.625em}.cab-main a{display:block;height:100%;color:#5f6f81;text-decoration:none;cursor:pointer}.cab-desc{display:none}.cab-main>li{display:block;float:left;height:100%;border-right:1px solid #c6d0da;text-align:center}.cab-main>li:hover{background:rgba(0,0,1,.025)}.cab-main>li>a,.cab-main>li>div{padding:0 1em;letter-spacing:1px;font-weight:700}.cab-main>li>a.text{font-weight:400;margin-top:.5em;font-size:1.2em}.cab-main>li>a.user{margin-top:.5em;font-weight:400;overflow:hidden;white-space:nowrap}.cab-main>li>ul{display:none;margin-top:-.5em}.cab-main>li:hover ul{display:block;border-radius:0 0 3px 3px}.cab-main>li>ul>li{padding-left:.625em;padding-right:.625em;font-weight:400;border-top:1px solid #c6d0da;line-height:2.6em;cursor:pointer;text-align:left}.cab-main>li>ul>li:hover{background:rgba(0,0,1,.05)}.cab-main>li>input{font-family:Lato,Arial,sans-serif;color:#333;font-size:1.4em;line-height:1.3;margin:.6em .625em 0;font-weight:300;background:0 0;border:0;width:16em;max-width:16em}.cab-main:after{display:table;clear:both;content:\"\"}.cab-main li.trigger{position:relative;width:3.75em;vertical-align:middle}.cab-main li.menu-trigger{position:relative;width:3.75em;vertical-align:middle;display:none}.cab-main li.cab-right{float:right;border-right:0;border-left:1px solid #c6d0da}.cab-main li.cab-action{cursor:pointer}i.on-cab{margin-top:.5em}#user-menu{min-width:11em;font-size:1.2em}#responsive-cab{display:none}.button-bar{margin-top:1.25em;padding:1.25em 15%;background:rgba(0,0,0,.05)}.button{margin-left:.625em;background-color:#326151;border:1px solid rgba(0,0,0,.05);display:inline-block;color:#fff;font-weight:400;font-family:Lato,Arial,sans-serif;font-size:1em;font-style:normal;line-height:2.5em;text-decoration:none;text-align:center;vertical-align:middle;padding-left:1.25em;padding-right:1.25em;-webkit-box-shadow:1px 1px 1px 0 rgba(0,0,0,.4);-moz-box-shadow:1px 1px 1px 0 rgba(0,0,0,.4);box-shadow:1px 1px 1px 0 rgba(0,0,0,.4);border-radius:3px}.button:hover{background-color:#44836E}.button:active{position:relative;top:1px}.on-button{margin-left:.625em}i.action{cursor:pointer}i.opacity-hover:hover{opacity:.8}.md-modal{position:fixed;margin-top:-2.5em;top:50%;left:50%;max-width:39em;min-width:20em;height:auto;z-index:20000;visibility:hidden;-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;backface-visibility:hidden;-webkit-transform:translateX(-50%) translateY(-50%);-moz-transform:translateX(-50%) translateY(-50%);-ms-transform:translateX(-50%) translateY(-50%);transform:translateX(-50%) translateY(-50%);overflow:visible}.md-show{visibility:visible}div.md-overlay{position:fixed;width:100%;height:100%;visibility:hidden;top:0;left:0;z-index:10000;opacity:0;background:rgba(0,0,0,.6);-webkit-transition:all .3s;-moz-transition:all .3s;transition:all .3s}.md-error{z-index:50001}div.md-overlay.md-show{opacity:1;visibility:visible}.md-content{color:#fff;background:#34495e;position:relative;border-radius:3px;margin:0 auto}.md-content.error{background-color:#333230}.md-content h3{margin:0;padding:.4em;text-align:left;font-size:1.2em;font-weight:400;opacity:.8;background:rgba(0,0,0,.1);border-radius:3px 3px 0 0}.md-content h3 i{color:#8499af}.md-content>div{padding:.938em 2.5em 1.875em;margin:0;font-weight:300;font-size:1.15em}.md-content>div p{margin:0;padding:.625em 0}.md-content>div ul{margin:0;padding:0 0 1.875em 1.25em}.md-content>div ul li{padding:.313em 0}.md-content input{font-family:Lato,Arial,sans-serif;color:#fff;font-size:1.4em;line-height:1.3;margin:0;font-weight:300;background:0 0;border:0;border-bottom:1px solid #fff;width:13.4em}.md-content div.confirmation-message{font-size:1.2em;line-height:1.2;font-weight:300;margin:0;padding-left:1.25em;padding-right:1.25em;padding-bottom:1.25em;background:0 0;border:0;width:25em;min-height:2.4em;vertical-align:middle;-moz-box-sizing:border-box;box-sizing:border-box}.md-content div.error-message{font-size:1.2em;line-height:1.2;font-weight:400;margin:0;background:0 0;border:0;width:25em;min-height:2.4em;vertical-align:middle}.md-content div.error-icon{float:left;vertical-align:middle;padding:.938em}.md-content div.confirmation-icon{vertical-align:middle;padding:0;width:100%;text-align:center}.md-content div.confirmation-icon>i{font-size:2em;padding:.5em;border:3px solid rgba(255,255,255,.25);border-radius:50%;margin-bottom:1em}.md-content button{display:block;margin:0 auto;margin-top:1.4em;font-size:.8em}.md-content div.confirmation{display:inline-block}.md-effect-3 .md-content{-webkit-transform:translateY(20%);-moz-transform:translateY(20%);-ms-transform:translateY(20%);transform:translateY(20%);opacity:0;-webkit-transition:all .3s;-moz-transition:all .3s;transition:all .3s}.md-show.md-effect-3 .md-content{-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0);opacity:1}i.on-right{float:right;margin-top:.8em}.md-content div.confirmation i{font-size:1.5em;padding:.5em;border:3px solid rgba(255,255,255,.25);border-radius:50%}i.confirmation{float:right}div.query-sidebar{position:fixed;top:2.5em;width:20%;min-width:12.5em;float:left;padding:1em;padding-top:.25em;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden;background-color:#11273d;color:#dacea6}div.query-results{position:fixed;top:2.5em;width:80%;left:20%;min-width:12.5em;float:left;padding:.25em 2em;-moz-box-sizing:border-box;box-sizing:border-box;overflow:hidden}h3.filterHeader{margin-top:1.5em;font-size:1.2em;font-weight:300}h2.resultHeader{margin:0;margin-top:.75em;margin-bottom:.8em;font-size:2em;font-weight:300}h2.resultHeader span i{margin-left:.25em;margin-right:.25em}ul.resultList{padding-left:1.25em;list-style:none;text-transform:none;font-size:1em;word-wrap:break-word}ul.tag-list{list-style:none;text-transform:none;padding-left:.8em}ul.tag-list>li{margin-top:.25em}ul.tag-list a{cursor:pointer}ul.tag-list i{margin-right:.313em}li.resultListItem{margin-bottom:1.875em}li.resultListItem>a{font-size:1.6em;font-weight:300;text-decoration:none}li.resultListItem>p.origin{margin-top:.313em;margin-bottom:.313em;font-size:.8em}li.resultListItem>p.content{margin-top:.313em;font-size:1em;color:#fff}p.stats{padding-left:1em;margin-bottom:1.563em}.main-search{text-align:center;height:100%}.logo{margin-bottom:2em;margin-top:6em}.main-search-input{font-family:Lato,Arial,sans-serif;color:#fff;font-size:1.4em;line-height:1.3;margin:0;margin-top:3em;margin-bottom:1em;font-weight:300;background:0 0;border:0;border-bottom:1px solid #fff;width:40%}.welcome-msg{font-size:3em;color:#fff;font-weight:300}.version{font-size:1em;color:#fff;font-weight:300}.seperator{width:20%;margin-top:3em;border:0;border-top:1px solid #fff}.ngTagsInput *,:after,:before{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}.ngTagsInput{position:relative;margin-top:.5em}.ngTagsInput:active{outline:0}.ngTagsInput .tags{padding:0;overflow-y:auto;overflow-x:hidden;word-wrap:break-word;cursor:text}.ngTagsInput .tags.focused{outline:0}.ngTagsInput .tags .tag-list{margin:0;padding:0;overflow:visible;list-style-type:none}div.ngTagsInput li.tag-item{background-color:#566473;border:1px solid #566473;border-radius:3px;list-style-type:none;display:inline-block;margin:0;margin-right:.313em;margin-top:.313em;padding:.125em;float:left}li.tag-item>span::before{font-family:FontAwesome;font-weight:400;font-style:normal;display:inline-block;text-decoration:inherit;content:\"\\f02b\";margin:0 .25em}li.tag-item>span{font-family:Lato,Arial,sans-serif;font-size:1em;display:inline;color:#fff}li.tag-item>button.ng-binding{border:0;background-color:transparent;color:#fff;padding:0;margin:0 .125em;cursor:pointer}div.ngTagsInput input.tag-input{font-family:Lato,Arial,sans-serif;font-size:1em;border:0;outline:0;background-color:transparent;float:left;color:#fff;font-weight:300;margin-top:.5em;width:9.375em!important}.ngTagsInput .autocomplete{margin-top:.313em;position:absolute;padding:.313em 0;background-color:#566473;width:100%;z-index:999;border-radius:3px 3px 0 0}.ngTagsInput .autocomplete .suggestion-list{margin:0;padding:0;list-style-type:none}.ngTagsInput .autocomplete .suggestion-item{padding:.188em 1em;font-family:Lato,Arial,sans-serif;font-size:1em;line-height:1.25em;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ngTagsInput .autocomplete .suggestion-item.selected{color:#fff;background:rgba(0,0,0,.05)}.ngTagsInput .autocomplete .suggestion-item em{font-weight:700;font-style:normal}div.typeahead{width:25em;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;display:inline-block}div.typeahead>input.typeahead-input{width:100%}div.typeahead>div.suggestions{margin-top:.313em;position:absolute;padding:.313em 0;background-color:#566473;width:25em;z-index:10000;border-radius:3px}div.suggestions .suggestion-list{margin:0;padding:0;list-style-type:none}div.suggestions .suggestion-item{padding:.188em 1em;font-family:Lato,Arial,sans-serif;font-size:1em;line-height:1.4em;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}div.suggestions .suggestion-item.selected{color:#fff;background:rgba(0,0,0,.1)}div.suggestions .suggestion-item em{font-weight:700;font-style:normal}div.selectbox{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;display:inline-block}div.value{cursor:pointer}div.selectbox i.handler{margin-left:.5em}div.selectbox>div.options{margin-top:.313em;position:absolute;padding:.313em 0;background-color:#566473;width:auto;z-index:10000;border-radius:3px}div.options .option-list{margin:0;padding:0;list-style-type:none}div.options .option-item{padding:.188em 1em;font-family:Lato,Arial,sans-serif;font-size:1em;line-height:1.4em;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}div.options .option-item.selected{color:#fff;background:rgba(0,0,0,.1)}div.options .option-item em{font-weight:700;font-style:normal}div.selectbox i.on-selectbox{margin-right:.3em}#usersettings-modal{width:32em}#usersettings-modal input{margin-top:1em}#usersettings-modal #old-pw-input{margin-top:.25em}.quickdate{display:inline-block;vertical-align:bottom;font-size:1em}.quickdate input,.quickdate select{font-size:10.188em}.quickdate-button{display:inline;text-decoration:none;color:#74818e!important}.quickdate-button:hover{text-decoration:underline}.quickdate-button:hover i{text-decoration:none}.quickdate-button i{padding-right:.25em}.quickdate-popup{color:#fff;font-size:1em;background-color:#566473;border-radius:3px}.quickdate-action-link:hover,.quickdate-action-link:visited{color:#fff}.quickdate-next-month i{padding-left:.625em}.quickdate-prev-month i{padding-right:.625em}table.quickdate-calendar{border:solid 1px #74818e;background-color:transparent}table.quickdate-calendar td,table.quickdate-calendar th{border-right:1px solid #74818e;border-bottom:1px solid #74818e}table.quickdate-calendar td:hover{background:rgba(0,0,0,.1)}table.quickdate-calendar td.other-month{background-color:transparent;color:gray}table.quickdate-calendar td.other-month:hover{background-color:transparent}table.quickdate-calendar td.disabled-date{background-color:inherit;color:#fff}table.quickdate-calendar td.disabled-date:hover{background:0 0;cursor:default}table.quickdate-calendar td.selected{font-weight:400;color:#fff}table.quickdate-calendar td.is-today{color:#fff}table.quickdate-calendar td.is-today.disabled-date{color:#929292;font-weight:400}.quickdate-clear{display:inline;padding:.313em;color:#fff!important;text-align:center;font-weight:400}.quickdate-clear:hover{text-decoration:underline;}@media screen and (max-width:1280px){body{font-size:.75em}}@media screen and (max-width:1024px){body{font-size:12px}div.container.story{width:100%;left:0}}@media screen and (max-width:800px){body{font-size:12px}div.left-container{width:200%;left:-200%}.left-container.show-slots{left:-100%}.left-container.show-stories{left:0}.stories-left{width:50%}.slots-left{left:50%;width:50%}div.right-container{width:200%;left:100%}.right-container.show-slots{left:0}.right-container.show-stories{left:-100%}.stories-right{width:50%;left:50%}.slots-right{width:50%}div.query-sidebar{width:100%;left:-100%}div.query-results{left:0;right:0;width:100%}.main-search-input{width:80%}br.only-responsive{display:inline}.not-in-responsive{display:none}div.story-icon{height:7em}div.slots,div.stories{font-size:1.4em}#responsive-cab{display:block;margin:0;padding:0;background-color:#fff;color:#5f6f81;list-style:none;text-transform:none;font-weight:300;font-family:Lato,Arial,sans-serif;line-height:2.5em;z-index:9000;position:fixed;top:0;left:0;right:0;height:4em;font-size:.625em}#responsive-cab>li{float:left;display:block;background-color:#fff;min-width:4em;text-align:center;height:4em}#responsive-cab a{display:block;height:100%;color:#5f6f81;text-decoration:none;cursor:pointer}#responsive-cab>li>a.text{font-weight:400;font-size:1.6em;margin-top:.2em}#responsive-cab>li.middle{margin-left:4em;max-width:calc(100% - 20.1em)}#responsive-cab>li.cab-right{float:right;border-right:0;border-left:1px solid #c6d0da}#responsive-cab>li>input{font-family:Lato,Arial,sans-serif;color:#333;font-size:1.6em;line-height:1.3;margin:.4em .625em 0;font-weight:300;background:0 0;border:0;width:8em;max-width:8em}.cab-main{z-index:9000;position:fixed;top:4.1em;left:0;width:100%;min-width:75em;height:auto;max-height:90%;font-size:.625em;overflow-y:auto;overflow-x:hidden;border:0}.cab-main>li.trigger{display:none}#responsive-cab>li.menu-trigger{float:left;display:block;position:absolute;top:0;left:0;height:100%;text-align:center;border:0}.cab-main>li{display:none;background-color:#fff;width:100%;border-top:1px solid #c6d0da;text-align:left;height:auto}.cab-main.active-menu>li{display:block}.cab-main>li.not-in-responsive{display:none}.cab-main>li>a{width:100%;font-size:1.6em;margin-bottom:.6em;padding:.3em;font-weight:300}.cab-desc{display:inline;font-size:1.2em;margin-left:1em}.cab-main>li:hover{background-color:#ccc}.md-modal{position:fixed;margin:2.5%;top:0;left:0;width:95%;max-width:100%;height:95%;-webkit-transform:none;transform:none;overflow:hidden}.md-effect-3 .md-content,.md-show.md-effect-3 .md-content{-webkit-transform:none;transform:none}.md-content{max-width:100%;max-height:100%;height:100%;width:100%;overflow:hidden}div.md-overlay{position:fixed;width:200%;height:200%;top:-100%;left:-100%;touch-event:none}.md-content h3{font-size:1.5em;margin-bottom:1em}.md-content div.confirmation{margin-top:4em;display:block;width:100%;text-align:center}.md-content div.confirmation i{font-size:4em;margin:0;padding:.5em;border:3px solid rgba(255,255,255,.25);border-radius:50%}.md-content div.confirmation-icon{float:none;margin-top:4em;display:block;width:100%;text-align:center;padding:0}.md-content div.confirmation-icon>i{font-size:4em}.md-content div.confirmation-message{font-size:1.7em;padding:1em;width:100%}div.typeahead{width:100%;max-width:100%}.md-content input{font-size:1.7em;width:100%}#share-modal{width:95%;max-width:95%}#login-modal{width:95%;height:95%;text-align:center}#unlock-icon{font-size:3em;float:none;padding:.5em;border:3px solid rgba(255,255,255,.25);border-radius:50%;width:2em;height:2em;margin:0;margin-top:4em;text-align:center;vertical-align:middle}#unlock-icon::before{font-size:2em}#error-message-modal{text-align:center}.md-content div.error-message{font-size:1.7em;width:95%;margin:0;margin-top:1em;padding:2.5%}.md-content div.error-icon{float:none;vertical-align:middle;padding:0;font-size:3em}}@media screen and (max-width:1280px){body{font-size:.75em}}@media screen and (max-width:1024px){body{font-size:12px}div.container.story{width:100%;left:0}}@media screen and (max-width:800px){body{font-size:12px}div.left-container{width:200%;left:-200%}.left-container.show-slots{left:-100%}.left-container.show-stories{left:0}.stories-left{width:50%}.slots-left{left:50%;width:50%}div.right-container{width:200%;left:100%}.right-container.show-slots{left:0}.right-container.show-stories{left:-100%}.stories-right{width:50%;left:50%}.slots-right{width:50%}div.query-sidebar{width:100%;left:-100%}div.query-results{left:0;right:0;width:100%}.main-search-input{width:80%}br.only-responsive{display:inline}.not-in-responsive{display:none}div.story-icon{height:7em}div.slots,div.stories{font-size:1.4em}#responsive-cab{display:block;margin:0;padding:0;background-color:#fff;color:#5f6f81;list-style:none;text-transform:none;font-weight:300;font-family:Lato,Arial,sans-serif;line-height:2.5em;z-index:9000;position:fixed;top:0;left:0;right:0;height:4em;font-size:.625em}#responsive-cab>li{float:left;display:block;background-color:#fff;min-width:4em;text-align:center;height:4em}#responsive-cab a{display:block;height:100%;color:#5f6f81;text-decoration:none;cursor:pointer}#responsive-cab>li>a.text{font-weight:400;font-size:1.6em;margin-top:.2em}#responsive-cab>li.middle{margin-left:4em;max-width:calc(100% - 20.1em)}#responsive-cab>li.cab-right{float:right;border-right:0;border-left:1px solid #c6d0da}#responsive-cab>li>input{font-family:Lato,Arial,sans-serif;color:#333;font-size:1.6em;line-height:1.3;margin:.4em .625em 0;font-weight:300;background:0 0;border:0;width:8em;max-width:8em}.cab-main{z-index:9000;position:fixed;top:4.1em;left:0;width:100%;min-width:75em;height:auto;max-height:90%;font-size:.625em;overflow-y:auto;overflow-x:hidden;border:0}.cab-main>li.trigger{display:none}#responsive-cab>li.menu-trigger{float:left;display:block;position:absolute;top:0;left:0;height:100%;text-align:center;border:0}.cab-main>li{display:none;background-color:#fff;width:100%;border-top:1px solid #c6d0da;text-align:left;height:auto}.cab-main.active-menu>li{display:block}.cab-main>li.not-in-responsive{display:none}.cab-main>li>a{width:100%;font-size:1.6em;margin-bottom:.6em;padding:.3em;font-weight:300}.cab-desc{display:inline;font-size:1.2em;margin-left:1em}.cab-main>li:hover{background-color:#ccc}.md-modal{position:fixed;margin:2.5%;top:0;left:0;width:95%;max-width:100%;height:95%;-webkit-transform:none;-moz-transform:none;-ms-transform:none;transform:none;overflow:hidden}.md-effect-3 .md-content,.md-show.md-effect-3 .md-content{-webkit-transform:none;-moz-transform:none;-ms-transform:none;transform:none}.md-content{max-width:100%;max-height:100%;height:100%;width:100%;overflow:hidden}div.md-overlay{position:fixed;width:200%;height:200%;top:-100%;left:-100%;touch-event:none}.md-content h3{font-size:1.5em;margin-bottom:1em}.md-content div.confirmation{margin-top:4em;display:block;width:100%;text-align:center}.md-content div.confirmation i{font-size:4em;margin:0;padding:.5em;border:3px solid rgba(255,255,255,.25);border-radius:50%}.md-content div.confirmation-icon{float:none;margin-top:4em;display:block;width:100%;text-align:center;padding:0}.md-content div.confirmation-icon>i{font-size:4em}.md-content div.confirmation-message{font-size:1.7em;padding:1em;width:100%}div.typeahead{width:100%;max-width:100%}.md-content input{font-size:1.7em;width:100%}#share-modal{width:95%;max-width:95%}#login-modal{width:95%;height:95%;text-align:center}#unlock-icon{font-size:3em;float:none;padding:.5em;border:3px solid rgba(255,255,255,.25);border-radius:50%;width:2em;height:2em;margin:0;margin-top:4em;text-align:center;vertical-align:middle}#unlock-icon::before{font-size:2em}#error-message-modal{text-align:center}.md-content div.error-message{font-size:1.7em;width:95%;margin:0;margin-top:1em;padding:2.5%}.md-content div.error-icon{float:none;vertical-align:middle;padding:0;font-size:3em}}\n\n25 matches across 7 files\n",
-			"settings":
-			{
-				"buffer_size": 69714,
+				"buffer_size": 8920,
 				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
+				"name": "fa-adjust"
 			}
 		},
 		{
 			"file": "src/main/webapp/app/styles/responsive.css",
 			"settings":
 			{
-				"buffer_size": 7062,
+				"buffer_size": 8237,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/main/webapp/app/views/query.html",
+			"file": "src/main/webapp/app/styles/story.css",
 			"settings":
 			{
-				"buffer_size": 5216,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/controllers/searchDialog.js",
-			"settings":
-			{
-				"buffer_size": 451,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/controllers/cab.js",
-			"settings":
-			{
-				"buffer_size": 4390,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/controllers/story.js",
-			"settings":
-			{
-				"buffer_size": 22725,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/scripts/services/utilService.js",
-			"settings":
-			{
-				"buffer_size": 1367,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/webapp/app/index.html",
-			"settings":
-			{
-				"buffer_size": 18613,
+				"buffer_size": 9003,
 				"line_ending": "Unix"
 			}
 		}
@@ -746,52 +689,59 @@
 	},
 	"file_history":
 	[
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/responsive.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
+		"/home/tiberius/scala/projects/amanuensis/neo4j/queries.cypher",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchDomain.scala",
+		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/update_damod_0.9.2.sh",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/font-awesome/css/font-awesome.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/buttons.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/buttons.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
+		"/home/tiberius/scala/projects/amanuensis/build.sbt",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/query.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/searchDialog.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utilService.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/query.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/layout.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/responsive.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-loading-bar/build/loading-bar.min.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/tags.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/main.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/responsive.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/layout.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/modals.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-elastic/elastic.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/query.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/query.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-gestures/gestures.js",
 		"/home/tiberius/scala/projects/amanuensis/amanuensis.sublime-project",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/UserHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/markdownEditor.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/story.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/UserActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/slot.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/cab.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/layout.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/cab.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/query.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/onFinishRender.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/findpaths.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/typeahead.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/selectbox.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/buttons.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles/quickdate.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/quickdate.css",
-		"/home/tiberius/scala/projects/amanuensis/neo4j/queries.cypher",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/selectbox.js",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/update_damod.sh",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/exceptions/Exceptions.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/FavourHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/Gruntfile.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/FavourActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/favourService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/GraphActor.scala",
@@ -808,7 +758,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/.bower.json",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchDomain.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/storyService.js",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/init",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/RootServiceActor.scala",
@@ -820,7 +769,6 @@
 		"/home/tiberius/scala/projects/amanuensis/neo4j/test.cypher",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/reset",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/security/StatelessCookieAuthenticator.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/utilService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/shelljs/global.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/font-awesome/src/3.2.1/icons/index.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
@@ -829,7 +777,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/UserContext.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/AccessHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/filters/rightsFilter.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/font-awesome/css/font-awesome.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/selectbox.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/shareService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/CypherServer.scala",
@@ -838,7 +785,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Failable.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/login.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/graph.js",
-		"/home/tiberius/scala/projects/amanuensis/build.sbt",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/test/spec/services/graphservice.js",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/insert",
 		"/home/tiberius/scala/projects/amanuensis/curl/slot/create",
@@ -870,10 +816,7 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/web/Web.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/manual_components/inlineattachment/angularjs.inline-attach.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/s3cala/S3.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/s3cala/Live.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/s3cala/Local.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/angular-loading-bar/src/loading-bar.js",
-		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/query"
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/s3cala/Live.scala"
 	],
 	"find":
 	{
@@ -881,9 +824,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
+			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/styles",
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp",
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
 			"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app",
@@ -932,6 +876,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"story",
+			" (alias)",
+			"story",
+			"createA",
+			"create",
+			".action",
+			"create",
+			"only-in-responsive",
+			"not-in",
+			"only-",
+			"href",
+			"create",
+			"error",
 			"md-show",
 			"middle",
 			"text",
@@ -1046,20 +1003,7 @@
 			"NotFoundException",
 			"setPris",
 			"tabindex=\"0\"",
-			"tabindex='0'",
-			"tryAdd",
-			"changed",
-			"tag-added",
-			"ng-tags-input",
-			"ngModelCtrl",
-			"form",
-			"pristine",
-			"ngModelCtrl",
-			"input",
-			"save",
-			"parse",
-			"defaultTime",
-			"setViewValue"
+			"tabindex='0'"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1067,6 +1011,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"",
 			"\\n<a",
 			"right",
 			"0.313em",
@@ -1110,217 +1055,52 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/main/webapp/app/styles/main.css",
+					"file": "src/main/webapp/app/scripts/icons.js",
 					"settings":
 					{
-						"buffer_size": 3783,
+						"buffer_size": 8920,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2812,
-								2812
+								4495,
+								4495
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"auto_name": "fa-adjust",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2474.0,
+						"translation.y": 3299.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/main/webapp/app/styles/modals.css",
-					"settings":
-					{
-						"buffer_size": 3705,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								896,
-								896
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 135.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"settings":
-					{
-						"buffer_size": 69714,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										143,
-										150
-									],
-									[
-										232,
-										239
-									],
-									[
-										324,
-										331
-									],
-									[
-										551,
-										558
-									],
-									[
-										893,
-										900
-									],
-									[
-										1086,
-										1093
-									],
-									[
-										1239,
-										1246
-									],
-									[
-										1315,
-										1322
-									],
-									[
-										1511,
-										1518
-									],
-									[
-										1558,
-										1565
-									],
-									[
-										1722,
-										1729
-									],
-									[
-										1810,
-										1817
-									],
-									[
-										1900,
-										1907
-									],
-									[
-										2129,
-										2136
-									],
-									[
-										22741,
-										22748
-									],
-									[
-										22891,
-										22898
-									],
-									[
-										22983,
-										22990
-									],
-									[
-										23011,
-										23018
-									],
-									[
-										23107,
-										23114
-									],
-									[
-										23134,
-										23141
-									],
-									[
-										52656,
-										52663
-									],
-									[
-										52926,
-										52933
-									],
-									[
-										54793,
-										54800
-									],
-									[
-										64318,
-										64325
-									],
-									[
-										68286,
-										68293
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "src/main/webapp/app/styles/responsive.css",
 					"settings":
 					{
-						"buffer_size": 7062,
+						"buffer_size": 8237,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6951,
-								6951
+								2123,
+								2123
 							]
 						],
 						"settings":
@@ -1330,175 +1110,35 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6509.0,
+						"translation.y": 2144.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "src/main/webapp/app/views/query.html",
+					"buffer": 2,
+					"file": "src/main/webapp/app/styles/story.css",
 					"settings":
 					{
-						"buffer_size": 5216,
+						"buffer_size": 9003,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2040,
-								2040
+								925,
+								925
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/CSS/CSS.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/main/webapp/app/scripts/controllers/searchDialog.js",
-					"settings":
-					{
-						"buffer_size": 451,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								400,
-								400
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/main/webapp/app/scripts/controllers/cab.js",
-					"settings":
-					{
-						"buffer_size": 4390,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4371,
-								4371
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2318.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "src/main/webapp/app/scripts/controllers/story.js",
-					"settings":
-					{
-						"buffer_size": 22725,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5995,
-								5995
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1942.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "src/main/webapp/app/scripts/services/utilService.js",
-					"settings":
-					{
-						"buffer_size": 1367,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1008,
-								1008
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "src/main/webapp/app/index.html",
-					"settings":
-					{
-						"buffer_size": 18613,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								482,
-								482
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 225.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1564,44 +1204,108 @@
 		"selected_items":
 		[
 			[
-				"cab.js",
-				"src/main/webapp/app/scripts/controllers/cab.js"
-			],
-			[
-				"utilse",
-				"src/main/webapp/app/scripts/services/utilService.js"
-			],
-			[
-				"index.html",
-				"src/main/webapp/app/index.html"
-			],
-			[
-				"story.js",
-				"src/main/webapp/app/scripts/controllers/story.js"
-			],
-			[
-				"query.html",
-				"src/main/webapp/app/views/query.html"
-			],
-			[
-				"modals.css",
-				"src/main/webapp/app/styles/modals.css"
+				"story.css",
+				"src/main/webapp/app/styles/story.css"
 			],
 			[
 				"resp",
 				"src/main/webapp/app/styles/responsive.css"
 			],
 			[
-				"responsive",
-				"src/main/webapp/.tmp/styles/responsive.css"
+				"respons",
+				"src/main/webapp/app/styles/responsive.css"
 			],
 			[
-				"modals",
+				"index",
+				"src/main/webapp/app/index.html"
+			],
+			[
+				"app.js",
+				"src/main/webapp/app/scripts/app.js"
+			],
+			[
+				"buttons",
+				"src/main/webapp/app/styles/buttons.css"
+			],
+			[
+				"slotactor",
+				"src/main/scala/amanuensis/core/SlotActor.scala"
+			],
+			[
+				"storyac",
+				"src/main/scala/amanuensis/core/StoryActor.scala"
+			],
+			[
+				"buttons.css",
+				"src/main/webapp/.tmp/styles/buttons.css"
+			],
+			[
+				"modals.css",
 				"src/main/webapp/app/styles/modals.css"
+			],
+			[
+				"query.html",
+				"src/main/webapp/app/views/query.html"
+			],
+			[
+				"slotac",
+				"src/main/scala/amanuensis/core/SlotActor.scala"
+			],
+			[
+				"story.scala",
+				"src/main/scala/amanuensis/domain/Story.scala"
+			],
+			[
+				"respo",
+				"src/main/webapp/app/styles/responsive.css"
+			],
+			[
+				"story.html",
+				"src/main/webapp/app/views/story.html"
+			],
+			[
+				"story.js",
+				"src/main/webapp/app/scripts/controllers/story.js"
+			],
+			[
+				"cab.css",
+				"src/main/webapp/app/styles/cab.css"
+			],
+			[
+				"cab.js",
+				"src/main/webapp/app/scripts/controllers/cab.js"
+			],
+			[
+				"index.html",
+				"src/main/webapp/app/index.html"
+			],
+			[
+				"responsive",
+				"src/main/webapp/app/styles/responsive.css"
+			],
+			[
+				"query.css",
+				"src/main/webapp/app/styles/query.css"
+			],
+			[
+				"query.js",
+				"src/main/webapp/app/scripts/controllers/query.js"
+			],
+			[
+				"layout.css",
+				"src/main/webapp/app/styles/layout.css"
 			],
 			[
 				"main.css",
 				"src/main/webapp/app/styles/main.css"
+			],
+			[
+				"utilse",
+				"src/main/webapp/app/scripts/services/utilService.js"
+			],
+			[
+				"modals",
+				"src/main/webapp/app/styles/modals.css"
 			],
 			[
 				"login.css",
@@ -1616,40 +1320,12 @@
 				"src/main/webapp/app/bower_components/angular-gestures/gestures.js"
 			],
 			[
-				"layout.css",
-				"src/main/webapp/app/styles/layout.css"
-			],
-			[
 				"respon",
 				"src/main/webapp/app/styles/responsive.css"
 			],
 			[
-				"query.js",
-				"src/main/webapp/app/scripts/controllers/query.js"
-			],
-			[
-				"story.html",
-				"src/main/webapp/app/views/story.html"
-			],
-			[
-				"index",
-				"src/main/webapp/app/index.html"
-			],
-			[
-				"respons",
-				"src/main/webapp/app/styles/responsive.css"
-			],
-			[
-				"app.js",
-				"src/main/webapp/app/scripts/app.js"
-			],
-			[
 				"res",
 				"src/main/webapp/app/styles/responsive.css"
-			],
-			[
-				"story.css",
-				"src/main/webapp/app/styles/story.css"
 			],
 			[
 				"markdown",
@@ -1696,24 +1372,12 @@
 				"src/main/webapp/app/styles/modals.css"
 			],
 			[
-				"query.css",
-				"src/main/webapp/app/styles/query.css"
-			],
-			[
 				"cab",
-				"src/main/webapp/app/styles/cab.css"
-			],
-			[
-				"cab.css",
 				"src/main/webapp/app/styles/cab.css"
 			],
 			[
 				"layo",
 				"src/main/webapp/app/styles/layout.css"
-			],
-			[
-				"respo",
-				"src/main/webapp/app/styles/responsive.css"
 			],
 			[
 				"misc",
@@ -1738,10 +1402,6 @@
 			[
 				"findp",
 				"src/main/webapp/app/views/findpaths.html"
-			],
-			[
-				"storyac",
-				"src/main/scala/amanuensis/core/StoryActor.scala"
 			],
 			[
 				"inde",
@@ -1804,10 +1464,6 @@
 				"src/main/webapp/app/scripts/services/favourService.js"
 			],
 			[
-				"story.scala",
-				"src/main/scala/amanuensis/domain/Story.scala"
-			],
-			[
 				"story",
 				"src/main/scala/amanuensis/core/StoryActor.scala"
 			],
@@ -1854,10 +1510,6 @@
 			[
 				"graphhttp",
 				"src/main/scala/amanuensis/api/GraphHttpService.scala"
-			],
-			[
-				"slotactor",
-				"src/main/scala/amanuensis/core/SlotActor.scala"
 			],
 			[
 				"storyhttps",
@@ -1934,10 +1586,6 @@
 			[
 				"grunt",
 				"src/main/webapp/Gruntfile.js"
-			],
-			[
-				"slotac",
-				"src/main/scala/amanuensis/core/SlotActor.scala"
 			],
 			[
 				"rootse",
@@ -2066,14 +1714,6 @@
 			[
 				"rights",
 				"src/main/webapp/app/scripts/filters/rights.js"
-			],
-			[
-				"sele",
-				"src/main/webapp/app/styles/selectbox.css"
-			],
-			[
-				"select",
-				"src/main/webapp/.tmp/styles/selectbox.css"
 			]
 		],
 		"width": 0.0
