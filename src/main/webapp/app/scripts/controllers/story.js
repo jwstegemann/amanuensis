@@ -11,6 +11,13 @@ angular.module('amanuensisApp')
         return false;
     }
 
+    function setPristine() {
+        $scope.storyForm.$setPristine();
+        $scope.storyForm.icon = {
+            $dirty: false
+        };
+    }
+
     $scope.icons = icons;
 
     // init StoryContext
@@ -48,7 +55,7 @@ angular.module('amanuensisApp')
                     }
                 }
 
-                $scope.storyForm.$setPristine();
+                setPristine();
 
                 // set window title to loaded story
                 $window.document.title = 'Colibri - ' + $scope.context.story.title;
@@ -96,7 +103,7 @@ angular.module('amanuensisApp')
             };
 
             if (angular.isDefined($scope.storyForm)) {
-                $scope.storyForm.$setPristine();
+                setPristine();
             }
 
             // set window title
@@ -125,7 +132,7 @@ angular.module('amanuensisApp')
             // save existing story
         	if (angular.isDefined($scope.context.story.id)) {
         		storyService.update($scope.context.story, function(successData) {
-                    $scope.storyForm.$setPristine();
+                    setPristine();
                     $scope.reload();
                     growl.addSuccessMessage($scope.context.story.title + ' has been saved.');
                 });
@@ -138,7 +145,7 @@ angular.module('amanuensisApp')
                         fromStoryId : $routeParams.fromStoryId,
                         slotName: $routeParams.slotName
                     }, $scope.context.story, function(successData) {
-                        $scope.storyForm.$setPristine();
+                        setPristine();
                         $scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id).replace();
                         growl.addSuccessMessage($scope.context.story.title + ' has been created in Slot ' + $routeParams.slotName + ' at Story ' + $routeParams.fromStoryTitle);
@@ -151,7 +158,7 @@ angular.module('amanuensisApp')
                 // on its own
                 else {
             		storyService.create($scope.context.story, function(successData) {
-                        $scope.storyForm.$setPristine();
+                        setPristine();
             			$scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id).replace();
                         growl.addSuccessMessage($scope.context.story.title + ' has been created.');
@@ -193,6 +200,11 @@ angular.module('amanuensisApp')
     }
 
     $scope.selectIcon = function(icon) {
+        if (icon !== $scope.context.story.icon) {
+            $scope.storyForm.icon = {
+                $dirty: true
+            }
+        }
         $scope.context.story.icon = icon;
         utilService.hideModal('#choose-icon-modal');
     }
@@ -530,7 +542,7 @@ angular.module('amanuensisApp')
         if (newUrl === $scope.newUrl) {
             $scope.newUrl = undefined;
         }
-        else if (($scope.storyForm.title.$dirty || $scope.storyForm.tags.$dirty || $scope.storyForm.content.$dirty) 
+        else if (($scope.storyForm.title.$dirty || $scope.storyForm.tags.$dirty || $scope.storyForm.content.$dirty || $scope.storyForm.icon.$dirty) 
             && newUrl.match(/^[^\?]+/)[0] !== oldUrl.match(/^[^\?]+/)[0]) {
                 event.preventDefault(); // This prevents the navigation from happening
                 $scope.newUrl = newUrl;
