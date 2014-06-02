@@ -395,6 +395,13 @@ li.story-info > span.title {
   font-size: 1.25em;
 }
 
+li.story-info > span.meta {
+  display: block;
+  float: right;
+  font-size: 0.7em;
+  margin-top: 0.5em;
+}
+
 li.story-info:hover {
   background-color: rgba(75,75,75,0.25);
 }
@@ -402,6 +409,7 @@ li.story-info:hover {
 li.story-info > .delete-action {
   float: right;
   visibility: hidden;
+  margin-top: 0.3em;
 }
 
 li.story-info:hover > .delete-action {
@@ -548,4 +556,48 @@ div.share-list .mCSB_scrollTools .mCSB_draggerContainer{
 
 .inactive {
   cursor: default;
+}
+
+/*
+ * sort stories
+ */
+.story-sort {
+  margin: 5%;
+  margin-top: 0.313em;
+  position: absolute;
+  padding: 0.313em 0;
+  background-color: #566473;
+  max-width: 90%;
+  z-index: 10000;
+  border-radius: 3px;
+  display: none;    
+}
+
+.story-sort-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  color: #fff;
+}
+
+.story-sort-item {
+  padding: 0.188em 1em;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 1.0em;
+  line-height: 1.4em;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.story-sort-item:hover {
+  color: #fff;
+  background: rgba(0,0,0,0.1);
+}
+
+.reverse-sort {
+  float: right;
+  margin-top: 0.35em;
 }

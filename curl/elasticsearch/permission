@@ -1,10 +1,10 @@
 #! /bin/bash
 
 
-curl -X POST http://localhost:9200/stories/story/$1/_update -d'
+curl -X POST $1/stories/story/$2/_update -d'
 {
     "doc": {
-      "canRead": ["dummy"]
+      "canRead": ["isabel"]
     }
     
 }'

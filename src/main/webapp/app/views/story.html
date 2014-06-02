@@ -7,28 +7,54 @@
   <div id="stories-left" class="container stories stories-left shadow-right vertical-scrollable" ng-controller="SlotCtrl" 
     ng-init="inbound=true" hm-swipe-left="hideInStories()">
 		<div class="story-list-title">
-      <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
+      <i class="fa fa-lg on-slot action" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}" ng-click="changeStorySort('#story-sort-left')"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
+      <i class="fa fa-sort fa-lg action reverse-sort" ng-click="reverseSort()"></i>
+      <div id="story-sort-left" class="story-sort">
+        <ul class="story-sort-list">
+          <li class="story-sort-item" ng-click="setStorySort('title','#story-sort-left')"><i class="fa fa-font fa-fw"></i>&nbsp;sort by alphabet</li>
+          <li class="story-sort-item" ng-click="setStorySort('created','#story-sort-left')"><i class="fa fa-file-text-o fa-fw"></i>&nbsp;sort by creation</li>
+          <li class="story-sort-item" ng-click="setStorySort('modified','#story-sort-left')"><i class="fa fa-pencil fa-fw"></i>&nbsp;sort by modification</li>          
+        </ul>
+      </div>      
     </div>
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder" 
           ng-click="openStory(storyInfo.id, slotName, false)">
           <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>          
           <p story-preview markdown-source="storyInfo.content"></p>
         </li>
       </div>
       <div ng-switch-when="single">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'"
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder"
           ng-click="openStory(storyInfo.id, slotName, false)">
           <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>          
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
         </li>
       </div>
       <div ng-switch-when="all">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder" 
           ng-click="openStory(storyInfo.id, slotName, false)">
-          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>        
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span> 
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>                 
         </li>
       </div>
 		</ul>  	
@@ -36,7 +62,7 @@
 	<!-- inbound Slot-List	-->
   <div id="slots-left" class="container slots slots-left shadow-right vertical-scrollable" hm-swipe-left="hideInSlots()">
     <div class="slot-list-title">
-      <i class="fa on-slot fa-lg" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i>&nbsp;<input class="slot-filter" type="text" placeholder="In" ng-model="slotFilterLeft" tabindex="-1"></input>
+      <i class="fa on-slot fa-lg" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i><input class="slot-filter" type="text" placeholder="In" ng-model="slotFilterLeft" tabindex="-1"></input>
     </div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.inSlots | filter:slotFilterLeft | orderBy:'name'" 
@@ -105,31 +131,57 @@
   <div id="stories-right" class="container stories stories-right shadow-left vertical-scrollable" ng-controller="SlotCtrl"  
     ng-init="inbound=false" >
 		<div class="story-list-title">
-      <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
+      <i class="fa fa-lg on-slot action" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}" ng-click="changeStorySort('#story-sort-right')"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
+      <i class="fa fa-sort fa-lg action reverse-sort" ng-click="reverseSort()"></i>      
+      <div id="story-sort-right" class="story-sort">
+        <ul class="story-sort-list">
+          <li class="story-sort-item" ng-click="setStorySort('title','#story-sort-right')"><i class="fa fa-font fa-fw"></i>&nbsp;sort by alphabet</li>
+          <li class="story-sort-item" ng-click="setStorySort('created','#story-sort-right')"><i class="fa fa-file-text-o fa-fw"></i>&nbsp;sort by creation</li>
+          <li class="story-sort-item" ng-click="setStorySort('modified','#story-sort-right')"><i class="fa fa-pencil fa-fw"></i>&nbsp;sort by modification</li>          
+        </ul>
+      </div>
     </div>
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder" 
           ng-click="openStory(storyInfo.id, slotName, true)">
           <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>
           <p story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="single">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder" 
           ng-click="openStory(storyInfo.id, slotName, true)">
           <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>          
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="all">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder" 
           ng-click="openStory(storyInfo.id, slotName, true)">
           <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>          
         </li>
       </div>
 		</ul>  	
@@ -137,7 +189,7 @@
 	<!-- outbound Slot-List	-->
   <div id="slots-right" class="container slots slots-right shadow-left vertical-scrollable" hm-swipe-right="hideOutSlots()">
     <div class="slot-list-title">
-      <i class="fa fa-lg on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i>&nbsp;<input class="slot-filter" type="text" placeholder="Out" ng-model="slotFilterRight" tabindex="-1"></input>
+      <i class="fa fa-lg on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i><input class="slot-filter" type="text" placeholder="Out" ng-model="slotFilterRight" tabindex="-1"></input>
     </div>
     <ul class="slot-list">
       <li class="slot-name" ng-repeat="slot in context.outSlots | filter:slotFilterRight | orderBy:'name'" 

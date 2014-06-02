@@ -3,7 +3,9 @@
 angular.module('amanuensisApp')
   .controller('SlotCtrl', function ($scope,slotService,$rootScope,$location,$window) {
 
-    $scope.storyListViewMode = "all"        
+    $scope.storyListViewMode = 'all';
+    $scope.sortOrder = 'created';  
+    $scope.reverseOrder = false;
 
     // init StoryContext
     $scope.reload = function(storyId, storyTitle, slotName) {
@@ -73,6 +75,19 @@ angular.module('amanuensisApp')
 
     $scope.hideOutSlots = function() {
         $scope.$emit("hideOutSlots");
+    }
+
+    $scope.changeStorySort = function(element) {
+        $(element).show();
+    }    
+
+    $scope.setStorySort = function(order, element) {
+        $scope.sortOrder = order;
+        $(element).hide();
+    }      
+
+    $scope.reverseSort = function() {
+        $scope.reverseOrder = !$scope.reverseOrder;
     }
 
   });

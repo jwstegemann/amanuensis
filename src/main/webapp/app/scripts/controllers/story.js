@@ -720,5 +720,4 @@ angular.module('amanuensisApp')
         }));
     }
 
-
 }); 
