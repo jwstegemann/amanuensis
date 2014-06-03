@@ -176,6 +176,13 @@
     padding: 0;
   }
 
+  li.story-info > .delete-action {
+    visibility: visible;
+  }
+
+  li.story-info > span.meta {
+    float: none;
+  }
   /*
    * share modal
    */
