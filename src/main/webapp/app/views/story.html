@@ -12,9 +12,9 @@
       <i class="fa fa-sort fa-lg action reverse-sort" ng-click="reverseSort()"></i>
       <div id="story-sort-left" class="story-sort">
         <ul class="story-sort-list">
-          <li class="story-sort-item" ng-click="setStorySort('title','#story-sort-left')"><i class="fa fa-font fa-fw"></i>&nbsp;sort by alphabet</li>
-          <li class="story-sort-item" ng-click="setStorySort('created','#story-sort-left')"><i class="fa fa-file-text-o fa-fw"></i>&nbsp;sort by creation</li>
-          <li class="story-sort-item" ng-click="setStorySort('modified','#story-sort-left')"><i class="fa fa-pencil fa-fw"></i>&nbsp;sort by modification</li>          
+          <li class="story-sort-item" ng-click="setStorySort('title','#story-sort-left')"><i class="fa fa-font fa-fw"></i>&nbsp;<span translate>sort by alphabet</span></li>
+          <li class="story-sort-item" ng-click="setStorySort('created','#story-sort-left')"><i class="fa fa-file-text-o fa-fw"></i>&nbsp;<span translate>sort by creation</span></li>
+          <li class="story-sort-item" ng-click="setStorySort('modified','#story-sort-left')"><i class="fa fa-pencil fa-fw"></i>&nbsp;<span translate>sort by modification</span></li>          
         </ul>
       </div>      
     </div>
@@ -88,16 +88,16 @@
             <i ng-class="context.story.icon" class="fa fw fa-5x"></i>
           </div>
           <input id="story-title-input" name="title" class="story-title" type="text" ng-model="context.story.title"
-            placeholder="A Story..." ng-disabled="!editMode"></input>
+            placeholder="{{'A Story...' | translate}}" ng-disabled="!editMode"></input>
 				  <h1>
             <div class="meta">
-              <span><i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span>
+              <span><i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{context.story.created.substr(0,10)}} <span translate>by</span> {{context.story.createdBy}}</span>
               <span class="not-in-responsive">|&nbsp;</span><br class="only-responsive" />
-              <span><i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}} by {{context.story.modifiedBy}}</span>
+              <span><i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}} <span translate>by</span> {{context.story.modifiedBy}}</span>
               <span class="not-in-responsive">|&nbsp;</span><br class="only-responsive" />
-              <quick-datepicker ng-model="context.story.due" date-format="yyyy-MM-dd" placeholder="not set" 
-                  on-change="updateDue()"hover-text="set date for ToDo" icon-class="fa fa-bell fa-fw" disable-timepicker="true" 
-                  default-time="12:00:00">
+              <quick-datepicker ng-model="context.story.due" date-format="yyyy-MM-dd" placeholder="{{'not set' | translate}}" 
+                  on-change="updateDue()" hover-text="{{'set date for ToDo' | translate}}" icon-class="fa fa-bell fa-fw" 
+                  disable-timepicker="true" default-time="12:00:00">
                 </quick-datepicker>
             </div>
           </h1>
@@ -109,7 +109,7 @@
         </div>
         <div id="story-content" class="content" margin="10">
           <markdown-editor textarea-name="content" ng-show="editMode" textarea-id="story-content-editor" 
-            textarea-class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">
+            textarea-class="story-content" ng-model="context.story.content" placeholder="{{'... that still has to be written.' | translate}}">
           </markdown-editor>
           <div id="story-view" ng-hide="editMode" class="story-view" markdown>
             &nbsp;
@@ -136,9 +136,10 @@
       <i class="fa fa-sort fa-lg action reverse-sort" ng-click="reverseSort()"></i>      
       <div id="story-sort-right" class="story-sort">
         <ul class="story-sort-list">
-          <li class="story-sort-item" ng-click="setStorySort('title','#story-sort-right')"><i class="fa fa-font fa-fw"></i>&nbsp;sort by alphabet</li>
-          <li class="story-sort-item" ng-click="setStorySort('created','#story-sort-right')"><i class="fa fa-file-text-o fa-fw"></i>&nbsp;sort by creation</li>
-          <li class="story-sort-item" ng-click="setStorySort('modified','#story-sort-right')"><i class="fa fa-pencil fa-fw"></i>&nbsp;sort by modification</li>          
+          <li class="story-sort-item" ng-click="setStorySort('title','#story-sort-right')"><i class="fa fa-font fa-fw"></i>&nbsp;<span translate>sort by alphabet</span></li>
+          <li class="story-sort-item" ng-click="setStorySort('created','#story-sort-right')"><i class="fa fa-file-text-o fa-fw"></i>&nbsp;
+          <span translate>sort by creation</span></li>
+          <li class="story-sort-item" ng-click="setStorySort('modified','#story-sort-right')"><i class="fa fa-pencil fa-fw"></i>&nbsp;<span translate>sort by modification</span></li>          
         </ul>
       </div>
     </div>
@@ -212,7 +213,7 @@
     </h3>
     <div class="one-line">
     	<typeahead style="height: 37px" ng-model="newSlotName" on-enter="done()" on-escape="cancel()" input-class="start-focus" 
-        placeholder="name of new slot" source="suggestSlots($query)">
+        placeholder="{{'name of the slot' | translate}}" source="suggestSlots($query)">
       </typeahead>
       <div class="confirmation"><i class="fa fa-check fa-2x on-button action opacity-hover" ng-click="done()"></i></div>  
     </div>
@@ -223,8 +224,9 @@
 <!-- Modal to confirm deletion of a Story -->
 <div class="md-modal md-effect-3" id="confirm-delete-modal">
   <div class="md-content">
-    <h3>Are you sure?&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelConfirmDelete()"></i></h3>
-    <div class="confirmation-message">Do you really want to delete the Story<br>'{{context.story.title}}'?</div>
+    <h3><span translate>Are you sure?</span>&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelConfirmDelete()"></i>
+    </h3>
+    <div class="confirmation-message" translate>Do you really want to delete the Story<br>'{{context.story.title}}'?</div>
     <div class="confirmation-icon">
       <i class="fa fa-check fa-2x opacity-hover" ng-click="deleteStoryConfirmed()"></i>
     </div>
@@ -234,7 +236,7 @@
 <!-- Modal to choose a story-icon -->
 <div class="md-modal md-effect-3" id="choose-icon-modal">
   <div class="md-content">
-    <h3>Please choose an icon...&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelChooseIcon()"></i></h3>
+    <h3><span translate>Please choose an icon...</span>&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelChooseIcon()"></i></h3>
     <div class="icon-list">
       <i ng-repeat="icon in icons" ng-click="selectIcon(icon)" ng-class="icon" class="fa fa-fw fa-lg"></i>
     </div>
@@ -245,8 +247,8 @@
 <!-- Modal to confirm leaving a Story -->
 <div class="md-modal md-effect-3" id="confirm-leave-modal">
   <div class="md-content">
-    <h3>Are you sure?&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelConfirmLeave()"></i></h3>
-    <div class="confirmation-message">You made some changes to this Story<br>Do you really want to abandon the unsaved work?</div>
+    <h3><span translate>Are you sure?</span>&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelConfirmLeave()"></i></h3>
+    <div class="confirmation-message" translate>You made some changes to this Story<br>Do you really want to abandon the unsaved work?</div>
     <div class="confirmation-icon">
       <i class="fa fa-check fa-2x opacity-hover" ng-click="leaveStoryConfirmed()"></i>
     </div>
@@ -256,7 +258,7 @@
 <!-- Modal to share a Story with other users -->
 <div class="md-modal md-effect-3" id="share-modal" ng-controller="ShareModalCtrl">
   <div class="md-content">
-    <h3>You are sharing this story with...&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
+    <h3><span translate>You are sharing this story with...</span>&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
     </h3>
     <div id="share-list" class="share-list vertical-scrollable">
       <table class="shares">
@@ -284,7 +286,8 @@
       <selectbox class="select-mode" ng-model="mode" options="modes" value-selected="changeMode(value)"></selectbox>
       <br class="only-responsive" />   
       <typeahead ng-model="userToShare" input-class="start-focus share-login" 
-        placeholder="please enter a name" source="suggestUsersOrGroups($query)" ng-show="mode === 'user' || mode === 'group'">
+        placeholder="{{'please enter a name' | translate}}" source="suggestUsersOrGroups($query)" 
+        ng-show="mode === 'user' || mode === 'group'">
       </typeahead>
       <br class="only-responsive" />   
       <div ng-show="mode === 'public'" class="everybody"></div>

@@ -55,11 +55,11 @@ angular.module('amanuensisApp', [
           if (rejection.status !== 401) {
             if (rejection.status === 404) {
               console.log("NotFound-Error communicating with the backend: " + angular.toJson(rejection));
-              $rootScope.$broadcast('error',{errorMessage: 'I am sorry, but you are not allowed to do this.'});
+              $rootScope.$broadcast('error',{errorMessage: $rootScope.notFoundErrorMsg});
             }
             else if (rejection.status === 423) {
               console.log("OptimisticLock-Info communicating with the backend: " + angular.toJson(rejection));
-              $rootScope.$broadcast('error',{errorMessage: 'I am sorry, but somebody else has edited this object since your last update. Please reload the story.'});
+              $rootScope.$broadcast('error',{errorMessage: $rootScope.optimisticLockingErrorMsg});
             }
             else if (rejection.status === 412) {
               console.log("Validation-Error communicating with the backend: " + angular.toJson(rejection));
@@ -71,7 +71,7 @@ angular.module('amanuensisApp', [
             }            
             else {
               console.log("Fatal-Error communicating with the backend: " + angular.toJson(rejection));
-              $rootScope.$broadcast('error',{errorMessage: 'Error communicating with Amanuensis-backend. Please try again or contact your system-administrator.'});
+              $rootScope.$broadcast('error',{errorMessage: $rootScope.fatalErrorMsg});
             }
           }
           return $q.reject(rejection);
@@ -92,6 +92,15 @@ angular.module('amanuensisApp', [
   }).run(function ($rootScope, $location, gettextCatalog) {
     gettextCatalog.debug = false;
 
+    /*
+     * configure global error-messages
+     */
+
+     $rootScope.notFoundErrorMsg = gettextCatalog.getString('I am sorry, but you are not allowed to do this.');
+     $rootScope.optimisticLockingErrorMsg = gettextCatalog.getString('I am sorry, but somebody else has edited this object since your last update. Please reload the story.');     
+     $rootScope.fatalErrorMsg = gettextCatalog.getString('Error communicating with Amanuensis-backend. Please try again or contact your system-administrator.');
+
+
     //init mode and stack
     $rootScope.selectMode = false;
     $rootScope.stack = undefined;
@@ -103,7 +112,7 @@ angular.module('amanuensisApp', [
     if(!(($location.host() === 'localhost' || $location.host() === '0.0.0.0') && $location.port() === 9000)) {
       if ($location.protocol() !== 'https') {
         //FixMe: Is there a way to switch the protocol?
-        $rootScope.$broadcast('error',{errorMessage: 'Please use https in your URL to make sure, that nobody gets to know your credentials.'});
+        $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('Please use https in your URL to make sure, that nobody gets to know your credentials.')});
       }
     }
 

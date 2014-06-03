@@ -10,26 +10,26 @@
 
 <div id="graph-query-results" class="query-results container vertical-scrollable">
   <h2 ng-show="result.length" class="resultHeader">
-    <i class="fa fa-tag"></i>&nbsp;{{tagName}} connecting '{{sourceStory.title}}' and '{{targetStory.title}}'
+    <i class="fa fa-tag"></i><span translate>&nbsp;{{tagName}} connecting '{{sourceStory.title}}' and '{{targetStory.title}}'</span>
   </h2>
 
     <ul ng-show="result.length" class="resultList">
 
       <li class="resultListItem" ng-repeat="storyResult in result">
         <a href="#/story/{{storyResult.id}}"><i class="fa fa-bookmark"></i>&nbsp;&nbsp;{{storyResult.title}}</a>
-        <p class="origin">created by {{storyResult.createdBy}} on {{storyResult.created.substr(0,10)}}</p>
+        <p class="origin" translate>created by {{storyResult.createdBy}} on {{storyResult.created.substr(0,10)}}</p>
         <p class="content">{{storyResult.content}}...</p>
       </li>
     </ul>
 
-    <p ng-show="result.length" class="stats">found {{page*25 + result.length}} stories<span> so far</span>.</p>
+    <p ng-show="result.length" class="stats" translate>found {{page*25 + result.length}} stories<span> so far</span>.</p>
 
     <p class="pagination" ng-show="page > 0 || result.length === 25">
       <span class="pagination-nav" ng-show="page > 0" ng-click="previousPage()">
-        <i class="fa fa-angle-double-left"></i>&nbsp;previous
+        <i class="fa fa-angle-double-left"></i>&nbsp;<span translate>previous</span>
       </span>&nbsp;&nbsp;
-      <span>page&nbsp;{{page+1}}</span>&nbsp;&nbsp;
-      <span class="pagination-nav" ng-hide="result.length < 25" ng-click="nextPage()">next&nbsp;
+      <span translate>page&nbsp;{{page+1}}</span>&nbsp;&nbsp;
+      <span class="pagination-nav" ng-hide="result.length < 25" ng-click="nextPage()"><span translate>next</span>&nbsp;
         <i class="fa fa-angle-double-right"></i>
       </span>
     </p> 

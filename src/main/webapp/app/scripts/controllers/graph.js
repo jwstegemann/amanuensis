@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('FindPathsCtrl', function ($scope, graphService, $rootScope, utilService) {
+  .controller('FindPathsCtrl', function ($scope, graphService, $rootScope, utilService, gettextCatalog) {
 
     $scope.searchStories = function() {
       $scope.result = graphService.query({
@@ -24,14 +24,14 @@ angular.module('amanuensisApp')
             $scope.newTagName = undefined;
         }
         else {
-            $scope.title = 'Your input was too short...';
+            $scope.title = gettextCatalog.getString('Your input was too short...');
         }      
 
     };
 
 
     $scope.askForTagName = function() {
-        $scope.title = 'Please enter a tag-name...';
+        $scope.title = gettextCatalog.getString('Please enter a tag-name...');
         utilService.showModal('#tag-name-modal');
     };
 
@@ -61,7 +61,7 @@ angular.module('amanuensisApp')
       angular.isUndefined($rootScope.targetStack.source) ||
       angular.isUndefined($rootScope.targetStack.target)) {
 
-      $rootScope.$broadcast('error',{errorMessage: 'Please select the stories you want to search between first.'});      
+      $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('Please select the stories you want to search between first.')});      
 
     }
     else {
@@ -75,24 +75,3 @@ angular.module('amanuensisApp')
     }
 
   });
-
-
-/*
- * Controller for Tag-Name-Dialog
- */
-angular.module('amanuensisApp')
-  .controller('MyModalCtrl', function ($scope,utilService) {
-    $scope.$on('testMe',function() {
-    console.log("init modal");
-  });
-
-});
-
-
-
-/*
-
-    
-
-
-*/

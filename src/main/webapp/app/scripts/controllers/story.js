@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,favourService,$rootScope,$location,$window,utilService,growl,queryService,$http) {
+  .controller('StoryCtrl', function ($scope,$routeParams,storyService,slotService,favourService,$rootScope,$location,$window,utilService,growl,queryService,$http,gettextCatalog) {
 
     function hasSlot(name, slots) {
         var i = slots.length;
@@ -62,6 +62,7 @@ angular.module('amanuensisApp')
 
             }, function(errorData) {
                 // goto query-page when it is not possible to load the story!
+                setPristine();
                 $location.url('/query').replace();                
             });
         } 
@@ -72,10 +73,10 @@ angular.module('amanuensisApp')
         			id: undefined,
         			title: undefined,
         			content: undefined,
-                    created: "not yet",
-                    createdBy: "who knows",
-                    modified: "not yet",
-                    modifiedBy: "who knows",
+                    created: gettextCatalog.getString("not yet"),
+                    createdBy: gettextCatalog.getString("who knows"),
+                    modified: gettextCatalog.getString("not yet"),
+                    modifiedBy: gettextCatalog.getString("who knows"),
                     tags: [],
                     icon: "fa-bookmark"
         		},
@@ -107,7 +108,7 @@ angular.module('amanuensisApp')
             }
 
             // set window title
-            $window.document.title = 'Colibri - new Story';            
+            $window.document.title = gettextCatalog.getString('Colibri - new Story');            
         }
 
         $scope.storyFilter = {};
@@ -126,7 +127,7 @@ angular.module('amanuensisApp')
             angular.isUndefined($scope.context.story.content) ||
             $scope.context.story.content.length < 3
         ) {
-            $rootScope.$broadcast('error',{errorMessage: 'Sorry, but your story must have a title and a content. Please enter one...'});
+            $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('Sorry, but your story must have a title and a content. Please enter one...')});
         }
         else {
             // save existing story
@@ -134,7 +135,7 @@ angular.module('amanuensisApp')
         		storyService.update($scope.context.story, function(successData) {
                     setPristine();
                     $scope.reload();
-                    growl.addSuccessMessage($scope.context.story.title + ' has been saved.');
+                    growl.addSuccessMessage($scope.context.story.title + gettextCatalog.getString(' has been saved.'));
                 });
         	}
             // create new story
@@ -148,7 +149,7 @@ angular.module('amanuensisApp')
                         setPristine();
                         $scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id).replace();
-                        growl.addSuccessMessage($scope.context.story.title + ' has been created in Slot ' + $routeParams.slotName + ' at Story ' + $routeParams.fromStoryTitle);
+                        growl.addSuccessMessage($scope.context.story.title + gettextCatalog.getString(' has been created in Slot ') + $routeParams.slotName + gettextCatalog.getString(' at Story ') + $routeParams.fromStoryTitle);
                         $rootScopy.storyFlags.saved = 1;
                     });
 
@@ -161,7 +162,7 @@ angular.module('amanuensisApp')
                         setPristine();
             			$scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id).replace();
-                        growl.addSuccessMessage($scope.context.story.title + ' has been created.');
+                        growl.addSuccessMessage($scope.context.story.title + gettextCatalog.getString(' has been created.'));
                         $rootScopy.storyFlags.saved = 1;                        
             		});
                 }
@@ -180,7 +181,7 @@ angular.module('amanuensisApp')
         //keep title for message
         var oldTitle = $scope.context.story.title;
         storyService.delete({storyId: $routeParams.storyId}, function(successData) {
-            growl.addSuccessMessage(oldTitle + ' has been deleted.');    
+            growl.addSuccessMessage(oldTitle + gettextCatalog.getString(' has been deleted.'));    
             $window.history.back();
             utilService.hideModal('#confirm-delete-modal');    
         });
@@ -218,11 +219,11 @@ angular.module('amanuensisApp')
      */
     $scope.$on('starStory', function() {
         if (angular.isUndefined($scope.context.story.id)) {
-            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot star an unsaved story.'});
+            $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('Unfortunately you cannot star an unsaved story.')});
         }      
         else {  
         favourService.star({storyId: $scope.context.story.id}, null, function(successData) {
-                growl.addSuccessMessage('You just starred ' + $scope.context.story.title);
+                growl.addSuccessMessage(gettextCatalog.getString('You just starred ') + $scope.context.story.title);
                 $rootScope.storyFlags.stars = 1;
             });
         }
@@ -230,11 +231,11 @@ angular.module('amanuensisApp')
 
     $scope.$on('unstarStory', function() {
         if (angular.isUndefined($scope.context.story.id)) {
-            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot unstar an unsaved story.'});
+            $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('Unfortunately you cannot unstar an unsaved story.')});
         }      
         else {  
         favourService.unstar({storyId: $scope.context.story.id}, null, function(successData) {
-                growl.addSuccessMessage('You have removed your star from ' + $scope.context.story.title);
+                growl.addSuccessMessage(gettextCatalog.getString('You have removed your star from ') + $scope.context.story.title);
                 $rootScope.storyFlags.stars = 0;
             });
         }
@@ -247,12 +248,12 @@ angular.module('amanuensisApp')
     $scope.updateDue = function() {
         if (angular.isUndefined($scope.context.story.due) || $scope.context.story.due === null) {
             favourService.undue({storyId: $scope.context.story.id}, null, function(successData) {
-                    growl.addSuccessMessage('You have removed ' + $scope.context.story.title + ' from your ToDo-list.');
+                    growl.addSuccessMessage(gettextCatalog.getString('You have removed ') + $scope.context.story.title + gettextCatalog.getString(' from your ToDo-list.'));
                 });
         }
         else {
             favourService.due({storyId: $scope.context.story.id, date: $scope.context.story.due.toJSON()}, null, function(successData) {
-                    growl.addSuccessMessage('You have added ' + $scope.context.story.title + ' to your ToDo-list.');
+                    growl.addSuccessMessage(gettextCatalog.getString('You have added ') + $scope.context.story.title + gettextCatalog.getString(' to your ToDo-list.'));
                 });
         }
     }
@@ -267,7 +268,7 @@ angular.module('amanuensisApp')
             });
         }
         else {
-            $rootScope.$broadcast('error',{errorMessage: 'You cannot share a story that has not been saved yet.'});            
+            $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('You cannot share a story that has not been saved yet.')});            
         }
     });
 
@@ -276,10 +277,10 @@ angular.module('amanuensisApp')
      */
     $scope.$on('addStoryToSlot', function() {
         if (angular.isUndefined($scope.context.story.id)) {
-            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately you cannot add an unsaved story to a slot.'});
+            $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('Unfortunately you cannot add an unsaved story to a slot.')});
         }
         else if ($scope.context.story.id === $rootScope.stack.storyId) {
-            $rootScope.$broadcast('error',{errorMessage: 'Unfortunately it is not possible to link a story to itself.'});                        
+            $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('Unfortunately it is not possible to link a story to itself.')});                        
         }
         else {
             slotService.add({
@@ -288,7 +289,7 @@ angular.module('amanuensisApp')
                 storyId: $scope.context.story.id
             }, null, function (successData) {
                 $rootScope.selectMode = false;
-                growl.addSuccessMessage($scope.context.story.title + ' has been linked to ' + $rootScope.stack.storyTitle + ' as ' + $rootScope.stack.slotName); 
+                growl.addSuccessMessage($scope.context.story.title + gettextCatalog.getString(' has been linked to ') + $rootScope.stack.storyTitle + gettextCatalog.getString(' as ') + $rootScope.stack.slotName); 
                 $rootScope.stack = undefined;
                 $scope.reload();
             });
@@ -304,7 +305,7 @@ angular.module('amanuensisApp')
             }); 
         }
         else {
-            $rootScope.$broadcast('error',{errorMessage: 'I am sorry, but you cannot create a new slot on an unsaved story.'});            
+            $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('I am sorry, but you cannot create a new slot on an unsaved story.')});            
         }
     });
 
@@ -327,7 +328,7 @@ angular.module('amanuensisApp')
             }
         }
         else {
-            $rootScope.$broadcast('error',{errorMessage: 'Excuse me, but you cannot create a new story in a slot of an unsaved story.'});
+            $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('Excuse me, but you cannot create a new story in a slot of an unsaved story.')});
         }
     });    
 
@@ -577,10 +578,10 @@ angular.module('amanuensisApp')
  * Controller for Slot-Name-Dialog
  */
 angular.module('amanuensisApp')
-  .controller('SlotNameModalCtrl', function ($scope,$rootScope,$location,utilService) {
+  .controller('SlotNameModalCtrl', function ($scope,$rootScope,$location,utilService,gettextCatalog) {
 
     $scope.$on('askForSlotName',function(event, param) {
-        $scope.title = 'Please give the new slot a name...';
+        $scope.title = gettextCatalog.getString('Please give the new slot a name...');
 
         $scope.storyId = param.storyId;
         $scope.storyTitle = param.storyTitle;
@@ -608,7 +609,7 @@ angular.module('amanuensisApp')
             utilService.hideModal('#slot-name-modal');
         }
         else {
-            $scope.title = 'Too short. Try a longer name for the slot...';
+            $scope.title = gettextCatalog.getString('Too short. Try a longer name for the slot...');
         }
     }
 
@@ -622,21 +623,21 @@ angular.module('amanuensisApp')
  * Controller for Share-Dialog
  */
 angular.module('amanuensisApp')
-  .controller('ShareModalCtrl', function ($scope,$rootScope,$location,utilService,shareService,$http) {
+  .controller('ShareModalCtrl', function ($scope,$rootScope,$location,utilService,shareService,$http,gettextCatalog) {
 
     $scope.userRights = [
-        {label: 'read', value: 'canRead'},
-        {label: 'read & write', value: 'canWrite'},
-        {label: 'read, write & grant', value: 'canGrant'},
+        {label: gettextCatalog.getString('read'), value: 'canRead'},
+        {label: gettextCatalog.getString('read & write'), value: 'canWrite'},
+        {label: gettextCatalog.getString('read, write & grant'), value: 'canGrant'},
     ];
 
     $scope.modes = [
-        {label: 'user ', value: 'user', icon: 'fa-user'},
-        {label: 'group', value: 'group', icon: 'fa-users'},
-        {label: 'everybody', value: 'public', icon: 'fa-globe'},
+        {label: gettextCatalog.getString('user '), value: 'user', icon: 'fa-user'},
+        {label: gettextCatalog.getString('group'), value: 'group', icon: 'fa-users'},
+        {label: gettextCatalog.getString('everybody'), value: 'public', icon: 'fa-globe'},
     ];
 
-    $scope.title = 'Share with somebody else...';
+    $scope.title = gettextCatalog.getString('Share with somebody else...');
 
     $scope.$on('openShareStoryModal',function(event, param) {
 
@@ -658,7 +659,7 @@ angular.module('amanuensisApp')
 
     $scope.share = function() {
         if (angular.isUndefined($scope.mode)) {
-            $scope.title = 'Please choose, how to share this story...';            
+            $scope.title = gettextCatalog.getString('Please choose, how to share this story...');            
         }
         else if (angular.isDefined($scope.userToShare) && $scope.userToShare.length > 3 && angular.isDefined($scope.rightToShare)) {
             shareService.share({
@@ -667,15 +668,15 @@ angular.module('amanuensisApp')
                 user: $scope.userToShare
             }, {}, function(successData) {
                 $scope.reloadShares();
-                $scope.title = 'Share with somebody else...';
+                $scope.title = gettextCatalog.getString('Share with somebody else...');
             });
         }
         else {
             if ($scope.mode === 'public') {
-                $scope.title = 'Please choose the rights to grant to everybody else...';
+                $scope.title = gettextCatalog.getString('Please choose the rights to grant to everybody else...');
             }
             else {
-                $scope.title = 'Please enter a valid username and the rights to grant...';
+                $scope.title = gettextCatalog.getString('Please enter a valid username and the rights to grant...');
             }
         }
     }

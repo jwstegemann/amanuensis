@@ -118,7 +118,7 @@ angular.module('amanuensisApp')
       scope: {
         ngModel: '=' 
       },
-      link: function(scope, elem, attrs) {
+      link: function(scope, elem, attrs, gettextCatalog) {
 
         var lastValue;
         var editor = elem.context;
@@ -157,7 +157,7 @@ angular.module('amanuensisApp')
         scope.onErrorUploading = function() {
           var text = scope.ngModel.replace(lastValue, "");
           scope.ngModel = text;
-          $rootScope.$broadcast('error',{errorMessage: 'I am inconsolable, but an error occured uploading your file.'});
+          $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('I am inconsolable, but an error occured uploading your file.')});
         };
 
         //helper functions
@@ -186,7 +186,7 @@ angular.module('amanuensisApp')
         }
 
         scope.insertProgressText = function(isImage) {
-              lastValue = '[Uploading file...]()'
+              lastValue = gettextCatalog.getString('[Uploading file...]()');
               //scope.ngModel = appendInItsOwnLine(scope.ngModel, imagePrefix(isImage) + lastValue);
               scope.ngModel = insertAtCaret(scope.ngModel, imagePrefix(isImage) + lastValue);
         }
@@ -196,7 +196,7 @@ angular.module('amanuensisApp')
             return true;
           }
           else {
-            $rootScope.$broadcast('error',{errorMessage: 'Sorry, but you cannot upload attachments to an unsaved story.'});
+            $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('Sorry, but you cannot upload attachments to an unsaved story.')});
             return false;
           }
         }

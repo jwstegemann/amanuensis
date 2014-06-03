@@ -37,14 +37,14 @@ typeahead.directive('selectbox', ["$timeout", function($timeout) {
                 </div> \
             </div>',
         replace: true,
-        controller: ["$scope","$attrs","$element", function($scope, $attrs, $element) {
+        controller: ["$scope","$attrs","$element","gettextCatalog", function($scope, $attrs, $element,gettextCatalog) {
 
 //            console.log("input-class:" + $scope.inputClass)
 
             $scope.reset = function() {
                 $scope.optionsVisible= false;
                 $scope.selected = undefined;
-                $scope.committed = {label: $scope.placeholder || 'please choose...'};
+                $scope.committed = {label: $scope.placeholder || gettextCatalog.getString('please choose...')};
             }
 
             $scope.select = function(index) {

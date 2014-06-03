@@ -18,14 +18,14 @@ angular.module('amanuensisApp')
                   '</div>',
                 replace: true,
                 scope: true,
-                controller: ['$scope', '$element', 'utilService', '$location', '$timeout', function ($scope, $element, utilService, $location, $timeout) {
+                controller: ['$scope', '$element', 'utilService', '$location', '$timeout', 'gettextCatalog', function ($scope, $element, utilService, $location, $timeout, gettextCatalog) {
 
                         $scope.$on("error", function (event, param) {
                           if (angular.isDefined(param.errorMessage)) {
                             $scope.errorMessage = param.errorMessage;
                           }
                           else {
-                            $scope.errorMessage = 'This should not have happened. Please inform your system-administrator.';
+                            $scope.errorMessage = gettextCatalog.getString('This should not have happened. Please inform your system-administrator.');
                           }
 
                           $scope.$apply();
