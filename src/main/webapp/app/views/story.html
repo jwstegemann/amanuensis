@@ -4,10 +4,10 @@
 
 <div id="left-container" class="container left-container" ng-class="{'show-slots': inSlots, 'show-stories': inStories}">
 	<!-- inbound Story-List	-->
-  <div id="stories-left" class="container stories stories-left shadow-right vertical-scrollable" ng-controller="SlotCtrl" 
+  <div id="stories-left" class="container stories stories-left shadow-right vertical-scrollable" ng-controller="InboundSlotCtrl" 
     ng-init="inbound=true" hm-swipe-left="hideInStories()">
 		<div class="story-list-title">
-      <i class="fa fa-lg on-slot action" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}" ng-click="changeStorySort('#story-sort-left')"></i>
+      <i class="fa fa-lg on-slot action" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}" ng-click="changeStorySort('#story-sort-left', $event)"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
       <i class="fa fa-sort fa-lg action reverse-sort" ng-click="reverseSort()"></i>
       <div id="story-sort-left" class="story-sort">
@@ -128,10 +128,10 @@
 
 <div id="right-container" class="container right-container" ng-class="{'show-slots': outSlots, 'show-stories': outStories}">
 	<!-- outbound Story-List	-->
-  <div id="stories-right" class="container stories stories-right shadow-left vertical-scrollable" ng-controller="SlotCtrl"  
-    ng-init="inbound=false" >
+  <div id="stories-right" class="container stories stories-right shadow-left vertical-scrollable" ng-controller="OutboundSlotCtrl"  
+    ng-init="inbound=false" hm-swipe-right="hideOutStories()">
 		<div class="story-list-title">
-      <i class="fa fa-lg on-slot action" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}" ng-click="changeStorySort('#story-sort-right')"></i>
+      <i class="fa fa-lg on-slot action" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}" ng-click="changeStorySort('#story-sort-right', $event)"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
       <i class="fa fa-sort fa-lg action reverse-sort" ng-click="reverseSort()"></i>      
       <div id="story-sort-right" class="story-sort">

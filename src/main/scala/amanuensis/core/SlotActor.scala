@@ -18,19 +18,19 @@ import amanuensis.domain.{StoryInfo, StoryId, StoryRights}
 
 object SlotActor {
 
-  case class List(storyId: String, slotName: String, login: String)
-  case class Add(toStory: String, slotName: String, storyId: String, login: String)
-  case class Remove(fromStory: String, slotName: String, storyId: String, login: String)
-  case class CreateAndAdd(toStory: String, slotName: String, story: Story, login: String)
+  case class List(storyId: String, slotName: String, inbound: Boolean, login: String)
+  case class Add(toStory: String, slotName: String, storyId: String, inbound: Boolean, login: String)
+  case class Remove(fromStory: String, slotName: String, storyId: String, inbound: Boolean, login: String)
+  case class CreateAndAdd(toStory: String, slotName: String, story: Story, inbound: Boolean, login: String)
 
 
-  val retrieveQueryString = """
+  val retrieveLeftQueryString = """
     MATCH (u:User {login: {login}})
     MATCH (s:Story {id: {story}})
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     MATCH (s)-[r:Slot {name: {slot}}]-(:Story)
     WITH s, u, count(*) as weight
-    MATCH (s)-[r:Slot {name: {slot}}]-(m:Story)
+    MATCH (s)<-[r:Slot {name: {slot}}]-(m:Story)
     WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     WITH m, weight,
       (CASE
@@ -39,6 +39,22 @@ object SlotActor {
       END) as content
     RETURN m.id, m.title, m.created, m.modified, content, m.icon LIMIT 250
   """
+
+  val retrieveRightQueryString = """
+    MATCH (u:User {login: {login}})
+    MATCH (s:Story {id: {story}})
+    WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    MATCH (s)-[r:Slot {name: {slot}}]-(:Story)
+    WITH s, u, count(*) as weight
+    MATCH (s)-[r:Slot {name: {slot}}]->(m:Story)
+    WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
+    WITH m, weight,
+      (CASE
+        WHEN weight < 5 THEN m.content
+        ELSE null 
+      END) as content
+    RETURN m.id, m.title, m.created, m.modified, content, m.icon LIMIT 250
+  """  
 
   val addQueryString = """
     MATCH (u:User {login: {login}})
@@ -110,22 +126,25 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
   }
 
   def receive = {
-    case List(storyId, slotName, login) => list(storyId, slotName, login) pipeTo sender
-    case Add(toStory, slotName, storyId, login) => add(toStory, slotName, storyId, login) pipeTo sender
-    case Remove(fromStory, slotName, storyId, login) => remove(fromStory, slotName, storyId, login) pipeTo sender
-    case CreateAndAdd(toStory, slotName, story, login) => createAndAdd(toStory, slotName, story, login) pipeTo sender
+    case List(storyId, slotName, inbound, login) => list(storyId, slotName, inbound, login) pipeTo sender
+    case Add(toStory, slotName, storyId, inbound, login) => add(toStory, slotName, storyId, inbound, login) pipeTo sender
+    case Remove(fromStory, slotName, storyId, inbound, login) => remove(fromStory, slotName, storyId, inbound, login) pipeTo sender
+    case CreateAndAdd(toStory, slotName, story, inbound, login) => createAndAdd(toStory, slotName, story, inbound, login) pipeTo sender
   }
 
-  def list(storyId: String, slotName: String, login: String) = {
-  	server.list[StoryInfo](retrieveQueryString,
+  def list(storyId: String, slotName: String, inbound: Boolean, login: String) = {
+    val queryString = if (inbound) retrieveLeftQueryString else retrieveRightQueryString
+  	server.list[StoryInfo](queryString,
       ("story" -> storyId),
       ("slot" -> slotName),
       ("login" -> login)
     )
   }
 
-  def add(toStory: String, slotName: String, storyId: String, login: String) = {
+  def add(toStory: String, slotName: String, storyId: String, inbound: Boolean, login: String) = {
     import QueryActor.IndexSlotName
+
+    if (inbound) throw NotFoundException(Message(s"cannot add a story to an inbound slot",`ERROR`) :: Nil)
 
     server.one[StoryId](addQueryString, 
       ("toStory" -> toStory),
@@ -138,8 +157,10 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
       }
   }
 
-  def remove(fromStory: String, slotName: String, storyId: String, login: String) = {
+  def remove(fromStory: String, slotName: String, storyId: String, inbound: Boolean, login: String) = {
     import QueryActor.DeleteSlotName
+
+    if (inbound) throw NotFoundException(Message(s"cannot remove a story from an inbound slot",`ERROR`) :: Nil)
 
     server.one[StoryId](removeQueryString, 
       ("fromStory" -> fromStory),
@@ -152,9 +173,10 @@ class SlotActor extends Actor with ActorLogging with Failable with Neo4JJsonProt
       }
   }
 
-  def createAndAdd(toStory: String, slotName: String, story: Story, login: String) = {
-
+  def createAndAdd(toStory: String, slotName: String, story: Story, inbound: Boolean, login: String) = {
     import QueryActor.{Index, IndexSlotName}
+
+    if (inbound) throw NotFoundException(Message(s"cannot create a story into an inbound slot",`ERROR`) :: Nil)
 
     if (story.id.nonEmpty) throw ValidationException(Message("A new story must not have an id.",`ERROR`) :: Nil)
     story.check

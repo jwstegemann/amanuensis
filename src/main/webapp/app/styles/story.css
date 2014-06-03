@@ -263,6 +263,10 @@ div.slot-list-title {
     box-sizing: border-box;    
 }
 
+div.slot-list-title > i {
+  vertical-align: -webkit-baseline-middle;
+}
+
 input.slot-filter {
   outline: none;
   font-family: 'Lato', Arial, sans-serif;
@@ -274,6 +278,7 @@ input.slot-filter {
   border: none;
   margin: 0;
   padding: 0;
+  vertical-align: middle;
 }
 
 input.slot-filter::-webkit-input-placeholder {
@@ -343,7 +348,7 @@ div.story-list-title {
 }
 
 div.story-list-title i {
-  vertical-align: baseline;
+  vertical-align: middle;
 }
 
 input.story-filter {
@@ -357,6 +362,7 @@ input.story-filter {
   border: none;
   margin: 0;
   padding: 0;
+  vertical-align: middle;
 }
 
 input.story-filter::-webkit-input-placeholder {
@@ -562,7 +568,6 @@ div.share-list .mCSB_scrollTools .mCSB_draggerContainer{
  * sort stories
  */
 .story-sort {
-  margin: 5%;
   margin-top: 0.313em;
   position: absolute;
   padding: 0.313em 0;
@@ -598,6 +603,8 @@ div.share-list .mCSB_scrollTools .mCSB_draggerContainer{
 }
 
 .reverse-sort {
+  padding-top: 0.1em;
   float: right;
-  margin-top: 0.35em;
+  display: inline;
+  vertical-align: middle;
 }

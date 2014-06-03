@@ -68,12 +68,12 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
             }
           }
         } ~
-        pathPrefix(Segment) { slotName: String =>
+        pathPrefix(Map("in" -> true, "out" -> false) / Segment) { (inbound: Boolean, slotName: String) =>
           pathEnd {
             get {
-              dynamic {
+              dynamic {                
     //            log.debug(s"request: get stories in slot $slotName for story $storyId")
-                complete((slotActor ? List(storyId, slotName, userContext.login)).mapTo[Seq[StoryInfo]])
+                complete((slotActor ? List(storyId, slotName, inbound, userContext.login)).mapTo[Seq[StoryInfo]])
               }
             } ~
             post {
@@ -86,7 +86,7 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
                     modified = DateTime.now.toString,
                     modifiedBy = userContext.login
                   )
-                  complete((slotActor ? CreateAndAdd(storyId, slotName, storyWithMeta, userContext.login)).mapTo[StoryInfo])
+                  complete((slotActor ? CreateAndAdd(storyId, slotName, storyWithMeta, inbound, userContext.login)).mapTo[StoryInfo])
                 }
               }              
             }
@@ -99,14 +99,14 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
                   reject(ValidationRejection("A story cannot be added to a slot at itself."))
                 }
                 else {
-                  complete((slotActor ? Add(storyId, slotName, targetStoryId, userContext.login)) map { value => StatusCodes.OK })
+                  complete((slotActor ? Add(storyId, slotName, targetStoryId, inbound, userContext.login)) map { value => StatusCodes.OK })
                 }
               }
             } ~
             delete {
               dynamic {
       //          log.debug(s"request: remove story $targetStoryId from slot $slotName at story $storyId")
-                complete((slotActor ? Remove(storyId, slotName, targetStoryId, userContext.login)) map { value => StatusCodes.OK })
+                complete((slotActor ? Remove(storyId, slotName, targetStoryId, inbound, userContext.login)) map { value => StatusCodes.OK })
               }
             }
           }

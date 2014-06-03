@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('amanuensisApp')
-  .controller('SlotCtrl', function ($scope,slotService,$rootScope,$location,$window) {
+function BaseSlotCtrl($scope,slotService,$rootScope,$location,$window) {
 
     $scope.storyListViewMode = 'all';
     $scope.sortOrder = 'created';  
@@ -13,9 +12,9 @@ angular.module('amanuensisApp')
         $scope.storyTitle = storyTitle;
         $scope.slotName = slotName;
 
-       	$scope.stories = slotService.query({
-        	storyId: $scope.storyId,
-        	slotName: $scope.slotName
+        $scope.stories = $scope.retrieveMethod({
+            storyId: $scope.storyId,
+            slotName: $scope.slotName
         }, function(successData) {
             if (successData.length > 4) $scope.storyListViewMode = "all"
             else if (successData.length == 1) $scope.storyListViewMode = "single"
@@ -25,30 +24,30 @@ angular.module('amanuensisApp')
     }
 
     $scope.$on('addStory', function() {
-    	$rootScope.selectMode = true;
-    	$rootScope.stack = {
-    		storyId: $scope.storyId,
+        $rootScope.selectMode = true;
+        $rootScope.stack = {
+            storyId: $scope.storyId,
             storyTitle: $scope.storyTitle,
-    		slotName: $scope.slotName
-    	};
-    	$location.url('/query');
+            slotName: $scope.slotName
+        };
+        $location.url('/query');
     });
 
     $scope.remove = function(storyInfo, $event) {
         //stop the click-event to go further down...
         if(typeof($event) !== 'undefined') $event.stopPropagation();
-    	
+        
         slotService.remove({
-    		fromStoryId: $scope.storyId,
-    		slotName: $scope.slotName,
-    		storyId: storyInfo.id
-    	}, function (successData) {
+            fromStoryId: $scope.storyId,
+            slotName: $scope.slotName,
+            storyId: storyInfo.id
+        }, function (successData) {
             var index = $scope.stories.indexOf(storyInfo);
             if (index >= 0) {
                 $scope.stories.splice(index,1);
             }
-//	    	console.log("story aus slot entfernt!");    	
-    	});
+    //          console.log("story aus slot entfernt!");        
+        });
     }
 
     $scope.goBack = function() {
@@ -77,17 +76,47 @@ angular.module('amanuensisApp')
         $scope.$emit("hideOutSlots");
     }
 
-    $scope.changeStorySort = function(element) {
-        $(element).show();
+    function closeSortList(element) {
+        element.hide();
+    }
+
+    $scope.changeStorySort = function(element, $event) {
+        var e = $(element);
+        e.show();
+        $event.stopPropagation();
+        $(document).one('click', function() {
+            closeSortList(e);
+        });
     }    
 
     $scope.setStorySort = function(order, element) {
         $scope.sortOrder = order;
-        $(element).hide();
+        closeSortList($(element));
     }      
 
     $scope.reverseSort = function() {
         $scope.reverseOrder = !$scope.reverseOrder;
     }
 
+}
+
+
+angular.module('amanuensisApp')
+  .controller('OutboundSlotCtrl', function($scope,slotService,$rootScope,$location,$window) {
+    BaseSlotCtrl($scope,slotService,$rootScope,$location,$window);
+
+    $scope.ctype = 'outbound';
+    $scope.retrieveMethod = slotService.listOut;
+
   });
+
+
+angular.module('amanuensisApp')
+  .controller('InboundSlotCtrl', function($scope,slotService,$rootScope,$location,$window) {
+    BaseSlotCtrl($scope,slotService,$rootScope,$location,$window);
+
+    $scope.ctype = 'inbound';
+    $scope.retrieveMethod = slotService.listIn;
+
+  });
+
