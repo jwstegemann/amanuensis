@@ -3,10 +3,91 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: app/views/query.html
+msgid ""
+msgstr ""
+
+#: app/views/query.html
+msgid "Filter Dates:"
+msgstr ""
+
+#: app/views/query.html
+msgid "Filter Tags:"
+msgstr ""
+
+#: app/views/query.html
+msgid "My @-notifications"
+msgstr ""
+
+#: app/views/query.html
 #: app/scripts/controllers/query.js
 msgid "My ToDos"
 msgstr ""
 
 #: app/views/query.html
+msgid "My Workplace:"
+msgstr ""
+
+#: app/views/query.html
+msgid "My latest work"
+msgstr ""
+
+#: app/views/query.html
+msgid "My starred stories"
+msgstr ""
+
+#: app/views/query.html
+msgid "Others latest work"
+msgstr ""
+
+#: app/views/query.html
+msgid "Welcome to Colibri..."
+msgstr ""
+
+#: app/views/query.html
+msgid "You have not starred any story, yet."
+msgstr ""
+
+#: app/views/query.html
 msgid "found {{result.hits.total}} stories in {{result.took}} ms."
+msgstr ""
+
+#: app/views/query.html
+msgid "next&nbsp;<i class=\"fa fa-angle-double-right\"></i>"
+msgstr ""
+
+#: app/views/query.html
+msgid "page&nbsp;{{page+1}}&nbsp;of&nbsp;{{pages}}"
+msgstr ""
+
+#: app/views/query.html
+msgid "since"
+msgstr ""
+
+#: app/views/query.html
+msgid "since last month"
+msgstr ""
+
+#: app/views/query.html
+msgid "since last week"
+msgstr ""
+
+#: app/views/query.html
+msgid "since last year"
+msgstr ""
+
+#: app/views/query.html
+msgid "since two weeks ago"
+msgstr ""
+
+#: app/views/query.html
+msgid "since yesterday"
+msgstr ""
+
+#: app/views/query.html
+msgid "today"
+msgstr ""
+
+#: app/views/query.html
+msgid "with Tag"
 msgstr ""

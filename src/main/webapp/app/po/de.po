@@ -12,11 +12,87 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 "X-Poedit-Language: de\n"
 
-#: app/scripts/controllers/query.js
+#: app/views/query.html
+msgid "Filter Dates:"
+msgstr "Filter nach Datum:"
+
+#: app/views/query.html
+msgid "Filter Tags:"
+msgstr "Filter nach Tags:"
+
+#: app/views/query.html
+msgid "My @-notifications"
+msgstr "Meine @-Benachrichtigungen"
+
+#: app/views/query.html app/scripts/controllers/query.js
 msgid "My ToDos"
 msgstr "Meine ToDos"
 
 #: app/views/query.html
+msgid "My Workplace:"
+msgstr "Mein Arbeitsplatz:"
+
+#: app/views/query.html
+msgid "My latest work"
+msgstr "Meine letzte Arbeit"
+
+#: app/views/query.html
+msgid "My starred stories"
+msgstr "Meine Favoriten"
+
+#: app/views/query.html
+msgid "Others latest work"
+msgstr "Others latest work"
+
+#: app/views/query.html
+msgid "Welcome to Colibri..."
+msgstr "Willkommen bei Colibri..."
+
+#: app/views/query.html
+msgid "You have not starred any story, yet."
+msgstr "Sie haben noch keine Story als Favorit markiert."
+
+#: app/views/query.html
 msgid "found {{result.hits.total}} stories in {{result.took}} ms."
 msgstr "{{result.hits.total}} Stories in {{result.took}} ms gefunden."
+
+#: app/views/query.html
+msgid "next&nbsp;<i class=\"fa fa-angle-double-right\"></i>"
+msgstr "nächste&nbsp;<i class=\"fa fa-angle-double-right\"></i>"
+
+#: app/views/query.html
+msgid "page&nbsp;{{page+1}}&nbsp;of&nbsp;{{pages}}"
+msgstr "Seite&nbsp;{{page+1}}&nbsp;von&nbsp;{{pages}}"
+
+#: app/views/query.html
+msgid "since"
+msgstr "seit"
+
+#: app/views/query.html
+msgid "since last month"
+msgstr "im letzten Monat"
+
+#: app/views/query.html
+msgid "since last week"
+msgstr "in der letzten Woche"
+
+#: app/views/query.html
+msgid "since last year"
+msgstr "im letzten Jahr"
+
+#: app/views/query.html
+msgid "since two weeks ago"
+msgstr "in den letzten zwei Wochen"
+
+#: app/views/query.html
+msgid "since yesterday"
+msgstr "seit gestern"
+
+#: app/views/query.html
+msgid "today"
+msgstr "heute"
+
+#: app/views/query.html
+msgid "with Tag"
+msgstr "mit dem Tag"
 

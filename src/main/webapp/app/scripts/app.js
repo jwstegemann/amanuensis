@@ -90,9 +90,7 @@ angular.module('amanuensisApp', [
   }).config(function(msdElasticConfig) {
     msdElasticConfig.append = '\n';
   }).run(function ($rootScope, $location, gettextCatalog) {
-    //set language
-    gettextCatalog.currentLanguage = 'de';
-    gettextCatalog.debug = true;
+    gettextCatalog.debug = false;
 
     //init mode and stack
     $rootScope.selectMode = false;

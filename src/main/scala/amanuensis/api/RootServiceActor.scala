@@ -65,7 +65,7 @@ class RootServiceActor extends Actor with ActorLogging with HttpService with Ama
       graphRoute(userContext)
   } 
 
-  val dummyUser = UserContext("dummy", "Dummy", Nil)
+  val dummyUser = UserContext("dummy", "Dummy", Nil, "en")
 
   def receive = runRoute(
     staticRoute ~

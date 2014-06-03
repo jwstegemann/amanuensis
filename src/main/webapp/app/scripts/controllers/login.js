@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('LoginDialogCtrl', function ($scope, $rootScope, $http, $location, authService, utilService) {
+  .controller('LoginDialogCtrl', function ($scope, $rootScope, $http, $location, authService, utilService, gettextCatalog) {
 
     var welcomeMessage = 'Welcome to Colibri. Please login...';
     var errorMessage = 'Something is wrong. Please try again...';
@@ -75,6 +75,15 @@ angular.module('amanuensisApp')
       $http(config).
         success(function(data, status, headers, config) {
           $rootScope.userContext = data;
+          
+          //set language
+          if (angular.isDefined(data.lang)) {
+            gettextCatalog.currentLanguage = data.lang;            
+          }
+          else {
+            gettextCatalog.currentLanguage = 'en';            
+          }
+
         }).
         error(function(data, status, headers, config) {
           $rootScope.$broadcast('event:auth-loginRequired');

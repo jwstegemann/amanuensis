@@ -12,7 +12,13 @@ curl -H "accept: applicaton/json" -H "X-Stream:true" -H "content-type:applicatio
   }
 }'
 
+echo update users on neo4j
 
+curl -H "accept: applicaton/json" -H "X-Stream:true" -H "content-type:application/json" "$1/db/data/cypher" -d '{
+  "query": "match (u:User) set u.lang=\"en\"",
+  "params": {
+  }
+}'
 
 #
 # for each story in neo4j update index in elastic-search

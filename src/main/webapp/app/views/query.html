@@ -1,52 +1,52 @@
 <div id="query-sidebar" class="query-sidebar container shadow-right vertical-scrollable" ng-class="{'activeSidebar': sideBarVisible}" 
   hm-swipe-left="toggleSideBar()">
     <h3 ng-show="result && pages > 0 && result.facets.tags.terms.length"class="filterHeader">
-      <i class="fa fa-filter fa-lg on-slot"></i>&nbsp;Filter Tags:</h3>
+      <i class="fa fa-filter fa-lg on-slot"></i>&nbsp;<span translate>Filter Tags:</span></h3>
     <ul ng-show="result && pages > 0 && result.facets.tags.terms.length" class="tag-list">
       <li ng-repeat="term in result.facets.tags.terms" ng-click="searchWithFilter(term.term)">
         <a><i class="fa fa-tag"></i>{{term.term}} ({{term.count}})</a>
       </li>
     </ul>
     <h3 ng-show="result && pages > 0 &&  result.facets.dates"class="filterHeader">
-      <i class="fa fa-filter fa-lg on-slot"></i>&nbsp;Filter Dates:
+      <i class="fa fa-filter fa-lg on-slot"></i>&nbsp;<span translate>Filter Dates:</span>
     </h3>
     <ul ng-show="result && pages > 0 &&  result.facets.dates" class="tag-list">
       <li ng-click="searchWithDate(result.facets.dates.ranges[0].from_str)">
-        <a><i class="fa fa-calendar"></i>today ({{result.facets.dates.ranges[0].count}})</a>
+        <a><i class="fa fa-calendar"></i><span translate>today</span> ({{result.facets.dates.ranges[0].count}})</a>
       </li>
       <li ng-click="searchWithDate(result.facets.dates.ranges[1].from_str)">
-        <a><i class="fa fa-calendar"></i>since yesterday ({{result.facets.dates.ranges[1].count}})</a>
+        <a><i class="fa fa-calendar"></i><span translate>since yesterday</span> ({{result.facets.dates.ranges[1].count}})</a>
       </li>
       <li ng-click="searchWithDate(result.facets.dates.ranges[2].from_str)">
-        <a><i class="fa fa-calendar"></i>since last week ({{result.facets.dates.ranges[2].count}})</a>
+        <a><i class="fa fa-calendar"></i><span translate>since last week</span> ({{result.facets.dates.ranges[2].count}})</a>
       </li>
       <li ng-click="searchWithDate(result.facets.dates.ranges[3].from_str)">
-        <a><i class="fa fa-calendar"></i>since two weeks ago ({{result.facets.dates.ranges[3].count}})</a>
+        <a><i class="fa fa-calendar"></i><span translate>since two weeks ago</span> ({{result.facets.dates.ranges[3].count}})</a>
       </li>
       <li ng-click="searchWithDate(result.facets.dates.ranges[4].from_str)">
-        <a><i class="fa fa-calendar"></i>since last month({{result.facets.dates.ranges[4].count}})</a>
+        <a><i class="fa fa-calendar"></i><span translate>since last month</span> ({{result.facets.dates.ranges[4].count}})</a>
       </li>
       <li ng-click="searchWithDate(result.facets.dates.ranges[5].from_str)">
-        <a><i class="fa fa-calendar"></i>since last year ({{result.facets.dates.ranges[5].count}})</a>
+        <a><i class="fa fa-calendar"></i><span translate>since last year</span> ({{result.facets.dates.ranges[5].count}})</a>
       </li>
     </ul>
 
-    <h3 class="filterHeader"><i class="fa fa-desktop fa-lg on-slot"></i>&nbsp;My Workplace:</h3>
+    <h3 class="filterHeader"><i class="fa fa-desktop fa-lg on-slot"></i>&nbsp;<span translate>My Workplace:</span></h3>
     <ul class="tag-list">
       <li ng-click="searchToDos()">
-        <a><i class="fa fa-bell fa-fw"></i>My ToDos</a>
+        <a><i class="fa fa-bell fa-fw" translate></i><span translate>My ToDos</span></a>
       </li>      
       <li ng-click="searchFavourites()">
-        <a><i class="fa fa-star fa-fw"></i>My starred stories</a>
+        <a><i class="fa fa-star fa-fw" translate></i><span translate>My starred stories</span></a>
       </li>
       <li ng-click="searchMyLatest()">
-        <a><i class="fa fa-bolt fa-fw"></i>My latest work</a>
+        <a><i class="fa fa-bolt fa-fw" translate></i><span translate>My latest work</span></a>
       </li>
       <li ng-click="searchOthersLatest()">
-        <a><i class="fa fa-group fa-fw"></i>Others latest work</a>
+        <a><i class="fa fa-group fa-fw" translate></i><span translate>Others latest work</span></a>
       </li>
       <li ng-click="searchNotifications()">
-        <a><i class="fa fa-bullhorn fa-fw"></i>My @-notifications</a>
+        <a><i class="fa fa-bullhorn fa-fw" translate></i><span translate>My @-notifications</span></a>
       </li>
     </ul>
 
@@ -57,7 +57,7 @@
 
   <div class="main-search" ng-hide="result">
     <img class="logo" src="images/colibri_blau.png"></img><br/>
-    <span class="welcome-msg">Welcome to Colibri...</span><br/>
+    <span class="welcome-msg" translate>Welcome to Colibri...</span><br/>
     <span class="version">Version 0.9.1</span><br/>
     <input class="main-search-input" type="text" ng-model="mainSearch" placeholder="What are you looking for?" on-enter="doSearch()"></input>
     <i class="fa fa-search fa-fw fa-2x action opacity-hover" ng-click="doSearch()"></i>
@@ -65,13 +65,13 @@
 
   <h2 ng-show="result" class="resultHeader">
     <i class="fa fa-bars fa-lg on-slot"></i>&nbsp;{{title}}
-    <span ng-show="terms"> with Tag <span ng-repeat="term in terms"><i class="fa fa-tag"></i>{{term}}</span></span>
-    <span ng-show="lastQuery.fromDate"> since {{lastQuery.fromDate.substr(0,10)}}</span></span>
+    <span ng-show="terms">&nbsp;<span translate>with Tag</span>&nbsp;<span ng-repeat="term in terms"><i class="fa fa-tag"></i>{{term}}</span></span>
+    <span ng-show="lastQuery.fromDate"> <span translate>since</span>&nbsp;{{lastQuery.fromDate.substr(0,10)}}</span></span>
   </h2>
 
   <p ng-show="result && pages >= 0" class="stats" translate>found {{result.hits.total}} stories in {{result.took}} ms.</p>
 
-  <p ng-show="result && pages === -1 && result.hits.length === 0" class="stats">You have not starred any story, yet.</p>
+  <p ng-show="result && pages === -1 && result.hits.length === 0" class="stats" translate>You have not starred any story, yet.</p>
 
     <ul ng-show="result" class="resultList">
 
@@ -92,8 +92,8 @@
       <span class="pagination-nav" ng-show="page > 0" ng-click="previousPage()">
         <i class="fa fa-angle-double-left"></i>&nbsp;previous
       </span>
-      <span>page&nbsp;{{page+1}}&nbsp;of&nbsp;{{pages}}</span>&nbsp;&nbsp;
-      <span class="pagination-nav" ng-hide="(page+1) === pages" ng-click="nextPage()">next&nbsp;<i class="fa fa-angle-double-right"></i></span>
+      <span translate>page&nbsp;{{page+1}}&nbsp;of&nbsp;{{pages}}</span>&nbsp;&nbsp;
+      <span class="pagination-nav" ng-hide="(page+1) === pages" ng-click="nextPage()" translate>next&nbsp;<i class="fa fa-angle-double-right"></i></span>
     </p>
   </div>
 
