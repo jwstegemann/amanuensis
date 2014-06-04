@@ -10,6 +10,9 @@ import spray.util._
 import spray.http._
 import MediaTypes._
 import CachingDirectives._
+import spray.http.HttpHeaders._
+import spray.http.CacheDirectives._
+import spray.httpx.encoding.Gzip
 
 
 // this trait defines our service behavior independently from the service actor
@@ -20,8 +23,12 @@ trait StaticHttpService extends HttpService { self : ActorLogging =>
 
   val staticRoute = {
     pathPrefix("app") {
-      cache(staticCache) {
-        getFromResourceDirectory("app")
+      respondWithHeader(`Cache-Control`(`max-age`(86400))) {
+        encodeResponse(Gzip) {
+          cache(staticCache) {
+            getFromResourceDirectory("app")
+          }
+        }
       }
     }
   }

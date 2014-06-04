@@ -26,7 +26,7 @@ case class StoryInfo(id : String, title : String, created: String, modified: Str
 
 case class StoryContext(story: Story, inSlots: Seq[Slot], outSlots: Seq[Slot], flags: StoryFlags)
 
-case class StoryId(id: String)
+case class StoryId(id: String, version: String)
 
 case class StoryUpdateResult(id: String, updated: Int)
 
@@ -47,7 +47,7 @@ object StoryProtocol extends DefaultJsonProtocol {
   // JSON-Serialization
   implicit val storyJsonFormat = jsonFormat10(Story.apply)
   implicit val storyInfoJsonFormat = jsonFormat6(StoryInfo.apply)
-  implicit val storyIdJsonFormat = jsonFormat1(StoryId.apply)
+  implicit val storyIdJsonFormat = jsonFormat2(StoryId.apply)
   implicit val storyIndexJsonFormat = jsonFormat9(StoryIndex.apply)
   implicit val storyAccessJsonFormat = jsonFormat4(StoryAccess.apply)
   implicit val storyRightsJsonFormat = jsonFormat1(StoryRights.apply)  

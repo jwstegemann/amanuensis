@@ -22,6 +22,14 @@ import java.io.File
 import spray.routing.directives.ContentTypeResolver
 import scala.concurrent.Future
 
+import spray.http.HttpHeaders._
+import spray.http.CacheDirectives._
+
+
+import com.amazonaws.auth.{AWSCredentials, BasicAWSCredentials}
+import com.amazonaws.services.s3.model.S3Object
+import com.amazonaws.services.s3.AmazonS3Client
+
 
 // this trait defines our service behavior independently from the service actor
 trait AttachmentHttpService extends HttpService { self : ActorLogging =>
@@ -35,6 +43,9 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
 
   val s3 = S3(s3Key,s3Secret)
   val bucket = s3.bucket(s3BucketName)
+
+  val credentials = new BasicAWSCredentials(s3Key, s3Secret)
+  val s3client = new AmazonS3Client(credentials)
 
 
   val attachmentRoute = {
@@ -75,28 +86,15 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
           }
         } ~
         path(Segment) { filename: String =>
-          detach() {
-            val file = File.createTempFile("S3-",".tmp")            // use Metadata
-            file.deleteOnExit()
-            
-            respondWithLastModifiedHeader(file.lastModified) {
+          respondWithHeader(`Cache-Control`(`max-age`(3600))) {
+            detach() {
 
-              val result: Future[HttpEntity] = bucket.get(s"$storyId/$filename", file) map (metaData =>
-                if (file.isFile && file.canRead) {
-                    //autoChunk(settings.fileChunkingThresholdSize, settings.fileChunkingChunkSize) {
-                      //ToDo: use MetaData for content-type
-                  HttpEntity(ContentTypeResolver.Default(filename), HttpData(file))
-                    //}
-                
-                } 
-                else {
-                  throw new Exception("Fehler!")
-                }              
-              )
+              val s3object = s3client.getObject(s3BucketName, s"$storyId/$filename")
 
-              complete(result) 
-            }
-          }       
+//              complete(s3object.getObjectContent()) 
+              complete("OK") 
+            }       
+          }
         }
       }
     }

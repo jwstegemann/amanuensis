@@ -79,10 +79,10 @@ object StoryActor {
   val removeStoryQueryString = """
     MATCH (s:Story {id: {id}}), (u:User {login: {login}})
     WHERE (s)<-[:canWrite|:canGrant*1..5]-(u)
-    WITH s.id as id, s
+    WITH s.id as id, s.modified as modified s
     OPTIONAL MATCH s-[r]-() 
     DELETE r,s
-    RETURN id
+    RETURN id, modified
   """
 
   val updateStoryQueryString = """
@@ -220,7 +220,8 @@ class StoryActor extends Actor with ActorLogging with Failable with UsingParams 
     ) map {
         case Some(s) => {
           if (s.updated == 1) {
-            indexActor ! UpdateIndex(story)  
+            indexActor ! UpdateIndex(story)
+            StoryId(storyId, story.modified)
           }
           else {
             throw OptimisticLockException(Message(s"story with id '$storyId' could not be updated",`ERROR`) :: Nil)  

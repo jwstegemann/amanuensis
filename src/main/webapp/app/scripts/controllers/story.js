@@ -134,7 +134,7 @@ angular.module('amanuensisApp')
         	if (angular.isDefined($scope.context.story.id)) {
         		storyService.update($scope.context.story, function(successData) {
                     setPristine();
-                    $scope.reload();
+                    $scope.context.story.modified = successData.version;
                     growl.addSuccessMessage($scope.context.story.title + gettextCatalog.getString(' has been saved.'));
                 });
         	}

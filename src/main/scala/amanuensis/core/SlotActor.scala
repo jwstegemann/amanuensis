@@ -63,7 +63,7 @@ object SlotActor {
     MATCH (m:Story {id: {story}})
     WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     CREATE (n)-[r:Slot {name: {slot}}]->(m)
-    RETURN n.id
+    RETURN n.id, n.modified
   """
 
   val removeQueryString = """
@@ -74,7 +74,7 @@ object SlotActor {
     WHERE (m)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     MATCH (n)-[r:Slot {name: {slot}}]-(m)
     DELETE r
-    RETURN n.id
+    RETURN n.id, n.modified
   """
 
   val createAndAddQueryString = """

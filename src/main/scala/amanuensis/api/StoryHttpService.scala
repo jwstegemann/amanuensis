@@ -21,7 +21,7 @@ import org.joda.time.DateTime
 import amanuensis.core.StoryActor._
 import amanuensis.core.SlotActor._
 import amanuensis.core.AccessActor._
-import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol, UserContext, StoryAccess}
+import amanuensis.domain.{Story, StoryInfo, StoryContext, StoryProtocol, UserContext, StoryAccess, StoryId}
 
 import StatusCode._
 
@@ -44,28 +44,19 @@ trait StoryHttpService extends HttpService with SprayJsonSupport {
         pathEnd {
           // FIXME: rehect if not a valid id!
           get {
-            dynamic {
-//              log.debug(s"request: get details for story $storyId")
-              complete((storyActor ? Retrieve(storyId, userContext.login)).mapTo[StoryContext])
-            }
+            complete((storyActor ? Retrieve(storyId, userContext.login)).mapTo[StoryContext])
           } ~
           put {
             entity(as[Story]) { story =>
-              dynamic {
- //               log.debug(s"request: update story $storyId with $story")
-               val storyWithMeta = story.copy(
-                  modified = DateTime.now.toString,
-                  modifiedBy = userContext.login                
-                )
-                complete((storyActor ? Update(storyId, storyWithMeta, story.modified, userContext.login)) map { value => StatusCodes.OK })
-              }
+              val storyWithMeta = story.copy(
+                modified = DateTime.now.toString,
+                modifiedBy = userContext.login                
+              )
+              complete((storyActor ? Update(storyId, storyWithMeta, story.modified, userContext.login)).mapTo[StoryId])
             }
           } ~
           delete {
-            dynamic {
-  //            log.debug(s"request: remove story $storyId")
-              complete((storyActor ? Delete(storyId, userContext.login)) map { value => StatusCodes.OK })
-            }
+            complete((storyActor ? Delete(storyId, userContext.login)) map { value => StatusCodes.OK })
           }
         } ~
         pathPrefix(Map("in" -> true, "out" -> false) / Segment) { (inbound: Boolean, slotName: String) =>

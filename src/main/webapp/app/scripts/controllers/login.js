@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('LoginDialogCtrl', function ($scope, $rootScope, $http, $location, authService, utilService, gettextCatalog) {
+  .controller('LoginDialogCtrl', function ($scope, $rootScope, $http, $location, authService, utilService, gettextCatalog, $window) {
 
     var welcomeMessage = 'Welcome to Colibri. Please login...';
     var errorMessage = 'Something is wrong. Please try again...';
@@ -29,12 +29,15 @@ angular.module('amanuensisApp')
 
       $http(config).
         success(function(data, status, headers, config) {
-          $rootScope.userContext = data;
+          $scope.setUserContext(data);
+
           $('#login-modal-content').removeClass('error');
           $scope.welcome = welcomeMessage;
           
           $scope.reset();
           authService.loginConfirmed();
+
+          $location.url('/query').replace();                          
         }).
         error(function(data, status, headers, config) {
           $scope.welcome = errorMessage;
@@ -68,22 +71,32 @@ angular.module('amanuensisApp')
     });
 
 
+    $scope.setUserContext = function(data) {
+      $rootScope.userContext = data;
+      
+      //set language
+      if (angular.isDefined(data.lang)) {
+        gettextCatalog.currentLanguage = data.lang;            
+      }
+      else {
+        gettextCatalog.currentLanguage = 'en';            
+      }
+    }
+
+    var defaultLanguage = $window.navigator.language;
+
+    if (angular.isDefined(defaultLanguage) && defaultLanguage.length > 1) {
+      console.log("detected browser language: " + defaultLanguage);
+      gettextCatalog.currentLanguage = defaultLanguage.substr(0,2);
+    }
+
     $scope.reset();
 
     // force login when loaded and not developing locally
       var config = {method: 'GET', url: '/user/info', ignoreAuthModule: true};   
       $http(config).
         success(function(data, status, headers, config) {
-          $rootScope.userContext = data;
-          
-          //set language
-          if (angular.isDefined(data.lang)) {
-            gettextCatalog.currentLanguage = data.lang;            
-          }
-          else {
-            gettextCatalog.currentLanguage = 'en';            
-          }
-
+          $scope.setUserContext(data);
         }).
         error(function(data, status, headers, config) {
           $rootScope.$broadcast('event:auth-loginRequired');

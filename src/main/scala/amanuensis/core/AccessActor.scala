@@ -58,7 +58,7 @@ object AccessActor {
     OPTIONAL MATCH (s)<-[r:canWrite | :canGrant]-(u)
     DELETE (r)
     CREATE UNIQUE (s)<-[:canRead]-(u)
-    RETURN s.id
+    RETURN s.id, s.modified
   """
 
   val shareReadWriteQueryString = """
@@ -68,7 +68,7 @@ object AccessActor {
     OPTIONAL MATCH (s)<-[r:canRead | :canGrant]-(u)
     DELETE (r)
     CREATE UNIQUE (s)<-[:canWrite]-(u)
-    RETURN s.id
+    RETURN s.id, s.modified
   """
 
   val shareReadWriteGrantQueryString = """
@@ -78,7 +78,7 @@ object AccessActor {
     OPTIONAL MATCH (s)<-[r:canRead | :canWrite]-(u)
     DELETE (r)
     CREATE UNIQUE (s)<-[:canGrant]-(u)
-    RETURN s.id
+    RETURN s.id, s.modified
   """
 
 
@@ -88,7 +88,7 @@ object AccessActor {
     MATCH (u:User {login: {userId}})
     MATCH (s)<-[r:canRead | :canWrite | :canGrant]-(u)
     DELETE r
-    RETURN s.id
+    RETURN s.id, s.modified
   """
 }
 

@@ -12,7 +12,7 @@ angular.module('amanuensisApp')
       },
       createInSlot: {
         method: 'POST',
-        url: '/story/:fromStoryId/:slotName',
+        url: '/story/:fromStoryId/out/:slotName',
         params: {}
       },      
       update: {
