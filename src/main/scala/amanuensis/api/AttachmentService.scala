@@ -58,6 +58,92 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
         pathEnd {
           post {
             entity(as[MultipartFormData]) { formData =>
+              detach() {
+                formData.get("file") match {
+
+                  case Some(bodyPart) => {
+
+                    val filename = bodyPart.filename match {
+                      case Some(name) => name
+                      case None => Neo4JId.generateId()
+                    }
+
+                    val content = bodyPart.entity.data.toByteArray
+
+                    saveContent(content, storyId, filename)               
+
+                    complete(s"""{"filename": "/attachment/$storyId/$filename"}""") 
+
+                  }
+                  
+                  case None => complete(BadRequest, "invalid upload, missing file...")
+
+                }
+              }
+            }
+          }
+        } ~
+        path(Segment) { filename: String =>
+          respondWithHeader(`Cache-Control`(`max-age`(3600))) {
+            detach() {
+              get {
+                val sourceFile = new File(s"$s3BucketName/$storyId/$filename")       
+                if (!sourceFile.isFile || !sourceFile.canRead) {
+                  reject(ValidationRejection("You are not allowed to do this!"))
+                }
+                respondWithLastModifiedHeader(sourceFile.lastModified) {
+                  autoChunk(32000) {
+
+                    //ToDo: use MetaData for content-type
+                    complete(HttpEntity(ContentTypeResolver.Default(filename), HttpData(sourceFile)))
+                    
+                  }                                
+                }
+              }
+            }       
+          }
+        }
+      }
+    }
+
+  }
+
+  def saveContent(content: Array[Byte], storyId: String, filename: String) = {
+    //FIXME: filename absichern (kein . oder .. am Anfang!)
+    val targetFile = new File(s"$s3BucketName/$storyId/$filename")
+
+    targetFile.getParentFile().mkdirs()
+
+    if (!targetFile.exists()) {
+      targetFile.createNewFile()
+    }
+
+    val outputStream = new FileOutputStream(targetFile)
+    outputStream.write(content)
+    outputStream.close();
+  }
+
+  /*
+
+    val s3Key = scala.util.Properties.envOrElse("AWS_S3_KEY", "none")
+  val s3Secret = scala.util.Properties.envOrElse("AWS_S3_SECRET", "none")
+
+  val s3BucketName = scala.util.Properties.envOrElse("AWS_S3_BUCKET", "none")
+
+  val s3 = S3(s3Key,s3Secret)
+  val bucket = s3.bucket(s3BucketName)
+
+
+  val attachmentRoute = {
+
+    import spray.httpx.encoding.{ NoEncoding, Gzip }
+    
+    pathPrefix("attachment") {
+      //FixMe: check, if storyId is valid
+      pathPrefix(Segment) { storyId: String =>
+        pathEnd {
+          post {
+            entity(as[MultipartFormData]) { formData =>
 
               formData.get("file") match {
 
@@ -86,19 +172,32 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
           }
         } ~
         path(Segment) { filename: String =>
-          respondWithHeader(`Cache-Control`(`max-age`(3600))) {
-            detach() {
+          detach() {
+            val file = File.createTempFile("S3-",".tmp")            // use Metadata
+            file.deleteOnExit()
+            
+            respondWithLastModifiedHeader(file.lastModified) {
 
-              val s3object = s3client.getObject(s3BucketName, s"$storyId/$filename")
+              val result: Future[HttpEntity] = bucket.get(s"$storyId/$filename", file) map (metaData =>
+                if (file.isFile && file.canRead) {
+                    //autoChunk(settings.fileChunkingThresholdSize, settings.fileChunkingChunkSize) {
+                      //ToDo: use MetaData for content-type
+                  HttpEntity(ContentTypeResolver.Default(filename), HttpData(file))
+                    //}
+                
+                } 
+                else {
+                  throw new Exception("Fehler!")
+                }              
+              )
 
-//              complete(s3object.getObjectContent()) 
-              complete("OK") 
-            }       
-          }
+              complete(result) 
+            }
+          }       
         }
       }
     }
 
-  }
+    */
 
 }

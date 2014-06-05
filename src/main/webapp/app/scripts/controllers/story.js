@@ -150,7 +150,7 @@ angular.module('amanuensisApp')
                         $scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id).replace();
                         growl.addSuccessMessage($scope.context.story.title + gettextCatalog.getString(' has been created in Slot ') + $routeParams.slotName + gettextCatalog.getString(' at Story ') + $routeParams.fromStoryTitle);
-                        $rootScopy.storyFlags.saved = 1;
+                        $rootScope.storyFlags.saved = 1;
                     });
 
                     $rootScope.stack = undefined;
@@ -163,7 +163,7 @@ angular.module('amanuensisApp')
             			$scope.context.story.id = successData.id;
                         $location.url("/story/" + $scope.context.story.id).replace();
                         growl.addSuccessMessage($scope.context.story.title + gettextCatalog.getString(' has been created.'));
-                        $rootScopy.storyFlags.saved = 1;                        
+                        $rootScope.storyFlags.saved = 1;                        
             		});
                 }
         	}

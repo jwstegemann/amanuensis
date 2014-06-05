@@ -112,13 +112,13 @@ angular.module('amanuensisApp')
       }
     };
   })
-  .directive("uploadable", function ($rootScope,$http) {
+  .directive("uploadable", function ($rootScope,$http, gettextCatalog) {
     return {
       restrict: 'A',
       scope: {
         ngModel: '=' 
       },
-      link: function(scope, elem, attrs, gettextCatalog) {
+      link: function(scope, elem, attrs) {
 
         var lastValue;
         var editor = elem.context;
@@ -147,7 +147,7 @@ angular.module('amanuensisApp')
         scope.onUploadedFile = function(data, isImage, linkText) {
           var filename = data['filename'];
           if (filename) {
-            var text = scope.ngModel.replace(lastValue, "[" + linkText + "](" + filename + ")");
+            var text = scope.ngModel.replace(imagePrefix(isImage)+lastValue, "[" + linkText + "](" + filename + ")");
             scope.ngModel = text;
 
             //ToDo: Update scope with new editor-value
