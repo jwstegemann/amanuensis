@@ -147,7 +147,7 @@ angular.module('amanuensisApp')
         scope.onUploadedFile = function(data, isImage, linkText) {
           var filename = data['filename'];
           if (filename) {
-            var text = scope.ngModel.replace(imagePrefix(isImage)+lastValue, "[" + linkText + "](" + filename + ")");
+            var text = scope.ngModel.replace(lastValue, "[" + linkText + "](" + filename + ")");
             scope.ngModel = text;
 
             //ToDo: Update scope with new editor-value
@@ -155,7 +155,7 @@ angular.module('amanuensisApp')
         };
 
         scope.onErrorUploading = function() {
-          var text = scope.ngModel.replace(lastValue, "");
+          var text = scope.ngModel.replace(imagePrefix(isImage) + lastValue, "");
           scope.ngModel = text;
           $rootScope.$broadcast('error',{errorMessage: gettextCatalog.getString('I am inconsolable, but an error occured uploading your file.')});
         };
@@ -169,7 +169,7 @@ angular.module('amanuensisApp')
 
         function insertAtCaret(previous, appended) {
           var position = elem[0].selectionStart;
-          return previous.substr(0,position) + '\n\n' + appended + '\n' + previous.substr(position);
+          return previous.substr(0,position) + '\n' + appended + '\n' + previous.substr(position);
         }
 
         function isAnImage(contentType) {

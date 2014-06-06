@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"outp",
+				"outputFile"
+			],
+			[
 				"s3ob",
 				"s3object"
 			],
@@ -510,10 +514,6 @@
 			[
 				"jsno",
 				"jsonFormat2"
-			],
-			[
-				"imp",
-				"implicit"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "src/main/scala/amanuensis/api/AttachmentService.scala",
 			"settings":
 			{
-				"buffer_size": 2831,
+				"buffer_size": 6011,
 				"line_ending": "Unix"
 			}
 		},
@@ -534,17 +534,59 @@
 				"buffer_size": 2173,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "src/main/webapp/app/scripts/services/storyService.js",
+			"settings":
+			{
+				"buffer_size": 483,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/StoryHttpService.scala",
+			"settings":
+			{
+				"buffer_size": 4648,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 40 files for \"reject\"\n\n/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/AccessHttpService.scala:\n   52              dynamic {\n   53                if (userId == userContext.login) {\n   54:                 reject(ValidationRejection(\"You cannot change your access to story by yourself.\"))\n   55                }\n   56                else {\n   ..\n   64              dynamic {\n   65                if (userId == userContext.login) {\n   66:                 reject(ValidationRejection(\"You cannot unshare a story from yourself.\"))\n   67                }\n   68                else {\n\n/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala:\n   88      //            log.debug(s\"request: add story $targetStoryId to slot $slotName at story $storyId\")\n   89                  if (targetStoryId == storyId) {\n   90:                   reject(ValidationRejection(\"A story cannot be added to a slot at itself.\"))\n   91                  }\n   92                  else {\n\n/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/UserHttpService.scala:\n   19  import StatusCodes._\n   20  \n   21: import spray.routing.AuthenticationFailedRejection\n   22  \n   23  import language.postfixOps\n\n/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/security/StatelessCookieAuthenticator.scala:\n    5  import HttpHeaders._\n    6  import spray.routing.authentication._\n    7: import spray.routing.{RequestContext, RoutingSettings, AuthenticationFailedRejection}\n    8: import spray.routing.AuthenticationFailedRejection.{CredentialsRejected, CredentialsMissing}\n    9  \n   10  import scala.concurrent._\n   ..\n   33    import UserActor._\n   34  \n   35:   val invalid = future { Left(AuthenticationFailedRejection(CredentialsMissing, Nil)) }\n   36  \n   37    // get client-ip from the right header depending on environment-variable\n   ..\n   59                  Right(anything)\n   60                }.recover {\n   61:                 case _ => Left(AuthenticationFailedRejection(CredentialsMissing, Nil)) // not logged in (no cache entry)                \n   62                }\n   63              }\n\n12 matches across 4 files\n",
+			"settings":
+			{
+				"buffer_size": 2200,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "src/main/scala/amanuensis/api/AccessHttpService.scala",
+			"settings":
+			{
+				"buffer_size": 2343,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 372.0,
 		"selected_items":
 		[
 			[
-				"sbt",
+				"sbt:",
 				"SBT: Start SBT"
+			],
+			[
+				"sbt:Start",
+				"SBT: Start Console"
+			],
+			[
+				"sbt",
+				"SBT: Compile"
 			],
 			[
 				"Snippet: ",
@@ -647,10 +689,6 @@
 				"SBT: Compile"
 			],
 			[
-				"sbt:",
-				"SBT: Compile"
-			],
-			[
 				"S",
 				"SBT: Stop SBT"
 			],
@@ -685,14 +723,16 @@
 	"file_history":
 	[
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/storyService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StaticHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/AttachmentService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/SlotActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/FavourActor.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/AccessActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/selectbox.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
@@ -700,7 +740,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/po/de.po",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/errorDialog.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/graph.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/findpaths.html",
@@ -771,7 +810,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ng-tags-input/bower.json",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/elasticsearch/ElasticSearchServer.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/QueryHttpService.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/neo4j/Neo4JRestFormats.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/.tmp/styles/modals.css",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ngQuickDate/dist/ng-quick-date.css",
@@ -872,9 +910,11 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"reject",
+			"appendIn",
 			"create",
 			"Trans",
 			"Client",
@@ -1000,9 +1040,7 @@
 			"px",
 			"5px",
 			"20px",
-			"10px",
-			"40px",
-			"px"
+			"10px"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1064,15 +1102,15 @@
 					"file": "src/main/scala/amanuensis/api/AttachmentService.scala",
 					"settings":
 					{
-						"buffer_size": 2831,
+						"buffer_size": 6011,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2765,
-								2765
+								6008,
+								6008
 							]
 						],
 						"settings":
@@ -1082,7 +1120,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 898.0,
+						"translation.y": 2560.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1111,6 +1149,178 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 97.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/main/webapp/app/scripts/services/storyService.js",
+					"settings":
+					{
+						"buffer_size": 483,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/main/scala/amanuensis/api/StoryHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 4648,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 540.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"settings":
+					{
+						"buffer_size": 2200,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										237,
+										243
+									],
+									[
+										254,
+										260
+									],
+									[
+										485,
+										491
+									],
+									[
+										502,
+										508
+									],
+									[
+										894,
+										900
+									],
+									[
+										911,
+										917
+									],
+									[
+										1204,
+										1210
+									],
+									[
+										1528,
+										1534
+									],
+									[
+										1587,
+										1593
+									],
+									[
+										1609,
+										1615
+									],
+									[
+										1779,
+										1785
+									],
+									[
+										2043,
+										2049
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								239,
+								239
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/main/scala/amanuensis/api/AccessHttpService.scala",
+					"settings":
+					{
+						"buffer_size": 2343,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1626,
+								1626
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 225.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1159,7 +1369,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 282.0
+		"height": 294.0
 	},
 	"output.sbt_error":
 	{
@@ -1176,12 +1386,36 @@
 		"selected_items":
 		[
 			[
-				"storyser",
+				"storyhttp",
+				"src/main/scala/amanuensis/api/StoryHttpService.scala"
+			],
+			[
+				"storys",
 				"src/main/webapp/app/scripts/services/storyService.js"
+			],
+			[
+				"story",
+				"src/main/scala/amanuensis/domain/Story.scala"
+			],
+			[
+				"queryact",
+				"src/main/scala/amanuensis/core/QueryActor.scala"
+			],
+			[
+				"storya",
+				"src/main/scala/amanuensis/core/StoryActor.scala"
+			],
+			[
+				"misc",
+				"src/main/webapp/app/scripts/directives/misc.js"
 			],
 			[
 				"story.js",
 				"src/main/webapp/app/scripts/controllers/story.js"
+			],
+			[
+				"storyser",
+				"src/main/webapp/app/scripts/services/storyService.js"
 			],
 			[
 				"s3.scala",
@@ -1198,14 +1432,6 @@
 			[
 				"story.scala",
 				"src/main/scala/amanuensis/domain/Story.scala"
-			],
-			[
-				"storya",
-				"src/main/scala/amanuensis/core/StoryActor.scala"
-			],
-			[
-				"storyhttp",
-				"src/main/scala/amanuensis/api/StoryHttpService.scala"
 			],
 			[
 				"story.html",
@@ -1306,10 +1532,6 @@
 			[
 				"cyph",
 				"src/main/scala/amanuensis/core/neo4j/CypherServer.scala"
-			],
-			[
-				"story",
-				"src/main/scala/amanuensis/domain/Story.scala"
 			],
 			[
 				"graphs",
@@ -1452,10 +1674,6 @@
 				"src/main/webapp/app/styles/layout.css"
 			],
 			[
-				"misc",
-				"src/main/webapp/app/scripts/directives/misc.js"
-			],
-			[
 				"layou",
 				"src/main/webapp/app/styles/layout.css"
 			],
@@ -1580,10 +1798,6 @@
 				"src/main/webapp/app/scripts/app.js"
 			],
 			[
-				"storys",
-				"src/main/webapp/app/scripts/services/storyService.js"
-			],
-			[
 				"grapha",
 				"src/main/scala/amanuensis/core/GraphActor.scala"
 			],
@@ -1682,10 +1896,6 @@
 			[
 				"onf",
 				"src/main/webapp/app/scripts/directives/onFinishRender.js"
-			],
-			[
-				"slot.j",
-				"src/main/webapp/app/scripts/controllers/slot.js"
 			]
 		],
 		"width": 0.0

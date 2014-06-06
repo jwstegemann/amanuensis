@@ -47,5 +47,6 @@ trait CoreActors {
   val graphActorInstance = system.actorOf(Props[GraphActor], "graph")
   val accessActorInstance = system.actorOf(Props[AccessActor], "access")
   val favourActorInstance = system.actorOf(Props[FavourActor], "favour")  
+  val attachmentActorInstance = system.actorOf(Props[AttachmentActor], "attachment")    
 }
 
