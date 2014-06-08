@@ -24,6 +24,9 @@ import java.io.{ FileOutputStream }
 
 import java.io.File
 
+import com.roundeights.s3cala._
+import spray.routing.directives.ContentTypeResolver
+
 
 object AttachmentActor {
 
@@ -65,6 +68,9 @@ class AttachmentActor extends Actor with ActorLogging with Failable {
   val credentials = if (!local) new BasicAWSCredentials(s3Key, s3Secret) else null
   val s3client = if (!local) new AmazonS3Client(credentials) else null
 
+  // FIXME: remove, just for old s3-lib
+  val s3 = S3(s3Key,s3Secret)
+  val bucket = s3.bucket(s3BucketName)
 
   override def preStart =  {
     log.info(s"AttachmentActor started at: {} {} @ {}", self.path, s3BucketName, if (local) "local" else "S3")
@@ -103,13 +109,21 @@ class AttachmentActor extends Actor with ActorLogging with Failable {
   }
 
   def retrieveS3(filename: String, storyId: String) : Future[HttpData] = {
-    Future {
-      HttpData("shdfjsdfsfd")
-    }
+    val file = File.createTempFile("S3-",".tmp")            // use Metadata
+    file.deleteOnExit()
+
+    bucket.get(s"$storyId/$filename", file) map (metaData =>
+      if (file.isFile && file.canRead) {
+        HttpData(file)
+      } 
+      else {
+        throw new Exception("Fehler!")
+      }              
+    )
   }
 
   def storeS3(filename: String, storyId: String, content: Array[Byte]) : Unit = {
-
+    bucket.put(s"$storyId/$filename", content)
   }
 
 }
