@@ -36,8 +36,6 @@ angular.module('amanuensisApp')
           
           $scope.reset();
           authService.loginConfirmed();
-
-          $location.url('/query').replace();                          
         }).
         error(function(data, status, headers, config) {
           $scope.welcome = errorMessage;
@@ -62,7 +60,8 @@ angular.module('amanuensisApp')
     });
 
     $scope.$on('logout', function() {
-      var config = {method: 'GET', url: '/user/logout'};   
+      var config = {method: 'GET', url: '/user/logout'};
+      $location.url('/query').replace();                                
       $http(config).
         success(function(data, status, headers, config) {
           $scope.welcome = "You logged out successfully.";
