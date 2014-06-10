@@ -18,31 +18,31 @@ msgstr "&nbsp;{{tagName}}, die '{{sourceStory.title}}' mit '{{targetStory.title}
 
 #: app/views/story.html
 msgid "... that still has to be written."
-msgstr ""
+msgstr "... die noch geschrieben werden muss."
 
 #: app/views/story.html
 msgid "A Story..."
-msgstr ""
+msgstr "Eine Story..."
 
 #: app/views/story.html
 msgid "Are you sure?"
-msgstr ""
+msgstr "Sind Sie sicher?"
 
 #: app/index.html
 msgid "Change Your Password"
-msgstr ""
+msgstr "Ändern Sie Ihr Passwort"
 
 #: app/scripts/controllers/story.js
 msgid "Colibri - new Story"
-msgstr ""
+msgstr "Colibri - neue Story"
 
 #: app/views/story.html
 msgid "Do you really want to delete the Story<br>'{{context.story.title}}'?"
-msgstr ""
+msgstr "Möchten Sie die Story '{{context.story.title}}' wirklich löschen?"
 
 #: app/scripts/controllers/story.js
 msgid "Excuse me, but you cannot create a new story in a slot of an unsaved story."
-msgstr ""
+msgstr "Verzeihen Sie, aber Sie können keine Story in einem Slot einer noch nicht gespeicherten Story anlegen."
 
 #: app/views/query.html
 msgid "Filter Dates:"
@@ -54,15 +54,15 @@ msgstr "Filter nach Tags:"
 
 #: app/scripts/controllers/userSettings.js
 msgid "I am inconsolable, but the two entries of your new password do not match."
-msgstr ""
+msgstr "Ich bin untröstlich, aber Ihre beiden Eingaben stimmen nicht überein."
 
 #: app/scripts/controllers/story.js
 msgid "I am sorry, but you cannot create a new slot on an unsaved story."
-msgstr ""
+msgstr "Es tut mir leid, aber Sie müssen die Story zuerst speichern."
 
 #: app/scripts/controllers/query.js
 msgid "Latest Activites of other users"
-msgstr ""
+msgstr "Letzte Arbeiten anderer Nutzer"
 
 #: app/views/query.html
 msgid "My @-notifications"
@@ -88,7 +88,7 @@ msgstr "Mein Arbeitsplatz:"
 
 #: app/scripts/controllers/query.js
 msgid "My latest Activities"
-msgstr ""
+msgstr "Meine letzten Arbeiten"
 
 #: app/views/query.html
 msgid "My latest work"
@@ -104,39 +104,39 @@ msgstr "Others latest work"
 
 #: app/views/story.html
 msgid "Please choose an icon..."
-msgstr ""
+msgstr "Bitte wählen Sie ein Icon..."
 
 #: app/scripts/controllers/story.js
 msgid "Please choose the rights to grant to everybody else..."
-msgstr ""
+msgstr "Bitte wählen Sie die Rechte für alle anderen Nutzer."
 
 #: app/scripts/controllers/story.js
 msgid "Please choose, how to share this story..."
-msgstr ""
+msgstr "Bestimmen Sie, wie Sie die Story teilen möchten!"
 
 #: app/scripts/controllers/userSettings.js
 msgid "Please enter a new password of at least 6 characters."
-msgstr ""
+msgstr "Bitte vergeben Sie ein Passwort aus mindestens 6 Zeichen."
 
 #: app/scripts/controllers/graph.js
 msgid "Please enter a tag-name..."
-msgstr ""
+msgstr "Bitte geben Sie den Namen eines Tags ein..."
 
 #: app/scripts/controllers/story.js
 msgid "Please enter a valid username and the rights to grant..."
-msgstr ""
+msgstr "Bitte nennen Sie einen gültigen Usernamen."
 
 #: app/scripts/controllers/userSettings.js
 msgid "Please enter your actual password."
-msgstr ""
+msgstr "Bitte geben Sie Ihr aktuelles Passwort ein."
 
 #: app/scripts/controllers/story.js
 msgid "Please give the new slot a name..."
-msgstr ""
+msgstr "Bitte geben Sie dem Slot einen Namen..."
 
 #: app/scripts/controllers/graph.js
 msgid "Please select the stories you want to search between first."
-msgstr ""
+msgstr "Bitte wählen Sie zunächst die Stories zwischen denen Sie suchen wollen."
 
 #: app/index.html
 msgid "Search Colibri"
@@ -144,35 +144,35 @@ msgstr "Colibri durchsuchen"
 
 #: app/scripts/controllers/story.js
 msgid "Share with somebody else..."
-msgstr ""
+msgstr "Mit Anderen teilen..."
 
 #: app/scripts/controllers/userSettings.js
 msgid "Something is wrong. Please try again..."
-msgstr ""
+msgstr "Etwas ist falsch. Bite versuchen Sie es erneut."
 
 #: app/scripts/controllers/story.js
 msgid "Sorry, but your story must have a title and a content. Please enter one..."
-msgstr ""
+msgstr "Eine Story muss mindestens einen Titel und Inhalt besitzen."
 
 #: app/scripts/controllers/story.js
 msgid "Too short. Try a longer name for the slot..."
-msgstr ""
+msgstr "Zu kurz. Bitte vergeben Sie einen längeren Namen."
 
 #: app/scripts/controllers/story.js
 msgid "Unfortunately it is not possible to link a story to itself."
-msgstr ""
+msgstr "Eine Story kann nicht auf sich selbst verweisen."
 
 #: app/scripts/controllers/story.js
 msgid "Unfortunately you cannot add an unsaved story to a slot."
-msgstr ""
+msgstr "Sie können leider keine ungespeicherte Story zu einem Slot hinzufügen."
 
 #: app/scripts/controllers/story.js
 msgid "Unfortunately you cannot star an unsaved story."
-msgstr ""
+msgstr "Leider können Sie keine ungesicherte Story markieren."
 
 #: app/scripts/controllers/story.js
 msgid "Unfortunately you cannot unstar an unsaved story."
-msgstr ""
+msgstr "Dies ist für eine nicht gesicherte Story leider unmöglich."
 
 #: app/views/query.html
 msgid "Welcome to Colibri..."
@@ -180,19 +180,19 @@ msgstr "Willkommen bei Colibri..."
 
 #: app/index.html
 msgid "What are you looking for?"
-msgstr ""
+msgstr "Wonach suchen Sie?"
 
 #: app/views/story.html
 msgid "You are sharing this story with..."
-msgstr ""
+msgstr "Sie teilen diese Story mit:"
 
 #: app/scripts/controllers/story.js
 msgid "You cannot share a story that has not been saved yet."
-msgstr ""
+msgstr "Sie können keine Story teilen, die Sie noch nicht gespeichert haben."
 
 #: app/scripts/controllers/story.js
 msgid "You have added"
-msgstr ""
+msgstr "Sie haben folgende Story hinzugefügt:"
 
 #: app/views/query.html
 msgid "You have not starred any story, yet."
@@ -200,147 +200,147 @@ msgstr "Sie haben noch keine Story als Favorit markiert."
 
 #: app/scripts/controllers/story.js
 msgid "You have removed"
-msgstr ""
+msgstr "Sie haben folgende Story entfernt."
 
 #: app/scripts/controllers/story.js
 msgid "You have removed your star from"
-msgstr ""
+msgstr "Sie haben Ihre Markierung entfernt von"
 
 #: app/scripts/controllers/story.js
 msgid "You just starred"
-msgstr ""
+msgstr "Sie haben markiert: "
 
 #: app/views/story.html
 msgid "You made some changes to this Story<br>Do you really want to abandon the unsaved work?"
-msgstr ""
+msgstr "Sie haben Änderungen vorgenommen<br>Möchten Sie diese verwerfen?"
 
 #: app/index.html
 msgid "Your Login"
-msgstr ""
+msgstr "Ihre Benutzername"
 
 #: app/index.html
 msgid "Your Password"
-msgstr ""
+msgstr "Ihr Passwort"
 
 #: app/scripts/controllers/graph.js
 msgid "Your input was too short..."
-msgstr ""
+msgstr "Ihre Eingabe war zu kurz..."
 
 #: app/index.html
 msgid "Your new password"
-msgstr ""
+msgstr "Ihr neues Passwort"
 
 #: app/index.html
 msgid "Your old password"
-msgstr ""
+msgstr "Ihr altes Passwort"
 
 #: app/index.html
 msgid "add Attachment"
-msgstr ""
+msgstr "Anhang hinzufügen"
 
 #: app/index.html
 msgid "add Story to a Slot"
-msgstr ""
+msgstr "Story zu einem Slot hinzufügen"
 
 #: app/index.html
 msgid "add Story to open Slot"
-msgstr ""
+msgstr "Story zum offenen Slot hinzufügen"
 
 #: app/index.html
 msgid "add an existing story to a slot of this one"
-msgstr ""
+msgstr "existierende Story zu einem Slot hinzufügen"
 
 #: app/index.html
 msgid "add an existing story to the actual open slot"
-msgstr ""
+msgstr "existierende Story zum offenen Slot hinzufügen"
 
 #: app/index.html
 msgid "add this Story to the Slot"
-msgstr ""
+msgstr "diese Story zum Slot hinzufügen"
 
 #: app/index.html
 msgid "add this story to the slot"
-msgstr ""
+msgstr "diese Story zum Slot hinzufügen"
 
 #: app/scripts/controllers/story.js
 msgid "as"
-msgstr ""
+msgstr "als"
 
 #: app/scripts/controllers/story.js
 msgid "at Story"
-msgstr ""
+msgstr "an der Story"
 
 #: app/views/story.html
 msgid "by"
-msgstr ""
+msgstr "von"
 
 #: app/index.html
 msgid "cancel Graph-Search"
-msgstr ""
+msgstr "Graphen-Suche abbrechen"
 
 #: app/index.html
 msgid "cancel graph-search"
-msgstr ""
+msgstr "Graphen-Suche abbrechen"
 
 #: app/index.html
 msgid "cancel selecting a Story"
-msgstr ""
+msgstr "Story-Auswahl abbrechen"
 
 #: app/index.html
 msgid "cancel selecting a story"
-msgstr ""
+msgstr "Story-Auswahl abbrechen"
 
 #: app/index.html
 msgid "change password"
-msgstr ""
+msgstr "Passwort ändern"
 
 #: app/index.html
 msgid "create a new Story"
-msgstr ""
+msgstr "eine neue Story anlegen"
 
 #: app/index.html
 msgid "create a new story"
-msgstr ""
+msgstr "eine neue Story anlegen"
 
 #: app/index.html
 msgid "create a new story and add it to to slot at this one"
-msgstr ""
+msgstr "eine neue Story anlegen und mit dieser verbinden"
 
 #: app/index.html
 msgid "create new Story"
-msgstr ""
+msgstr "eine neue Story anlegen"
 
 #: app/views/findpaths.html
 msgid "created by {{storyResult.createdBy}} on {{storyResult.created.substr(0,10)}}"
-msgstr ""
+msgstr "angelegt von {{storyResult.createdBy}} am {{storyResult.created.substr(0,10)}}"
 
 #: app/index.html
 msgid "delete Story"
-msgstr ""
+msgstr "Story löschen"
 
 #: app/index.html
 msgid "delete this story"
-msgstr ""
+msgstr "diese Story löschen"
 
 #: app/index.html
 msgid "edit story"
-msgstr ""
+msgstr "Story bearbeiten"
 
 #: app/index.html
 msgid "edit this Story"
-msgstr ""
+msgstr "diese Story bearbeiten"
 
 #: app/scripts/controllers/story.js
 msgid "everybody"
-msgstr ""
+msgstr "jeder"
 
 #: app/index.html
 msgid "finish editing"
-msgstr ""
+msgstr "Bearbeitung beenden"
 
 #: app/views/findpaths.html
 msgid "found {{page*25 + result.length}} stories<span> so far</span>."
-msgstr ""
+msgstr "{{page*25 + result.length}} Stories gefunden<span> (bisher)</span>."
 
 #: app/views/query.html
 msgid "found {{result.hits.total}} stories in {{result.took}} ms."
@@ -348,91 +348,91 @@ msgstr "{{result.hits.total}} Stories in {{result.took}} ms gefunden."
 
 #: app/scripts/controllers/story.js
 msgid "from your ToDo-list."
-msgstr ""
+msgstr "aus Ihren Aufgaben"
 
 #: app/index.html
 msgid "go back"
-msgstr ""
+msgstr "zurück"
 
 #: app/index.html
 msgid "go to the search-page"
-msgstr ""
+msgstr "zur Suche"
 
 #: app/scripts/controllers/story.js
 msgid "group"
-msgstr ""
+msgstr "Gruppe"
 
 #: app/scripts/controllers/story.js
 msgid "has been created in Slot"
-msgstr ""
+msgstr "wurde angelegt im Slot"
 
 #: app/scripts/controllers/story.js
 msgid "has been created."
-msgstr ""
+msgstr "wurde angelegt."
 
 #: app/scripts/controllers/story.js
 msgid "has been deleted."
-msgstr ""
+msgstr "wurde gelöscht."
 
 #: app/scripts/controllers/story.js
 msgid "has been linked to"
-msgstr ""
+msgstr "wurde verbunden mit"
 
 #: app/scripts/controllers/story.js
 msgid "has been saved."
-msgstr ""
+msgstr "wurde gespeichert."
 
 #: app/index.html
 msgid "log me out"
-msgstr ""
+msgstr "abmelden"
 
 #: app/index.html
 msgid "make Line a Header"
-msgstr ""
+msgstr "Zeile zur Überschrift machen"
 
 #: app/index.html
 msgid "make Line a List"
-msgstr ""
+msgstr "Zeile als Liste formatieren"
 
 #: app/index.html
 msgid "make Text a Link"
-msgstr ""
+msgstr "Zeile als Link markieren"
 
 #: app/index.html
 msgid "make Text bold"
-msgstr ""
+msgstr "fett"
 
 #: app/index.html
 msgid "make Text italic"
-msgstr ""
+msgstr "kursiv"
 
 #: app/index.html
 msgid "make current line a header"
-msgstr ""
+msgstr "Zeile als Überschrift markieren"
 
 #: app/index.html
 msgid "make line a list"
-msgstr ""
+msgstr "Zeile als Liste formatieren"
 
 #: app/index.html
 msgid "make text a link"
-msgstr ""
+msgstr "Zeile als Link markieren"
 
 #: app/index.html
 msgid "make text bold"
-msgstr ""
+msgstr "fett"
 
 #: app/index.html
 msgid "make text italic"
-msgstr ""
+msgstr "kursiv"
 
 #: app/views/story.html
 msgid "name of the slot"
-msgstr ""
+msgstr "Name des Slots"
 
 #: app/views/findpaths.html
 msgid "next"
-msgstr ""
+msgstr "nächste"
 
 #: app/views/query.html
 msgid "next&nbsp;<i class=\"fa fa-angle-double-right\"></i>"
@@ -440,11 +440,11 @@ msgstr "nächste&nbsp;<i class=\"fa fa-angle-double-right\"></i>"
 
 #: app/views/story.html
 msgid "not set"
-msgstr ""
+msgstr "nicht gesetzt"
 
 #: app/scripts/controllers/story.js
 msgid "not yet"
-msgstr ""
+msgstr "noch nicht"
 
 #: app/views/findpaths.html
 #, fuzzy
@@ -469,63 +469,63 @@ msgstr ""
 
 #: app/scripts/controllers/story.js
 msgid "read & write"
-msgstr ""
+msgstr "lesen & schreiben"
 
 #: app/scripts/controllers/story.js
 msgid "read, write & grant"
-msgstr ""
+msgstr "lesen, schreiben & teilen"
 
 #: app/index.html
 msgid "reload"
-msgstr ""
+msgstr "neu laden"
 
 #: app/index.html
 msgid "reload this story"
-msgstr ""
+msgstr "diese Story neu laden"
 
 #: app/index.html
 msgid "repeat the new password"
-msgstr ""
+msgstr "Wiederholen Sie Ihr Passwort"
 
 #: app/index.html
 msgid "return to view mode"
-msgstr ""
+msgstr "zur Ansicht zurückkehren"
 
 #: app/index.html
 msgid "return to your workplace"
-msgstr ""
+msgstr "zurück zum Arbeitsplatz"
 
 #: app/index.html
 msgid "save Story"
-msgstr ""
+msgstr "Story speichern"
 
 #: app/index.html
 msgid "save this story"
-msgstr ""
+msgstr "diese Story speichern"
 
 #: app/index.html
 msgid "search for..."
-msgstr ""
+msgstr "suchen nach..."
 
 #: app/index.html
 msgid "select Story for Graph-Search"
-msgstr ""
+msgstr "Story für Graphen-Suche auswählen"
 
 #: app/index.html
 msgid "select story for graph-search"
-msgstr ""
+msgstr "Story für Graphen-Suche auswählen"
 
 #: app/views/story.html
 msgid "set date for ToDo"
-msgstr ""
+msgstr "Wiedervorlage setzen"
 
 #: app/index.html
 msgid "share Story with Others"
-msgstr ""
+msgstr "mit Anderen teilen"
 
 #: app/index.html
 msgid "share a story with other users"
-msgstr ""
+msgstr "Story mit Anderen teilen"
 
 #: app/views/query.html
 msgid "since"
@@ -553,11 +553,11 @@ msgstr "seit gestern"
 
 #: app/views/story.html
 msgid "sort by alphabet"
-msgstr ""
+msgstr "alphanumerisch sortieren"
 
 #: app/views/story.html
 msgid "sort by creation"
-msgstr ""
+msgstr "nach Anlage sortieren"
 
 #: app/views/story.html
 #, fuzzy
@@ -566,27 +566,27 @@ msgstr "Meine @-Benachrichtigungen"
 
 #: app/index.html
 msgid "star this Story"
-msgstr ""
+msgstr "Story markieren"
 
 #: app/index.html
 msgid "star this story"
-msgstr ""
+msgstr "diese Story markieren"
 
 #: app/index.html
 msgid "start Graph-Search"
-msgstr ""
+msgstr "Graphen-Suche starten"
 
 #: app/index.html
 msgid "start a new graph-search"
-msgstr ""
+msgstr "eine neue Graphen-Suche starten"
 
 #: app/index.html
 msgid "story and slot you are going to add a story to"
-msgstr ""
+msgstr "Story und Slot zu dem Sie eine Story hinzufügen"
 
 #: app/scripts/controllers/story.js
 msgid "to your ToDo-list."
-msgstr ""
+msgstr "zu Ihrer Wiedervorlage."
 
 #: app/views/query.html
 msgid "today"
@@ -594,23 +594,23 @@ msgstr "heute"
 
 #: app/index.html
 msgid "unstar this Story"
-msgstr ""
+msgstr "Story entmarkieren"
 
 #: app/index.html
 msgid "unstar this story"
-msgstr ""
+msgstr "Story entmarkieren."
 
 #: app/index.html
 msgid "upload an attachment to this story"
-msgstr ""
+msgstr "einen Anhang zu dieser Story hochladen"
 
 #: app/scripts/controllers/story.js
 msgid "user"
-msgstr ""
+msgstr "Benutzer"
 
 #: app/scripts/controllers/story.js
 msgid "who knows"
-msgstr ""
+msgstr "unbekannt"
 
 #: app/views/query.html
 msgid "with Tag"
