@@ -71,6 +71,19 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
   val s3Client = if (!local) new AmazonS3Client(credentials) else null
 
 
+  def getLocalRoute(storyId: String, filename: String) = {
+    get {
+      getFromFile(s"$s3BucketName/$storyId/$filename")
+    }
+  }
+
+  def getS3Route(storyId: String, filename: String) = {
+    get {
+      streamFromS3(storyId, filename, _)
+    }
+  }
+
+
   val attachmentRoute = {
 
     import spray.httpx.encoding.{ NoEncoding, Gzip }
@@ -93,10 +106,34 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
 
                     val content = bodyPart.entity.data.toByteArray
 
-                    /*
+                    if (local) {
+                      handleUploadLocal(storyId, filename, content)
+                    }
+                    else {
+                      handleUploadS3(storyId, filename, content)
+                    }
+
+                    complete(s"""{"filename": "/attachment/$storyId/$filename"}""")
+                  }
+                  
+                  case None => complete(BadRequest, "invalid upload, missing file...")
+
+                }
+              }
+            }
+          }
+        } ~
+        path(Segment) { filename: String =>
+          if (local) getLocalRoute(storyId, filename) else getS3Route(storyId, filename)                  
+        }
+      }
+    }
+  }
+
+  def handleUploadLocal(storyId: String, filename: String, content: Array[Byte]) = {
+/*
                      * store local
                      */
-                    validate(local, "") {
                       //FIXME: filename absichern (kein . oder .. am Anfang!)
                       val targetFile = new File(s"$s3BucketName/$storyId/$filename")
 
@@ -110,48 +147,23 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
                       outputStream.write(content)
                       outputStream.close(); 
 
-                      complete(s"""{"filename": "/attachment/$storyId/$filename"}""")                     
-                    } ~
-                    /*
+                          
+  }
+
+  def handleUploadS3(storyId: String, filename: String, content: Array[Byte]) = {
+/*
                      * store S3
                      */                    
-                    validate(!local, "") {
                       val metaData = new ObjectMetadata()
                       metaData.setContentLength(content.length)
                       s3Client.putObject(s3BucketName, s"$storyId/$filename", new ByteArrayInputStream(content), metaData)
-
-                      complete(s"""{"filename": "/attachment/$storyId/$filename"}""") 
-                    }
-
-                  }
-                  
-                  case None => complete(BadRequest, "invalid upload, missing file...")
-
-                }
-              }
-            }
-          }
-        } ~
-        path(Segment) { filename: String =>
-          /*
-           * get local
-           */
-          get {
-            if (!local) reject  
-            else getFromFile(s"$s3BucketName/$storyId/$filename")
-          } ~
-          /*
-           * get S3
-           */          
-          get {
-            if (local) reject
-            else streamFromS3(storyId, filename, _)
-          }           
-        }
-      }
-    }
   }
 
+
+
+  /*
+   * S3-Downstream
+   */
   case class Ok()
 
   def streamFromS3(storyId: String, filename: String, ctx: RequestContext): Unit = {

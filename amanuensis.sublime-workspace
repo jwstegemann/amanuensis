@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"stre",
+				"streamFromS3"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
 				"con",
 				"content"
 			],
@@ -506,27 +514,11 @@
 			[
 				"query",
 				"queryString"
-			],
-			[
-				"Resu",
-				"ResultX"
-			],
-			[
-				"jsno",
-				"jsonFormat2"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "src/main/webapp/app/scripts/directives/misc.js",
-			"settings":
-			{
-				"buffer_size": 8608,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -539,6 +531,10 @@
 				"SBT: Start SBT"
 			],
 			[
+				"kill",
+				"SBT: Kill SBT"
+			],
+			[
 				"sbt:",
 				"SBT: Start SBT"
 			],
@@ -549,10 +545,6 @@
 			[
 				"Snippet: ",
 				"Snippet: <?php if (…) ?> … <?php endif ?>"
-			],
-			[
-				"kill",
-				"SBT: Kill SBT"
 			],
 			[
 				"sb",
@@ -680,9 +672,13 @@
 	},
 	"file_history":
 	[
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/storyService.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/AttachmentService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/AttachmentActor.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/s3cala/S3.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/resources/application.conf",
+		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/AttachmentService.scala",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
+		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/services/storyService.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StoryHttpService.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/AccessActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/StoryActor.scala",
@@ -691,9 +687,7 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/StringUtils.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Converters.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/util/Failable.scala",
-		"/home/tiberius/scala/projects/amanuensis/src/main/scala/s3cala/S3.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/story.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/misc.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/domain/Story.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/QueryActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/api/StaticHttpService.scala",
@@ -701,7 +695,6 @@
 		"/home/tiberius/scala/projects/amanuensis/src/main/scala/amanuensis/core/FavourActor.scala",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/directives/selectbox.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/index.html",
-		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/controllers/login.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/story.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/scripts/app.js",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/po/de.po",
@@ -800,7 +793,6 @@
 		"/home/tiberius/scala/projects/amanuensis/curl/query/suggest",
 		"/home/tiberius/scala/projects/amanuensis/curl/elasticsearch/suggest",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/node_modules/karma/node_modules/log4js/examples/example-connect-logger.js",
-		"/home/tiberius/scala/projects/amanuensis/src/main/resources/application.conf",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/views/graph.html",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/app/bower_components/ng-tags-input/.bower.json",
 		"/home/tiberius/scala/projects/amanuensis/src/main/webapp/bower.json",
@@ -815,7 +807,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/tiberius/scala/projects/amanuensis/src/main/scala",
@@ -871,6 +863,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"put",
+			"Data",
 			"NotFoundExc",
 			"reject",
 			"appendIn",
@@ -996,9 +990,7 @@
 			"px",
 			"4px",
 			"3px",
-			"px",
-			"5px",
-			"20px"
+			"px"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1052,37 +1044,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/main/webapp/app/scripts/directives/misc.js",
-					"settings":
-					{
-						"buffer_size": 8608,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4819,
-								4819
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1942.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1127,7 +1090,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 294.0
+		"height": 400.0
 	},
 	"output.sbt_error":
 	{
@@ -1143,6 +1106,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"attah",
+				"src/main/scala/amanuensis/api/AttachmentService.scala"
+			],
+			[
+				"login.js",
+				"src/main/webapp/app/scripts/controllers/login.js"
+			],
 			[
 				"misc",
 				"src/main/webapp/app/scripts/directives/misc.js"
@@ -1198,10 +1169,6 @@
 			[
 				"story.html",
 				"src/main/webapp/app/views/story.html"
-			],
-			[
-				"login.js",
-				"src/main/webapp/app/scripts/controllers/login.js"
 			],
 			[
 				"index.html",
@@ -1650,10 +1617,6 @@
 			[
 				"storyact",
 				"src/main/scala/amanuensis/core/StoryActor.scala"
-			],
-			[
-				"onf",
-				"src/main/webapp/app/scripts/directives/onFinishRender.js"
 			]
 		],
 		"width": 0.0
