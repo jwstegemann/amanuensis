@@ -3,10 +3,6 @@
 angular.module('amanuensisApp')
   .controller('LoginDialogCtrl', function ($scope, $rootScope, $http, $location, authService, utilService, gettextCatalog, $window) {
 
-    var welcomeMessage = 'Welcome to Colibri. Please login...';
-    var errorMessage = 'Something is wrong. Please try again...';
-
-
     $scope.reset = function() {
       $scope.welcome = welcomeMessage;
 
@@ -64,7 +60,7 @@ angular.module('amanuensisApp')
       $location.url('/query').replace();                                
       $http(config).
         success(function(data, status, headers, config) {
-          $scope.welcome = "You logged out successfully.";
+          $scope.welcome = gettextCatalog.getString("You logged out successfully.");
           $rootScope.$broadcast('event:auth-loginRequired');          $
         })
     });
@@ -89,6 +85,9 @@ angular.module('amanuensisApp')
       gettextCatalog.currentLanguage = defaultLanguage.substr(0,2);
     }
 
+    var welcomeMessage = gettextCatalog.getString('Welcome to Colibri. Please login...');
+    var errorMessage = gettextCatalog.getString('Something is wrong. Please try again...');
+    
     $scope.reset();
 
     // force login when loaded and not developing locally

@@ -69,18 +69,16 @@ msgid "My @-notifications"
 msgstr "Meine @-Benachrichtigungen"
 
 #: app/scripts/controllers/query.js
-#, fuzzy
 msgid "My Starred Stories"
 msgstr "Meine Favoriten"
 
 #: app/views/query.html app/scripts/controllers/query.js
 msgid "My ToDos"
-msgstr "Meine ToDos"
+msgstr "Meine Wiedervorlage"
 
 #: app/index.html
-#, fuzzy
 msgid "My Workplace"
-msgstr "Mein Arbeitsplatz:"
+msgstr "Mein Arbeitsplatz"
 
 #: app/views/query.html
 msgid "My Workplace:"
@@ -100,7 +98,7 @@ msgstr "Meine Favoriten"
 
 #: app/views/query.html
 msgid "Others latest work"
-msgstr "Others latest work"
+msgstr "Letzte Arbeiten Anderer Nutzer"
 
 #: app/views/story.html
 msgid "Please choose an icon..."
@@ -146,7 +144,7 @@ msgstr "Colibri durchsuchen"
 msgid "Share with somebody else..."
 msgstr "Mit Anderen teilen..."
 
-#: app/scripts/controllers/userSettings.js
+#: app/scripts/controllers/login.js app/scripts/controllers/userSettings.js
 msgid "Something is wrong. Please try again..."
 msgstr "Etwas ist falsch. Bite versuchen Sie es erneut."
 
@@ -174,11 +172,15 @@ msgstr "Leider können Sie keine ungesicherte Story markieren."
 msgid "Unfortunately you cannot unstar an unsaved story."
 msgstr "Dies ist für eine nicht gesicherte Story leider unmöglich."
 
+#: app/scripts/controllers/login.js
+msgid "Welcome to Colibri. Please login..."
+msgstr "Willkommen bei Colibri..."
+
 #: app/views/query.html
 msgid "Welcome to Colibri..."
 msgstr "Willkommen bei Colibri..."
 
-#: app/index.html
+#: app/views/query.html app/index.html
 msgid "What are you looking for?"
 msgstr "Wonach suchen Sie?"
 
@@ -210,13 +212,17 @@ msgstr "Sie haben Ihre Markierung entfernt von"
 msgid "You just starred"
 msgstr "Sie haben markiert: "
 
+#: app/scripts/controllers/login.js
+msgid "You logged out successfully."
+msgstr "Sie haben sich erfolgreich abgemeldet."
+
 #: app/views/story.html
 msgid "You made some changes to this Story<br>Do you really want to abandon the unsaved work?"
 msgstr "Sie haben Änderungen vorgenommen<br>Möchten Sie diese verwerfen?"
 
 #: app/index.html
 msgid "Your Login"
-msgstr "Ihre Benutzername"
+msgstr "Ihr Benutzername"
 
 #: app/index.html
 msgid "Your Password"
@@ -447,7 +453,6 @@ msgid "not yet"
 msgstr "noch nicht"
 
 #: app/views/findpaths.html
-#, fuzzy
 msgid "page&nbsp;{{page+1}}"
 msgstr "Seite&nbsp;{{page+1}}&nbsp;von&nbsp;{{pages}}"
 
@@ -457,15 +462,15 @@ msgstr "Seite&nbsp;{{page+1}}&nbsp;von&nbsp;{{pages}}"
 
 #: app/views/story.html
 msgid "please enter a name"
-msgstr ""
+msgstr "Bitte geben Sie einen Namen ein"
 
 #: app/views/findpaths.html
 msgid "previous"
-msgstr ""
+msgstr "vorherige"
 
 #: app/scripts/controllers/story.js
 msgid "read"
-msgstr ""
+msgstr "lesen"
 
 #: app/scripts/controllers/story.js
 msgid "read & write"
@@ -560,9 +565,8 @@ msgid "sort by creation"
 msgstr "nach Anlage sortieren"
 
 #: app/views/story.html
-#, fuzzy
 msgid "sort by modification"
-msgstr "Meine @-Benachrichtigungen"
+msgstr "nach Änderungsdatum sortieren"
 
 #: app/index.html
 msgid "star this Story"

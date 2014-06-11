@@ -140,6 +140,7 @@ msgstr ""
 msgid "Share with somebody else..."
 msgstr ""
 
+#: app/scripts/controllers/login.js
 #: app/scripts/controllers/userSettings.js
 msgid "Something is wrong. Please try again..."
 msgstr ""
@@ -168,10 +169,15 @@ msgstr ""
 msgid "Unfortunately you cannot unstar an unsaved story."
 msgstr ""
 
+#: app/scripts/controllers/login.js
+msgid "Welcome to Colibri. Please login..."
+msgstr ""
+
 #: app/views/query.html
 msgid "Welcome to Colibri..."
 msgstr ""
 
+#: app/views/query.html
 #: app/index.html
 msgid "What are you looking for?"
 msgstr ""
@@ -202,6 +208,10 @@ msgstr ""
 
 #: app/scripts/controllers/story.js
 msgid "You just starred"
+msgstr ""
+
+#: app/scripts/controllers/login.js
+msgid "You logged out successfully."
 msgstr ""
 
 #: app/views/story.html
