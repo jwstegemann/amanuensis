@@ -200,7 +200,7 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
   def update(story: Story): Future[Unit] = {
     //ToDo: check, if id is valid
     val id = story.id.get
-    val myUrl =  s"$indexUrl/$id"
+    val myUrl =  s"$indexUrl/$id/_update"
 
     val updateObject = JsObject(
       ("doc", story.toJson)
