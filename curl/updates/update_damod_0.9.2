@@ -1,5 +1,10 @@
 #! /bin/bash
 
+if [ $# -lt 2 ]
+  then
+    echo "update_damod <neo4j-url> <elasticsearch-url>";
+    exit
+fi
 
 #
 # update stories in neo4j
