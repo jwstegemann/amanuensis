@@ -79,7 +79,7 @@ object StoryActor {
   val removeStoryQueryString = """
     MATCH (s:Story {id: {id}}), (u:User {login: {login}})
     WHERE (s)<-[:canWrite|:canGrant*1..5]-(u)
-    WITH s.id as id, s.modified as modified s
+    WITH s.id as id, s.modified as modified, s
     OPTIONAL MATCH s-[r]-() 
     DELETE r,s
     RETURN id, modified

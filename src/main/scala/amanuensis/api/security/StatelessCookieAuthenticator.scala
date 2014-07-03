@@ -62,22 +62,18 @@ class StatelessCookieAuthenticator(userActor: ActorSelection)(implicit val ec: E
               ((userActor ? GetUserContext(username)).mapTo[UserContext]).map { anything: UserContext =>
                 Right(anything)
               }.recover { 
-                case x => println(s"###!### invalid token $x")
-                  Left(AuthenticationFailedRejection(CredentialsMissing, Nil)) // not logged in (no cache entry)                
+                  case _ => Left(AuthenticationFailedRejection(CredentialsMissing, Nil)) //exception in UserActor
               }
             }
             else {
-               println("###!### invalid token")
                invalid // invalid token
             } 
           }    
                
-          case None => println("###!### no cookie")
-            invalid // no cookie
+          case None => invalid // no cookie
         }
       }
-      case None => println("###!### no host")
-        invalid // no host
+      case None => invalid // no host
     }
   }
 }
