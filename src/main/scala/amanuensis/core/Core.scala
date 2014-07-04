@@ -47,6 +47,12 @@ trait CoreActors {
   val graphActorInstance = system.actorOf(Props[GraphActor], "graph")
   val accessActorInstance = system.actorOf(Props[AccessActor], "access")
   val favourActorInstance = system.actorOf(Props[FavourActor], "favour")  
-  val attachmentActorInstance = system.actorOf(Props[AttachmentActor], "attachment")    
+  val attachmentActorInstance = system.actorOf(Props[AttachmentActor], "attachment")
+
+  if (scala.util.Properties.envOrElse("AMANUENSIS_REBUILD_INDEX", "false").toBoolean) {
+    val rebuildIndexActorInstance = system.actorOf(Props[RebuildIndexActor], "rebuildIndex")
+  }
+
+
 }
 
