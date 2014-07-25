@@ -26,6 +26,7 @@ object RebuildIndexActor {
   /*
    * query-string for neo4j
    */
+   //FIXME: always the same amount of tags and canReads...
   val listStoriesQueryString = """
     MATCH (s:Story)
     OPTIONAL MATCH (s)-[:is]->(t:Tag)
