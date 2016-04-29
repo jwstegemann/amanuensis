@@ -1,23 +1,40 @@
 #! /bin/bash
 
+echo Deleting old indices
 curl -XDELETE "$1/stories"
+echo .
 curl -XDELETE "$1/slots"
-curl -XDELETE "$1/groups"
+echo .
 curl -XDELETE "$1/users"
+echo .
 
-curl -XPUT "$1/stories"
-curl -XPUT "$1/slots"
+echo Set Stories
+curl -XPUT "$1/stories" -d'
+{
+        "number_of_shards" :   1,
+        "number_of_replicas" : 0
+}'
+echo .
 
+echo Set Slots
+curl -XPUT "$1/slots" -d'
+{
+        "number_of_shards" :   1,
+        "number_of_replicas" : 0
+}'
+echo .
+
+echo Create Stories
 curl -XPUT "$1/stories/story/_mapping" -d'
 {
   "story": {
     "properties": {
-      "id": {          
+      "id": {
         "type": "string",
         "store": "no",
         "index": "no"
-      },        
-      "title": {          
+      },
+      "title": {
         "type": "string",
         "store": "no",
         "analyzer": "german",
@@ -38,7 +55,7 @@ curl -XPUT "$1/stories/story/_mapping" -d'
         "type": "string",
         "store": "no",
         "index": "no"
-      },      
+      },
       "modified": {
         "type": "date",
         "format": "date_time",
@@ -60,13 +77,13 @@ curl -XPUT "$1/stories/story/_mapping" -d'
         "type": "string",
         "store": "no",
         "index": "not_analyzed"
-      },    
-      "tags" : { 
+      },
+      "tags" : {
         "type": "multi_field",
         "fields": {
             "tags": {
-                "type": "string", 
-                "analyzer" : "keyword" 
+                "type": "string",
+                "analyzer" : "keyword"
             },
             "suggest": {
                 "type": "completion",
@@ -77,14 +94,15 @@ curl -XPUT "$1/stories/story/_mapping" -d'
         }
       },
       "canRead": {
-          "type": "string", 
-          "index": "not_analyzed"          
+          "type": "string",
+          "index": "not_analyzed"
       }
     }
   }
 }'
+echo .
 
-
+echo Create Slots
 curl -XPUT "$1/slots/slot/_mapping" -d'
 {
   "slot": {
@@ -98,20 +116,32 @@ curl -XPUT "$1/slots/slot/_mapping" -d'
     }
   }
 }'
+echo .
 
+echo Dummy-Story
 curl -XPOST "$1/stories/story/dummyxyz" -d'
 {
     "id": "dummyxyz",
     "tags": [""]
 }'
+echo .
 
+echo Dummy-Slot
 curl -XPOST "$1/slots/slot/dummyabcde" -d'
 {
     "name": ""
 }'
+echo .
 
-curl -XPUT "$1/users"
+echo Set ID
+curl -XPUT "$1/users" -d'
+{
+        "number_of_shards" :   1,
+        "number_of_replicas" : 0
+}'
+echo .
 
+echo Create Users
 curl -XPUT "$1/users/user/_mapping" -d'
 {
   "user": {
@@ -125,17 +155,12 @@ curl -XPUT "$1/users/user/_mapping" -d'
     }
   }
 }'
+echo .
 
-curl -XPOST "$1/users/user/dummyfghi" -d'
+echo Create Groups
+curl -XPUT "$1/users/group/_mapping" -d'
 {
-    "login": ""
-}'
-
-curl -XPUT "$1/groups"
-
-curl -XPUT "$1/groups/group/_mapping" -d'
-{
-  "user": {
+  "group": {
     "properties": {
         "login": {
             "type": "completion",
@@ -146,8 +171,18 @@ curl -XPUT "$1/groups/group/_mapping" -d'
     }
   }
 }'
+echo .
 
-curl -XPOST "$1/groups/group/dummyzuio" -d'
+echo Dummy-User
+curl -XPOST "$1/users/user/dummyfghi" -d'
 {
-    "login": ""
+    "login": "_"
 }'
+echo .
+
+echo Dummy-Group
+curl -XPOST "$1/users/group/dummyzuio" -d'
+{
+    "login": "_"
+}'
+echo .
