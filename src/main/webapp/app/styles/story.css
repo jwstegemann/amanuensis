@@ -56,13 +56,13 @@ input.story-title {
 }
 
 div.story-icon {
-  width: 4em;
+  
   height: 5.5em;
   margin: 0;
   float: left;
   text-align: center;
   vertical-align: middle;
-  margin-right: 1.250em;
+  margin-right: 1em;
 }
  
 
@@ -263,6 +263,10 @@ div.slot-list-title {
     box-sizing: border-box;    
 }
 
+div.slot-list-title > i {
+  vertical-align: -webkit-baseline-middle;
+}
+
 input.slot-filter {
   outline: none;
   font-family: 'Lato', Arial, sans-serif;
@@ -274,6 +278,7 @@ input.slot-filter {
   border: none;
   margin: 0;
   padding: 0;
+  vertical-align: middle;
 }
 
 input.slot-filter::-webkit-input-placeholder {
@@ -343,12 +348,12 @@ div.story-list-title {
 }
 
 div.story-list-title i {
-  vertical-align: baseline;
+  vertical-align: middle;
 }
 
 input.story-filter {
   outline: none;
-  width: 12em;
+  width: 80%;
   font-family: 'Lato', Arial, sans-serif;
   color: #DABDB0;
   font-size: 1.5em;
@@ -357,6 +362,7 @@ input.story-filter {
   border: none;
   margin: 0;
   padding: 0;
+  vertical-align: middle;
 }
 
 input.story-filter::-webkit-input-placeholder {
@@ -395,6 +401,13 @@ li.story-info > span.title {
   font-size: 1.25em;
 }
 
+li.story-info > span.meta {
+  display: block;
+  float: right;
+  font-size: 0.7em;
+  margin-top: 0.5em;
+}
+
 li.story-info:hover {
   background-color: rgba(75,75,75,0.25);
 }
@@ -402,6 +415,7 @@ li.story-info:hover {
 li.story-info > .delete-action {
   float: right;
   visibility: hidden;
+  margin-top: 0.3em;
 }
 
 li.story-info:hover > .delete-action {
@@ -531,4 +545,66 @@ div.share-list .mCSB_scrollTools .mCSB_draggerContainer{
 
 #share-modal div.confirmation {
   margin-left: 1em;
+}
+
+.icon-list {
+  padding: 0.313em;
+  padding-bottom: 0;
+  max-height: 14em;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.icon-list > i {
+  margin: 0.627em;
+  cursor: pointer;
+}
+
+.inactive {
+  cursor: default;
+}
+
+/*
+ * sort stories
+ */
+.story-sort {
+  margin-top: 0.313em;
+  position: absolute;
+  padding: 0.313em 0;
+  background-color: #566473;
+  max-width: 90%;
+  z-index: 10000;
+  border-radius: 3px;
+  display: none;    
+}
+
+.story-sort-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  color: #fff;
+}
+
+.story-sort-item {
+  padding: 0.188em 1em;
+  font-family: 'Lato', Arial, sans-serif;
+  font-size: 1.0em;
+  line-height: 1.4em;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.story-sort-item:hover {
+  color: #fff;
+  background: rgba(0,0,0,0.1);
+}
+
+.reverse-sort {
+  padding-top: 0.2em;
+  float: right;
+  display: inline;
+  vertical-align: middle;
 }

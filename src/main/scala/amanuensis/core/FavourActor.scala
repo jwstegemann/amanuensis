@@ -38,7 +38,7 @@ object FavourActor {
     MATCH (s:Story {id: {id}}), (u:User {login: {login}})
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     MERGE (s)<-[:stars]-(u)
-    RETURN s.id
+    RETURN s.id, s.modified
   """
   
   val unstarQueryString = """
@@ -46,7 +46,7 @@ object FavourActor {
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     MATCH (s)<-[l:stars]-(u)
     DELETE l
-    RETURN s.id
+    RETURN s.id, s.modified
   """
 
   val dueQueryString = """
@@ -54,7 +54,7 @@ object FavourActor {
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     MERGE (s)<-[d:due]-(u)
     SET d.date = {date}
-    RETURN s.id
+    RETURN s.id, s.modified
   """
   
   val undueQueryString = """
@@ -62,7 +62,7 @@ object FavourActor {
     WHERE (s)<-[:canRead|:canWrite|:canGrant*1..5]-(u)
     MATCH (s)<-[l:due]-(u)
     DELETE l
-    RETURN s.id
+    RETURN s.id, s.modified
   """
 }
 

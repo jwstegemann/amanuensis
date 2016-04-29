@@ -1,0 +1,6 @@
+#! /bin/bash
+
+curl -XDELETE "$1/stories"
+curl -XDELETE "$1/slots"
+curl -XDELETE "$1/groups"
+curl -XDELETE "$1/users"

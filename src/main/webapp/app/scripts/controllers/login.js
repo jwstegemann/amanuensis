@@ -1,11 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('LoginDialogCtrl', function ($scope, $rootScope, $http, $location, authService, utilService) {
-
-    var welcomeMessage = 'Welcome to Colibri. Please login...';
-    var errorMessage = 'Something is wrong. Please try again...';
-
+  .controller('LoginDialogCtrl', function ($scope, $rootScope, $http, $location, authService, utilService, gettextCatalog, $window) {
 
     $scope.reset = function() {
       $scope.welcome = welcomeMessage;
@@ -29,7 +25,8 @@ angular.module('amanuensisApp')
 
       $http(config).
         success(function(data, status, headers, config) {
-          $rootScope.userContext = data;
+          $scope.setUserContext(data);
+
           $('#login-modal-content').removeClass('error');
           $scope.welcome = welcomeMessage;
           
@@ -59,22 +56,45 @@ angular.module('amanuensisApp')
     });
 
     $scope.$on('logout', function() {
-      var config = {method: 'GET', url: '/user/logout'};   
+      var config = {method: 'GET', url: '/user/logout'};
+      $location.url('/query').replace();                                
       $http(config).
         success(function(data, status, headers, config) {
-          $scope.welcome = "You logged out successfully.";
+          $scope.welcome = gettextCatalog.getString("You logged out successfully.");
           $rootScope.$broadcast('event:auth-loginRequired');          $
         })
     });
 
 
+    $scope.setUserContext = function(data) {
+      $rootScope.userContext = data;
+      
+      //set language
+      if (angular.isDefined(data.lang)) {
+        gettextCatalog.currentLanguage = data.lang;            
+      }
+      else {
+        gettextCatalog.currentLanguage = 'en';            
+      }
+    }
+
+    var defaultLanguage = $window.navigator.language;
+
+    if (angular.isDefined(defaultLanguage) && defaultLanguage.length > 1) {
+      console.log("detected browser language: " + defaultLanguage);
+      gettextCatalog.currentLanguage = defaultLanguage.substr(0,2);
+    }
+
+    var welcomeMessage = gettextCatalog.getString('Welcome to Colibri. Please login...');
+    var errorMessage = gettextCatalog.getString('Something is wrong. Please try again...');
+    
     $scope.reset();
 
     // force login when loaded and not developing locally
       var config = {method: 'GET', url: '/user/info', ignoreAuthModule: true};   
       $http(config).
         success(function(data, status, headers, config) {
-          $rootScope.userContext = data;
+          $scope.setUserContext(data);
         }).
         error(function(data, status, headers, config) {
           $rootScope.$broadcast('event:auth-loginRequired');

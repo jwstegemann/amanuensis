@@ -68,7 +68,7 @@ angular.module('amanuensisApp')
             });
  
             $scope.$on('markdown_link', function() {
-                addMarkdown('[',']()');
+                addMarkdown('[Link](',')');
             });
 
             $scope.$on('markdown_header', function() {

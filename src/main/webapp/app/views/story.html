@@ -1,75 +1,103 @@
 <!--                              -->
-<!-- # The inSlots  and -Stories  --> 
+<!-- # The inSlots  and -Stories  -->
 <!-- #                            -->
 
 <div id="left-container" class="container left-container" ng-class="{'show-slots': inSlots, 'show-stories': inStories}">
 	<!-- inbound Story-List	-->
-  <div id="stories-left" class="container stories stories-left shadow-right vertical-scrollable" ng-controller="SlotCtrl" 
+  <div id="stories-left" class="container stories stories-left shadow-right vertical-scrollable" ng-controller="InboundSlotCtrl"
     ng-init="inbound=true" hm-swipe-left="hideInStories()">
 		<div class="story-list-title">
-      <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
+      <i class="fa fa-lg on-slot action" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}" ng-click="changeStorySort('#story-sort-left', $event)"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
+      <i class="fa fa-sort fa-lg action reverse-sort" ng-click="reverseSort()"></i>
+      <div id="story-sort-left" class="story-sort">
+        <ul class="story-sort-list">
+          <li class="story-sort-item" ng-click="setStorySort('title','#story-sort-left')"><i class="fa fa-font fa-fw"></i>&nbsp;<span translate>sort by alphabet</span></li>
+          <li class="story-sort-item" ng-click="setStorySort('created','#story-sort-left')"><i class="fa fa-file-text-o fa-fw"></i>&nbsp;<span translate>sort by creation</span></li>
+          <li class="story-sort-item" ng-click="setStorySort('modified','#story-sort-left')"><i class="fa fa-pencil fa-fw"></i>&nbsp;<span translate>sort by modification</span></li>
+        </ul>
+      </div>
     </div>
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder"
           ng-click="openStory(storyInfo.id, slotName, false)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>
           <p story-preview markdown-source="storyInfo.content"></p>
         </li>
       </div>
       <div ng-switch-when="single">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'"
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder"
           ng-click="openStory(storyInfo.id, slotName, false)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
         </li>
       </div>
       <div ng-switch-when="all">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder"
           ng-click="openStory(storyInfo.id, slotName, false)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>        
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>
         </li>
       </div>
-		</ul>  	
+		</ul>
   </div>
 	<!-- inbound Slot-List	-->
   <div id="slots-left" class="container slots slots-left shadow-right vertical-scrollable" hm-swipe-left="hideInSlots()">
     <div class="slot-list-title">
-      <i class="fa on-slot fa-lg" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i>&nbsp;<input class="slot-filter" type="text" placeholder="In" ng-model="slotFilterLeft" tabindex="-1"></input>
+      <i class="fa on-slot fa-lg" ng-class="{'fa-link':!slotFilterLeft, 'fa-filter':slotFilterLeft}"></i><input class="slot-filter" type="text" placeholder="In" ng-model="slotFilterLeft" tabindex="-1"></input>
     </div>
     <ul class="slot-list">
-      <li class="slot-name" ng-repeat="slot in context.inSlots | filter:slotFilterLeft | orderBy:'name'" 
+      <li class="slot-name" ng-repeat="slot in context.inSlots | filter:slotFilterLeft | orderBy:'name'"
         ng-click="selectSlot(slot.name, true)">
       	<i class="fa fa-caret-left on-slot"></i>{{slot.name}}
       </li>
-    </ul>  	
+    </ul>
   </div>
 </div>
-     
+
 
 <!-- #                            -->
-<!-- # The Story itself           --> 
+<!-- # The Story itself           -->
 <!-- #                            -->
 
-<div id="story-container" class="container story" 
-  ng-class="{'shifted-right': inStories, 'shifted-left': outStories}" hm-swipe-right="showInSlots()" hm-swipe-left="showOutSlots()"> 
+<div id="story-container" class="container story"
+  ng-class="{'shifted-right': inStories, 'shifted-left': outStories}" hm-swipe-right="showInSlots()" hm-swipe-left="showOutSlots()">
 
     <ng-form name="storyForm">
       <div class="inner vertical-scrollable thick-scroll">
 				<div class="story-header">
-					<div class="story-icon"><i class="fa fa-bookmark fa-5x"></i></div>
+					<div class="story-icon" ng-click="chooseIcon()" ng-class="{'action': editMode}">
+            <i ng-class="context.story.icon" class="fa fw fa-5x"></i>
+          </div>
           <input id="story-title-input" name="title" class="story-title" type="text" ng-model="context.story.title"
-            placeholder="A Story..." ng-disabled="!editMode"></input>
+            placeholder="{{'A Story...' | translate}}" ng-disabled="!editMode"></input>
 				  <h1>
             <div class="meta">
-              <span><i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{context.story.created.substr(0,10)}} by {{context.story.createdBy}}</span>
+              <span><i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{context.story.created.substr(0,10)}} <span translate>by</span> {{context.story.createdBy}}</span>
               <span class="not-in-responsive">|&nbsp;</span><br class="only-responsive" />
-              <span><i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}} by {{context.story.modifiedBy}}</span>
+              <span><i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}} <span translate>by</span> {{context.story.modifiedBy}}</span>
               <span class="not-in-responsive">|&nbsp;</span><br class="only-responsive" />
-              <quick-datepicker ng-model="context.story.due" date-format="yyyy-MM-dd" placeholder="not set" 
-                  on-change="updateDue()"hover-text="set date for ToDo" icon-class="fa fa-bell fa-fw" disable-timepicker="true" 
-                  default-time="12:00:00">
+              <quick-datepicker ng-model="context.story.due" date-format="yyyy-MM-dd" placeholder="{{'not set' | translate}}"
+                  on-change="updateDue()" hover-text="{{'set date for ToDo' | translate}}" icon-class="fa fa-bell fa-fw"
+                  disable-timepicker="true" default-time="12:00:00">
                 </quick-datepicker>
             </div>
           </h1>
@@ -80,14 +108,14 @@
             </tags-input>
         </div>
         <div id="story-content" class="content" margin="10">
-          <markdown-editor textarea-name="content" ng-show="editMode" textarea-id="story-content-editor" 
-            textarea-class="story-content" ng-model="context.story.content" placeholder="... that still has to be written.">
+          <markdown-editor textarea-name="content" ng-show="editMode" textarea-id="story-content-editor"
+            textarea-class="story-content" ng-model="context.story.content" placeholder="{{'... that still has to be written.' | translate}}">
           </markdown-editor>
           <div id="story-view" ng-hide="editMode" class="story-view" markdown>
             &nbsp;
           </div>
           <input type="file" id="attachment" style="display:none"></input>
-        </div> 
+        </div>
       </div>
     </ng-form>
 
@@ -95,60 +123,87 @@
 
 
 <!-- #                            -->
-<!-- # The outSlots  and -Stories --> 
+<!-- # The outSlots  and -Stories -->
 <!-- #                            -->
 
 <div id="right-container" class="container right-container" ng-class="{'show-slots': outSlots, 'show-stories': outStories}">
 	<!-- outbound Story-List	-->
-  <div id="stories-right" class="container stories stories-right shadow-left vertical-scrollable" ng-controller="SlotCtrl"  
+  <div id="stories-right" class="container stories stories-right shadow-left vertical-scrollable" ng-controller="OutboundSlotCtrl"
     ng-init="inbound=false" hm-swipe-right="hideOutStories()">
 		<div class="story-list-title">
-      <i class="fa fa-lg on-slot" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}"></i>
+      <i class="fa fa-lg on-slot action" ng-class="{'fa-bars':!storyFilter.title, 'fa-filter':storyFilter.title}" ng-click="changeStorySort('#story-sort-right', $event)"></i>
       <input class="story-filter" type="text" placeholder="{{slotName}}" ng-model="storyFilter.title" tabindex="-1"></input>
+      <i class="fa fa-sort fa-lg action reverse-sort" ng-click="reverseSort()"></i>
+      <div id="story-sort-right" class="story-sort">
+        <ul class="story-sort-list">
+          <li class="story-sort-item" ng-click="setStorySort('title','#story-sort-right')"><i class="fa fa-font fa-fw"></i>&nbsp;<span translate>sort by alphabet</span></li>
+          <li class="story-sort-item" ng-click="setStorySort('created','#story-sort-right')"><i class="fa fa-file-text-o fa-fw"></i>&nbsp;
+          <span translate>sort by creation</span></li>
+          <li class="story-sort-item" ng-click="setStorySort('modified','#story-sort-right')"><i class="fa fa-pencil fa-fw"></i>&nbsp;<span translate>sort by modification</span></li>
+        </ul>
+      </div>
     </div>
 		<ul class="story-list" ng-switch on="storyListViewMode">
       <div ng-switch-when="few">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder"
           ng-click="openStory(storyInfo.id, slotName, true)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>
           <p story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="single">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder"
           ng-click="openStory(storyInfo.id, slotName, true)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>
           <p class="single-story" story-preview markdown-source="storyInfo.content"></p>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
         </li>
       </div>
       <div ng-switch-when="all">
-        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:'created'" 
+        <li class="story-info" ng-repeat="storyInfo in stories | filter:storyFilter | orderBy:sortOrder:reverseOrder"
           ng-click="openStory(storyInfo.id, slotName, true)">
-          <span class="title"><i class="fa fa-book on-slot"></i>{{storyInfo.title}}</span>
+          <span class="title"><i ng-class="storyInfo.icon" class="fa on-slot"></i>{{storyInfo.title}}</span>
           <i class="fa fa-trash-o fa-lg on-button delete-action" ng-click="remove(storyInfo,$event)"></i>
+          <span class="meta" ng-show="sortOrder === 'created'">
+            <i class="fa fa-file-text-o fa-fw"></i>&nbsp;{{storyInfo.created.substr(0,10)}}
+          </span>
+          <span class="meta" ng-show="sortOrder === 'modified'">
+            <i class="fa fa-pencil fa-fw"></i>&nbsp;{{context.story.modified.substr(0,10)}}
+          </span>
         </li>
       </div>
-		</ul>  	
+		</ul>
   </div>
 	<!-- outbound Slot-List	-->
   <div id="slots-right" class="container slots slots-right shadow-left vertical-scrollable" hm-swipe-right="hideOutSlots()">
     <div class="slot-list-title">
-      <i class="fa fa-lg on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i>&nbsp;<input class="slot-filter" type="text" placeholder="Out" ng-model="slotFilterRight" tabindex="-1"></input>
+      <i class="fa fa-lg on-slot" ng-class="{'fa-link':!slotFilterRight, 'fa-filter':slotFilterRight}"></i><input class="slot-filter" type="text" placeholder="Out" ng-model="slotFilterRight" tabindex="-1"></input>
     </div>
     <ul class="slot-list">
-      <li class="slot-name" ng-repeat="slot in context.outSlots | filter:slotFilterRight | orderBy:'name'" 
+      <li class="slot-name" ng-repeat="slot in context.outSlots | filter:slotFilterRight | orderBy:'name'"
         ng-click="selectSlot(slot.name, false)">
       	<i class="fa fa-caret-right on-slot"></i>{{slot.name}}
       </li>
-    </ul> 
+    </ul>
   </div>
 </div>
 
 
 <!-- #                         -->
-<!-- # Modals                  --> 
+<!-- # Modals                  -->
 <!-- #                         -->
 
 <!-- Modal to create a new Slot -->
@@ -157,10 +212,10 @@
     <h3>{{title}}&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
     </h3>
     <div class="one-line">
-    	<typeahead style="height: 37px" ng-model="newSlotName" on-enter="done()" on-escape="cancel()" input-class="start-focus" 
-        placeholder="name of new slot" source="suggestSlots($query)">
+    	<typeahead style="height: 37px" ng-model="newSlotName" on-enter="done()" on-escape="cancel()" input-class="start-focus"
+        placeholder="{{'name of the slot' | translate}}" source="suggestSlots($query)">
       </typeahead>
-      <div class="confirmation"><i class="fa fa-check fa-2x on-button action opacity-hover" ng-click="done()"></i></div>  
+      <div class="confirmation"><i class="fa fa-check fa-2x on-button action opacity-hover" ng-click="done()"></i></div>
     </div>
   </div>
 </div>
@@ -169,40 +224,41 @@
 <!-- Modal to confirm deletion of a Story -->
 <div class="md-modal md-effect-3" id="confirm-delete-modal">
   <div class="md-content">
-    <h3>Are you sure?&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelConfirmDelete()"></i></h3>
-    <div class="confirmation-message">Do you really want to delete the Story<br>'{{context.story.title}}'?</div>
+    <h3><span translate>Are you sure?</span>&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelConfirmDelete()"></i>
+    </h3>
+    <div class="confirmation-message" translate>Do you really want to delete the Story<br>'{{context.story.title}}'?</div>
     <div class="confirmation-icon">
       <i class="fa fa-check fa-2x opacity-hover" ng-click="deleteStoryConfirmed()"></i>
     </div>
   </div>
 </div>
 
+<!-- Modal to choose a story-icon -->
+<div class="md-modal md-effect-3" id="choose-icon-modal">
+  <div class="md-content">
+    <h3><span translate>Please choose an icon...</span>&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelChooseIcon()"></i></h3>
+    <div class="icon-list">
+      <i ng-repeat="icon in icons" ng-click="selectIcon(icon)" ng-class="icon" class="fa fa-fw fa-lg"></i>
+    </div>
+    <div class="modal-footer"></div>
+  </div>
+</div>
+
 <!-- Modal to confirm leaving a Story -->
 <div class="md-modal md-effect-3" id="confirm-leave-modal">
   <div class="md-content">
-    <h3>Are you sure?&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelConfirmLeave()"></i></h3>
-    <div class="confirmation-message">You made some changes to this Story<br>Do you really want to abandon the unsaved work?</div>
+    <h3><span translate>Are you sure?</span>&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelConfirmLeave()"></i></h3>
+    <div class="confirmation-message" translate>You made some changes to this Story<br>Do you really want to abandon the unsaved work?</div>
     <div class="confirmation-icon">
       <i class="fa fa-check fa-2x opacity-hover" ng-click="leaveStoryConfirmed()"></i>
     </div>
   </div>
 </div>
 
-<!-- Modal to watch a Story for changes -->
-<div class="md-modal md-effect-3" id="watch-modal">
-  <div class="md-content">
-    <h3>You are watching this Story now.&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancelWatch()"></i></h3>
-    <div class="confirmation-icon">
-      <i class="fa fa-check fa-2x opacity-hover" ng-click="cancelWatch()"></i>
-    </div>
-    <div class="confirmation-message">When someone else modifies this story,<br>we will inform you by email to <br><b>dummy@dummy.org</b></div>
-  </div>
-</div>
-
 <!-- Modal to share a Story with other users -->
 <div class="md-modal md-effect-3" id="share-modal" ng-controller="ShareModalCtrl">
   <div class="md-content">
-    <h3>You are sharing this story with...&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
+    <h3><span translate>You are sharing this story with...</span>&nbsp;<i style="float: right" class="fa fa-times action" ng-click="cancel()"></i>
     </h3>
     <div id="share-list" class="share-list vertical-scrollable">
       <table class="shares">
@@ -220,7 +276,7 @@
             {{share.access | userRights}}
           </td>
           <td class="unshare">
-            <i class="fa fa-trash-o" ng-click="unshare(share.login)"></i>            
+            <i class="fa fa-trash-o" ng-click="unshare(share.login)"></i>
           </td>
         </tr>
       </table>
@@ -228,15 +284,16 @@
     <h3>{{title}}</h3>
     <div class="one-line share-new">
       <selectbox class="select-mode" ng-model="mode" options="modes" value-selected="changeMode(value)"></selectbox>
-      <br class="only-responsive" />   
-      <typeahead ng-model="userToShare" input-class="start-focus share-login" 
-        placeholder="please enter a name" source="suggestUsersOrGroups($query)" ng-show="mode === 'user' || mode === 'group'">
+      <br class="only-responsive" />
+      <typeahead ng-model="userToShare" input-class="start-focus share-login"
+        placeholder="{{'please enter a name' | translate}}" source="suggestUsersOrGroups($query)"
+        ng-show="mode === 'user' || mode === 'group'">
       </typeahead>
-      <br class="only-responsive" />   
+      <br class="only-responsive" />
       <div ng-show="mode === 'public'" class="everybody"></div>
-      <br class="only-responsive" />   
-      <selectbox ng-model="rightToShare" options="userRights"></selectbox>  
-      <div class="confirmation"><i class="fa fa-plus fa-lg on-button action opacity-hover" ng-click="share()"></i></div>  
+      <br class="only-responsive" />
+      <selectbox ng-model="rightToShare" options="userRights"></selectbox>
+      <div class="confirmation"><i class="fa fa-plus fa-lg on-button action opacity-hover" ng-click="share()"></i></div>
     </div>
   </div>
 </div>

@@ -6,8 +6,9 @@ import akka.pattern.ask
 import akka.actor.ActorLogging
 import spray.util._
 
-import akka.actor.{ Props, Actor }
+import akka.actor._
 import spray.http._
+import spray.can.Http
 import spray.http.StatusCodes._
 import spray.http.MediaTypes._
 import spray.routing._
@@ -16,25 +17,71 @@ import java.io.{ FileOutputStream }
 
 import amanuensis.core.neo4j.Neo4JId
 
-import com.roundeights.s3cala._
-
-import java.io.File
 import spray.routing.directives.ContentTypeResolver
 import scala.concurrent.Future
+
+import spray.http.HttpHeaders._
+import spray.http.CacheDirectives._
+
+import amanuensis.core.AttachmentActor._
+
+import akka.util.Timeout
+import scala.concurrent.duration.DurationInt
+import language.postfixOps
+
+import com.amazonaws.auth.{AWSCredentials, BasicAWSCredentials}
+import com.amazonaws.services.s3.model.S3Object
+import com.amazonaws.services.s3.AmazonS3Client
+import com.amazonaws.services.s3.model.ObjectMetadata
+
+import java.io.{File, ByteArrayInputStream, IOException, InputStream}
+
+import amanuensis.api.exceptions._
+
+import amanuensis.domain.Message
+import amanuensis.domain.Severities._
+
+import akka.actor.ActorRefFactory
+import scala.concurrent.duration._
+
+import java.util.Arrays
 
 
 // this trait defines our service behavior independently from the service actor
 trait AttachmentHttpService extends HttpService { self : ActorLogging =>
 
+  private implicit val timeout = new Timeout(5 seconds)
   private implicit def executionContext = actorRefFactory.dispatcher
-  
+
+  /*
+   * config
+   */
+
   val s3Key = scala.util.Properties.envOrElse("AWS_S3_KEY", "none")
   val s3Secret = scala.util.Properties.envOrElse("AWS_S3_SECRET", "none")
 
   val s3BucketName = scala.util.Properties.envOrElse("AWS_S3_BUCKET", "none")
 
-  val s3 = S3(s3Key,s3Secret)
-  val bucket = s3.bucket(s3BucketName)
+  val local = (s3Key == "local")
+
+  val s3ChunkSize = 5000
+  val s3ChunkThreshold = 2500
+
+  val credentials = if (!local) new BasicAWSCredentials(s3Key, s3Secret) else null
+  val s3Client = if (!local) new AmazonS3Client(credentials) else null
+
+
+  def getLocalRoute(storyId: String, filename: String) = {
+    get {
+      getFromFile(s"$s3BucketName/$storyId/$filename")
+    }
+  }
+
+  def getS3Route(storyId: String, filename: String) = {
+    get {
+      streamFromS3(storyId, filename, _)
+    }
+  }
 
 
   val attachmentRoute = {
@@ -47,60 +94,143 @@ trait AttachmentHttpService extends HttpService { self : ActorLogging =>
         pathEnd {
           post {
             entity(as[MultipartFormData]) { formData =>
+              detach() {
+                formData.get("file") match {
 
-              formData.get("file") match {
+                  case Some(bodyPart) => {
 
-                case Some(bodyPart) => {
+                    val filename = bodyPart.filename match {
+                      case Some(name) => name
+                      case None => Neo4JId.generateId()
+                    }
 
-                  val filename = bodyPart.filename match {
-                    case Some(name) => name
-                    case None => Neo4JId.generateId()
+                    val content = bodyPart.entity.data.toByteArray
+
+                    if (local) {
+                      handleUploadLocal(storyId, filename, content)
+                    }
+                    else {
+                      handleUploadS3(storyId, filename, content)
+                    }
+
+                    complete(s"""{"filename": "/attachment/$storyId/$filename"}""")
                   }
-
-                  val file = bodyPart.entity.data.toByteArray
-
-                  val futureUpload = bucket.put(s"$storyId/$filename", file) map (nothing => 
-                    s"""{"filename": "/attachment/$storyId/$filename"}"""
-                  )                
-
-                  complete(futureUpload) 
+                  
+                  case None => complete(BadRequest, "invalid upload, missing file...")
 
                 }
-                
-                case None => complete(BadRequest, "invalid upload, missing file...")
-
               }
-
             }
           }
         } ~
         path(Segment) { filename: String =>
-          detach() {
-            val file = File.createTempFile("S3-",".tmp")            // use Metadata
-            file.deleteOnExit()
-            
-            respondWithLastModifiedHeader(file.lastModified) {
-
-              val result: Future[HttpEntity] = bucket.get(s"$storyId/$filename", file) map (metaData =>
-                if (file.isFile && file.canRead) {
-                    //autoChunk(settings.fileChunkingThresholdSize, settings.fileChunkingChunkSize) {
-                      //ToDo: use MetaData for content-type
-                  HttpEntity(ContentTypeResolver.Default(filename), HttpData(file))
-                    //}
-                
-                } 
-                else {
-                  throw new Exception("Fehler!")
-                }              
-              )
-
-              complete(result) 
-            }
-          }       
+          if (local) getLocalRoute(storyId, filename) else getS3Route(storyId, filename)                  
         }
       }
     }
+  }
 
+  def handleUploadLocal(storyId: String, filename: String, content: Array[Byte]) = {
+/*
+                     * store local
+                     */
+                      //FIXME: filename absichern (kein . oder .. am Anfang!)
+                      val targetFile = new File(s"$s3BucketName/$storyId/$filename")
+
+                      targetFile.getParentFile().mkdirs()
+
+                      if (!targetFile.exists()) {
+                        targetFile.createNewFile()
+                      }
+
+                      val outputStream = new FileOutputStream(targetFile)
+                      outputStream.write(content)
+                      outputStream.close(); 
+
+                          
+  }
+
+  def handleUploadS3(storyId: String, filename: String, content: Array[Byte]) = {
+/*
+                     * store S3
+                     */                    
+                      val metaData = new ObjectMetadata()
+                      metaData.setContentLength(content.length)
+                      s3Client.putObject(s3BucketName, s"$storyId/$filename", new ByteArrayInputStream(content), metaData)
+  }
+
+
+
+  /*
+   * S3-Downstream
+   */
+  case class Ok()
+
+  def streamFromS3(storyId: String, filename: String, ctx: RequestContext): Unit = {
+
+    actorRefFactory.actorOf {
+      //FIXME: create own pool for s3-actors
+      Props {
+        new Actor with ActorLogging {
+
+          //FIXME: check for not found
+          val s3Object = s3Client.getObject(s3BucketName, s"$storyId/$filename")          
+          val inputStream = s3Object.getObjectContent()
+          val metaData = s3Object.getObjectMetadata()
+
+          val buffer = new Array[Byte](s3ChunkSize)
+
+          // we use the successful sending of a chunk as trigger for scheduling the next chunk
+
+          val responseStart = HttpResponse(
+            entity = HttpEntity(ContentTypeResolver.Default(filename),HttpData(fillBuffer())),
+            headers = `Last-Modified`(DateTime(metaData.getLastModified().getTime())) :: Nil
+          )
+          ctx.responder ! ChunkedResponseStart(responseStart).withAck(Ok())
+
+          def receive = {
+            case Ok() =>
+              val msg = fillBuffer()
+
+              //log.debug("********* BYTES READ: " + msg.length)
+
+              if (msg.length > 0) {
+                val nextChunk = MessageChunk(msg)
+                ctx.responder ! nextChunk.withAck(Ok())
+              }
+              else {
+                ctx.responder ! ChunkedMessageEnd
+                context.stop(self)
+              }
+
+            case ev: Http.ConnectionClosed =>
+              log.error("Stopping S3- treaming due to {}", ev)
+              inputStream.abort()
+          }
+
+
+          def fillBuffer() : Array[Byte] = {
+            var start = 0
+            var bytesRead = 0
+
+            do {
+              bytesRead = inputStream.read(buffer,start,buffer.length - start)
+              start += bytesRead
+            } while (bytesRead != -1 && start < s3ChunkThreshold)
+
+            if (start == -1) {
+              Array[Byte]()
+            } 
+            else if (start == buffer.length) {
+              buffer
+            } else {
+              Arrays.copyOfRange(buffer, 0, start)
+            }
+          }
+
+        }
+      }
+    }
   }
 
 }

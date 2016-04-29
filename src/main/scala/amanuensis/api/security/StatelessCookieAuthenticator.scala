@@ -53,18 +53,23 @@ class StatelessCookieAuthenticator(userActor: ActorSelection)(implicit val ec: E
           case Some(token) => {
             val username = token.content.slice(41,token.content.length)
 
-            if (Converters.constantTimeEquals(token.content, StatelessCookieAuth.getSignedToken(username, host))) {
+            val compareToken = StatelessCookieAuth.getSignedToken(username, host)
+
+            println(s"###!### host: $host, username: $username, token: $token compareToken: $compareToken")
+
+            if (Converters.constantTimeEquals(token.content, compareToken)) {
 
               ((userActor ? GetUserContext(username)).mapTo[UserContext]).map { anything: UserContext =>
                 Right(anything)
-              }.recover {
-                case _ => Left(AuthenticationFailedRejection(CredentialsMissing, Nil)) // not logged in (no cache entry)                
+              }.recover { 
+                  case _ => Left(AuthenticationFailedRejection(CredentialsMissing, Nil)) //exception in UserActor
               }
             }
             else {
                invalid // invalid token
             } 
           }    
+               
           case None => invalid // no cookie
         }
       }

@@ -63,13 +63,7 @@ Buildpack: heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-bui
 
 5. Create a User in Neo4J
 
-    match (g:User {login: "public"})
-    create (u:User {
-        login:"<usernam>", 
-        pwd:"1eb1e1d6ad08dcf1a1020ae999d24ee836b30f0987acf3934e18783cc551bfc",
-        name:"<name>",
-        permissions:[]
-    })-[:canGrant]->(g)
+    curl/admin/create_user.sh <neo4j-url> <elasticsearch-url> <login> <name> <language>
 
 
 6. Add User to Index

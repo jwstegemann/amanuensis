@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('amanuensisApp')
-  .controller('QueryCtrl', function ($scope,$routeParams,queryService,$rootScope,graphService,$window,$location) {
+  .controller('QueryCtrl', function ($scope,$routeParams,queryService,$rootScope,graphService,$window,$location,gettextCatalog) {
 
     $rootScope.appState = 128;
     $scope.result = undefined;
@@ -24,16 +24,16 @@ angular.module('amanuensisApp')
         $location.url('query/' + queryString);
       }
       else if (method === queryService.myLatest) {
-        $scope.title = "My latest Activities" + queryString;
+        $scope.title = gettextCatalog.getString("My latest Activities") + queryString;
       }
       else if (method === queryService.othersLatest) {
-        $scope.title = "Latest Activites of other users" + queryString;
+        $scope.title = gettextCatalog.getString("Latest Activites of other users") + queryString;
       }
       else if (method === queryService.toDos) {
-        $scope.title = "My ToDos";
+        $scope.title = gettextCatalog.getString("My ToDos");
       }
       else if (method === queryService.favourites) {
-        $scope.title = "My Starred Stories";
+        $scope.title = gettextCatalog.getString("My Starred Stories");
       }      
 
       // set window title

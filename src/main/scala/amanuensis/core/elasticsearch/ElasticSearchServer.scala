@@ -65,8 +65,10 @@ case class ElasticSearchServer(url: String, credentialsOption: Option[BasicHttpC
   val slotSuggestUrl = s"$url/slots/_suggest"
   val indexUrl = s"$url/stories/story"
   val slotIndexUrl = s"$url/slots/slot"  
-  val userSuggestUrl = s"$url/users/_suggest"
-  val groupSuggestUrl = s"$url/groups/_suggest"
+  val userSuggestUrl = s"$url/users/user/_suggest"
+  val groupSuggestUrl = s"$url/users/group/_suggest"
+  val groupIndexUrl = s"$url/users/group"
+  val userIndexUrl = s"$url/users/user"
 
   // interpret the HttpResponse and throw a Neo4JException if necessary
   val mapToElasticSeachException: HttpResponse => HttpResponse = { response =>
@@ -406,6 +408,16 @@ def handleQuery(queryField: JsField, sortField: JsField, queryRequest: QueryRequ
 
     handleQuery(queryField, sortField, queryRequest, groups, login)
   }
+
+  def indexUser(login: String, isGroup: Boolean) = {
+    val index = if (isGroup) groupIndexUrl else userIndexUrl
+    val myUrl =  s"$index/$login"
+    log.debug("ElasticSearch-Index-User-Request: {}", myUrl)
+    pipelineRaw(Post(myUrl, JsObject(
+      ("login", JsString(login))
+    )))
+  }
+
 
 }
 

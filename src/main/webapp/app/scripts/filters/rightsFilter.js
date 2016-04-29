@@ -1,9 +1,9 @@
-angular.module('amanuensisApp').filter('userRights', function() {
+angular.module('amanuensisApp').filter('userRights', function(gettextCatalog) {
   return function(right) {
     switch (right) {
-      case 'canRead': return 'read';
-      case 'canWrite': return 'read & write';
-      case 'canGrant': return  'read, write & grant';
+      case 'canRead': return gettextCatalog.getString('read');
+      case 'canWrite': return gettextCatalog.getString('read & write');
+      case 'canGrant': return  gettextCatalog.getString('read, write & grant');
     }
   }
 })

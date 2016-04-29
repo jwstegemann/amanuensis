@@ -14,15 +14,16 @@
     <meta name="apple-mobile-web-app-title" content="Colibri">
     <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="/app/images/icon_120.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/app/icons/icon_120.png" sizes="192x192">
     <!--Android-->
-    <link rel="shortcut icon" href="/app/images/icon_196.png" sizes="196x196">
+    <link rel="shortcut icon" href="/app/icons/icon_196.png" sizes="196x196">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/angular-growl/angular-growl.css">    
     <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="bower_components/angular-loading-bar/src/loading-bar.css" />
         <link rel="stylesheet" href="bower_components/ngQuickDate/dist/ng-quick-date.css" />
         <!-- endbower -->
@@ -60,7 +61,7 @@
       </li>   
 
       <li ng-show="stack" ng-click="goToStack()" class="middle">
-        <a class="text" title="story and slot you are going to add a story to">
+        <a class="text" title="{{'story and slot you are going to add a story to' | translate}}">
           <i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{stack.storyTitle}}&nbsp;<i class="fa fa-link fa-fw fa-lg on-cab"></i>&nbsp;{{stack.slotName}}
         </a>
       </li>
@@ -92,52 +93,52 @@
       </li>       
 
       <li ng-click="goBack()" class="not-in-responsive">
-        <a title="go back">
+        <a title="{{'go back' | translate}}">
           <i class="fa fa-chevron-left fa-fw fa-2x on-cab"></i>
         </a>
       </li>
 
       <li ng-click="goHome()">
-        <a title="return to your workplace">
-          <i class="fa fa-home fa-fw fa-2x on-cab"></i><span class="cab-desc">My Workplace</span>
+        <a title="{{'return to your workplace' | translate}}">
+          <i class="fa fa-home fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>My Workplace</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && editMode" ng-click="doneEditing()">
-        <a title="return to view mode">
-          <i class="fa fa-eye fa-fw fa-2x on-cab"></i><span class="cab-desc">finish editing</span>
+        <a title="{{'return to view mode' | translate}}">
+          <i class="fa fa-eye fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>finish editing</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && !editMode && storyFlags.canWrite" ng-click="startEditing()">
-        <a title="edit story">
-          <i class="fa fa-pencil fa-fw fa-2x on-cab"></i><span class="cab-desc">edit this Story</span>
+        <a title="{{'edit story' | translate}}">
+          <i class="fa fa-pencil fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>edit this Story</span>
         </a>
       </li>
 
       <!-- selecting a story for slot-->
       <li ng-show="selectMode" ng-click="select()">
-        <a title="add this story to the slot">
-          <i class="fa fa-check fa-fw fa-2x on-cab"></i><span class="cab-desc">add this Story to the Slot</span>
+        <a title="{{'add this story to the slot' | translate}}">
+          <i class="fa fa-check fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>add this Story to the Slot</span>
         </a>
       </li>
  
       <li ng-show="stack" ng-click="goToStack()" class="not-in-responsive">
-        <a class="text" title="story and slot you are going to add a story to">
+        <a class="text" title="{{'story and slot you are going to add a story to' | translate}}">
           <i class="fa fa-clipboard fa-fw fa-lg on-cab"></i>&nbsp;{{stack.storyTitle}}&nbsp;<i class="fa fa-link fa-fw fa-lg on-cab"></i>&nbsp;{{stack.slotName}}
         </a>
       </li>    
 
       <li ng-show="selectMode" ng-click="cancel()">
-        <a title="cancel selecting a story">
-          <i class="fa fa-times fa-fw fa-2x on-cab"></i><span class="cab-desc">cancel selecting a Story</span>
+        <a title="{{'cancel selecting a story' | translate}}">
+          <i class="fa fa-times fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>cancel selecting a Story</span>
         </a>
       </li>
 
       <!-- selecting a story for graph-search -->
       <li ng-show="targetMode" ng-click="selectTarget()">
-        <a title="select story for graph-search">
-          <i class="fa fa-check fa-fw fa-2x on-cab"></i><span class="cab-desc">select Story for Graph-Search</span>
+        <a title="{{'select story for graph-search' | translate}}">
+          <i class="fa fa-check fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>select Story for Graph-Search</span>
         </a>
       </li>
 
@@ -150,108 +151,108 @@
       </li>   
 
       <li ng-show="targetMode" ng-click="cancelTarget()">
-        <a title="cancel graph-search">
-          <i class="fa fa-times fa-fw fa-2x on-cab"></i><span class="cab-desc">cancel Graph-Search</span>
+        <a title="{{'cancel graph-search' | translate}}">
+          <i class="fa fa-times fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>cancel Graph-Search</span>
         </a>
       </li>
 
       <!-- story-editing -->
       <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="createStoryInSlot()">
-        <a title="create a new story and add it to to slot at this one">
-          <i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i><span class="cab-desc">create new Story</span>
+        <a title="{{'create a new story and add it to to slot at this one' | translate}}">
+          <i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>create new Story</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && !selectMode && !targetMode" ng-click="saveStory()">
-        <a title="save this story">
-          <i class="fa fa-save fa-fw fa-2x on-cab"></i><span class="cab-desc">save Story</span>
+        <a title="{{'save this story' | translate}}">
+          <i class="fa fa-save fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>save Story</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="deleteStory()">
-        <a title="delete this story">
-          <i class="fa fa-trash-o fa-fw fa-2x on-cab"></i><span class="cab-desc">delete Story</span>
+        <a title="{{'delete this story' | translate}}">
+          <i class="fa fa-trash-o fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>delete Story</span>
         </a>
       </li>
 
       <li ng-show="appState < 4 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="createSlot()">
-        <a title="add an existing story to a slot of this one">
-          <i class="fa fa-link fa-fw fa-2x on-cab"></i><span class="cab-desc">add Story to a Slot</span>
+        <a title="{{'add an existing story to a slot of this one' | translate}}">
+          <i class="fa fa-link fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>add Story to a Slot</span>
         </a>
       </li>
 
       <!-- editing stories in a slot -->
       <li ng-show="appState === 4 && !editMode && !selectMode && !targetMode && storyFlags.saved" ng-click="addStory()">
-        <a title="add an existing story to the actual open slot">
-          <i class="fa fa-link fa-fw fa-2x on-cab"></i><span class="cab-desc">add Story to open Slot</span>
+        <a title="{{'add an existing story to the actual open slot' | translate}}">
+          <i class="fa fa-link fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>add Story to open Slot</span>
         </a>
       </li>
 
       <!-- share a story -->
       <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode" ng-click="shareStory()">
-        <a title="share a story with other users">
-          <i class="fa fa-random fa-fw fa-2x on-cab"></i><span class="cab-desc">share Story with Others</span>
+        <a title="{{'share a story with other users' | translate}}">
+          <i class="fa fa-share-alt fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>share Story with Others</span>
         </a>
       </li>
 
-      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && !storyFlags.stars && storyFlags.saved" ng-click="starStory()">  <a title="star this story">
-          <i class="fa fa-star-o fa-fw fa-2x on-cab"></i><span class="cab-desc">star this Story</span>
+      <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && !storyFlags.stars && storyFlags.saved" ng-click="starStory()">  <a title="{{'star this story' | translate}}">
+          <i class="fa fa-star-o fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>star this Story</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && !editMode && !selectMode && !targetMode && storyFlags.stars && storyFlags.saved" 
         ng-click="unstarStory()">
-        <a title="unstar this story">
-          <i class="fa fa-star fa-fw fa-2x on-cab"></i><span class="cab-desc">unstar this Story</span>
+        <a title="{{'unstar this story' | translate}}">
+          <i class="fa fa-star fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>unstar this Story</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && storyFlags.saved" ng-click="reloadStory()">
-        <a title="reload this story">
-          <i class="fa fa-refresh fa-fw fa-2x on-cab"></i><span class="cab-desc">reload</span>
+        <a title="{{'reload this story' | translate}}">
+          <i class="fa fa-refresh fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>reload</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && editMode && storyFlags.saved" ng-click="addAttachment()">
-        <a title="upload an attachment to this story">
-          <i class="fa fa-paperclip fa-fw fa-2x on-cab"></i><span class="cab-desc">add Attachment</span>
+        <a title="{{'upload an attachment to this story' | translate}}">
+          <i class="fa fa-paperclip fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>add Attachment</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && editMode" ng-click="controlText('bold',$event)">
-        <a title="make text bold">
-          <i class="fa fa-bold fa-fw fa-2x on-cab"></i><span class="cab-desc">make Text bold</span>
+        <a title="{{'make text bold' | translate}}">
+          <i class="fa fa-bold fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>make Text bold</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && editMode" ng-click="controlText('italic',$event)">
-        <a title="make text italic">
-          <i class="fa fa-italic fa-fw fa-2x on-cab"></i><span class="cab-desc">make Text italic</span>
+        <a title="{{'make text italic' | translate}}">
+          <i class="fa fa-italic fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>make Text italic</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && editMode" ng-click="controlText('link',$event)">
-        <a title="make text a link">
-          <i class="fa fa-external-link fa-fw fa-2x on-cab"></i><span class="cab-desc">make Text a Link</span>
+        <a title="{{'make text a link' | translate}}">
+          <i class="fa fa-external-link fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>make Text a Link</span>
         </a>
       </li> 
 
       <li ng-show="appState < 128 && editMode" ng-click="controlText('header',$event)">
-        <a title="make current line a header">
-          <i class="fa fa-text-height fa-fw fa-2x on-cab"></i><span class="cab-desc">make Line a Header</span>
+        <a title="{{'make current line a header' | translate}}">
+          <i class="fa fa-text-height fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>make Line a Header</span>
         </a>
       </li>
 
       <li ng-show="appState < 128 && editMode" ng-click="controlText('list-ul',$event)">
-        <a title="make line a list">
-          <i class="fa fa-list-ul fa-fw fa-2x on-cab"></i><span class="cab-desc">make Line a List</span>
+        <a title="{{'make line a list' | translate}}">
+          <i class="fa fa-list-ul fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>make Line a List</span>
         </a>
       </li>  
 
       <!-- create a new story on it's own -->
       <li ng-show="!selectMode && !targetMode && appState === 128">
-        <a href="#/story" title="create a new story" ng-click="toggleMenu()">
-          <i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i><span class="cab-desc">create a new Story</span>
+        <a href="#/story" title="{{'create a new story' | translate}}" ng-click="toggleMenu()" >
+          <i class="fa fa-file-text-o fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>create a new Story</span>
         </a>
       </li>
 
@@ -260,33 +261,33 @@
           <i class="fa fa-user fa-fw fa-lg"></i>&nbsp;{{userContext.name}}
         </a>
         <ul>
-          <li ng-click="changePassword()"><i class="fa fa-cog fa-fw"></i>&nbsp;change password</li>
-          <li ng-click="logout()"><i class="fa fa-power-off fa-fw"></i>&nbsp;log me out</li>
+          <li ng-click="changePassword()"><i class="fa fa-cog fa-fw"></i>&nbsp;<span translate>change password</span></li>
+          <li ng-click="logout()"><i class="fa fa-power-off fa-fw"></i>&nbsp;<span translate>log me out</span></li>
         </ul>
       </li>
 
       <li class="cab-right not-in-responsive">
-        <input id="query-input" ng-model="cabQueryString" placeholder="search for..." on-enter="search()"
+        <input id="query-input" ng-model="cabQueryString" placeholder="{{'search for...' | translate}}" on-enter="search()"
           select-on-focus>
         </input>
       </li>
 
       <li class="cab-right not-in-responsive">
-        <a ng-click="search(true)" title="go to the search-page">
+        <a ng-click="search(true)" title="{{'go to the search-page' | translate}}">
           <i class="fa fa-search fa-fw fa-2x on-cab"></i>
         </a>
       </li>
 
       <li class="cab-right" ng-show="appState < 128">
-        <a title="start a new graph-search" ng-click="findPaths()">
-          <i class="fa fa-code-fork fa-fw fa-2x on-cab"></i><span class="cab-desc">start Graph-Search</span>
+        <a title="{{'start a new graph-search' | translate}}" ng-click="findPaths()">
+          <i class="fa fa-code-fork fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>start Graph-Search</span>
         </a>
       </li>
 
       <!-- create a new story on it's own -->
       <li class="only-in-responsive last-menu-item">
-        <a title="log me out" ng-click="logout()">
-          <i class="fa fa-power-off fa-fw fa-2x on-cab"></i><span class="cab-desc">log me out</span>
+        <a title="{{'log me out' | translate}}" ng-click="logout()">
+          <i class="fa fa-power-off fa-fw fa-2x on-cab"></i><span class="cab-desc" translate>log me out</span>
         </a>
       </li>      
            
@@ -310,8 +311,8 @@
       <div id="login-modal-content" class="md-content">
         <h3>{{welcome}}&nbsp;<i style="float: right; margin-top: 2px;" class="fa fa-lock action"></i></h3>
         <div>
-          <input id="loginInput" class="start-focus" type="text" ng-model="login" on-enter="goToPassword()" placeholder="Your Login"></input>
-          <input id="passwordInput" type="password" ng-model="pwd" on-enter="doLogin()" placeholder="Your Password"></input>
+          <input id="loginInput" class="start-focus" type="text" ng-model="login" on-enter="goToPassword()" placeholder="{{'Your Login' | translate}}"></input>
+          <input id="passwordInput" type="password" ng-model="pwd" on-enter="doLogin()" placeholder="{{'Your Password' | translate}}"></input>
           <div class="default-button">
             <i id="unlock-icon" class="fa fa-unlock-alt fa-2x action opacity-hover" ng-click="doLogin()"></i>
           </div>
@@ -321,10 +322,10 @@
 
     <div class="md-modal md-effect-3" id="search-modal" ng-controller="SearchDialogCtrl">
       <div class="md-content">
-        <h3>Search Colibri<i style="float: right; margin-top: 2px;" class="fa fa-times action" ng-click="cancel()"></i></h3>
+        <h3><span translate>Search Colibri</span><i style="float: right; margin-top: 2px;" class="fa fa-times action" ng-click="cancel()"></i></h3>
         <div>
           <input id="searchDialogInput" 
-            class="start-focus" type="text" ng-model="query" on-enter="doSearch()" placeholder="What are you looking for?"></input>
+            class="start-focus" type="text" ng-model="query" on-enter="doSearch()" placeholder="{{'What are you looking for?' | translate}}"></input>
           <div class="default-button">
             <i class="fa fa-check fa-2x action opacity-hover" ng-click="doSearch()"></i>
           </div>
@@ -334,14 +335,14 @@
 
     <div class="md-modal md-effect-3" id="usersettings-modal" ng-controller="UserSettingsCtrl">
       <div class="md-content">
-        <h3>Change Your Password&nbsp;<i style="float: right; margin-top: 2px;" class="fa fa-times action" ng-click="cancel()"></i></h3>
+        <h3><span translate>Change Your Password</span>&nbsp;<i style="float: right; margin-top: 2px;" class="fa fa-times action" ng-click="cancel()"></i></h3>
         <div>
           <input id="old-pw-input" class="start-focus" type="password" ng-model="oldPwd" 
-            on-enter="goToNewPassword()" placeholder="Your old password"></input>
+            on-enter="goToNewPassword()" placeholder="{{'Your old password' | translate}}"></input>
           <input id="new-pw1-input" type="password" ng-model="newPwd" 
-            on-enter="goToRepeatPassword()" placeholder="Your new password"></input>
+            on-enter="goToRepeatPassword()" placeholder="{{'Your new password' | translate}}"></input>
           <input id="new-pw2-input" type="password" ng-model="repeatPwd" 
-            on-enter="change()" placeholder="repeat the new password"></input>
+            on-enter="change()" placeholder="{{'repeat the new password' | translate}}"></input>
           <div class="default-button">            
             <i class="fa fa-check fa-2x on-button action default-button opacity-hover" ng-click="change()"></i>
           </div>
@@ -387,12 +388,15 @@
     <script src="bower_components/ngQuickDate/dist/ng-quick-date.js"></script>
     <script src="bower_components/angular-elastic/elastic.js"></script>
     <script src="bower_components/angular-gestures/gestures.js"></script>
+    <script src="bower_components/angular-gettext/dist/angular-gettext.js"></script>
     <!-- endbower -->
     <script src="bower_components/marked/lib/marked.js"></script>
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/translations.js"></script>
         <script src="scripts/app.js"></script>
+        <script src="scripts/icons.js"></script>
         <script src="scripts/services/storyService.js"></script>
         <script src="scripts/controllers/story.js"></script>
         <script src="scripts/services/slotService.js"></script>

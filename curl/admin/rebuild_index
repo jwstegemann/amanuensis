@@ -1,0 +1,28 @@
+#! /bin/bash
+
+if [ $# -lt 2 ]
+  then
+    echo "rebuild_index <neo4j-url> <elasticsearch-url>";
+    exit
+fi
+
+#
+# for each story in neo4j update index in elastic-search
+#
+echo getting stories from neo4j
+
+storyIds=`curl -s -H "accept: applicaton/json" -H "X-Stream:true" -H "content-type:application/json" "$1/db/data/cypher" -d '{
+  "query": "match (s:Story) return s.id",
+  "params": {
+  }
+}' | grep -o "\"[a-z0-9]*\"" | sed "s/\"//g"`
+
+for storyId in $storyIds;
+do
+  echo $storyId
+  curl -s -XPOST "$2/stories/story/$storyId" -d '{
+  }'
+done
+
+
+

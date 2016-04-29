@@ -29,6 +29,7 @@ object QueryActor {
   case class SuggestSlots(text: String)
   case class SuggestUsers(text: String)
   case class SuggestGroups(text: String)  
+  case class IndexUser(login: String, isGroup: Boolean)
 }
 
 /**
@@ -53,8 +54,9 @@ class QueryActor extends Actor with ActorLogging with Failable {
     case MyLatest(queryRequest: QueryRequest, groups: Seq[String], login: String) => server.mylatest(queryRequest, groups, login) pipeTo sender
     case OthersLatest(queryRequest: QueryRequest, groups: Seq[String], login: String) => server.otherslatest(queryRequest, groups, login) pipeTo sender
 
+    //FIXME: get StoryIndex in msg!
     case Index(story: Story, canRead: Seq[String]) => server.index(StoryIndex(story.id, story.title, story.content, story.created, story.createdBy, 
-      story.modified, story.modifiedBy, story.tags, canRead))
+      story.modified, story.modifiedBy, story.tags, story.icon, canRead))
     case UpdateIndex(story: Story) => server.update(story) // pipeTo sender    
     case DeleteFromIndex(storyId: String) => server.delete(storyId) // pipeTo sender
     case IndexSlotName(slotName: String, sourceStoryId: String, targetStoryId: String) => server.indexSlotName(slotName, sourceStoryId, targetStoryId)
@@ -64,6 +66,8 @@ class QueryActor extends Actor with ActorLogging with Failable {
     case SuggestSlots(text: String) => server.suggestSlots(text) pipeTo sender
     case SuggestUsers(text: String) => server.suggestUsers(text) pipeTo sender
     case SuggestGroups(text: String) => server.suggestGroups(text) pipeTo sender
+
+    case IndexUser(login: String, isGroup: Boolean) => server.indexUser(login, isGroup)
   }
 
 }

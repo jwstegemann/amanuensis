@@ -24,6 +24,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-connect-proxy');
   grunt.loadNpmTasks('grunt-karma');
 
+  grunt.loadNpmTasks('grunt-angular-gettext');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -162,7 +164,25 @@ module.exports = function (grunt) {
         }
       }
     },
-
+    // extract texts to be translated...
+    nggettext_extract: {
+      pot: {
+        files: {
+          'app/po/template.pot': [
+            'app/views/*.html',
+            'app/index.html',
+            'app/scripts/controllers/*.js'
+          ]
+        }
+      }
+    },
+    nggettext_compile: {
+      all: {
+        files: {
+          'app/scripts/translations.js': ['app/po/*.po']
+        }
+      }
+    },    
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
@@ -329,7 +349,8 @@ module.exports = function (grunt) {
             'views/{,*/}*.html',
             'bower_components/**/*',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'fonts/*',
+            'icons/*'
           ]
         }, {
           expand: true,
@@ -342,6 +363,14 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/bower_components/font-awesome/fonts',
           dest: '<%= yeoman.dist %>/fonts',
           src: '*'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.app %>',
+          dest: '<%= yeoman.dist %>/..',
+          src: [
+            'favicon.ico'
+          ]
         }]
       },
       styles: {
@@ -435,6 +464,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'bower-install',
+    'nggettext_compile',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -450,9 +480,11 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
-    'test',
     'build'
+  ]);
+
+  grunt.registerTask('gettext', [
+    'nggettext_extract'
   ]);
 
   grunt.registerTask('heroku', ['build']);

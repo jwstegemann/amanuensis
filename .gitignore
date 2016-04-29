@@ -13,3 +13,9 @@ project/plugins/project/
 .scala_dependencies
 
 curl/cookies.txt
+
+amanuensis.sublime-project
+amanuensis.sublime-workspace
+
+.idea
+
